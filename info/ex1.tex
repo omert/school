@@ -129,6 +129,23 @@ and
   -\sum_ip_i\log q_i=-\sum_ip_i\log p_i  
 \end{equation*}
 \section{}
+By the rule $I(X;Y)=H(X)-H(X|Y)$ we have:
+\begin{eqnarray*}
+  I(A,B;X)
+  &=&H(A,B)-H(A,B|X)
+\end{eqnarray*}
+By application of the chain rule for entropy to both terms:
+\begin{eqnarray*}
+  I(A,B;X)
+  &=&H(A)+H(B|A)-H(A|X)-H(B|X,A)\\
+  &=&H(A)-H(A|X)+H(B|A)-H(B|X,A)\\
+  &=&I(A;X)+I(B;X,A).
+\end{eqnarray*}
+From this, by induction, it follows that:
+\begin{eqnarray*}
+  I(A_1,A_2,\ldots,A_n;X)=I(A_1;X)+I(A_2;X,A_1)+\dots+I(A_n;X,A_1,A_2,\ldots,A_{n-1})
+\end{eqnarray*}
+
 \section{}
 Depending on the joint distribution, either one could be larger. If $X$,
 $Y$ and $Z$ are subsequent events in a MC, then, although $I(X;Z)$ may
@@ -201,7 +218,7 @@ If $g(X,Y)=X$, then $H(X|g(X,Y))=H(X|X) = 0 \leq H(X|Y)$.
 Alternatively, let $g(X,Y)=0$. Then $H(X|g(X,Y))=H(X) \geq H(X|Y)$.
 
 \section{}
-By question 5 $H(X|Y)\leq H(X|g(Y))$. Let $Z=g(Y)$. Then:
+By question 5 we have that $H(X|Y)\leq H(X|g(Y))$. Let $Z=g(Y)$. Then:
 \begin{eqnarray*}
   H(X|Y)
   &\leq& H(X|g(Y))=H(X|Z)\\
