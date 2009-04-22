@@ -1,0 +1,270 @@
+\documentclass[11pt]{article} \usepackage{amssymb}
+\usepackage{amsfonts} \usepackage{amsmath} \usepackage{bm}
+\usepackage{latexsym} \usepackage{epsfig}
+
+\setlength{\textwidth}{6.5 in} \setlength{\textheight}{8.25in}
+\setlength{\oddsidemargin}{0in} \setlength{\topmargin}{0in}
+\addtolength{\textheight}{.8in} \addtolength{\voffset}{-.5in}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{example}[theorem]{Example}
+\newenvironment{proof}{\noindent \textbf{Proof:}}{$\Box$}
+
+\newcommand{\ignore}[1]{}
+
+\newcommand{\enote}[1]{} \newcommand{\knote}[1]{}
+\newcommand{\rnote}[1]{}
+
+
+
+% \newcommand{\enote}[1]{{\bf [[Elchanan:} {\emph{#1}}{\bf ]]}}
+% \newcommand{\knote}[1]{{\bf [[Krzysztof:} {\emph{#1}}{\bf ]]}}
+% \newcommand{\rnote}[1]{{\bf [[Ryan:} {\emph{#1}}{\bf ]]}}
+
+
+
+\DeclareMathOperator{\Support}{Supp} \DeclareMathOperator{\Opt}{Opt}
+\DeclareMathOperator{\Ordo}{\mathcal{O}}
+\newcommand{\MaxkCSP}{\textsc{Max $k$-CSP}}
+\newcommand{\MaxkCSPq}{\textsc{Max $k$-CSP$_{q}$}}
+\newcommand{\MaxCSP}[1]{\textsc{Max CSP}(#1)} \renewcommand{\Pr}{{\bf
+    P}} \renewcommand{\P}{{\bf P}} \newcommand{\Px}{\mathop{\bf P\/}}
+\newcommand{\E}{{\bf E}} \newcommand{\Cov}{{\bf Cov}}
+\newcommand{\Var}{{\bf Var}} \newcommand{\Varx}{\mathop{\bf Var\/}}
+
+\newcommand{\bits}{\{-1,1\}}
+
+\newcommand{\nsmaja}{\textstyle{\frac{2}{\pi}} \arcsin \rho}
+
+\newcommand{\Inf}{\mathrm{Inf}} \newcommand{\I}{\mathrm{I}}
+\newcommand{\J}{\mathrm{J}}
+
+\newcommand{\eps}{\epsilon} \newcommand{\lam}{\lambda}
+
+% \newcommand{\trunc}{\ell_{2,[-1,1]}}
+\newcommand{\trunc}{\zeta} \newcommand{\truncprod}{\chi}
+
+\newcommand{\N}{\mathbb N} \newcommand{\R}{\mathbb R}
+\newcommand{\Z}{\mathbb Z} \newcommand{\CalE}{{\mathcal{E}}}
+\newcommand{\CalC}{{\mathcal{C}}} \newcommand{\CalM}{{\mathcal{M}}}
+\newcommand{\CalR}{{\mathcal{R}}} \newcommand{\CalS}{{\mathcal{S}}}
+\newcommand{\CalV}{{\mathcal{V}}}
+\newcommand{\CalX}{{\boldsymbol{\mathcal{X}}}}
+\newcommand{\CalG}{{\boldsymbol{\mathcal{G}}}}
+\newcommand{\CalH}{{\boldsymbol{\mathcal{H}}}}
+\newcommand{\CalY}{{\boldsymbol{\mathcal{Y}}}}
+\newcommand{\CalZ}{{\boldsymbol{\mathcal{Z}}}}
+\newcommand{\CalW}{{\boldsymbol{\mathcal{W}}}}
+\newcommand{\CalF}{{\mathcal{Z}}}
+% \newcommand{\boldG}{{\boldsymbol G}}
+% \newcommand{\boldQ}{{\boldsymbol Q}}
+% \newcommand{\boldP}{{\boldsymbol P}}
+% \newcommand{\boldR}{{\boldsymbol R}}
+% \newcommand{\boldS}{{\boldsymbol S}}
+% \newcommand{\boldX}{{\boldsymbol X}}
+% \newcommand{\boldB}{{\boldsymbol B}}
+% \newcommand{\boldY}{{\boldsymbol Y}}
+% \newcommand{\boldZ}{{\boldsymbol Z}}
+% \newcommand{\boldV}{{\boldsymbol V}}
+\newcommand{\boldi}{{\boldsymbol i}} \newcommand{\boldj}{{\boldsymbol
+    j}} \newcommand{\boldk}{{\boldsymbol k}}
+\newcommand{\boldr}{{\boldsymbol r}}
+\newcommand{\boldsigma}{{\boldsymbol \sigma}}
+\newcommand{\boldupsilon}{{\boldsymbol \upsilon}}
+\newcommand{\hone}{{\boldsymbol{H1}}}
+\newcommand{\htwo}{\boldsymbol{H2}}
+\newcommand{\hthree}{\boldsymbol{H3}}
+\newcommand{\hfour}{\boldsymbol{H4}}
+
+
+\newcommand{\sgn}{\mathrm{sgn}} \newcommand{\Maj}{\mathrm{Maj}}
+\newcommand{\Acyc}{\mathrm{Acyc}}
+\newcommand{\UniqMax}{\mathrm{UniqMax}}
+\newcommand{\Thr}{\mathrm{Thr}} \newcommand{\littlesum}{{\textstyle
+    \sum}}
+
+\newcommand{\half}{{\textstyle \frac12}}
+\newcommand{\third}{{\textstyle \frac13}}
+\newcommand{\fourth}{{\textstyle \frac14}}
+
+\newcommand{\Stab}{\mathbb{S}}
+\newcommand{\StabThr}[2]{\Gamma_{#1}(#2)}
+\newcommand{\StabThrmin}[2]{{\underline{\Gamma}}_{#1}(#2)}
+\newcommand{\StabThrmax}[2]{{\overline{\Gamma}}_{#1}(#2)}
+\newcommand{\TestFcn}{\Psi}
+
+\renewcommand{\phi}{\varphi}
+
+\begin{document}
+\title{Coding Theory - Exercise 1}
+
+ \author{Omer Tamuz, 035696574}
+\maketitle
+
+\section{}
+Each placement of black and white hats can be described by a
+binary vector $a_i$ of length $n$, where the $i$th person sees all bits
+except the $i$th. Given a vector $a$, we define $a_i^0$ as equal to 
+$a$ in all bits, except perhaps the $i$th, for which its values is zero.
+$a_i^1$ is defined likewise. In the case where the hat placement is $a$, 
+player $i$ has to decide whether to: (a) abstain, (b) guess that his bit is
+zero (so that $a=a_i^0$), or (c) guess that his bit is 1 (so that $a=a_i^1$).
+This information can be coded in a sub-graph of the $n$ dimensional
+hypercube, in which the vertices correspond to the vectors $a$, 
+and there is an edge from $a_i^0$ to $a_i^1$ in case (c), an edge the
+other way in case (b) and no edge in case (a).
+\subsection{}
+If a hat placement $a$ corresponds to a vertex with positive in-degree,
+then some player(s) will guess their bit correctly when $a$ is chosen. 
+If this vertex has zero out-degree, then no player will guess wrongly
+when $a$ is chosen, and the players will suceed. Therefore, the set
+of vectors $a$ that corresponds to placements for which the players will
+succeed is of the size $K(G)$. Since the number of vertices is $2^n$, 
+the probability of sucess will be $K(G)/2^n$.
+
+\subsection{}
+Each vertex with positive in-degree and out-degree zero must be immediately 
+reachable from a vertex with positive out-degree. Since the out-degree of 
+each vertex is at most $n$, these positive out-degree vertices can be shared
+by at most $n$ ``good'' vertices, and therefore they must make up at least
+$1/(n+1)$ of all the vertices. This leaves at most a fraction of
+$1-1/(n+1)=n/(n+1)$ ``good'' vertices, and $K(G)/2^n\leq n/(n+1)$.
+
+\subsection{}
+The ``Hamming code strategy'' would be the following: For $n=2^l-1$ players, 
+one would use the Hamming code $[2^l-1, 2^l-1-l, 3]$.
+Given the two
+options $a_i^0$ and $a_i^1$, player $i$ would guess the one that is a Hamming
+code if indeed one of them is, or otherwise abstain. Since the minimum
+distance between Hamming codes is three, the option that both are Hamming
+codes does not exist. The in-degree of every Hamming code would
+be positive, since there would be an edge to it from each one of its 
+neighbours. Also, its out-degree would clearly be zero. 
+The probability of sucess $K(G)/2^n$ would be the size of the code
+over the number of possible vectors: 
+\begin{equation}
+  {2^l-1-l\over 2^l-1}={n - log(n+1) \over n}
+\end{equation}
+
+\section{}
+Let $G_m$ be the generating matrix for the $[2^m-1,2^m-1-m,3]_2$ Hamming 
+code. Then using the same matrix to encode strings over $F_q$ would make
+a perfect $[2^m-1,2^m-1-m,3]_q$ code when $q$ is a prime power.
+
+I have no proof for this conjecture...
+
+\section{}
+\subsection{}
+Given a $(n,k,d)_q$ code $C$ where 
+$C(a_1a_2\ldots a_k)=b_1b_2\ldots b_n$, define $\hat{C}$ as 
+$\hat{C}(a_1a_2\ldots a_k)=b_1b_2\ldots b_{n-1}$. Then the minimum distance between code words of
+$\hat{C}$ is at most $d-1$ (with equality in the case where
+the last bit always differs among nearest neighbors), 
+and $\hat{C}$ is a $(n-1,k,d'\leq d - 1)_q$ code.  
+\subsection{}
+Given a $(n,k,d)_2$ code $C$ where 
+$C(a_1a_2\ldots a_k)=b_1b_2\ldots b_n$, define $\hat{C}$ as 
+$\hat{C}(a_1a_2\ldots a_k)=b_1b_2\ldots b_{n-1}p(b)$, where $p(b)$ is the parity
+of $b_1b_2\ldots b_n$. Since $d$ is odd, then code words which under $C$ are
+of distance $d$ will differ, under $\hat{C}$, by the parity bit, as well as by the rest
+of the $d$ bits they differed under $C$. 
+The rest of the code words 
+may or may not differ by the parity bit, but will differ by the bits they 
+differed under $C$, and so $\hat{C}$ is a $(n+1,k,d +1)_2$ code.  
+
+\subsection{}
+Given a $(n,k,d)_{2^m}$ code $C$, then, given a bit vector of length $mk$,
+encode it thus:
+\begin{itemize}
+\item Subdivide it into $k$ groups of $m$ bits.
+\item Translate each group into a character of the input of $C$, by 
+      an invertible function $T$, to arrive at a string of length $k$.
+\item Encode the resulting string using $C$, to arrive at a string of
+      length $n$.
+\item Use $T^{-1}$ (or infact any other invertible function) to translate
+      back from $C$'s alphabet to bits, to arrive at a bit string
+      of length $mn$.
+\end{itemize}
+
+Since the difference between two code words of $C$ is at least $d$, and since
+at least one differet bit is needed to make different characters, then
+the distance of the code over bits would be larger than $d$, and the code
+would be a $(mn,mk,d'\leq d)_2$ code. 
+
+\section{}
+\subsection{}
+Let $S_1,S_2 \subseteq V$ be cuts, and let $F_1,F_2$ be the corresponding
+set of edges. Let $F$ be a set of edges so that $e\in F$ iff 
+$e\in F_1$ xor $e\in F_2$, i.e. $F=F_1+F_2$. Then $F$ is the set of edges corresponding
+to the cut defined by $S$, the symmetric difference of $S_1$ and $S_2$. Proof:
+Let $e={u,v}$ be an edge crossing the cut of $S$. Assume wolg that 
+$u\in S$ and $v \not \in S$. Assume, also wlog, that $u\in S_1$, $u \not \in S_2$. Then either $v$ belongs
+to both $S_1$ and $S_2$, or else it does not belong to both. In the first
+case, $e$ belongs to $F_2$ only. In the second, it belongs to $F_1$ only.
+The other direction uses the same argument.
+
+Since for every $F_1,F_2$ in the code, $F=F_1+F_2$ also represents a codeword, 
+the code is linear
+
+\subsection{}
+The codeword nearest to the word represented by the set of all edges would
+be the maximum cut. Therefore, a decoding algorithm would be able to find
+the maximum cut, given the set of all the edges as input.
+
+\section{}
+Note: I assume that $p(0)$ is not used, even though it was used in the 
+question formulation.
+
+The coding matrix of an RS code described in the question is the
+$n$ by $k$ matrix $A_{ij}=\left(\alpha^i\right)^j=\alpha^{ij}$ (with $i=0,\ldots,q-2$ and $j=0,\ldots,k-1$), 
+since then the coding $C$ of the word $x\in F_q^k$ is
+\begin{equation*}
+C_i = \sum_jA_{ij}x_j=\sum_jx_j\left(\alpha^i\right)^j=p(\alpha^i),
+\end{equation*}
+as defined.
+  
+The dual code is given by a $n$ by $n-k$ matrix $B_{ij}$ so that
+$B^tA=0$. We will guess that it has the same structure as $A$, and check
+that the above equality holds. Then, since the dual code is unique, we
+will have proved that the dual code is also a RS code.
+
+So, assume $B_{ij}=\alpha^{ij}$. Then: 
+\begin{eqnarray*}
+ (B^tA)_{ij}&=&\sum_{m=0}^{q-2}B^t_{im}A_{mj}\\
+ &=& \sum_{m=0}^{q-2}B_{mi}A_{mj}\\
+ &=& \sum_{m=0}^{q-2}\alpha^{mi+mj}\\
+ &=& \sum_{m=0}^{q-2}\alpha^{m(i+j)}\\
+\end{eqnarray*}
+Since $\alpha$ is a generator, then $F^*=\{\alpha^m | m=0,\ldots,q-2\}$ and
+\begin{equation*}
+ (B^tA)_{ij} = \sum_{a\in F}a^{i+j}
+\end{equation*}
+The index $i$ ranges from $0$ to $n-k-1$, and then index $j$ ranges from
+$0$ to $k - 1$. Therefore $i+j< n-1=q-1$.  Then, by the
+lemma below, $B^tA=0$. QED.
+
+Proof of lemma: Let $\alpha$ be a generator of $F_q$. Then:
+\begin{equation*}
+  \sum_{a\in F}a^k=0+\sum_{i=0}^{q-2}\left(\alpha^i\right)^k
+=\sum_{i=0}^{q-2}\left(\alpha^k\right)^i
+\end{equation*}
+If $k=q-1$ then $\alpha^k=1$ and the sum above equals $q-1 = -1$.
+Otherwise $\alpha^k\not = 1$ and
+\begin{eqnarray*}
+  \sum_{a\in F}a^k
+  &=&\sum_{i=0}^{q-2}\left(\alpha^k\right)^i\\
+  &=&{1-(\alpha^k)^{q-1}\over 1-\alpha^k}.\\
+\end{eqnarray*}
+Then, since $a^{q-1}=1$ for all $a>1$, then the sum equals zero. QED.
+\end{document}
+
+
+
+

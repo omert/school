@@ -1,0 +1,266 @@
+\documentclass[11pt]{article} \usepackage{amssymb}
+\usepackage{amsfonts} \usepackage{amsmath} \usepackage{bm}
+\usepackage{latexsym} \usepackage{epsfig}
+
+\setlength{\textwidth}{6.5 in} \setlength{\textheight}{8.25in}
+\setlength{\oddsidemargin}{0in} \setlength{\topmargin}{0in}
+\addtolength{\textheight}{.8in} \addtolength{\voffset}{-.5in}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{example}[theorem]{Example}
+\newenvironment{proof}{\noindent \textbf{Proof:}}{$\Box$}
+
+\newcommand{\ignore}[1]{}
+
+\newcommand{\enote}[1]{} \newcommand{\knote}[1]{}
+\newcommand{\rnote}[1]{}
+
+
+
+% \newcommand{\enote}[1]{{\bf [[Elchanan:} {\emph{#1}}{\bf ]]}}
+% \newcommand{\knote}[1]{{\bf [[Krzysztof:} {\emph{#1}}{\bf ]]}}
+% \newcommand{\rnote}[1]{{\bf [[Ryan:} {\emph{#1}}{\bf ]]}}
+
+
+
+\DeclareMathOperator{\Support}{Supp} \DeclareMathOperator{\Opt}{Opt}
+\DeclareMathOperator{\Ordo}{\mathcal{O}}
+\newcommand{\MaxkCSP}{\textsc{Max $k$-CSP}}
+\newcommand{\MaxkCSPq}{\textsc{Max $k$-CSP$_{q}$}}
+\newcommand{\MaxCSP}[1]{\textsc{Max CSP}(#1)} \renewcommand{\Pr}{{\bf
+    P}} \renewcommand{\P}{{\bf P}} \newcommand{\Px}{\mathop{\bf P\/}}
+\newcommand{\E}{{\bf E}} \newcommand{\Cov}{{\bf Cov}}
+\newcommand{\Var}{{\bf Var}} \newcommand{\Varx}{\mathop{\bf Var\/}}
+
+\newcommand{\bits}{\{-1,1\}}
+
+\newcommand{\nsmaja}{\textstyle{\frac{2}{\pi}} \arcsin \rho}
+
+\newcommand{\Inf}{\mathrm{Inf}} \newcommand{\I}{\mathrm{I}}
+\newcommand{\J}{\mathrm{J}}
+
+\newcommand{\eps}{\epsilon} \newcommand{\lam}{\lambda}
+
+% \newcommand{\trunc}{\ell_{2,[-1,1]}}
+\newcommand{\trunc}{\zeta} \newcommand{\truncprod}{\chi}
+
+\newcommand{\N}{\mathbb N} \newcommand{\R}{\mathbb R}
+\newcommand{\Z}{\mathbb Z} \newcommand{\CalE}{{\mathcal{E}}}
+\newcommand{\CalC}{{\mathcal{C}}} \newcommand{\CalM}{{\mathcal{M}}}
+\newcommand{\CalR}{{\mathcal{R}}} \newcommand{\CalS}{{\mathcal{S}}}
+\newcommand{\CalV}{{\mathcal{V}}}
+\newcommand{\CalX}{{\boldsymbol{\mathcal{X}}}}
+\newcommand{\CalG}{{\boldsymbol{\mathcal{G}}}}
+\newcommand{\CalH}{{\boldsymbol{\mathcal{H}}}}
+\newcommand{\CalY}{{\boldsymbol{\mathcal{Y}}}}
+\newcommand{\CalZ}{{\boldsymbol{\mathcal{Z}}}}
+\newcommand{\CalW}{{\boldsymbol{\mathcal{W}}}}
+\newcommand{\CalF}{{\mathcal{Z}}}
+% \newcommand{\boldG}{{\boldsymbol G}}
+% \newcommand{\boldQ}{{\boldsymbol Q}}
+% \newcommand{\boldP}{{\boldsymbol P}}
+% \newcommand{\boldR}{{\boldsymbol R}}
+% \newcommand{\boldS}{{\boldsymbol S}}
+% \newcommand{\boldX}{{\boldsymbol X}}
+% \newcommand{\boldB}{{\boldsymbol B}}
+% \newcommand{\boldY}{{\boldsymbol Y}}
+% \newcommand{\boldZ}{{\boldsymbol Z}}
+% \newcommand{\boldV}{{\boldsymbol V}}
+\newcommand{\boldi}{{\boldsymbol i}} \newcommand{\boldj}{{\boldsymbol
+    j}} \newcommand{\boldk}{{\boldsymbol k}}
+\newcommand{\boldr}{{\boldsymbol r}}
+\newcommand{\boldsigma}{{\boldsymbol \sigma}}
+\newcommand{\boldupsilon}{{\boldsymbol \upsilon}}
+\newcommand{\hone}{{\boldsymbol{H1}}}
+\newcommand{\htwo}{\boldsymbol{H2}}
+\newcommand{\hthree}{\boldsymbol{H3}}
+\newcommand{\hfour}{\boldsymbol{H4}}
+
+
+\newcommand{\sgn}{\mathrm{sgn}} \newcommand{\Maj}{\mathrm{Maj}}
+\newcommand{\Acyc}{\mathrm{Acyc}}
+\newcommand{\UniqMax}{\mathrm{UniqMax}}
+\newcommand{\Thr}{\mathrm{Thr}} \newcommand{\littlesum}{{\textstyle
+    \sum}}
+
+\newcommand{\half}{{\textstyle \frac12}}
+\newcommand{\third}{{\textstyle \frac13}}
+\newcommand{\fourth}{{\textstyle \frac14}}
+
+\newcommand{\Stab}{\mathbb{S}}
+\newcommand{\StabThr}[2]{\Gamma_{#1}(#2)}
+\newcommand{\StabThrmin}[2]{{\underline{\Gamma}}_{#1}(#2)}
+\newcommand{\StabThrmax}[2]{{\overline{\Gamma}}_{#1}(#2)}
+\newcommand{\TestFcn}{\Psi}
+
+\renewcommand{\phi}{\varphi}
+
+\begin{document}
+\title{Information Theory - Exercise 1}
+
+ \author{Omer Tamuz, 035696574}
+\maketitle
+
+\section{}
+Jensen's inequality for the log function is $\E[\log f] \leq \log(\E[f])$. If we set
+$f=q_i/p_i$ then the inequality becomes:
+\begin{equation*}
+  \E[\log {q_i \over p_i}] \leq \log(\E[{q_i\over p_i}]).
+\end{equation*}
+The expected value of $q_i/p_i$ is 
+$\E[q_i/p_i]=\sum_ipi{q_i\over p_i}=\sum_iq_i=1$, and therefore
+\begin{equation*}
+  \E[\log {q_i \over p_i}] \leq \log 1 = 0.
+\end{equation*}
+Hence:
+\begin{eqnarray*}
+  \sum_ip_i\log{q_i\over p_i}&\leq&0\\
+  \sum_ip_i\log q_i-\sum_ip_i\log p_i&\leq&0,
+\end{eqnarray*}
+and
+\begin{equation*}
+  -\sum_ip_i\log q_i=-\sum_ip_i\log p_i  
+\end{equation*}
+\section{}
+\section{}
+Depending on the joint distribution, either one could be larger. If $X$,
+$Y$ and $Z$ are subsequent events in a MC, then, although $I(X;Z)$ may
+be larger than zero, $I(X;Z|Y)$ is always zero by the definition of an
+MC, so that in these cases $I(X;Z)>I(X;Z|Y)$.
+
+On the other hand, take $X$ and $Y$ to be independent, uniformly distributed
+random bits, and $Y = X\; \mbox{xor}\; Z$. Then, because of independece, $I(X;Z)=0$.
+However, given $Y$, $X$ determines $Z$, so $I(X;Z|Y)=H(X)=1$, and
+so $I(X;Z|Y)>I(X;Z)$.
+
+\section{}
+We showed in class that $H(f(X)) \leq H(X)$. Hence:
+\begin{eqnarray*}
+  H(f(X)|Y)
+  &=& H(f(X), Y) - H(Y)\\
+  &=& H(F(X,Y)) - H(Y)\quad\quad \mbox{where}\quad F(X,Y) = (f(X),Y)\\
+  &\leq& H(X,Y) - H(Y)\\
+  &=& H(X|Y)
+\end{eqnarray*}
+\section{}
+We showed in class that 
+\begin{equation*}
+  I(X;Y)=H(X)-H(X|Y). 
+\end{equation*}
+By the same derivation, the same is true for conditional mutual entropy:
+\begin{equation}
+  \label{eq:cme}
+  I(X;Y|Z)=H(X|Z)-H(X|Y,Z).
+\end{equation}
+
+Now, since mutual information is non-negative:
+\begin{equation*}
+  0 \leq I(X;Y|g(Y)).  
+\end{equation*}
+By Eq.~\ref{eq:cme}:
+\begin{equation*}
+  0  \leq H(X|g(Y)) - H(X|Y,g(Y))  
+\end{equation*}
+Since $Y$ holds all the information for $g(Y)$, then $H(X|Y,g(Y))=H(X|Y)$,
+and:
+\begin{equation*}
+  0  \leq H(X|g(Y)) - H(X|Y).  
+\end{equation*}
+Moving the right term to the other side of the equation:
+\begin{equation*}
+   H(X|Y)  \leq H(X|g(Y))
+\end{equation*}
+
+\section{}
+Let $f_y(x)=f(x,y)$. Then:
+\begin{eqnarray*}
+  H(f(X,Y)|Y) 
+  &=& \E_{Y=y}[H(f(X,Y)|Y=y)]\\
+  &=& \E_{Y=y}[H(f(X,y)|Y=y)]\\
+  &=& \E_{Y=y}[H(f_y(X)|Y=y)]\\
+  &\leq& \E_{Y=y}[H(X|Y=y)]\quad\mbox{since $\forall g,\:H(g(X))\leq H(X)$}\\
+  &=& H(X|Y)
+\end{eqnarray*}
+
+Alternatively:
+\begin{equation*}
+  H(f(X,Y)|Y) = H(f(X,Y),Y) - H(Y) \leq H((X,Y),Y) - H(Y) = H(X,Y)-H(Y)=H(X|Y)
+\end{equation*}
+
+\section{}
+Either one could be larger. Let $X$ and $Y$ be such that $H(X) > 0$
+and $H(X) > H(X|Y) > 0$ (it is trivial to show that this is possible). 
+If $g(X,Y)=X$, then $H(X|g(X,Y))=H(X|X) = 0 \leq H(X|Y)$.
+Alternatively, let $g(X,Y)=0$. Then $H(X|g(X,Y))=H(X) \geq H(X|Y)$.
+
+\section{}
+By question 5 $H(X|Y)\leq H(X|g(Y))$. Let $Z=g(Y)$. Then:
+\begin{eqnarray*}
+  H(X|Y)
+  &\leq& H(X|g(Y))=H(X|Z)\\
+  &=& H(X,Z)-H(Z)
+\end{eqnarray*}
+Let $Q$ be a random variable such that $Z$ equals one when $X=Z$ and zero 
+otherwise. Then it is given that $Pr[Q=1]\geq 1-\epsilon$. Since $Q$ is 
+determined by $X$ and $Z$, we may write:
+\begin{eqnarray*}
+  H(X|Y) 
+  &\leq& H(X,Z,Q) - H(Z)
+\end{eqnarray*}
+Applying the chain rule to the first term we may write:
+\begin{eqnarray*}
+  H(X|Y) 
+  &\leq& H(Q) + H(X,Z|Q) - H(Z)\\  
+  &\leq& H(\epsilon,1-\epsilon) + H(X,Z|Q) - H(Z).
+\end{eqnarray*}
+Applying the chain rule to the second term we may write:
+\begin{eqnarray*}
+  H(X|Y) 
+  &\leq& H(\epsilon,1-\epsilon) + H(Z|Q) + H(X|Q,Z) - H(Z)\\
+  &\leq& H(\epsilon,1-\epsilon) + H(X|Q,Z) - H(Z) + H(Z|Q)
+\end{eqnarray*}
+Since $H(Z) - H(Z|Q) = I(Z;Q) \leq 0$:
+\begin{eqnarray*}
+  H(X|Y) 
+  &\leq& H(\epsilon,1-\epsilon) + H(X|Q,Z) - I(Z;Q)\\
+  &\leq& H(\epsilon,1-\epsilon) + H(X|Q,Z).
+\end{eqnarray*}
+We may expand the second term thus:
+\begin{eqnarray*}
+  H(X|Y) 
+  &\leq& H(\epsilon,1-\epsilon) + \E_Q[\E_Z[H(X|Q=q,Z=z)]]
+\end{eqnarray*}
+If we define $\gamma=Pr[Q=1]=Pr[X=Z]$ then
+\begin{eqnarray*}
+  H(X|Y) 
+  &\leq& H(\epsilon,1-\epsilon) + \gamma\E_Z[H(X|Q=1,Z=z)] + (1-\gamma)\E_Z[H(X|Q=0,Z=z)].
+\end{eqnarray*}
+The second term vanishes because $Q=1,Z=z$ implies $X=z$, and $H(X|X=z)=0$:
+\begin{eqnarray*}
+  H(X|Y) 
+  &\leq& H(\epsilon,1-\epsilon) + (1-\gamma)\E_Z[H(X|Q=1,Z=z)]\\
+  &\leq& H(\epsilon,1-\epsilon) + \epsilon\E_Z[H(X|Q=0,Z=z)]
+\end{eqnarray*}
+On the other hand, $Q=0,Z=z$ implies $X\not=z$:
+\begin{eqnarray*}
+  H(X|Y) 
+  &\leq& H(\epsilon,1-\epsilon) + \epsilon\E_Z[H(X|X\not=z)].
+\end{eqnarray*}
+Since there are $m$ elements, $H(X|X\not=z)\leq \log(m-1)$:
+\begin{eqnarray*}
+  H(X|Y) 
+  &\leq& H(\epsilon,1-\epsilon) + \epsilon\E_Z[\log(m-1)]\\
+  &\leq& H(\epsilon,1-\epsilon) + \epsilon\log(m-1)
+\end{eqnarray*}
+
+QED.
+\end{document}
+
+

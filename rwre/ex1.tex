@@ -1,0 +1,176 @@
+\documentclass[11pt]{article} \usepackage{amssymb}
+\usepackage{amsfonts} \usepackage{amsmath} \usepackage{bm}
+\usepackage{latexsym} \usepackage{epsfig}
+
+\setlength{\textwidth}{6.5 in} \setlength{\textheight}{8.25in}
+\setlength{\oddsidemargin}{0in} \setlength{\topmargin}{0in}
+\addtolength{\textheight}{.8in} \addtolength{\voffset}{-.5in}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{example}[theorem]{Example}
+\newenvironment{proof}{\noindent \textbf{Proof:}}{$\Box$}
+
+\newcommand{\ignore}[1]{}
+
+\newcommand{\enote}[1]{} \newcommand{\knote}[1]{}
+\newcommand{\rnote}[1]{}
+
+
+
+% \newcommand{\enote}[1]{{\bf [[Elchanan:} {\emph{#1}}{\bf ]]}}
+% \newcommand{\knote}[1]{{\bf [[Krzysztof:} {\emph{#1}}{\bf ]]}}
+% \newcommand{\rnote}[1]{{\bf [[Ryan:} {\emph{#1}}{\bf ]]}}
+
+
+
+\DeclareMathOperator{\Support}{Supp} \DeclareMathOperator{\Opt}{Opt}
+\DeclareMathOperator{\Ordo}{\mathcal{O}}
+\newcommand{\MaxkCSP}{\textsc{Max $k$-CSP}}
+\newcommand{\MaxkCSPq}{\textsc{Max $k$-CSP$_{q}$}}
+\newcommand{\MaxCSP}[1]{\textsc{Max CSP}(#1)} \renewcommand{\Pr}{{\bf
+    P}} \renewcommand{\P}{{\bf P}} \newcommand{\Px}{\mathop{\bf P\/}}
+\newcommand{\E}{{\bf E}} \newcommand{\Cov}{{\bf Cov}}
+\newcommand{\Var}{{\bf Var}} \newcommand{\Varx}{\mathop{\bf Var\/}}
+
+\newcommand{\bits}{\{-1,1\}}
+
+\newcommand{\nsmaja}{\textstyle{\frac{2}{\pi}} \arcsin \rho}
+
+\newcommand{\Inf}{\mathrm{Inf}} \newcommand{\I}{\mathrm{I}}
+\newcommand{\J}{\mathrm{J}}
+
+\newcommand{\eps}{\epsilon} \newcommand{\lam}{\lambda}
+
+% \newcommand{\trunc}{\ell_{2,[-1,1]}}
+\newcommand{\trunc}{\zeta} \newcommand{\truncprod}{\chi}
+
+\newcommand{\N}{\mathbb N} \newcommand{\R}{\mathbb R}
+\newcommand{\Z}{\mathbb Z} \newcommand{\CalE}{{\mathcal{E}}}
+\newcommand{\CalC}{{\mathcal{C}}} \newcommand{\CalM}{{\mathcal{M}}}
+\newcommand{\CalR}{{\mathcal{R}}} \newcommand{\CalS}{{\mathcal{S}}}
+\newcommand{\CalV}{{\mathcal{V}}}
+\newcommand{\CalX}{{\boldsymbol{\mathcal{X}}}}
+\newcommand{\CalG}{{\boldsymbol{\mathcal{G}}}}
+\newcommand{\CalH}{{\boldsymbol{\mathcal{H}}}}
+\newcommand{\CalY}{{\boldsymbol{\mathcal{Y}}}}
+\newcommand{\CalZ}{{\boldsymbol{\mathcal{Z}}}}
+\newcommand{\CalW}{{\boldsymbol{\mathcal{W}}}}
+\newcommand{\CalF}{{\mathcal{Z}}}
+% \newcommand{\boldG}{{\boldsymbol G}}
+% \newcommand{\boldQ}{{\boldsymbol Q}}
+% \newcommand{\boldP}{{\boldsymbol P}}
+% \newcommand{\boldR}{{\boldsymbol R}}
+% \newcommand{\boldS}{{\boldsymbol S}}
+% \newcommand{\boldX}{{\boldsymbol X}}
+% \newcommand{\boldB}{{\boldsymbol B}}
+% \newcommand{\boldY}{{\boldsymbol Y}}
+% \newcommand{\boldZ}{{\boldsymbol Z}}
+% \newcommand{\boldV}{{\boldsymbol V}}
+\newcommand{\boldi}{{\boldsymbol i}} \newcommand{\boldj}{{\boldsymbol
+    j}} \newcommand{\boldk}{{\boldsymbol k}}
+\newcommand{\boldr}{{\boldsymbol r}}
+\newcommand{\boldsigma}{{\boldsymbol \sigma}}
+\newcommand{\boldupsilon}{{\boldsymbol \upsilon}}
+\newcommand{\hone}{{\boldsymbol{H1}}}
+\newcommand{\htwo}{\boldsymbol{H2}}
+\newcommand{\hthree}{\boldsymbol{H3}}
+\newcommand{\hfour}{\boldsymbol{H4}}
+
+
+\newcommand{\sgn}{\mathrm{sgn}} \newcommand{\Maj}{\mathrm{Maj}}
+\newcommand{\Acyc}{\mathrm{Acyc}}
+\newcommand{\UniqMax}{\mathrm{UniqMax}}
+\newcommand{\Thr}{\mathrm{Thr}} \newcommand{\littlesum}{{\textstyle
+    \sum}}
+
+\newcommand{\half}{{\textstyle \frac12}}
+\newcommand{\third}{{\textstyle \frac13}}
+\newcommand{\fourth}{{\textstyle \frac14}}
+
+\newcommand{\Stab}{\mathbb{S}}
+\newcommand{\StabThr}[2]{\Gamma_{#1}(#2)}
+\newcommand{\StabThrmin}[2]{{\underline{\Gamma}}_{#1}(#2)}
+\newcommand{\StabThrmax}[2]{{\overline{\Gamma}}_{#1}(#2)}
+\newcommand{\TestFcn}{\Psi}
+
+\renewcommand{\phi}{\varphi}
+
+\begin{document}
+\title{RWRE - Exercise 1}
+
+ \author{Omer Tamuz, 035696574}
+\maketitle
+
+Suppose $\{\omega_x\}$ is a stationary, finite state, irreducible MC.
+\section{}
+Prove  $\{\omega_x\}$ is ergodic.
+\section{}
+Let the MC have two states: $\omega_-$ and $\omega_+$. Let the transition
+probability from $\omega_-$ to $\omega_+$ be $p$, and the transition
+probability in the other direction be $q$. Then the stationary distribution
+is $P(\omega_-)={q\over q+p}$, $P(\omega_+)={p\over q+p}$. 
+The expected value of $\rho$ is:
+\begin{equation*}
+  \E\rho
+    = {1\over q+p}\left(q{1-\omega_- \over \omega_-}+
+                        p{1-\omega_+ \over \omega_+}\right).
+\end{equation*}
+
+The speed is:
+\begin{eqnarray*}
+  v &=& {1-\E\rho \over 1+\E\rho}\\
+  v &=& {1-{1\over q+p}\left(q{1-\omega_- \over \omega_-}+
+                        p{1-\omega_+ \over \omega_+}\right) 
+          \over 1+{1\over q+p}\left(q{1-\omega_- \over \omega_-}+
+                        p{1-\omega_+ \over \omega_+}\right)}\\
+  v &=& {q+p-q{1-\omega_- \over \omega_-}- p{1-\omega_+ \over \omega_+}
+          \over q+p+q{1-\omega_- \over \omega_-}+p{1-\omega_+ \over \omega_+}}\\
+  v &=& {q{2\omega_--1 \over \omega_-}+ p{2\omega_+-1 \over \omega_+}
+          \over q{1 \over \omega_-}+p{1 \over \omega_+}}\\
+  v &=& {2(q+p)-q/\omega_--p/\omega_+
+          \over q{1 \over \omega_-}+p{1 \over \omega_+}}\\
+  v &=& 2{q+p \over q/\omega_-+p/\omega_+}-1\\
+  v &=& {2\over\E[1/\omega]}-1\\
+\end{eqnarray*}
+\section{}
+The i.i.d. case is obtained when $p=1-q$. 
+
+Let $A=10000$, $B=A-1=9999$. 
+Let $\gamma$ be the unique solution in $[0,1]$ of the equation 
+$\log\gamma=A\log(1-\gamma)$. Then $\gamma<0.001$, and $\log(\gamma/(1-\gamma))=B\log(1-\gamma)$
+If $\omega_-=\gamma$, $\omega_+=1-\gamma$, with $P(\omega_+)=1-p=2/3$, then:
+\begin{equation*}
+  \E\omega={2\over 3}(1-\gamma)+{1\over 3}\gamma
+          ={2\over 3}-{1\over 3}\gamma>{1\over 2},
+\end{equation*}
+whereas 
+\begin{eqnarray*}
+  \E[\log\rho]&=&{2\over 3}\log({\gamma\over 1-\gamma})+
+                 {1\over 3}\log({1-\gamma\over \gamma})\\
+  \E[\log\rho]&=&{1\over 3}\log(\gamma)-
+                 {1\over 3}\log(1-\gamma)\\
+  \E[\log\rho]&=&{1\over 3}B\log(1-\gamma)\\
+              &<&0
+\end{eqnarray*} 
+and
+\begin{eqnarray*}
+  \E\rho
+  &=& {2\over 3}{\gamma \over 1-\gamma}+{1\over 3}{1-\gamma \over \gamma}\\
+  &=& {2\over 3}{\gamma^2 \over \gamma(1-\gamma)}
+      +{1\over 3}{(1-\gamma)^2 \over \gamma(1-\gamma)}\\
+\end{eqnarray*}
+
+Then 
+$\E\omega=(1-p)\omega_-+p\omega_+$. 
+\end{document}
+
+
+
+

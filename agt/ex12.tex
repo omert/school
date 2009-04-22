@@ -1,0 +1,116 @@
+\documentclass{article}
+\usepackage{graphicx}
+
+\begin{document}
+AGT Ex. 12
+
+Omer Tamuz 035696574
+
+\section{}
+Using the definitions of $A$ and the $T_i$'s from the hint in handout 13, 
+it is easy to see that every element of $A$ appears in $k$ of the $2k$
+subsets - those corresponding to the element's $k$ bits which are 1. By argument
+of symmetry, the linear program will therefore set $x_i = 1/k$, and its
+cost will equal 2 (even without symmetry - $x_i=1/k$ is a solution and
+therefore the cost is at most 2).
+
+The cost of the integer program, on the other hand, is $k+1$. Proof: 
+Assume, without loss of generality, that $T_0\cup T_1 \cup \cdots\cup T_{k-1}$ 
+is a cover for $A$. Then the number whose binary representation is $k$ zeros
+followed by $k$ ones is not covered - contradiction. On the other hand,
+$T_0\cup T_1 \cup \cdots\cup T_{k}$ is a cover, since every number must
+have a one among its first $k+1$ bits, since at least half of them are one.
+
+The integrality gap is therefore $O(1/k)=O(1/\log n)$. 
+
+\section{}
+In general the minimum $\gamma$ for which there is an empty core is equal to the
+integrality gap of the following integer program:
+\begin{eqnarray*}
+  \min{\sum_{S\subseteq A}{\lambda_S C(S)}}\\
+  \forall i\in A \sum_{S:\:i\in S}{\lambda_S}=1\\
+  \forall S\subseteq A:\lambda_S\in\{0, 1\},
+\end{eqnarray*}
+where the last constraint is $\lambda_S\geq 0$ in the relaxed case.
+
+In our case, $C(S)=C(T_i)=1$, and therefore this program is
+the exact same program of question 1. Since its interality gap is 
+$1/\log n$, that is also the minimum $\lambda$ for which the core is
+empty.
+
+\section{}
+We examine the following cost-sharing scheme:
+\begin{equation}
+  \xi(i,S)=\min_{T:i\in T}{1\over |T\cap S|}.
+\end{equation}
+
+By the theorem proved in class, if $\xi$ is cross-monotone and $\gamma$-budget-balanced, 
+then the game admits a group strategyproof mechanism.
+
+Cross-monotone:
+\begin{equation}
+  \xi(i,S_1)=\min_{T:i\in T}{1\over |T\cap S_1|}\geq
+\min_{T:i\in T}{1\over |T\cap (S_1\cup S_2)|}=\xi(i,S_1\cup S_2).
+\end{equation}
+Note that the inequality follows from the fact that for any $T$, $S_1$, 
+$S_2$, it is true that $|T\cap (S_1\cup S_2)|\geq|T\cap S_1|$.
+
+$\gamma$-budget-balanced: Examine a set $S$ which is covered by the $k$ sets
+ $T_1,T_2,\cdots,T_k$. Since each element is covered by at most two sets, then:
+\begin{eqnarray}
+  \sum_{i=0}^k{|T_i\cap S|}&\leq& 2|S|\\
+  {1\over k}\sum_{i=0}^k{|T_i\cap S|}&\leq& {2|S|\over k},
+\end{eqnarray}
+and by the relation between arithmetic and harmonic mean:
+\begin{equation}
+  {k\over \sum_{i=0}^k{1\over |T_i\cap S|}}\leq {2|S|\over k}.
+\end{equation}
+Hence:
+\begin{equation}
+  \sum_{i=0}^k{1\over |T_i\cap S|}\geq {k^2\over 2|S|}.
+\end{equation}
+
+Since any cover is of size at least $C(S)$, then:
+\begin{equation}
+  \label{eq:ineq}
+  \sum_{i=0}^k{1\over |T_i\cap S|}\geq {C(S)^2\over 2|S|}.  
+\end{equation}
+Now:
+\begin{eqnarray*}
+  \forall S\subseteq \mathcal{E}:\\
+ \sum_{i\in S}{\xi(i, S)}
+ &=&\sum_{i\in S}{\min_{T:i\in T}{1\over |T\cap S|}}\\
+ &=&\sum_{i\in S}{1\over |T_{i,\mathrm{min}}\cap S|}.
+\end{eqnarray*}
+Since the set of $T_{i,\mathrm{min}}$'s picked for this sum must include a cover of
+$S$, then by Eq.~\ref{eq:ineq}:
+\begin{eqnarray}
+ \sum_{i\in S}{\xi(i, S)}
+ &=& \sum_{i\in S}{\min_{T:i\in T}{1\over |T\cap S|}}\\
+ &\geq&{C(S)^2 \over 2|S|}\\
+ &=&{C(S) \over 2|S|}C(S),
+\end{eqnarray}
+and this cost sharing scheme is $\gamma$ balanaced for 
+$\gamma=\Omega({1\over n})$, and in fact larger, whenever $C(S)$ tends
+to be large.
+
+\section{}
+The claim is false. Counter example: Let $A=\{1, 2, 3\}$, $S=\{1, 2\}$,
+ $T=\{2, 3\}$. Then $S\cup T=A$ and $S\cap T=\{2\}$. We define a set-cover game by the 
+following collection of subsets of $A$:
+ $\mathcal{E}=\left\{\{1, 2\}, \{2, 3\}\right\}$. We the observe the following:
+ \begin{eqnarray*}
+   S\subseteq\{1, 2\},\\
+   T\subseteq\{2, 3\},\\
+   S\cup T\subseteq\{1, 2\} \cup  \{2, 3\},\\
+   S\cap T\subseteq\{1, 2\}.
+ \end{eqnarray*}
+
+It is easy to verify that these are all minimum covers and that therefore
+$C(S)=1$, $C(T)=1$, $C(S\cup T)=2$, $C(S\cap T)=1$, and the relation
+$C(S)+C(T) \geq C(S\cup T)+C(S\cap T)$ is not satisfied.
+
+
+
+\end{document}
+

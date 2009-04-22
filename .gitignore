@@ -1,0 +1,8 @@
+*.aux
+*.log
+_region*
+*~
+*.dvi
+*.pdf
+*.eps
+*#

@@ -1,0 +1,222 @@
+\documentclass[11pt]{article} \usepackage{amssymb}
+\usepackage{amsfonts} \usepackage{amsmath} \usepackage{bm}
+\usepackage{latexsym} \usepackage{epsfig}
+
+\setlength{\textwidth}{6.5 in} \setlength{\textheight}{8.25in}
+\setlength{\oddsidemargin}{0in} \setlength{\topmargin}{0in}
+\addtolength{\textheight}{.8in} \addtolength{\voffset}{-.5in}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{example}[theorem]{Example}
+\newenvironment{proof}{\noindent \textbf{Proof:}}{$\Box$}
+
+\newcommand{\ignore}[1]{}
+
+\newcommand{\enote}[1]{} \newcommand{\knote}[1]{}
+\newcommand{\rnote}[1]{}
+
+
+
+% \newcommand{\enote}[1]{{\bf [[Elchanan:} {\emph{#1}}{\bf ]]}}
+% \newcommand{\knote}[1]{{\bf [[Krzysztof:} {\emph{#1}}{\bf ]]}}
+% \newcommand{\rnote}[1]{{\bf [[Ryan:} {\emph{#1}}{\bf ]]}}
+
+
+
+\DeclareMathOperator{\Support}{Supp} \DeclareMathOperator{\Opt}{Opt}
+\DeclareMathOperator{\Ordo}{\mathcal{O}}
+\newcommand{\MaxkCSP}{\textsc{Max $k$-CSP}}
+\newcommand{\MaxkCSPq}{\textsc{Max $k$-CSP$_{q}$}}
+\newcommand{\MaxCSP}[1]{\textsc{Max CSP}(#1)} \renewcommand{\Pr}{{\bf
+    P}} \renewcommand{\P}{{\bf P}} \newcommand{\Px}{\mathop{\bf P\/}}
+\newcommand{\E}{{\bf E}} \newcommand{\Cov}{{\bf Cov}}
+\newcommand{\Var}{{\bf Var}} \newcommand{\Varx}{\mathop{\bf Var\/}}
+
+\newcommand{\bits}{\{-1,1\}}
+
+\newcommand{\nsmaja}{\textstyle{\frac{2}{\pi}} \arcsin \rho}
+
+\newcommand{\Inf}{\mathrm{Inf}} \newcommand{\I}{\mathrm{I}}
+\newcommand{\J}{\mathrm{J}}
+
+\newcommand{\eps}{\epsilon} \newcommand{\lam}{\lambda}
+
+% \newcommand{\trunc}{\ell_{2,[-1,1]}}
+\newcommand{\trunc}{\zeta} \newcommand{\truncprod}{\chi}
+
+\newcommand{\N}{\mathbb N} \newcommand{\R}{\mathbb R}
+\newcommand{\Z}{\mathbb Z} \newcommand{\CalE}{{\mathcal{E}}}
+\newcommand{\CalC}{{\mathcal{C}}} \newcommand{\CalM}{{\mathcal{M}}}
+\newcommand{\CalR}{{\mathcal{R}}} \newcommand{\CalS}{{\mathcal{S}}}
+\newcommand{\CalV}{{\mathcal{V}}}
+\newcommand{\CalX}{{\boldsymbol{\mathcal{X}}}}
+\newcommand{\CalG}{{\boldsymbol{\mathcal{G}}}}
+\newcommand{\CalH}{{\boldsymbol{\mathcal{H}}}}
+\newcommand{\CalY}{{\boldsymbol{\mathcal{Y}}}}
+\newcommand{\CalZ}{{\boldsymbol{\mathcal{Z}}}}
+\newcommand{\CalW}{{\boldsymbol{\mathcal{W}}}}
+\newcommand{\CalF}{{\mathcal{Z}}}
+% \newcommand{\boldG}{{\boldsymbol G}}
+% \newcommand{\boldQ}{{\boldsymbol Q}}
+% \newcommand{\boldP}{{\boldsymbol P}}
+% \newcommand{\boldR}{{\boldsymbol R}}
+% \newcommand{\boldS}{{\boldsymbol S}}
+% \newcommand{\boldX}{{\boldsymbol X}}
+% \newcommand{\boldB}{{\boldsymbol B}}
+% \newcommand{\boldY}{{\boldsymbol Y}}
+% \newcommand{\boldZ}{{\boldsymbol Z}}
+% \newcommand{\boldV}{{\boldsymbol V}}
+\newcommand{\boldi}{{\boldsymbol i}} \newcommand{\boldj}{{\boldsymbol
+    j}} \newcommand{\boldk}{{\boldsymbol k}}
+\newcommand{\boldr}{{\boldsymbol r}}
+\newcommand{\boldsigma}{{\boldsymbol \sigma}}
+\newcommand{\boldupsilon}{{\boldsymbol \upsilon}}
+\newcommand{\hone}{{\boldsymbol{H1}}}
+\newcommand{\htwo}{\boldsymbol{H2}}
+\newcommand{\hthree}{\boldsymbol{H3}}
+\newcommand{\hfour}{\boldsymbol{H4}}
+
+
+\newcommand{\sgn}{\mathrm{sgn}} \newcommand{\Maj}{\mathrm{Maj}}
+\newcommand{\Acyc}{\mathrm{Acyc}}
+\newcommand{\UniqMax}{\mathrm{UniqMax}}
+\newcommand{\Thr}{\mathrm{Thr}} \newcommand{\littlesum}{{\textstyle
+    \sum}}
+
+\newcommand{\half}{{\textstyle \frac12}}
+\newcommand{\third}{{\textstyle \frac13}}
+\newcommand{\fourth}{{\textstyle \frac14}}
+
+\newcommand{\Stab}{\mathbb{S}}
+\newcommand{\StabThr}[2]{\Gamma_{#1}(#2)}
+\newcommand{\StabThrmin}[2]{{\underline{\Gamma}}_{#1}(#2)}
+\newcommand{\StabThrmax}[2]{{\overline{\Gamma}}_{#1}(#2)}
+\newcommand{\TestFcn}{\Psi}
+
+\renewcommand{\phi}{\varphi}
+
+\begin{document}
+\title{Scenery Reconstruction}
+
+% \author{Elchanan Mossel\footnote{Supported by a Sloan fellowship in
+%     Mathematics, by BSF grant 2004105, NSF Career Award (DMS 054829)
+%     and by ONR award N00014-07-1-0506.
+%     Part %of this work was carried out while the author was visiting IPAM, UCLA}
+%     \\U.C.\ Berkeley and Weizmann Institute
+%     \\mossel@stat.berkeley.edu} \date{\today}
+\maketitle
+
+\section{Notation and Basic Facts}
+Some standard definitions are described below. 
+
+Given functions $f:S^1\to\R$ and $g:S^1\to\R$:
+\begin{itemize}
+\item Fourier transform is denoted by $\mathcal{F}$ and $\hat{f}$ is the Fourier transform of $f$:
+  \begin{equation*}
+    \mathcal{F}[f]_l=\hat{f}_l = \int_{\theta=0}^{2\pi}{d\theta e^{-il\theta}f(\theta)}
+  \end{equation*}
+\item Inner product is denoted by $\left<f,g\right>$:
+\begin{eqnarray*}
+\left<f,g\right>:={1\over 2\pi}\int_{\theta=0}^{2\pi}{d\theta f(\theta)g(\theta)}\\
+\left<\hat{f},\hat{g}\right>:=\sum_{l=-\infty}^\infty{\hat{f}_l^*\hat{g}_l}
+\end{eqnarray*}
+\item Convolution is denoted by $*$:
+  \begin{equation*}
+    (f*g)(\phi)={1 \over 2\pi}\int_{\theta=0}^{2\pi}{d\theta f(\theta)g(\theta-\phi)}
+  \end{equation*}
+\item $k$-fold convolution is denoted by $f^{(k)}$:
+  \begin{equation}
+    f^{(k)}=\underbrace{f*f*\cdots*f}_{k\; \mathrm{times}}
+  \end{equation}
+\item The auto-correlation function of $f$ is $f*f$.
+\end{itemize}
+
+Some basic facts:
+\begin{itemize}
+\item $\left<f,g\right>=\left<\hat{f},\hat{g}\right>$
+\item $\mathcal{F}[f*f]=\widehat{f*f}=|\hat{f}|^2$
+\item $\mathcal{F}[f^{(k)}]=|\hat{f}|^k$, for even $k$.
+\item $(f*f)(0)=\left<f,f\right>$
+\end{itemize}
+\section{General Case}
+We examine a general case of a random walk on the unit circle, 
+where we want to reconstruct a function $f(\theta)$, 
+and at each step the random walk makes
+a jump $\phi$ according to a distribution $g(\phi)$. We denote $\theta_k$ as the
+position of the random walk at time $k$, and $r_k=f(\theta_k)$ the value
+of $f$ at time $k$.  
+
+The expected correlation product of $r_k$'s of consecutive steps of the random 
+walk is:
+\begin{eqnarray*}
+  a_1&=&\E[r_kr_{k+1}]\\
+     &=&\E[f(\theta_k)f(\theta_{k+1})]\\
+     &=&{1\over 2\pi}\int_{\phi=0}^{2\pi}{d\phi g(\phi){1\over 2\pi}\int_{\theta=0}^{2\pi}{d\theta f(\theta)f(\theta-\phi)}}\\
+     &=&\left<g,f*f\right>\\
+     &=&\left<\hat{g},|\hat{f}|^2\right>
+\end{eqnarray*}
+
+and in general the product of $r_k$'s separated by $m$ steps is
+\begin{eqnarray*}
+  a_m&=&\E[r_kr_{k+m}]\\
+     &=&\left<g^{(m)},f*f\right>\\
+     &=&\left<\hat{g}^m,|\hat{f}|^2\right>.
+\end{eqnarray*}
+
+This also holds for $m=0$, where $\hat{g}^0$ is constant.
+
+Since the expected value $\E[r_kr_{k+m}]$ can be estimated from the $r_k$'s,
+the autocorrelation of $f$, $f*f$, can be reconstructed in the linear
+space spanned by the $\hat{g}^m$'s.
+
+Note that $f$ cannot be, in general, reconstructed from $f*f$, since the
+phases of the Fourier transform elements $\hat{f}_l$'s are lost. 
+{\bf In particular, two functions 
+that are identical up to a shift or a reflection have the same 
+auto-correlation function}.
+
+\section{$n$-cycle}
+The case of $g={1\over 2}\left(\delta(\phi-2\pi/n)+\delta(\phi+2\pi/n)\right)$ 
+corresponds to
+a random walk on the $n$-cycle. Then the values of $f$ are only sampled at
+integer multiples of $2\pi/n$. In this case, the dimension of the vector
+space of such functions is $n$, so $n$ linearly independent functions
+$g^{(m)}$ are sufficient to reconstruct $f*f$. Indeed, the set
+$\{g^{(m)}\:|\:m=0,\cdots,n-1\}$ is linearly independent in this case.
+However, it seems likely that a larger set, in particular
+$\{g^{(m)}\:|\:m=0,\cdots,n^2\}$, would provide better estimation
+for a given sample size. For $m>n^2$, the $g^{(m)}$'s are close to constant,
+and perhaps no more information can be obtained.
+
+\subsection{$f:\Z_n\to\{0,1\}$}
+If $f:\Z_n\to\{0,1\}$, then:
+\begin{conjecture}
+$f$ is reconstructible from $f*f$, up to shifts and reflections. (Actually,
+sometimes two functions seem to fit an auto-correlation funtion...)
+\end{conjecture}
+\begin{conjecture}
+$f$ is reconstructible from $f*f$, up to shifts and reflections, 
+in polynomial time in $n$.
+\end{conjecture}
+\begin{conjecture}
+$f*f$ can be reconstructed to arbitrary precision from $\left\{s_m\;|\;m=0,\cdots,O(n^2)\right\}$, where
+\begin{equation}
+   s_m={1\over T}\sum_{k=0}^T[r_kr_{k+m}],
+\end{equation}
+and $T=O(n^6)$.
+
+\end{conjecture}
+We've implemented an algorithm which seems to consistently reconstruct
+a binary scenery in $O(n^6)$, supporting the conjectures above.
+
+\end{document}
+
+
+

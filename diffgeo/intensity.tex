@@ -1,0 +1,50 @@
+\documentclass{article}
+\usepackage{graphicx}
+
+\begin{document}
+
+We present here a calculation of the energy intensity on the caustic of a half circle, at the point where the caustic is closest to the center of the circle. We show that it is finite.
+
+We examine a semi-circle of radius one, centered at $(0,0)$ and facing the positive x-axis. We shine on it rays of light in the direction of the negative x-axis. 
+
+\begin{figure}[htp]
+\centering
+\includegraphics{intensity}
+\end{figure}
+
+
+The caustic intersects the x-axis at $C=(-1/2,0)$, and is tangent to the x-axis at that point. We denote $Y(y)=(-1/2,-y)$ and calculate here the energy density at $C$:
+\begin{equation}
+  I_C = \lim_{y\to 0} \left({\textrm{energy flux between } C \textrm{ and } Y(y)}\over y\right).
+\end{equation}
+
+A ray of light hitting the half circle at a point where the radius makes an angle of $\phi$ with the positive x-axis, will be reflected back along the line
+\begin{equation}
+  (x-\cos\phi){\sin 2\phi \over \cos 2\phi}=y-\sin\phi
+\end{equation}
+
+Specifically, the rays reflected at angles $\pi>\phi>\phi_0$ will cross between $C$ and $Y$ iff 
+\begin{equation}
+y=\sin\phi-\left({1 \over 2}+\cos\phi\right){\sin2\phi\over \cos2\phi}>-y_0.
+\end{equation}
+Their total energy equals to the total energy of rays crossing the segment between $(0,0)$ and $(0,\sin\phi_0)$, which is proportional to $\sin\phi_0$ (we henceforth assume the constant of proportionality to be one). Therefore, the average energy flux between $C$ and $Y$ will satisfy:
+\begin{eqnarray}
+1/I_{[C,Y]}&=&{y\over \sin\phi_0}\\
+&=&{\sin\phi_0-\left({1 \over 2}+\cos\phi_0\right){\sin2\phi_0\over \cos2\phi_0} \over \sin\phi_0}\\
+&=&1-{\left({1\over 2}+\cos\phi_0\right)\sin2\phi_0\over \sin\phi_0\cos2\phi_0}.
+\end{eqnarray} 
+Then:
+\begin{eqnarray}
+1/I_C=\lim_{\phi_0\to\pi}1/I_{[C,Y]}&=&\lim_{\phi_0\to\pi}1-{\left({1\over 2}+\cos\phi_0\right)\sin2\phi_0\over \sin\phi_0\cos2\phi_0}.
+\end{eqnarray}
+We take the derivatives of both the numerator and denomenator:
+\begin{eqnarray}
+1/I_C=\lim_{\phi_0\to\pi}1/I&=&1-{\left({1\over2}+\cos\phi_0\right)2\cos2\phi_0-\sin\phi_0\sin2\phi_0\over\cos\phi_0\cos2\phi_0-2\sin\phi_0\sin2\phi_0}\\
+&=&1-{\left({1\over2}-1\right)2-0\over -1-0}\\
+&=&1-2\left({1\over2}-1\right)\\
+&=&2
+\end{eqnarray} 
+ Therefore the intensity at $C$ is $1/2$, and in particular is finite.
+
+\end{document}
+
