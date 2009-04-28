@@ -141,24 +141,55 @@ $1-1/(n+1)=n/(n+1)$ ``good'' vertices, and $K(G)/2^n\leq n/(n+1)$.
 The ``Hamming code strategy'' would be the following: For $n=2^l-1$ players, 
 one would use the Hamming code $[2^l-1, 2^l-1-l, 3]$.
 Given the two
-options $a_i^0$ and $a_i^1$, player $i$ would guess the one that is a Hamming
-code if indeed one of them is, or otherwise abstain. Since the minimum
+options $a_i^0$ and $a_i^1$, player $i$ would guess the one that is not a Hamming
+code if one of them isn't and the other is, 
+or abstain if both aren't code words. Since the minimum
 distance between Hamming codes is three, the option that both are Hamming
-codes does not exist. The in-degree of every Hamming code would
-be positive, since there would be an edge to it from each one of its 
-neighbours. Also, its out-degree would clearly be zero. 
-The probability of sucess $K(G)/2^n$ would be the size of the code
-over the number of possible vectors: 
+codes does not exist. Also, because the Hamming code is perfect, all
+words that aren't code words will have a neighbor that is a code word,
+and therefore have positive in-degree. Their out-degree would clearly
+be zero.
+The probability of failure $1-K(G)/2^n$ would be the size of the code
+over the number of possible vectors, and so: 
 \begin{equation}
-  {2^l-1-l\over 2^l-1}={n - log(n+1) \over n}
+  {K(G)\over 2^n}=1-{2^{2^l-1-l}\over 2^{2^l-1}}=1-{1\over 2^l}=1-{1\over n+1}
+  ={n\over n+1}
 \end{equation}
 
 \section{}
-Let $G_m$ be the generating matrix for the $[2^m-1,2^m-1-m,3]_2$ Hamming 
-code. Then using the same matrix to encode strings over $F_q$ would make
-a perfect $[2^m-1,2^m-1-m,3]_q$ code when $q$ is a prime power.
+Given $q=p^l$, $F_q$ is a finite field with $q$ elements. We will form
+a parity check matrix for a code over $F_q$, in a similar way to
+the binary code, by choosing as many pair-wise independent columns
+of length $l$. This matrix can be optimally built ``greedily'': choose
+a first non-zero column. This excludes from the choice for the rest
+of the column all of its $q-1$ non-zero multiples, and only them. We can
+then inductively choose the next column, again excluding its $q-1$ 
+non-zero multiples. Since the total number of non-zero vectors in $(F_q)^l$
+is $q^l-1$, we will have ${q^l-1\over q-1}$ columns.
 
-I have no proof for this conjecture...
+The proof that the minimum distance is three, shown for binary codes, still
+works for this $H_m$: each two columns of $H_m$ are linearly independent,
+are therefore at least three non-zero components are needed for a 
+vector to be in $H_m$'s kernel and therefore in the code. Hence, the
+distance is at least 3, and the code is a 
+$[{q^l-1\over q-1},{q^l-1\over q-1}-l,3]_q$ code.
+
+To show that this is a perfect code, we have to show that it meets the
+ball packing bound, i.e.:
+\begin{equation*}
+  \textrm{size of code}={q^n\over \sum_{k=0}^1{{n \choose k}(q-1)^k}}
+\end{equation*}
+where $n={q^l-1\over q-1}$.
+
+The left hand side of this equation equals:
+\begin{eqnarray*}
+  {q^n\over \sum_{k=0}^1{{n \choose k}(q-1)^k}}
+&=&{q^n\over 1 + n(q-1)}\\
+&=&{q^n\over 1 + {q^l-1\over q-1}(q-1)}\\
+&=&{q^n\over q^l}\\
+&=&q^{n-l}
+\end{eqnarray*}
+which precisely equals the size of the code.
 
 \section{}
 \subsection{}
