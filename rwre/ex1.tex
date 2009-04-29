@@ -142,9 +142,10 @@ The speed is:
 \section{}
 The i.i.d. case is obtained when $p=1-q$. 
 
-Let $A=10000$, $B=A-1=9999$. 
+Let $A=10000$. 
 Let $\gamma$ be the unique solution in $[0,1]$ of the equation 
-$\log\gamma=A\log(1-\gamma)$. Then $\gamma<0.001$, and $\log(\gamma/(1-\gamma))=B\log(1-\gamma)$
+$\log\gamma=A\log(1-\gamma)$. 
+Then $\gamma<0.001$, and $\log(\gamma/(1-\gamma))=(A-1)\log(1-\gamma)$.
 If $\omega_-=\gamma$, $\omega_+=1-\gamma$, with $P(\omega_+)=1-p=2/3$, then:
 \begin{equation*}
   \E\omega={2\over 3}(1-\gamma)+{1\over 3}\gamma
@@ -156,7 +157,7 @@ whereas
                  {1\over 3}\log({1-\gamma\over \gamma})\\
   \E[\log\rho]&=&{1\over 3}\log(\gamma)-
                  {1\over 3}\log(1-\gamma)\\
-  \E[\log\rho]&=&{1\over 3}B\log(1-\gamma)\\
+  \E[\log\rho]&=&{1\over 3}(A-1)\log(1-\gamma)\\
               &<&0
 \end{eqnarray*} 
 and
