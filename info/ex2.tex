@@ -231,8 +231,12 @@ $\sum_{i=1}^{m_l}q_i^{(l)}=\sum_{i=1}^{m_r}q_i^{(r)}=1$. Then
 \item
 Let $q_i=2^{-k_i}$ be such that each $\log q_i$ is the result of 
 rounding $\log p_i$ down to the nearest integer.
-Since $\sum_{i=1}^mq_i$ might be less than one, let $q_{m+1}=1-\sum_{i=1}^mq_i$,
-so that $(q_1,\ldots,q_m,q_{m+1})$ is a distribution. Next, build a Huffman
+As $\sum_{i=1}^mq_i$ might be less than one, find $q_{m+1},\ldots,q_{m_n}$ 
+such that $\sum_{i=1}^{m+n}q_i=1$ and still $\forall i\::\:-\log q_i\in\N$, 
+so that $(q_1,\ldots,q_m,\ldots,q_{m+n})$ is a distribution. 
+This is possible because
+all of $q_1,\ldots,q_m$ are integer multiples of their minimum.
+ Next, build a Huffman
 tree for this distribution. By the proof in the answer to question 2, 
 the depth of the leaf corresponding
 to $q_i$ will be $-\log q_i$. Use this tree to encode messages for the $p$
