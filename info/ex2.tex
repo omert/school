@@ -1,0 +1,249 @@
+\documentclass[11pt]{article} \usepackage{amssymb}
+\usepackage{amsfonts} \usepackage{amsmath} \usepackage{bm}
+\usepackage{latexsym} \usepackage{epsfig}
+
+\setlength{\textwidth}{6.5 in} \setlength{\textheight}{8.25in}
+\setlength{\oddsidemargin}{0in} \setlength{\topmargin}{0in}
+\addtolength{\textheight}{.8in} \addtolength{\voffset}{-.5in}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{example}[theorem]{Example}
+\newenvironment{proof}{\noindent \textbf{Proof:}}{$\Box$}
+
+\newcommand{\ignore}[1]{}
+
+\newcommand{\enote}[1]{} \newcommand{\knote}[1]{}
+\newcommand{\rnote}[1]{}
+
+
+
+% \newcommand{\enote}[1]{{\bf [[Elchanan:} {\emph{#1}}{\bf ]]}}
+% \newcommand{\knote}[1]{{\bf [[Krzysztof:} {\emph{#1}}{\bf ]]}}
+% \newcommand{\rnote}[1]{{\bf [[Ryan:} {\emph{#1}}{\bf ]]}}
+
+
+
+\DeclareMathOperator{\Support}{Supp} \DeclareMathOperator{\Opt}{Opt}
+\DeclareMathOperator{\Ordo}{\mathcal{O}}
+\newcommand{\MaxkCSP}{\textsc{Max $k$-CSP}}
+\newcommand{\MaxkCSPq}{\textsc{Max $k$-CSP$_{q}$}}
+\newcommand{\MaxCSP}[1]{\textsc{Max CSP}(#1)} \renewcommand{\Pr}{{\bf
+    P}} \renewcommand{\P}{{\bf P}} \newcommand{\Px}{\mathop{\bf P\/}}
+\newcommand{\E}{{\bf E}} \newcommand{\Cov}{{\bf Cov}}
+\newcommand{\Var}{{\bf Var}} \newcommand{\Varx}{\mathop{\bf Var\/}}
+
+\newcommand{\bits}{\{-1,1\}}
+
+\newcommand{\nsmaja}{\textstyle{\frac{2}{\pi}} \arcsin \rho}
+
+\newcommand{\Inf}{\mathrm{Inf}} \newcommand{\I}{\mathrm{I}}
+\newcommand{\J}{\mathrm{J}}
+
+\newcommand{\eps}{\epsilon} \newcommand{\lam}{\lambda}
+
+% \newcommand{\trunc}{\ell_{2,[-1,1]}}
+\newcommand{\trunc}{\zeta} \newcommand{\truncprod}{\chi}
+
+\newcommand{\N}{\mathbb N} \newcommand{\R}{\mathbb R}
+\newcommand{\Z}{\mathbb Z} \newcommand{\CalE}{{\mathcal{E}}}
+\newcommand{\CalC}{{\mathcal{C}}} \newcommand{\CalM}{{\mathcal{M}}}
+\newcommand{\CalR}{{\mathcal{R}}} \newcommand{\CalS}{{\mathcal{S}}}
+\newcommand{\CalV}{{\mathcal{V}}}
+\newcommand{\CalX}{{\boldsymbol{\mathcal{X}}}}
+\newcommand{\CalG}{{\boldsymbol{\mathcal{G}}}}
+\newcommand{\CalH}{{\boldsymbol{\mathcal{H}}}}
+\newcommand{\CalY}{{\boldsymbol{\mathcal{Y}}}}
+\newcommand{\CalZ}{{\boldsymbol{\mathcal{Z}}}}
+\newcommand{\CalW}{{\boldsymbol{\mathcal{W}}}}
+\newcommand{\CalF}{{\mathcal{Z}}}
+% \newcommand{\boldG}{{\boldsymbol G}}
+% \newcommand{\boldQ}{{\boldsymbol Q}}
+% \newcommand{\boldP}{{\boldsymbol P}}
+% \newcommand{\boldR}{{\boldsymbol R}}
+% \newcommand{\boldS}{{\boldsymbol S}}
+% \newcommand{\boldX}{{\boldsymbol X}}
+% \newcommand{\boldB}{{\boldsymbol B}}
+% \newcommand{\boldY}{{\boldsymbol Y}}
+% \newcommand{\boldZ}{{\boldsymbol Z}}
+% \newcommand{\boldV}{{\boldsymbol V}}
+\newcommand{\boldi}{{\boldsymbol i}} \newcommand{\boldj}{{\boldsymbol
+    j}} \newcommand{\boldk}{{\boldsymbol k}}
+\newcommand{\boldr}{{\boldsymbol r}}
+\newcommand{\boldsigma}{{\boldsymbol \sigma}}
+\newcommand{\boldupsilon}{{\boldsymbol \upsilon}}
+\newcommand{\hone}{{\boldsymbol{H1}}}
+\newcommand{\htwo}{\boldsymbol{H2}}
+\newcommand{\hthree}{\boldsymbol{H3}}
+\newcommand{\hfour}{\boldsymbol{H4}}
+
+
+\newcommand{\sgn}{\mathrm{sgn}} \newcommand{\Maj}{\mathrm{Maj}}
+\newcommand{\Acyc}{\mathrm{Acyc}}
+\newcommand{\UniqMax}{\mathrm{UniqMax}}
+\newcommand{\Thr}{\mathrm{Thr}} \newcommand{\littlesum}{{\textstyle
+    \sum}}
+
+\newcommand{\half}{{\textstyle \frac12}}
+\newcommand{\third}{{\textstyle \frac13}}
+\newcommand{\fourth}{{\textstyle \frac14}}
+
+\newcommand{\Stab}{\mathbb{S}}
+\newcommand{\StabThr}[2]{\Gamma_{#1}(#2)}
+\newcommand{\StabThrmin}[2]{{\underline{\Gamma}}_{#1}(#2)}
+\newcommand{\StabThrmax}[2]{{\overline{\Gamma}}_{#1}(#2)}
+\newcommand{\TestFcn}{\Psi}
+
+\renewcommand{\phi}{\varphi}
+
+\begin{document}
+\title{Information Theory - Exercise 2}
+
+ \author{Omer Tamuz, 035696574}
+\maketitle
+
+\begin{enumerate}
+\item 
+Let $p_i$ be the probability of $E_i$, with $\sum_ip_iE_i=E$ and $E_1<E<{1\over m}\sum_iE_i$.
+We'll use Lagrange multipliers to find the distribution that maximizes
+the entropy, given this constraint and given that the sum of the 
+probabilities is one:
+\begin{equation*}
+  F(p_1,\ldots,p_m) = -\sum_ip_i\log p_i -\beta(\sum_ip_iE_i-E) + \lambda(\sum_ip_i-1)
+\end{equation*}
+Differentiating by $p_i$ yields:
+\begin{equation*}
+  0={\partial F\over \partial p_i}=-\log p_i-1-\beta E_i+\lambda
+\end{equation*}
+so that:
+\begin{equation}
+  \label{eq:p_i}
+  p_i=e^{-\beta E_i-1+\lambda}.
+\end{equation}
+Differentiating by $\beta$ yields an equation that again produces the
+constraint $\sum_i p_iE_i=E$, and differentiating by $\lambda$ produces
+$\sum_ip_i=1$. These two constraints are satisfied together with 
+Eq.~\ref{eq:p_i} when:
+\begin{equation*}
+  \sum_ie^{-\beta E_i-1+\lambda}E_i=E \quad \mbox{and} \quad 
+  \sum_ie^{-\beta E_i-1+\lambda}=1
+\end{equation*}
+The solution to the second equation is:
+\begin{equation*}
+  e^{1-\lambda}=\sum_i e^{-\beta E_i}
+\end{equation*}
+The first equation can then be written as:
+\begin{eqnarray}
+  \label{eq:beta1}
+  {\sum_i e^{-\beta E_i}E_i\over \sum_i e^{-\beta E_i}}=E.
+\end{eqnarray}
+It can also be written as:
+\begin{eqnarray*}
+  E={\sum_i e^{-\beta E_i}E_i\over \sum_i e^{-\beta E_i}}&=&
+{\sum_i e^{-\beta E_1}e^{-\beta (E_i-E_1)}E_i\over \sum_i e^{-\beta E_1}e^{-\beta (E_i-E_1)}}
+\\ &=&
+{E_1+\sum_{i>1}e^{-\beta (E_i-E_1)}E_i\over \sum_i e^{-\beta (E_i-E_1)}}
+\end{eqnarray*}
+In this form it is easy to see that 
+\begin{itemize}
+\item 
+  for all $\beta\in \R$, $E>E_1$
+\item 
+when $\beta=0$, then $E={1\over m}\sum_iE_i$,
+\item
+and that when $\beta \to \infty$, then $E\to E_1$.  
+\end{itemize}
+
+The expression (\ref{eq:beta1}) for $E$ is a weighted average of the $E_i$'s, and as such
+gives lower weights to the higher $E_i$'s, the larger $\beta$ is. Therefore,
+it is monotonously decreasing. Then by the points above, it can be 
+solved for $\beta$ only when $E_1<E\leq {1\over m}\sum_iE_i$.
+
+For $E\leq E_1$, no real value of $\beta$ satisfies Eq.~\ref{eq:beta1}. 
+For ${1\over m}\sum_iE_i<E<E_m$, solutions exist, but with $\beta<0$. For $E\geq E_m$, no real 
+solutions exist.
+
+\item
+Let $X$ be a r.v. with distribution $(p_1,\ldots,p_m)$, with $p_i=2^{-k_i}$.
+Assume w.o.l.g. that $k_1\leq \cdots\ \leq k_m$. 
+The Huffman tree $T_m$ for $(p_1,\ldots,p_m)$ includes, by definition,  
+a Huffman tree $T_{m-1}$ for $(p_1,\ldots,p_{m-2},p_{m-1}+p_{m})$, and then 
+two branches, for $p_{m-1}$ and $p_m$, attached to the branch terminating
+at $p_{m-1}+p_m$. 
+
+Now, 
+\begin{eqnarray*}
+1=\sum_ip_i&=&\sum_i2^{-k_i}
+\\ 1&=&2^{-k_m}\sum_i2^{k_m-k_i}
+\\ 2^{k_m}&=&\sum_i2^{k_m-k_i}
+\\ 2^{k_m}&=&1+\sum_{i<m}2^{k_m-k_i}.
+\end{eqnarray*}
+Therefore if $k_m>0$ then $k_{m-1}$ must equal $k_m$, otherwise the r.h.s. could not be even.
+This implies that $T_{m-1}$ is a Huffman tree of the same kind as
+$T_m$, since $(p_1,\ldots,p_{m-2},p_{m-1}+p_{m})$ is also a distribution
+with all probabilities equaling powers of two ($p_{m-1}+p_m=2p_m=2^{-(k_m-1)}$).
+
+We will now prove inductively that in a Huffman tree for a distribution with
+probabilities equaling powers of two, the depth of a node with probability
+$p=2^{-k}$ is $k$. The induction base is the trivial distribution, with one
+possible outcome happening with probability $1=2^0$. Since the Huffman tree
+for this distribution is empty, this outcome indeed has depth zero. 
+
+Next, we'll make the inductive assumption 
+that in $T_{m-1}$ the depth to $p_i$ for $i<m-1$ is $k_i$, and
+the depth to $p_{m-1}+p_m$, which equals $2^{-(k_m-1)}$, is $k_m-1$. Then the depth to
+$p_{m-1}(=2^{-k_m})$ and $p_m(=2^{-k_m})$ in $T_m$ will be one more, or $k_m$. 
+We have thus
+proved that the depth to $p_i$ is $k_i=-\log p_i$. The average depth of the
+tree, and hence the average message length, will therefore 
+be $\sum_i-p_i\log p_i$, or $H(X)$. QED.
+
+\item
+Let $k_i$ be the depth to $p_i$ in the Huffman tree of some distribution
+$(p_1,\ldots,p_m)$. Let $q_i=2^{-k_i}$. We prove below that $\sum_iq_i=1$. By exercise 1,
+question 1, we have
+\begin{equation*}
+  H(X)=-\sum_ip_i\log p_i\leq -\sum_ip_i\log q_i=\sum_ip_ik_i,
+\end{equation*}
+where the expression on the r.h.s is the average depth of the tree, or the
+average message length. QED.
+
+Proof by induction that $\sum_iq_i=1$:
+Let $T$ be a binary tree. If $T$ is empty then $m=1$, $q_1=1$ and $\sum_iq_i=1$.
+Otherwise, let $T^{(r)}$ be the subtree at the right branch of the root of $T$,
+and $T^{(l)}$ the subtree at the left child. Make the inductive assumption that
+$\sum_{i=1}^{m_l}q_i^{(l)}=\sum_{i=1}^{m_r}q_i^{(r)}=1$. Then 
+\begin{eqnarray*}
+\sum_iq_i
+   &=&\sum_{i=1}^{m_l}2^{-(k_i^{(l)}+1)}+\sum_{i=1}^{m_r}2^{-(k_i^{(r)}+1)}
+\\ &=&\sum_{i=1}^{m_l}\half 2^{-k_i^{(l)}}+\sum_{i=1}^{m_r}\half 2^{-k_i^{(r)}}
+\\ &=&\sum_{i=1}^{m_l}\half q_i^{(l)}+\sum_{i=1}^{m_r}\half q_i^{(r)}
+\\ &=&\half\sum_{i=1}^{m_l}q_i^{(l)}+\half\sum_{i=1}^{m_r}q_i^{(r)}
+\\ &=& 1
+\end{eqnarray*}
+
+\item
+Let $q_i=2^{-k_i}$ be such that each $\log q_i$ is the result of 
+rounding $\log p_i$ down to the nearest integer.
+Since $\sum_{i=1}^mq_i$ might be less than one, let $q_{m+1}=1-\sum_{i=1}^mq_i$,
+so that $(q_1,\ldots,q_m,q_{m+1})$ is a distribution. Next, build a Huffman
+tree for this distribution. By the proof in the answer to question 2, 
+the depth of the leaf corresponding
+to $q_i$ will be $-\log q_i$. Use this tree to encode messages for the $p$
+distribution, by encoding $p_i$ according to the leaf corresponding
+to $q_i$. The average message length would be 
+\begin{equation*}
+  -\sum_ip_i\log q_i \leq -\sum_ip_i(\log p_i-1) = H(X)+\sum_ip_i=H(X)+1.
+\end{equation*}
+Because the Huffman tree is optimal, its message length will also be $\leq H(X)+1$.
+\end{enumerate}
+\end{document}
+
+
+

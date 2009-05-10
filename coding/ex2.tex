@@ -1,0 +1,293 @@
+\documentclass[11pt]{article} \usepackage{amssymb}
+\usepackage{amsfonts} \usepackage{amsmath} \usepackage{bm}
+\usepackage{latexsym} \usepackage{epsfig}
+
+\setlength{\textwidth}{6.5 in} \setlength{\textheight}{8.25in}
+\setlength{\oddsidemargin}{0in} \setlength{\topmargin}{0in}
+\addtolength{\textheight}{.8in} \addtolength{\voffset}{-.5in}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{example}[theorem]{Example}
+\newenvironment{proof}{\noindent \textbf{Proof:}}{$\Box$}
+
+\newcommand{\ignore}[1]{}
+
+\newcommand{\enote}[1]{} \newcommand{\knote}[1]{}
+\newcommand{\rnote}[1]{}
+
+
+
+% \newcommand{\enote}[1]{{\bf [[Elchanan:} {\emph{#1}}{\bf ]]}}
+% \newcommand{\knote}[1]{{\bf [[Krzysztof:} {\emph{#1}}{\bf ]]}}
+% \newcommand{\rnote}[1]{{\bf [[Ryan:} {\emph{#1}}{\bf ]]}}
+
+
+
+\DeclareMathOperator{\Support}{Supp} \DeclareMathOperator{\Opt}{Opt}
+\DeclareMathOperator{\Ordo}{\mathcal{O}}
+\newcommand{\MaxkCSP}{\textsc{Max $k$-CSP}}
+\newcommand{\MaxkCSPq}{\textsc{Max $k$-CSP$_{q}$}}
+\newcommand{\MaxCSP}[1]{\textsc{Max CSP}(#1)} \renewcommand{\Pr}{{\bf
+    P}} \renewcommand{\P}{{\bf P}} \newcommand{\Px}{\mathop{\bf P\/}}
+\newcommand{\E}{{\bf E}} \newcommand{\Cov}{{\bf Cov}}
+\newcommand{\Var}{{\bf Var}} \newcommand{\Varx}{\mathop{\bf Var\/}}
+
+\newcommand{\bits}{\{-1,1\}}
+
+\newcommand{\nsmaja}{\textstyle{\frac{2}{\pi}} \arcsin \rho}
+
+\newcommand{\Inf}{\mathrm{Inf}} \newcommand{\I}{\mathrm{I}}
+\newcommand{\J}{\mathrm{J}}
+
+\newcommand{\eps}{\epsilon} \newcommand{\lam}{\lambda}
+
+% \newcommand{\trunc}{\ell_{2,[-1,1]}}
+\newcommand{\trunc}{\zeta} \newcommand{\truncprod}{\chi}
+
+\newcommand{\N}{\mathbb N} \newcommand{\R}{\mathbb R}
+\newcommand{\Z}{\mathbb Z} \newcommand{\CalE}{{\mathcal{E}}}
+\newcommand{\CalC}{{\mathcal{C}}} \newcommand{\CalM}{{\mathcal{M}}}
+\newcommand{\CalR}{{\mathcal{R}}} \newcommand{\CalS}{{\mathcal{S}}}
+\newcommand{\CalV}{{\mathcal{V}}}
+\newcommand{\CalX}{{\boldsymbol{\mathcal{X}}}}
+\newcommand{\CalG}{{\boldsymbol{\mathcal{G}}}}
+\newcommand{\CalH}{{\boldsymbol{\mathcal{H}}}}
+\newcommand{\CalY}{{\boldsymbol{\mathcal{Y}}}}
+\newcommand{\CalZ}{{\boldsymbol{\mathcal{Z}}}}
+\newcommand{\CalW}{{\boldsymbol{\mathcal{W}}}}
+\newcommand{\CalF}{{\mathcal{Z}}}
+% \newcommand{\boldG}{{\boldsymbol G}}
+% \newcommand{\boldQ}{{\boldsymbol Q}}
+% \newcommand{\boldP}{{\boldsymbol P}}
+% \newcommand{\boldR}{{\boldsymbol R}}
+% \newcommand{\boldS}{{\boldsymbol S}}
+% \newcommand{\boldX}{{\boldsymbol X}}
+% \newcommand{\boldB}{{\boldsymbol B}}
+% \newcommand{\boldY}{{\boldsymbol Y}}
+% \newcommand{\boldZ}{{\boldsymbol Z}}
+% \newcommand{\boldV}{{\boldsymbol V}}
+\newcommand{\boldi}{{\boldsymbol i}} \newcommand{\boldj}{{\boldsymbol
+    j}} \newcommand{\boldk}{{\boldsymbol k}}
+\newcommand{\boldr}{{\boldsymbol r}}
+\newcommand{\boldsigma}{{\boldsymbol \sigma}}
+\newcommand{\boldupsilon}{{\boldsymbol \upsilon}}
+\newcommand{\hone}{{\boldsymbol{H1}}}
+\newcommand{\htwo}{\boldsymbol{H2}}
+\newcommand{\hthree}{\boldsymbol{H3}}
+\newcommand{\hfour}{\boldsymbol{H4}}
+
+
+\newcommand{\sgn}{\mathrm{sgn}} \newcommand{\Maj}{\mathrm{Maj}}
+\newcommand{\Acyc}{\mathrm{Acyc}}
+\newcommand{\UniqMax}{\mathrm{UniqMax}}
+\newcommand{\Thr}{\mathrm{Thr}} \newcommand{\littlesum}{{\textstyle
+    \sum}}
+
+\newcommand{\half}{{\textstyle \frac12}}
+\newcommand{\third}{{\textstyle \frac13}}
+\newcommand{\fourth}{{\textstyle \frac14}}
+
+\newcommand{\Stab}{\mathbb{S}}
+\newcommand{\StabThr}[2]{\Gamma_{#1}(#2)}
+\newcommand{\StabThrmin}[2]{{\underline{\Gamma}}_{#1}(#2)}
+\newcommand{\StabThrmax}[2]{{\overline{\Gamma}}_{#1}(#2)}
+\newcommand{\TestFcn}{\Psi}
+
+\renewcommand{\phi}{\varphi}
+
+\begin{document}
+\title{Coding Theory - Exercise 2}
+
+ \author{Omer Tamuz, 035696574}
+\maketitle
+
+\begin{enumerate}
+\setcounter{enumi}{1}
+\item 
+\begin{enumerate}
+\item
+Let $G$ be the generator matrix of an $[n,k,d]$ linear code. Let $m$ be
+a message and $w$ its corresponding codeword. Then $Gm=w$. Given a
+set of $e<d$ erasures, remove these characters from $w$, and remove
+the corresponding rows from $G$, so that $w$ and $G$ become $\hat{w}$ and $\hat{G}$, 
+after these removals. 
+Then $\hat{G}m=\hat{w}$, with all values of $\hat{w}$
+known to be correct.
+
+Since $G$ is an $n$ by $k$ matrix, then $\hat{G}$ is an $n-e$ by $k$
+matrix. By the Singleton bound $k+d\leq n+1$, and by $e<d$, we 
+have that $n-e>k-1$ or $n-e\geq k$. The
+linear system defined by  $\hat{G}m=\hat{w}$ is not under-determined,
+and can therefore be solved for $m$, in linear time.
+\item
+Let $[n,k,d]$ be an RS code, with generating matrix $G$. 
+Assume we have $s$ erasures and $e$ errors, with $s+2e<d$. Let $\hat{G}$
+be $G$ with the rows corresponding to the erasures removed. Then
+$\hat{G}$ also represents an RS code, with parameters 
+$[\hat{n}=n-s, \hat{k}=k, \hat{d}=d-s]$. Since $s+2e<d$, then 
+$2e<d-s=\hat{d}$, and $e<\half\hat{d}$, so that the message can be
+decoded with the Berlekamp-Welsh algorithm, applied to $\hat{G}$.
+\end{enumerate}
+\item
+\begin{enumerate}
+\item
+Given two different messages, after the first ($E1$) stage of
+the encoding, at least one column will be different, by at least
+$d_1$ characters. Therefore, after the second stage,
+at least $d_1$ rows will be different, each by at least $d_2$
+characters, so that the difference between the codewords 
+will be by at least $d_1d_2$ characters.
+The distance of $E1\otimes E1$ is therefore $d_{12}=d_1d_2$. 
+The size of messages is $k_{12}=k_1k_2$, and the
+size of codewords is $n_{12}=n_1n_2$, so that $E1\otimes E1$ is a
+$(n_1n_2,k_1k_2,d_1d_2)$ code with $R={k_1k_2\over n_1n_2}=R_1R_2$
+and $\delta = {d_1d_2\over n_1n_2}=\delta_1\delta_2$.
+\item
+For this question we will use some standard tensor notation:
+\begin{itemize}
+\item $m_i$ denotes a column vector.
+\item $m^j$ denotes a row vector.
+\item Implied summation: $a^ib_i$ means
+  $\sum_ia^ib_i$, whenever the index appears twice, once as a superscript
+  and once as a subscript.
+\end{itemize}
+ Also, we will denote as $F$ the generating matrix of $E1$ and $G$ that 
+of $E2$. 
+By this notation, $w_i=F_i^jm_j$ is the operation
+of encoding a column by $E1$, and $w^j=G^j_im^i$ denotes encoding
+a row by $E2$.
+
+Let the message be $m_i^j$. Then encoding it into $w$ is done 
+by $w_k^l=F_k^jG_i^lm_j^i$. One can also write this as: 
+\begin{equation}
+  \label{eq:col_en}
+w_k^l=F_k^j(G_i^lm_j^i)  
+\end{equation}
+or as:
+\begin{equation}
+  \label{eq:row_en}
+w_k^l=G_i^l(F_k^jm_j^i).
+\end{equation}
+
+Eq.~\ref{eq:col_en} shows that the columns of $w$ are the encoding by $E1$
+of the encoding by $E2$ of the rows of $m$, while 
+Eq.~\ref{eq:row_en} shows that the converse is also true: the rows of $w$
+are the encoding by $E2$ of the encoding by $E1$ of the columns of $m$. 
+Hence the columns of $w$ are codewords of $E1$ and the rows of $w$ 
+are codewords of $E2$. 
+\end{enumerate}
+\item
+\begin{enumerate}
+\item
+Let $C$ be the RS code which, given $\{\alpha_i\}=S\subset \mathbb{F}_q$, encodes a message  
+$m\in \mathbb{F}_q^{\lfloor\sqrt{k}\rfloor}$ into message in $w\in \mathbb{F}_q^{|S|}$ by $w_{i}=P_m(\alpha_i)$, where 
+$P_m(x)=\sum_im_ix^i$. Then, again by implied summation, $w_i=\alpha_i^jm_j$. (Note that
+the superscript $j$ in $\alpha_i^j$ doubles as an exponent and a
+tensor index.)
+
+The tensor code $C\otimes C$ is then:
+\begin{equation*}
+  w_k^l=\alpha_i^l\alpha_k^jm_j^i,
+\end{equation*}
+which is precisely the definition of the Reed Muller code.
+\item
+The rate of $C$ is ${\sqrt{k}\over |S|}$  and its distance is 
+${|S|-\sqrt{k} \over |S|}$ (up to an $o(1)$ addend, for both expressions). By the previous question,
+the relative rate of $C\otimes C$ is the square of that of $C$, and so equals
+${k\over |S|^2}$. Likewise, the relative distance of $C\otimes C$ is the square
+of that of $C$, and therefore is
+\begin{equation*}
+  \delta=\left({|S|-\sqrt{k} \over |S|}\right)^2
+        =\left(1-{\sqrt{k} \over |S|}\right)^2
+\end{equation*}
+\item
+The extension of the RM codes to $n$-variate polynomials will encode
+a message $m_{i_1,\ldots,i_n}$, where $\forall k\:: 0<i_k<\sqrt[n]{k}$ into a message
+ $w_{i_1,\ldots,i_n}\in \mathbb{F}_q^{|S|^n}$ by $w_{i_1,\ldots,i_n}=P_m(\alpha_{i_1},\ldots,\alpha_{i_n})$, where
+ \begin{equation*}
+P_m(X_1,\ldots,X_n)=\sum_{i_1,\ldots,i_n}m_{i_1,\ldots,i_n}X_1^{i_1}\cdots X_n^{i_n}.
+ \end{equation*}
+In tensor notation:
+\begin{equation*}
+  w_{i_1,\ldots,i_n}=\alpha_{i_1}^{j_1}\cdots\alpha_{i_n}^{j_n}m_{j_1,\ldots,j_n}.  
+\end{equation*}
+which is precisely $C^{\otimes n}$, where $C$ is the code from the
+previous question.
+\item
+The number of possible monomials over $m$ variables with sum of exponents  at
+most $d$ is equal to the number of ways of distributing $d$ balls 
+into $m + 1$ bins - one for each variable and one 'hidden' one which 
+allows some of the balls not to be distributed (since the exponent may be
+lower than $d$). This number equals ${d+m\choose d}$. Since each such monomial has
+a character of the message as a coefficient, the length of the message
+$k$ equals this number.
+
+
+Let $P_{m,d}(X_1,\ldots,X_m)$ be the 
+encoding polynomial for $m$ variables with max total degree $d$. 
+The degree of the difference
+between two different such polynomials, $P_{m,d}$ and $P'_{m,d}$, is at most $d$, and
+therefore has at most $dq^{m-1}$ zeros: fix the first $m-1$ variables to
+arrive at a polynomial of degree $d$ in the last variable. This polynomial
+has at most $d$ zeros. Now repeat for the $q^{m-1}$ possible
+values of the first $m-1$ variables. 
+
+Therefore, the two polynomials
+agree in at most $dq^{m-1}$ points, and the distance between two encodings
+is at least $q^m-dq^{m-1}=q^m(1-d/q)$. Since the size of the codeword
+is $q^m$, the relative distance is at least $1-d/q$.
+\item
+The rate of the $n$ variate codes is $(k/q)^n$ where $k$ is the size of 
+the message encoded by the underlying RS code. This cannot be asymptotically
+non-vanishing (except for the trivial case when $k=q$, but then the distance
+vanishes).
+
+The rate of the RM code is
+\begin{equation*}
+  {{d+m\choose d}\over q^m}.
+\end{equation*}
+Since $d$ cannot be meaningfully more than $q$, this is less than or equal to
+\begin{equation*}
+  {{q+m\choose q}\over q^m}.
+\end{equation*}
+Using Stirling's approximation:
+\begin{equation*}
+  \log{{q+m\choose q}\over q^m}=
+  \Theta(\log(q+m))+(q+m)H\left({q\over q+m}\right)-m\log q.
+\end{equation*}
+As $m$ goes to infinity:
+\begin{equation*}
+  \lim_{m\to\infty}\log{{q+m\choose q}\over q^m}=
+  \lim_{m\to\infty}\left[\Theta(\log(q+m))+qH\left({q\over q+m}\right)-m\left(\log q-H\left({q\over q+m}\right)\right)\right].
+\end{equation*}
+The first term increases logarithmically with $m$, the second term vanishes
+and the third term goes to infinity almost linearly with $m$, and so the 
+expression goes to minus infinity, and the asymptotic rate vanishes.
+\end{enumerate}
+\item 
+The relative distance of the linear code is $\half \delta$ and that
+of the RS code is $\half$, and so the relative distance of the 
+concatenated code is $\fourth\delta$. The rate of the linear code is 
+$\half$, as is that of the RS code, and therefore the concatenated code
+has rate $\fourth$. Since both the relative rate and distance are
+positive, the code is asymptotically good.
+\item
+
+\begin{enumerate}
+\item 
+\end{enumerate}
+
+\end{enumerate}
+
+\end{document}
+
+
+
+
