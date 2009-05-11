@@ -271,6 +271,8 @@ The first term increases logarithmically with $m$, the second term vanishes
 and the third term goes to infinity almost linearly with $m$, and so the 
 expression goes to minus infinity, and the asymptotic rate vanishes.
 \end{enumerate}
+\item
+\begin{enumerate}
 \item 
 The relative distance of the linear code is $\half \delta$ and that
 of the RS code is $\half$, and so the relative distance of the 
@@ -278,14 +280,26 @@ concatenated code is $\fourth\delta$. The rate of the linear code is
 $\half$, as is that of the RS code, and therefore the concatenated code
 has rate $\fourth$. Since both the relative rate and distance are
 positive, the code is asymptotically good.
+
+The number of possible linear codes from $m$ bits to $2m$ bits is
+the number of $2m$ by $m$ matrices over $\{0,1\}$, which is $2^{2m^2}$. Since 
+$m$ is $\Theta(\log k)$, then $2^{2m^2}=\left(2^{m}\right)^{2m}$ is $\Theta(k^{C\log k})$ for some $C$. That
+is then the complexity of exhaustively searching for a good
+linear code. Encoding by this code and then by the RS code is then
+polynomial in $2^m$ and hence in $k$.
 \item
-
-\begin{enumerate}
-\item 
+Polynomial scheme: exhaustively search for a 
+linear code $C=[2\sqrt{m},\sqrt{m},\delta \sqrt{m}]$. By the (essentially) same calculation
+as in the previous question, the complexity of this will be $2^{2m}$ 
+and therefore polynomial. 
+The code will be the concatenation of an RS code over alphabet $2^m$ and rate
+$\half$, with 
+$C\otimes C$, which, by question 3, has rate $\fourth$ and relative 
+distance $\fourth\delta$. The distance of the concatenated code 
+will be ${1\over 8}\delta^2$, and the rate ${1\over 8}$.
 \end{enumerate}
 
 \end{enumerate}
-
 \end{document}
 
 
