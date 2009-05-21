@@ -1,13 +1,17 @@
 \documentclass[11pt]{article} \usepackage{amssymb}
-\usepackage{amsfonts} \usepackage{amsmath} \usepackage{bm}
+\usepackage{amsfonts} \usepackage{amsmath} \usepackage{amsthm} \usepackage{bm}
 \usepackage{latexsym} \usepackage{epsfig}
 
 \setlength{\textwidth}{6.5 in} \setlength{\textheight}{8.25in}
 \setlength{\oddsidemargin}{0in} \setlength{\topmargin}{0in}
 \addtolength{\textheight}{.8in} \addtolength{\voffset}{-.5in}
 
+\newtheorem*{theorem*}{Theorem}
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{lemma}[theorem]{Lemma}
+\newtheorem*{lemma*}{Lemma}
+\newtheorem*{proposition*}{Proposition}
+
 \newtheorem{proposition}[theorem]{Proposition}
 \newtheorem{corollary}[theorem]{Corollary}
 \newtheorem{fact}[theorem]{Fact}
@@ -15,7 +19,7 @@
 \newtheorem{remark}[theorem]{Remark}
 \newtheorem{conjecture}[theorem]{Conjecture}
 \newtheorem{example}[theorem]{Example}
-\newenvironment{proof}{\noindent \textbf{Proof:}}{$\Box$}
+%\newenvironment{proof}{\noindent \textbf{Proof:}}{$\Box$}
 
 \newcommand{\ignore}[1]{}
 
@@ -229,15 +233,61 @@ lower than $d$). This number equals ${d+m\choose d}$. Since each such monomial h
 a character of the message as a coefficient, the length of the message
 $k$ equals this number.
 
+\begin{lemma*}
 
-Let $P_{m,d}(X_1,\ldots,X_m)$ be the 
+A non-zero polynomial of
+max total degree $d$ in $m$ variables has at most $dq^{m-1}$ zeros.
+\end{lemma*}
+\begin{proof}
+
+
+We prove by induction on $m$ and $d$.
+Let $Q_{m,d}$ be a polynomial of max total degree at most $d$, in $m$
+variables. For $m=1$ and arbitrary $d$,
+it is a non-zero polynomial in one variable, of 
+degree $d$, can therefore have at most
+$d$ zeros. Now, inductively assume the statement is true up to $m-1$ variables
+and up to degree $d$. Then
+\begin{eqnarray*}
+  Q_{m,d}(X_1,\ldots,X_m) = 
+  a_{m,d}X_m^d+\sum_{i=0}^{d-1}X_m^iQ_{m-1,d-i}(X_1,\ldots,X_{m-1})
+\end{eqnarray*}
+for some constant $a_{m,d}$. Then
+\begin{itemize}
+\item 
+If $a_{m,d}\not=0$, then for fixing each of the $q^{m-1}$ values of
+$(X_1,\ldots,X_{m-1})$, $Q_{m,d}$ is a non-zero polynomial of degree $d$
+in $X_m$, with at most $d$ zeros. Therefore, in this case, $Q_{m,d}$
+has at most $dq^{m-1}$ zeros. 
+\item
+Otherwise, if $a_{m,d}=0$, then there is a maximal $0\leq i<d$
+for which it holds that $Q_{m-1,d-i}$ is non zero. We now again
+fix the values of $(X_1,\ldots,X_{m-1})$ to each of the possible $q^{m-1}$
+values. We look at two cases: the ones in which $Q_{m-1,d-i}$ vanishes
+and the ones in which is doesn't:
+\begin{enumerate}
+\item 
+By the inductive assumption,
+$Q_{m-1,d-i}$ has at most $(d-i)q^{m-2}$ zeros, 
+and so out of the $q^{m-1}$ possible values
+of $(X_1,\ldots,X_{m-1})$, fixing to these $(d-i)q^{m-2}$ may 
+result in zero polynomials in $X_m$ and therefore $(d-i)q^{m-1}$ 
+zeros for $Q_{m,d}$. 
+\item
+Fixing to the rest of the 
+$q^{m-1}-(d-i)q^{m-2}$ values results in non-zero polynomials
+in $X_m$ of degree $i$ and therefore at most $iq^{m-1}$ zeros.
+\end{enumerate}
+The total number of zeroes is therefore at most $(d-i)q^{m-1}+iq^{m-1}=dq^{m-1}$.
+\end{itemize}
+\end{proof}
+Let $P_{m,d}(X_1,\ldots,X_m)$ be an
 encoding polynomial for $m$ variables with max total degree $d$. 
-The degree of the difference
-between two different such polynomials, $P_{m,d}$ and $P'_{m,d}$, is at most $d$, and
-therefore has at most $dq^{m-1}$ zeros: fix the first $m-1$ variables to
-arrive at a polynomial of degree $d$ in the last variable. This polynomial
-has at most $d$ zeros. Now repeat for the $q^{m-1}$ possible
-values of the first $m-1$ variables. 
+The degree of the difference polynomial 
+between two different such polynomials, $Q_{m,d}=P_{m,d}-P'_{m,d}$, 
+is at most $d$, and
+has at most $dq^{m-1}$ zeros. 
+
 
 Therefore, the two polynomials
 agree in at most $dq^{m-1}$ points, and the distance between two encodings
