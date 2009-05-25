@@ -158,26 +158,23 @@ For this question we will use some standard tensor notation:
 \begin{itemize}
 \item $m_i$ denotes a column vector.
 \item $m^j$ denotes a row vector.
-\item Implied summation: $a^ib_i$ means
-  $\sum_ia^ib_i$, whenever the index appears twice, once as a superscript
-  and once as a subscript.
 \end{itemize}
  Also, we will denote as $F$ the generating matrix of $E1$ and $G$ that 
-of $E2$. 
-By this notation, $w_i=F_i^jm_j$ is the operation
-of encoding a column by $E1$, and $w^j=G^j_im^i$ denotes encoding
+of $E2$. Then
+$w_i=\sum_jF_i^jm_j$ is the operation
+of encoding a column by $E1$, and $w^j=\sum_iG^j_im^i$ denotes encoding
 a row by $E2$.
 
 Let the message be $m_i^j$. Then encoding it into $w$ is done 
-by $w_k^l=F_k^jG_i^lm_j^i$. One can also write this as: 
+by $w_k^l=\sum_jF_k^j\sum_iG_i^lm_j^i$. One can write this as: 
 \begin{equation}
   \label{eq:col_en}
-w_k^l=F_k^j(G_i^lm_j^i)  
+w_k^l=\sum_jF_k^j\sum_iG_i^lm_j^i  
 \end{equation}
-or as:
+or, by changing the order of summation, as:
 \begin{equation}
   \label{eq:row_en}
-w_k^l=G_i^l(F_k^jm_j^i).
+w_k^l=\sum_iG_i^l\sum_jF_k^jm_j^i.
 \end{equation}
 
 Eq.~\ref{eq:col_en} shows that the columns of $w$ are the encoding by $E1$
