@@ -1,0 +1,200 @@
+\documentclass[11pt]{article} \usepackage{amssymb}
+\usepackage{amsfonts} \usepackage{amsmath} \usepackage{bm}
+\usepackage{latexsym} \usepackage{epsfig}
+
+\setlength{\textwidth}{6.5 in} \setlength{\textheight}{8.25in}
+\setlength{\oddsidemargin}{0in} \setlength{\topmargin}{0in}
+\addtolength{\textheight}{.8in} \addtolength{\voffset}{-.5in}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{example}[theorem]{Example}
+\newenvironment{proof}{\noindent \textbf{Proof:}}{$\Box$}
+
+\newcommand{\ignore}[1]{}
+
+\newcommand{\enote}[1]{} \newcommand{\knote}[1]{}
+\newcommand{\rnote}[1]{}
+
+
+
+% \newcommand{\enote}[1]{{\bf [[Elchanan:} {\emph{#1}}{\bf ]]}}
+% \newcommand{\knote}[1]{{\bf [[Krzysztof:} {\emph{#1}}{\bf ]]}}
+% \newcommand{\rnote}[1]{{\bf [[Ryan:} {\emph{#1}}{\bf ]]}}
+
+
+
+\DeclareMathOperator{\Support}{Supp} \DeclareMathOperator{\Opt}{Opt}
+\DeclareMathOperator{\Ordo}{\mathcal{O}}
+\newcommand{\MaxkCSP}{\textsc{Max $k$-CSP}}
+\newcommand{\MaxkCSPq}{\textsc{Max $k$-CSP$_{q}$}}
+\newcommand{\MaxCSP}[1]{\textsc{Max CSP}(#1)} \renewcommand{\Pr}{{\bf
+    P}} \renewcommand{\P}{{\bf P}} \newcommand{\Px}{\mathop{\bf P\/}}
+\newcommand{\E}{{\bf E}} \newcommand{\Cov}{{\bf Cov}}
+\newcommand{\Var}{{\bf Var}} \newcommand{\Varx}{\mathop{\bf Var\/}}
+
+\newcommand{\bits}{\{-1,1\}}
+
+\newcommand{\nsmaja}{\textstyle{\frac{2}{\pi}} \arcsin \rho}
+
+\newcommand{\Inf}{\mathrm{Inf}} \newcommand{\I}{\mathrm{I}}
+\newcommand{\J}{\mathrm{J}}
+
+\newcommand{\eps}{\epsilon} \newcommand{\lam}{\lambda}
+
+% \newcommand{\trunc}{\ell_{2,[-1,1]}}
+\newcommand{\trunc}{\zeta} \newcommand{\truncprod}{\chi}
+
+\newcommand{\N}{\mathbb N} \newcommand{\R}{\mathbb R}
+\newcommand{\Z}{\mathbb Z} \newcommand{\CalE}{{\mathcal{E}}}
+\newcommand{\CalC}{{\mathcal{C}}} \newcommand{\CalM}{{\mathcal{M}}}
+\newcommand{\CalR}{{\mathcal{R}}} \newcommand{\CalS}{{\mathcal{S}}}
+\newcommand{\CalV}{{\mathcal{V}}}
+\newcommand{\CalX}{{\boldsymbol{\mathcal{X}}}}
+\newcommand{\CalG}{{\boldsymbol{\mathcal{G}}}}
+\newcommand{\CalH}{{\boldsymbol{\mathcal{H}}}}
+\newcommand{\CalY}{{\boldsymbol{\mathcal{Y}}}}
+\newcommand{\CalZ}{{\boldsymbol{\mathcal{Z}}}}
+\newcommand{\CalW}{{\boldsymbol{\mathcal{W}}}}
+\newcommand{\CalF}{{\mathcal{Z}}}
+% \newcommand{\boldG}{{\boldsymbol G}}
+% \newcommand{\boldQ}{{\boldsymbol Q}}
+% \newcommand{\boldP}{{\boldsymbol P}}
+% \newcommand{\boldR}{{\boldsymbol R}}
+% \newcommand{\boldS}{{\boldsymbol S}}
+% \newcommand{\boldX}{{\boldsymbol X}}
+% \newcommand{\boldB}{{\boldsymbol B}}
+% \newcommand{\boldY}{{\boldsymbol Y}}
+% \newcommand{\boldZ}{{\boldsymbol Z}}
+% \newcommand{\boldV}{{\boldsymbol V}}
+\newcommand{\boldi}{{\boldsymbol i}} \newcommand{\boldj}{{\boldsymbol
+    j}} \newcommand{\boldk}{{\boldsymbol k}}
+\newcommand{\boldr}{{\boldsymbol r}}
+\newcommand{\boldsigma}{{\boldsymbol \sigma}}
+\newcommand{\boldupsilon}{{\boldsymbol \upsilon}}
+\newcommand{\hone}{{\boldsymbol{H1}}}
+\newcommand{\htwo}{\boldsymbol{H2}}
+\newcommand{\hthree}{\boldsymbol{H3}}
+\newcommand{\hfour}{\boldsymbol{H4}}
+
+
+\newcommand{\sgn}{\mathrm{sgn}} \newcommand{\Maj}{\mathrm{Maj}}
+\newcommand{\Acyc}{\mathrm{Acyc}}
+\newcommand{\UniqMax}{\mathrm{UniqMax}}
+\newcommand{\Thr}{\mathrm{Thr}} \newcommand{\littlesum}{{\textstyle
+    \sum}}
+
+\newcommand{\half}{{\textstyle \frac12}}
+\newcommand{\third}{{\textstyle \frac13}}
+\newcommand{\fourth}{{\textstyle \frac14}}
+
+\newcommand{\Stab}{\mathbb{S}}
+\newcommand{\StabThr}[2]{\Gamma_{#1}(#2)}
+\newcommand{\StabThrmin}[2]{{\underline{\Gamma}}_{#1}(#2)}
+\newcommand{\StabThrmax}[2]{{\overline{\Gamma}}_{#1}(#2)}
+\newcommand{\TestFcn}{\Psi}
+
+\renewcommand{\phi}{\varphi}
+
+\begin{document}
+\title{Information Theory - Exercise 3}
+
+ \author{Omer Tamuz, 035696574}
+\maketitle
+
+
+\begin{enumerate}
+\item
+Let $C$ be a binary channel that, given $X$, outputs $Y=X$ with
+probability $1-p$ and $Y=1-X$ with probability $p$. Then 
+\begin{eqnarray*}
+  I(X;Y)&=&H(Y)-H(Y|X)
+     \\ &=&H(Y) - \E_XH(Y|X=x) 
+     \\ &=&H(Y)-\E_XH(p,1-p)
+     \\ &=&H(Y)-H(p,1-p)
+\end{eqnarray*}
+Let $X$ be one with probability $q$. Then 
+\begin{equation*}
+P(Y=1)=q(1-p)+(1-q)p=q-qp+p-qp=q+p-2qp  
+\end{equation*}
+ and
+ \begin{equation*}
+ P(Y=0)=qp+(1-q)(1-p)=1-(q+p-2qp).
+ \end{equation*}
+Since $Y$ is binary, $H(Y)$ can be at most one. This is indeed achieved when 
+$q+p-2qp=\half$, so
+\begin{equation*}
+\forall p \: \mbox{s.t.}\: 0\leq p \leq 1, \: q= \lim_{s\to p}{\half-s\over 1-2s}  \:\Longrightarrow\: P(Y=1)=P(Y=0)=\half \:\Longrightarrow\: H(Y)=1
+\end{equation*}
+(the limit is required for when $p=\half$). 
+
+Hence:
+\begin{equation*}
+  \sup_{\mbox{dist}(X)}I(X;Y)=1-H(p,1-p)
+\end{equation*}
+\item
+The mutual information between the input and output of this channel is:
+\begin{eqnarray*}
+  I(X;Y)&=&H(X)-H(X|Y)
+   \\   &=&H(X)-\E_YH(X|Y=y)
+   \\   &=&H(X)-P(Y=*)H(X|Y=*)+P(Y\not=*)H(X|Y\not=*)
+   \\   &=&H(X)-pH(X)+(1-p)0
+   \\   &=&(1-p)H(X)
+\end{eqnarray*}
+The information capacity of the channel is therefore:
+\begin{eqnarray*}
+  \sup_{\mbox{dist}(X)}I(X;Y)=\sup_{\mbox{dist}(X)}(1-p)H(X)=1-p,
+\end{eqnarray*}
+since $H(X)$ is at most one.
+
+\item
+
+Let $Z$ be an r.v. which equals the index of the bit in $X$ that was
+dropped. Then $H(Z)=\log n$. 
+\begin{eqnarray*}
+  H(X|Y)&\leq& H(Z,X|Y) 
+\quad\mbox{(adding an r.v. increases entropy)}
+\\      &=&H(Y,Z,X|Y)   
+\quad\mbox{($Y,Z,X$ is a one-to-one function of $Z,X$)}
+\\      &=&H(Y,Z,X_Z|Y) 
+\quad\mbox{($Y,Z,X_Z$ is a one-to-one function of $Y,Z,X$)}
+\\      &=&H(Z, X_Z|Y)
+\quad\mbox{($Y$ is constant given $Y$)}
+\\      &\leq&H(Z|Y)+H(X_Z|Y)
+\\      &\leq& \log n + 1
+\quad\mbox{($H(X_Z)$ is at most 1, $X_Z$ being a binary r.v.)}
+\end{eqnarray*}
+
+The information capacity of the channel is therefore:
+\begin{eqnarray*}
+  \sup_{\mbox{dist}(X)}I(X;Y)&=&\sup_{\mbox{dist}(X)}H(X)-H(X|Y)
+\\                        &\geq&\sup_{\mbox{dist}(X)}H(X)-\log n - 1,
+\\                        &\geq&n-\log n - 1,
+\end{eqnarray*}
+since $H(X)$ is at most $n$.
+
+For $n=2$: if $P(X_1=1,X_2=1)=P(X_1=0,X_2=0)=\half$ and $P(X_1\not=X_2)=0$,
+then clearly $H(Y|X)=0$ and $H(Y)=1$. These entail the lowest possible value
+for the former, and the highest possible value for the latter.
+
+The information capacity of the channel is therefore:
+
+\begin{eqnarray*}
+  \sup_{\mbox{dist}(X)}I(X;Y)=\sup_{\mbox{dist}(X)}H(Y)-H(Y|X)=1-0=1
+\end{eqnarray*}
+
+\item
+  \begin{eqnarray*}
+    I(X;Y)=I(X_1,X_2;Y)
+  \end{eqnarray*}
+\end{enumerate}
+\end{document}
+
+
+
