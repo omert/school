@@ -143,8 +143,8 @@ The mutual information between the input and output of this channel is:
 \begin{eqnarray*}
   I(X;Y)&=&H(X)-H(X|Y)
    \\   &=&H(X)-\E_YH(X|Y=y)
-   \\   &=&H(X)-P(Y=*)H(X|Y=*)+P(Y\not=*)H(X|Y\not=*)
-   \\   &=&H(X)-pH(X)+(1-p)0
+   \\   &=&H(X)-P(Y=*)H(X|Y=*)+P(Y=0)H(X|Y=0)+P(Y=1)H(X|Y=1)
+   \\   &=&H(X)-pH(X)+P(Y=0)\cdot 0+P(Y=1)\cdot 0
    \\   &=&(1-p)H(X)
 \end{eqnarray*}
 The information capacity of the channel is therefore:
@@ -180,8 +180,9 @@ The information capacity of the channel is therefore:
 since $H(X)$ is at most $n$.
 
 For $n=2$: if $P(X_1=1,X_2=1)=P(X_1=0,X_2=0)=\half$ and $P(X_1\not=X_2)=0$,
-then clearly $H(Y|X)=0$ and $H(Y)=1$. These entail the lowest possible value
-for the former, and the highest possible value for the latter.
+then clearly $H(Y)=1$ and $H(Y|X)=0$. These entail the highest possible value
+for the former, and the lowest possible value for the latter, and so maximize
+their difference, $I(X;Y)$.
 
 The information capacity of the channel is therefore:
 
@@ -191,8 +192,32 @@ The information capacity of the channel is therefore:
 
 \item
   \begin{eqnarray*}
-    I(X;Y)=I(X_1,X_2;Y)
+    I(X;Y)&=&I(X;Y_1,Y_2)
+   \\ &=&H(Y_1,Y_2)-H(Y_1,Y_2|X)
+   \\ &=&H(Y_1)+H(Y_2)-I(Y_1;Y_2)-H(Y_1|X)-H(Y_2|X)+I(Y_1;Y_2|X)
+   \end{eqnarray*}
+   Because $Y_1$ depends on $X_2$ only through $X_1$, if at all, then 
+   conditioning $Y_1$ on $X$ is the same as conditioning it just on $X_1$:
+  \begin{eqnarray*}
+    I(X;Y)&=&H(Y_1)+H(Y_2)-I(Y_1;Y_2)-H(Y_1|X_1)-H(Y_2|X_2)+I(Y_1;Y_2|X)
+   \\ &=&I(X_1;Y_1)+I(X_2;Y_2)-I(Y_1;Y_2)+I(Y_1;Y_2|X)
   \end{eqnarray*}
+  Again, $Y_1$ depends on $Y_2$ only though $X$, and so for a given
+  value of $X$ they are independent and the last term vanishes:
+
+  \begin{eqnarray*}
+    I(X;Y)&=&I(X_1;Y_1)+I(X_2;Y_2)-I(Y_1;Y_2)
+  \end{eqnarray*}
+  The above expression is maximized when $X_1$'s marginal distribution
+  maximizes the first term, $X_2$'s marginal distribution maximizes
+  the second term, and $X_1$ and $X_2$ are independent, so that the third
+  term is zero (which is the lowest it can be, as mutual information
+  is positive). The channel capacity is therefore:
+\begin{eqnarray*}
+  \sup_{\mbox{dist}(X)}I(X;Y)&=&\sup_{\mbox{dist}(X_1)}I(X_1;Y_1) + \sup_{\mbox{dist}(X_2)}I(X_2;Y_2)    
+\end{eqnarray*}
+  and equals the sum of the capacities of its components.
+
 \end{enumerate}
 \end{document}
 
