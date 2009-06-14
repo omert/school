@@ -1,0 +1,144 @@
+\documentclass[11pt]{article} \usepackage{amssymb}
+\usepackage{amsfonts} \usepackage{amsmath} \usepackage{bm}
+\usepackage{latexsym} \usepackage{epsfig}
+
+\setlength{\textwidth}{6.5 in} \setlength{\textheight}{8.25in}
+\setlength{\oddsidemargin}{0in} \setlength{\topmargin}{0in}
+\addtolength{\textheight}{.8in} \addtolength{\voffset}{-.5in}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{example}[theorem]{Example}
+\newenvironment{proof}{\noindent \textbf{Proof:}}{$\Box$}
+
+\newcommand{\ignore}[1]{}
+
+\newcommand{\enote}[1]{} \newcommand{\knote}[1]{}
+\newcommand{\rnote}[1]{}
+
+
+
+% \newcommand{\enote}[1]{{\bf [[Elchanan:} {\emph{#1}}{\bf ]]}}
+% \newcommand{\knote}[1]{{\bf [[Krzysztof:} {\emph{#1}}{\bf ]]}}
+% \newcommand{\rnote}[1]{{\bf [[Ryan:} {\emph{#1}}{\bf ]]}}
+
+
+
+\DeclareMathOperator{\Support}{Supp} \DeclareMathOperator{\Opt}{Opt}
+\DeclareMathOperator{\Ordo}{\mathcal{O}}
+\newcommand{\MaxkCSP}{\textsc{Max $k$-CSP}}
+\newcommand{\MaxkCSPq}{\textsc{Max $k$-CSP$_{q}$}}
+\newcommand{\MaxCSP}[1]{\textsc{Max CSP}(#1)} \renewcommand{\Pr}{{\bf
+    P}} \renewcommand{\P}{{\bf P}} \newcommand{\Px}{\mathop{\bf P\/}}
+\newcommand{\E}{{\bf E}} \newcommand{\Cov}{{\bf Cov}}
+\newcommand{\Var}{{\bf Var}} \newcommand{\Varx}{\mathop{\bf Var\/}}
+
+\newcommand{\bits}{\{-1,1\}}
+
+\newcommand{\nsmaja}{\textstyle{\frac{2}{\pi}} \arcsin \rho}
+
+\newcommand{\Inf}{\mathrm{Inf}} \newcommand{\I}{\mathrm{I}}
+\newcommand{\J}{\mathrm{J}}
+
+\newcommand{\eps}{\epsilon} \newcommand{\lam}{\lambda}
+
+% \newcommand{\trunc}{\ell_{2,[-1,1]}}
+\newcommand{\trunc}{\zeta} \newcommand{\truncprod}{\chi}
+
+\newcommand{\N}{\mathbb N} \newcommand{\R}{\mathbb R}
+\newcommand{\Z}{\mathbb Z} \newcommand{\CalE}{{\mathcal{E}}}
+\newcommand{\CalC}{{\mathcal{C}}} \newcommand{\CalM}{{\mathcal{M}}}
+\newcommand{\CalR}{{\mathcal{R}}} \newcommand{\CalS}{{\mathcal{S}}}
+\newcommand{\CalV}{{\mathcal{V}}}
+\newcommand{\CalX}{{\boldsymbol{\mathcal{X}}}}
+\newcommand{\CalG}{{\boldsymbol{\mathcal{G}}}}
+\newcommand{\CalH}{{\boldsymbol{\mathcal{H}}}}
+\newcommand{\CalY}{{\boldsymbol{\mathcal{Y}}}}
+\newcommand{\CalZ}{{\boldsymbol{\mathcal{Z}}}}
+\newcommand{\CalW}{{\boldsymbol{\mathcal{W}}}}
+\newcommand{\CalF}{{\mathcal{Z}}}
+% \newcommand{\boldG}{{\boldsymbol G}}
+% \newcommand{\boldQ}{{\boldsymbol Q}}
+% \newcommand{\boldP}{{\boldsymbol P}}
+% \newcommand{\boldR}{{\boldsymbol R}}
+% \newcommand{\boldS}{{\boldsymbol S}}
+% \newcommand{\boldX}{{\boldsymbol X}}
+% \newcommand{\boldB}{{\boldsymbol B}}
+% \newcommand{\boldY}{{\boldsymbol Y}}
+% \newcommand{\boldZ}{{\boldsymbol Z}}
+% \newcommand{\boldV}{{\boldsymbol V}}
+\newcommand{\boldi}{{\boldsymbol i}} \newcommand{\boldj}{{\boldsymbol
+    j}} \newcommand{\boldk}{{\boldsymbol k}}
+\newcommand{\boldr}{{\boldsymbol r}}
+\newcommand{\boldsigma}{{\boldsymbol \sigma}}
+\newcommand{\boldupsilon}{{\boldsymbol \upsilon}}
+\newcommand{\hone}{{\boldsymbol{H1}}}
+\newcommand{\htwo}{\boldsymbol{H2}}
+\newcommand{\hthree}{\boldsymbol{H3}}
+\newcommand{\hfour}{\boldsymbol{H4}}
+
+
+\newcommand{\sgn}{\mathrm{sgn}} \newcommand{\Maj}{\mathrm{Maj}}
+\newcommand{\Acyc}{\mathrm{Acyc}}
+\newcommand{\UniqMax}{\mathrm{UniqMax}}
+\newcommand{\Thr}{\mathrm{Thr}} \newcommand{\littlesum}{{\textstyle
+    \sum}}
+
+\newcommand{\half}{{\textstyle \frac12}}
+[\newcommand{\third}{{\textstyle \frac13}}
+\newcommand{\fourth}{{\textstyle \frac14}}
+
+\newcommand{\Stab}{\mathbb{S}}
+\newcommand{\StabThr}[2]{\Gamma_{#1}(#2)}
+\newcommand{\StabThrmin}[2]{{\underline{\Gamma}}_{#1}(#2)}
+\newcommand{\StabThrmax}[2]{{\overline{\Gamma}}_{#1}(#2)}
+\newcommand{\TestFcn}{\Psi}
+
+\renewcommand{\phi}{\varphi}
+
+\begin{document}
+\title{Information Theory - Exercise 4}
+
+ \author{Omer Tamuz, 035696574}
+\maketitle
+
+
+\begin{enumerate}
+\item
+
+Let $\mathcal{H}=H_1,\ldots,H_k$ be $k$ copies of $H$ that cover $G$. 
+Let $v$ be a node of $G$, randomly picked from a uniform distribution. 
+Let $V=\{v_1,\ldots,v_k\}$ 
+be the nodes of $\mathcal{H}$ corresponding to $v$. Let $s:V\to\{1,2,3\}$ be s.t.
+$s(v_i)$ is the part of $H_i$ that $v_i$ belongs to. 
+Let $S(v)=\{s(v_1),\ldots,s(v_k)\}$. 
+Now, if for two nodes of $G$, $u$ and $v$, it holds that $S(u)=S(v)$, then
+the edge between them is not covered by $\mathcal{H}$. Therefore, for $\mathcal{H}$
+to cover $G$, the
+number of different $S(v)$ must equal to the number of nodes, and in particular
+\begin{eqnarray*}
+  H(S(v))=H(v)=\log m.
+\end{eqnarray*}
+
+The entropy of each $s(v_i)$ is $\half\log 2+\fourth\log 4+\fourth \log 4 = 2/3$.
+Therefore:
+\begin{eqnarray*}
+\log m = H(S(v)) &=& H(s(v_1),\ldots,s(v_k))  \\
+&\leq& H(s(v_1))+\cdots+H(s(v_k))\\
+&=& kH(s(v_1))\\
+&=& (3/2)k.
+\end{eqnarray*}
+
+Hence $k\geq (2/3)\log m$.
+
+\end{enumerate}
+\end{document}
+
+
+
