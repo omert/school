@@ -91,7 +91,7 @@
     \sum}}
 
 \newcommand{\half}{{\textstyle \frac12}}
-[\newcommand{\third}{{\textstyle \frac13}}
+\newcommand{\third}{{\textstyle \frac13}}
 \newcommand{\fourth}{{\textstyle \frac14}}
 
 \newcommand{\Stab}{\mathbb{S}}
@@ -113,7 +113,7 @@
 \item
 
 Let $\mathcal{H}=H_1,\ldots,H_k$ be $k$ copies of $H$ that cover $G$. 
-Let $v$ be a node of $G$, randomly picked from a uniform distribution. 
+Let $v$ be a node of $G$, randomly picked from the uniform distribution. 
 Let $V=\{v_1,\ldots,v_k\}$ 
 be the nodes of $\mathcal{H}$ corresponding to $v$. Let $s:V\to\{1,2,3\}$ be s.t.
 $s(v_i)$ is the part of $H_i$ that $v_i$ belongs to. 
@@ -136,6 +136,50 @@ Therefore:
 \end{eqnarray*}
 
 Hence $k\geq (2/3)\log m$.
+\item
+
+Let $S\subset\{1,2,3\}^n$, and
+ $E=\left\{\{u,v\}:\:u,v\in S, |u-v|=1\right\}$, where $|w|$ is the number of
+non-zero coordinates in $w$.
+We will prove that $|E|\leq {1\over \log 3}|S|\log|S|$.
+
+Let $e=\{u,v\}$ belong to $E_i$ iff $e$ belongs to $E$ and 
+$u$ and $v$ differ in coordinate $i$. Then $E$ is the disjoint union of the $E_i$'s,
+and $|E|=\sum_i|E_i|$.
+
+Let $X=(X_1,\ldots,X_n)\in S$ be picked from the uniform distribution over
+$S$.
+\begin{lemma}
+  $H(X_i|X_1,\ldots,X_{i-1},X_{i+1},\ldots,X_n)\geq {\log 3|E_i|\over|S|}$
+\end{lemma}
+\begin{proof}
+Assume w.l.o.g that $i=1$. Then let $K_1$ be the number of values 
+of $X_2,\ldots,X_n$ for which there is only one possible value of $X_1$,
+and likewise define $K_2$ and $K_3$. Then $|S|=K_1+2K_2+3K_3$ and
+ $|E_1|=K_2+3K_3$. The entropy of
+$X_1$ is:
+\begin{eqnarray*}
+  H(X_1)&=&{K_1\over |S|}\cdot 0 +{2K_2\over|S|}\log 2 + {3K_3\over |S|}\log 3\\
+&=& {\log 3\over|S|}\left({2\over \log 3}K_2+3K_3\right)\\ 
+&\geq& {\log 3|E_1|\over|S|}
+\end{eqnarray*}
+\end{proof}
+\begin{theorem}
+  $|E|\leq |S|\log|S|$
+\end{theorem}
+\begin{proof}
+  \begin{eqnarray*}
+    \log|S|&=&H(X_1,\ldots,X_n)\\
+    &\geq& H(X_1)+H(X_2|X_1)+H(X_3|X_1,X_2)+\cdots+H(X_n|X_1,\ldots,X_{n-1})\\
+    &\geq& H(X_1|X_2,\ldots,X_n)+H(X_2|X_1,X_3,\ldots,X_n)+\cdots+H(X_n|X_1,\ldots,X_{n-1})\\
+    &\geq& {\log3|E_1|\over|S|}+\cdots+{\log3|E_n|\over|S|}\\
+    &=&{\log3|E|\over|S|}
+  \end{eqnarray*}
+and hence
+\begin{equation*}
+  |E|\leq{1\over \log 3}|S|\log|S|
+\end{equation*}
+\end{proof}
 
 \end{enumerate}
 \end{document}
