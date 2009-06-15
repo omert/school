@@ -1,13 +1,15 @@
 \documentclass[11pt]{article} \usepackage{amssymb}
-\usepackage{amsfonts} \usepackage{amsmath} \usepackage{bm}
+\usepackage{amsfonts} \usepackage{amsmath} \usepackage{amsthm} \usepackage{bm}
 \usepackage{latexsym} \usepackage{epsfig}
 
 \setlength{\textwidth}{6.5 in} \setlength{\textheight}{8.25in}
 \setlength{\oddsidemargin}{0in} \setlength{\topmargin}{0in}
 \addtolength{\textheight}{.8in} \addtolength{\voffset}{-.5in}
 
+\newtheorem*{theorem*}{Theorem}
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{lemma}[theorem]{Lemma}
+\newtheorem*{lemma*}{Lemma}
 \newtheorem{proposition}[theorem]{Proposition}
 \newtheorem{corollary}[theorem]{Corollary}
 \newtheorem{fact}[theorem]{Fact}
@@ -15,7 +17,7 @@
 \newtheorem{remark}[theorem]{Remark}
 \newtheorem{conjecture}[theorem]{Conjecture}
 \newtheorem{example}[theorem]{Example}
-\newenvironment{proof}{\noindent \textbf{Proof:}}{$\Box$}
+%\newenvironment{proof}{\noindent \textbf{Proof:}}{$\Box$}
 
 \newcommand{\ignore}[1]{}
 
@@ -149,9 +151,9 @@ and $|E|=\sum_i|E_i|$.
 
 Let $X=(X_1,\ldots,X_n)\in S$ be picked from the uniform distribution over
 $S$.
-\begin{lemma}
+\begin{lemma*}
   $H(X_i|X_1,\ldots,X_{i-1},X_{i+1},\ldots,X_n)\geq {\log 3|E_i|\over|S|}$
-\end{lemma}
+\end{lemma*}
 \begin{proof}
 Assume w.l.o.g that $i=1$. Then let $K_1$ be the number of values 
 of $X_2,\ldots,X_n$ for which there is only one possible value of $X_1$,
@@ -164,9 +166,9 @@ $X_1$ is:
 &\geq& {\log 3|E_1|\over|S|}
 \end{eqnarray*}
 \end{proof}
-\begin{theorem}
+\begin{theorem*}
   $|E|\leq |S|\log|S|$
-\end{theorem}
+\end{theorem*}
 \begin{proof}
   \begin{eqnarray*}
     \log|S|&=&H(X_1,\ldots,X_n)\\
@@ -193,6 +195,7 @@ Then, by Shirer's inequality, applied to each one of the addends:
 &=&H(X_1,X_2)+H(X_1,X_3)+H(X_1,X_4)+H(X_2,X_3)+H(X_2,X_4)+H(X_3,X_4) 
   \end{eqnarray*}
 \item
+The statement is true.
   \begin{eqnarray*}
     \lefteqn{H(X_1,X_2,X_3)+H(X_2,X_3,X_4)+H(X_3,X_4,X_1)+H(X_4,X_1,X_2)}\\
 &&= H(X_1,X_2)+H(X_3|X_1,X_2)+H(X_2,X_3)+H(X_4|X_2,X_3)\\
