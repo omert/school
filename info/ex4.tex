@@ -114,10 +114,10 @@
 
 Let $\mathcal{H}=H_1,\ldots,H_k$ be $k$ copies of $H$ that cover $G$. 
 Let $v$ be a node of $G$, randomly picked from the uniform distribution. 
-Let $V=\{v_1,\ldots,v_k\}$ 
+Let $V=(v_1,\ldots,v_k)$ 
 be the nodes of $\mathcal{H}$ corresponding to $v$. Let $s:V\to\{1,2,3\}$ be s.t.
 $s(v_i)$ is the part of $H_i$ that $v_i$ belongs to. 
-Let $S(v)=\{s(v_1),\ldots,s(v_k)\}$. 
+Let $S(v)=(s(v_1),\ldots,s(v_k))$. 
 Now, if for two nodes of $G$, $u$ and $v$, it holds that $S(u)=S(v)$, then
 the edge between them is not covered by $\mathcal{H}$. Therefore, for $\mathcal{H}$
 to cover $G$, the
@@ -180,7 +180,50 @@ and hence
   |E|\leq{1\over \log 3}|S|\log|S|
 \end{equation*}
 \end{proof}
-
+\item
+The statement is true.
+Let $\mathcal{H}= H(X_1,X_2,X_3)+H(X_1,X_2,X_4)+H(X_1,X_3,X_4)+H(X_2,X_3,X_4)$.
+Then, by Shirer's inequality, applied to each one of the addends:
+  \begin{eqnarray*}
+\lefteqn{\mathcal{H}\leq
+  {1\over 2}\left[H(X_1,X_2)+H(X_1,X_3)+H(X_2,X_3)\right]+}\\
+&&{1\over 2}\left[H(X_1,X_2)+H(X_1,X_4)+H(X_2,X_4)\right]+\\
+&&{1\over 2}\left[H(X_1,X_3)+H(X_1,X_4)+H(X_3,X_4)\right]+\\
+&&{1\over 2}\left[H(X_2,X_3)+H(X_2,X_4)+H(X_3,X_4)\right]\\
+&=&H(X_1,X_2)+H(X_1,X_3)+H(X_1,X_4)+H(X_2,X_3)+H(X_2,X_4)+H(X_3,X_4) 
+  \end{eqnarray*}
+\item
+  \begin{eqnarray*}
+    \lefteqn{H(X_1,X_2,X_3)+H(X_2,X_3,X_4)+H(X_3,X_4,X_1)+H(X_4,X_1,X_2)}\\
+&&= H(X_1,X_2)+H(X_3|X_1,X_2)+H(X_2,X_3)+H(X_4|X_2,X_3)\\
+&&\quad+H(X_3,X_4)+H(X_1|X_3,X_4)+H(X_4,X_1)+H(X_2|X_4,X_1)\\
+&&= H(X_1,X_2)+H(X_2,X_3)+H(X_3,X_4)+H(X_4,X_1)\\
+&&\quad+\half H(X_3|X_1,X_2)+\half H(X_4|X_2,X_3)+\half H(X_1|X_3,X_4)+\half H(X_2|X_4,X_1)\\
+&&\quad+\half H(X_3|X_1,X_2)+\half H(X_4|X_2,X_3)+\half H(X_1|X_3,X_4)+\half H(X_2|X_,4X_1)\\
+&&\leq H(X_1,X_2)+H(X_2,X_3)+H(X_3,X_4)+H(X_4,X_1)\\
+&&\quad+\half H(X_3|X_1,X_2)+\half H(X_4|X_2,X_3)+\half H(X_1|X_3,X_4)+\half H(X_2|X_4,X_1)\\
+&&\quad+\half H(X_3|X_2)+\half H(X_4|X_3)+\half H(X_1|X_4)+\half H(X_2|X_1)\\
+&&= H(X_1,X_2)+H(X_2,X_3)+H(X_3,X_4)+H(X_4,X_1)\\
+&&\quad+\half (H(X_1|X_4)+H(X_2|X_4,X_1))+\half (H(X_2|X_1)+H(X_3|X_1,X_2))\\
+&&\quad+\half (H(X_3|X_2)+H(X_4|X_2,X_3))+\half (H(X_4|X_3)+H(X_1|X_3,X_4))\\
+&&= H(X_1,X_2)+H(X_2,X_3)+H(X_3,X_4)+H(X_4,X_1)\\
+&&\quad+\half H(X_1,X_2|X_4)+\half H(X_2,X_3|X_1)\\
+&&\quad+\half H(X_3,X_4|X_2)+\half H(X_4,X_1|X_3)\\
+&&\leq H(X_1,X_2)+H(X_2,X_3)+H(X_3,X_4)+H(X_4,X_1)\\
+&&\quad+\half H(X_1,X_2)+\half H(X_2,X_3)\\
+&&\quad+\half H(X_3,X_4)+\half H(X_4,X_1)\\
+&&= 1.5\cdot\left(H(X_1,X_2)+H(X_2,X_3)+H(X_3,X_4)+H(X_4,X_1)\right)
+\end{eqnarray*}
+\item
+The statement is false. Let $X_1$ and $X_3$ be independent random bits,
+each one with probability $\half$. Let $X_2=X_1$ and $X_4=X_3$. Then
+\begin{eqnarray*}
+  H(X_1,X_2,X_3)+H(X_1,X_2,X_4)+H(X_1,X_3,X_4)+H(X_2,X_3,X_4) = 2 + 2 + 2 + 2=8
+\end{eqnarray*}
+whereas
+\begin{eqnarray*}
+  3\cdot[H(X_1,X_2)+H(X_2,X_1)]=3\cdot[1+1] = 6.
+\end{eqnarray*}
 \end{enumerate}
 \end{document}
 
