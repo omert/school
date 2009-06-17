@@ -114,6 +114,33 @@
 
 \begin{enumerate}
 \item 
+  \begin{enumerate}
+  \item Let $v_0$ through $v_{n-1}$ be the nodes on the left side of $G$,
+  and $u_0$ through $u_{n-1}$ the nodes on the right side of $G$. 
+  Let a message $m$ be an element of $\mathbb{F}_{2^c}^{k/c}$.
+  Let $x\in \{0,1\}^k$ be $m$'s binary representation, e.g. by coding
+  sequentially each symbol in $m$ by $c$ bits.
+  Let $y\in \{0,1\}^n$ be $x$'s encoding under $C$.
+  For each $j$ from zero to $n$, 
+  let $(v_{i_1},\ldots,v_{i_c})$ be the $c$ nodes which are neighbors 
+  of $u_j$, and $(y_{i_1},\ldots,y_{i_c})$ be the binary
+  encoding of $M_j\in \mathbb{F}_{2^c}$ (by the same scheme). Then $M\in \mathbb{F}_{2^c}^n$
+  is a codeword of $C'$. 
+
+  The message $m$ is an element of 
+  $\mathbb{F}_{2^c}^{k/c}$, while the codeword $M$ is an element of
+  $\mathbb{F}_{2^c}^n$, so $C'$ is a $(n,k/c,d)_{2^c}$ code.
+
+  \item
+  Let $y,y'\in \{0,1\}^n$ be the $C$-encoded binary representations of 
+  distinct $m,m'\in \mathbb{F}_{2^c}^{k/c}$, respectively. Then by $C$'s definition, $y$ and $y'$
+  differ by at least $\delta n$ bits. Let $S$ be the set of nodes on the left
+  side of $G$ that correspond to those bits. Let $P$ be $S$'s neighbors.
+  Then by the expander's defintion, $|P|\geq\gamma\delta n$. This will be the number
+  of nodes, $u_j$, where the codewords $M$ and $M'$ will differ in at
+  least one place, and hence the distance will be at least $\gamma\delta n$.
+  
+  \end{enumerate}
 \item
   \begin{enumerate}
   \item 
