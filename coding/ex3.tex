@@ -215,12 +215,14 @@
     Let $P$ be the number of paths $(v_1,v_2,v_3)$ s.t. $v_1,v_3\in V_R$ are on the
     right and $v_2\in V_L$ is on the left. 
 
+
     The number of options for $v_1$ and $v_3$
-    is each $l$. Given $v_1,v_3\in V_R$, the number of options for $v_2\in V_L$ is
-    at most $m$, so that
-    \begin{eqnarray*}
-      P\leq l^2m.
-    \end{eqnarray*}
+    is each $l$. If $v_1=v_3$ then the number of options for $v_2$ is $t$,
+    otherwise it is at most $m$, so that
+    \begin{eqnarray}
+      \label{eq:paths_upper}
+      P\leq lt+l(l-1)m.
+    \end{eqnarray}
 
     On the other hand, we may build the path by selecting a node $v_2\in V_L$,
     and then selecting two of its edges, and calling their other ends
@@ -231,11 +233,17 @@
       \\ &=&{1\over n}\left(\sum_{v\in V_R}\deg(v)\right)^2
       \\ &=&{1\over n}l^2t^2
     \end{eqnarray*}
-    Since $t>\sqrt{mn}$, we have
-   \begin{eqnarray*}
-      P&>&{1\over n}l^2mn=l^2m 
+    
+    Combining this with Eq.~\ref{eq:paths_upper}, we have:
+    \begin{eqnarray*}
+      {1\over n}l^2t^2 &\leq& lt+l(l-1)m
+      \\ {1\over n}lt^2 &\leq& t+(l-1)m
+      \\ {1\over n}lt^2 &\leq& t+lm-m
+      \\ {1\over n}lt^2 -lm &\leq& t-m
+      \\ lt^2 - lmn &\leq& n(t-m)
+      \\ l(t^2 - mn) &\leq& n(t-m)
+      \\ l &\leq& {n(t-m)\over t^2 - mn}
     \end{eqnarray*}
-    so that $P=l^2m$.
     \end{enumerate}
 \end{enumerate}
 \end{document}
