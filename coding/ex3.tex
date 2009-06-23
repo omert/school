@@ -244,6 +244,19 @@
       \\ l(t^2 - mn) &\leq& n(t-m)
       \\ l &\leq& {n(t-m)\over t^2 - mn}
     \end{eqnarray*}
+    \item
+    Let the $n$ nodes on the left side of $G$ represent the $n$ characters 
+    in a codeword of $(n,k,d)_q$. Let the $l$ nodes on the right
+    represent all codewords of weight $e=n-t$, so that 
+    for each zero character in each codeword,
+    there is an edge between the character and the codeword. 
+    Then the condition $e<n-\sqrt{n(n-d)}$ is equivalent to 
+    $t > \sqrt{n(n-d)}$.
+
+    Since any pair of 
+    codewords share at most $m$ zero characters, each has $t-m$ zero
+    characters that are non-zero for the other, so that $d\geq 2(t-m)$.
+
     \end{enumerate}
 \end{enumerate}
 \end{document}
