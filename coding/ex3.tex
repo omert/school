@@ -246,16 +246,28 @@
     \end{eqnarray*}
     \item
     Let the $n$ nodes on the left side of $G$ represent the $n$ characters 
-    in a codeword of $(n,k,d)_q$. Let the $l$ nodes on the right
-    represent all codewords of weight $e=n-t$, so that 
-    for each zero character in each codeword,
-    there is an edge between the character and the codeword. 
-    Then the condition $e<n-\sqrt{n(n-d)}$ is equivalent to 
-    $t > \sqrt{n(n-d)}$.
+    in some message $M$, encoded with a code $C=(n,k,d)_q$ and having at most
+    $e$ errors.  Let the $l$ nodes on the right
+    represent all codewords $C$ which are compatible with $M$, that is, have
+    at least $n-e$ characters in common with it. For each such codeword,
+    select $t=n-e$ such characters, and set an edge between the codeword and the
+    character. Since the distance of the code is $d$, the neighbor sets of no
+    two codewords will be larger than $n-d$. Denote $m=n-d$. Under these
+    definitions of $t$ and $m$, the condition $e<n-\sqrt{n(n-d)}$ translates
+    to $t>\sqrt{mn}$, and the graph thus created is the same as the graph
+    from (a). The result of (a) can then also be translated into a statement
+    about $C$:
+    \begin{eqnarray*}
+      l &\leq& {n(t-m)\over t^2 - mn}
+      \\l &\leq& {n(n-e-(n-d))\over t^2 - mn}
+      \\l &\leq& {n(d-e)\over t^2 - mn}
+      \\l &\leq& n^2
+    \end{eqnarray*}
 
-    Since any pair of 
-    codewords share at most $m$ zero characters, each has $t-m$ zero
-    characters that are non-zero for the other, so that $d\geq 2(t-m)$.
+    and hence there are no more than $n^2$ such codewords.
+
+    \item
+      Let $m=n/4$ and $t>0.99\sqrt{mn}$. Then $t>0.99\cdot 2m$. Assume $2m>t$.
 
     \end{enumerate}
 \end{enumerate}
