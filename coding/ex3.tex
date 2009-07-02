@@ -267,9 +267,20 @@
     and hence there are no more than $n^2$ such codewords.
 
     \item
+      Let $C=(n,m,d)_q$ be a Reed-Solomon code, with $d=3n/4$. Then 
+      $m=n-d=n/4$. Let 
+      $e=n-\sqrt{n(n-d)}+1=n-\sqrt{n^2/4}+1=n/2+1$. Then for large enough
+      $n$, it holds that $t=n-e > 0.99\sqrt{n(n-d)}=0.99\sqrt{mn}$.
+
+
+ 
       Let $m=n/4$ and $t>0.99\sqrt{mn}$. Then $t>0.99\cdot 2m$. Assume $2m>t$.
 
     \end{enumerate}
+  \item       
+    Let $C=(n,k,n-k)_q$ be a Reed-Solomon code, where $q$ is a prime power,
+    and $k=q/9$. Then, given a message $M$ produced by $C$, with a most
+    $e$ errors, where 
 \end{enumerate}
 \end{document}
 
