@@ -153,83 +153,74 @@ so that $D(p||q)$ is at most $-\log \alpha$.
     \\ &=&Pr(y=0)D(p_0||q)+Pr(y=1)D(p_1||q)
   \end{eqnarray*}
 \item
-  Note: I assume that the phrase ``with high probability X occurs'' means: for 
-  any probability $q<1$, $X_n$ occurs for high enough $n$'s. 
-      
-  In this solution we will assume that the programming language with which 
+  In this solution I will assume that the programming language with which 
   we're defining Kolmogorov complexity is binary. Therefore, the number 
   of syntactically correct programs of length $n$ is at most $2^n$.
-  \begin{lemma*}
-    Let $Y=Y_1,\ldots,Y_n$ be a binary string of length $n$ picked from
-    the {\bf uniform distribution}. Then
-    for every $q>1$ and $\epsilon>0$, there exists an $n_0$ s.t. 
-    for every $n>n_0$,
-    with probability $>q$ the Kolmogorov complexity of $Y$ is between
-    $n(1-\epsilon)$ and $n(1+\epsilon)$.
-  \end{lemma*}
-  \begin{proof}
-  We showed in class that there exists a constant $C$ s.t. the Kolmogorov
-  complexity of every binary string of length $n$ is less than $n+C$. Hence,
-  given $\epsilon>0$, for $n>n_0=C/\epsilon$, 
-  with probability {\bf one} the Kolomogorov 
-  complexity  of $Y$ is less than $n+C<n+n\epsilon=n(1+\epsilon)$.
-  
+
+  Given $\delta>0$, let $S_n\subset \{0,1\}^n$ be the set of strings of 
+  length $n$ with probability, under $X$, between $H(p,1-p)-\delta$
+  and $H(p,1-p)+\delta$. We showed in class 
+  (the asymptotic equipartition property) that 
+  \begin{enumerate}
+  \item 
+    \label{setprob}
+    the probability of
+    this set approaches one for large enough $n$'s, 
+  \item
+    \label{setsmall}
+    that the 
+    size of this set, again for large enough $n$'s, is smaller than
+    $2^{H(p,1-p)n(1+\delta)}$, 
+  \item
+    \label{setsize}
+    and that the 
+    size of this set, again for large enough $n$'s, is larger than
+    $2^{H(p,1-p)n(1-2\delta)}$ (this might not have been shown explicitly in class). 
+  \end{enumerate}
+
+  Because of (\ref{setsize}), the Kolmogorov complexity of any string
+  in $S_n$ is high with probability that approaches one:
+
   Given a probability $q<1$, let $D$ be such that $1-2^{-D}>q$.
-  Given $\epsilon>0$, let $n_0=D/\epsilon$.   
-  For any $n>n_0$, the number of strings produced by programs of 
-  length less than  $n-D$ is less than the number of such programs, 
-  which is less than $2^{n-D}$. Hence, the rest of the strings have complexity
-  at least $n-D>n-n\epsilon=n(1-\epsilon)$. 
-  There are at least $2^n-2^{n-D}$ such strings, so the probability that $Y$
-  is among them is
+  Given $\zeta>0$, let $\log|S_n|n_0=D/\zeta$.   
+  For any $n>n_0$, the number of strings in $S_n$ produced by programs of 
+  length less than  $\log|S_n|-D$ is less than the number of such programs, 
+  which is less than $2^{\log|S_n|-D}=|S_n|2^{-D}$. 
+  Hence, the rest of the strings have complexity
+  at least
+  \begin{eqnarray*}
+    \log|S_n|-D&>&\log|S_n|-\log|S_n|\zeta
+    \\ &=&\log|S_n|(1-\zeta)
+    \\ &>&H(p,1-p)n(1-2\delta)(1-\zeta).
+  \end{eqnarray*}
+  There are at least $|S_n|-|S_n|2^{-D}$ 
+  such strings, so the probability that $Y$  is among them is
   \begin{equation*}
-    {2^n-2^{n-D} \over 2^n}=1-2^{-D}>q.           
+    {|S_n|-|S_n|2^{-D} \over |S_n|}=1-2^{-D}>q.           
   \end{equation*}
  
   Hence, for any $q<1$ and $\epsilon>0$ there exists an $n_0$ large enough
   so that with probability higher than $q$ the Kolmogorov complexity of
-  $Y$ is higher than $n(1-\epsilon)$.
-  \end{proof}
+  an element in $S_n$ higher than $H(p,1-p)n(1-2\delta)(1-\zeta)$. 
+  Because of (\ref{setprob}), 
+  (the probability of a string in $X$ to be in $S$ approaches one), 
+  given $\epsilon$, then for $\zeta,\delta>0$ which maintain
+  $(1-2\delta)(1-\zeta)=1-\epsilon$, there exists an $n_0$ s.t. 
+  for $n>n_0$ the probability
+  of a string $X$ to have Kolmogorov complexity greater than 
+  $H(p,1-1)n(1-\epsilon)$ is larger than $q$.
   
-  \begin{theorem*}
-    For every $q>1$ and $\epsilon>0$, 
-    there exists an $n_0$ s.t. for every $n>n_0$,
-    with probability $>q$ the Kolmogorov complexity of $X$ is between
-    $H(p,1-p)n(1-\epsilon)$ and $H(p,1-p)n(1+\epsilon)$.
-  \end{theorem*}
-  \begin{proof}
-
-  Let $S_n\subset \{0,1\}^n$ be the set of strings of 
-  size $2^{H(p,1-p)n}$ which have a number 
-  of ones closest to $pn$ (ambiguities can be resolved by choosing the 
-  first strings, ordered lexicographically). We showed in class
-  that because the entropy of $X$ is $H(p,1-p)n$, 
-  for any $q<1$ there exists an $n_0$ s.t. for $n>n_0$, 
-  the probability of $X$ being in $S_n$ is greater than $q$. 
-
-  Now, $S_n$ is obviously enumerable. Let $\mathcal{T}$ be 
-  a program that enumerates the $S_n$'s. That is, 
-  given a string $t$ (intrepreted as a number) of length $H(p,1-p)n$ and the 
-  number $p$, let $\mathcal{T}(t,p)$ be  
-  the $t$'th string in $S_n$.
-  Then the Kolmogorov complexity of any string
-  $s$ in $S_n$ is at most a constant plus the complexity of $t\in \{0,1\}^{H(p,-1p)}$, where 
-  $\mathcal{T}(t,p)=s$. This is true because $s$ can be produced by a 
-  program that
-  produces $t$ and then runs $\mathcal{T}$ on it (and the length of $\mathcal{T}$ is 
-  constant).
-  Since the length of $t$ is $H(p,1-p)$, there exists a constant $C'$ s.t. 
-  the complexity of $t$ is less than $H(p,1-p)+C'$. Hence,
-  there exists a constant $C$ s.t.
-  the complexity of $s\in S_n$ is at most $H(p,1-p)n+C$. If $n>n_0=C/\epsilon$, 
-  then for {\bf all} strings in $S_n$, the Kolmogorov complexity is less than 
-  $H(p,1-p)n(1+\epsilon)$, and hence with probability larger than $q$, $X$
-  has complexity less than $H(p,1-p)n(1+\epsilon)$.
-  
-  Let $\mathcal{T}^{-1}$ be the inverse of $\mathcal{T}$. That is,
-  $\mathcal{T}^{-1}(s,p)=t$ iff $\mathcal{T}(t,p)=s$. 
-  Then, since, by the lemma above, for given $q<1$ and $\epsilon>0$ there
-  exists 
+  Because of (\ref{setsmall}) - $|S_n|<2^{H(p,1-p)n(1+\delta)}$, and because
+  the set is obviously enumerable, each element of the set can be calculated
+  by a program that enumerates the elements in $S_n$ and stops after
+  $\O(|S_n|)$ steps. The length of this program would be a constant
+  plus $O(\log|S_n|)$, or $O(H(p,1-p)n(1+\delta))$. Hence, the Kolmogorov
+  complexity of the strings in $S_n$ is at most $H(p,1-p)n(1+\delta)+C$. Given
+  $\epsilon>0$, let $\zeta,\delta>0$ be s.t. $(1+\delta)(1+\zeta)=1+\epsilon$. 
+  Then if we choose $n_0$ s.t. $C=H(p,1-p)n_0(1+\delta)\zeta$, then the Kolmogorov
+  complexity of a string in $S_n$ is at most $H(p,1-p)n(1+\epsilon)$, 
+  and since, again, the probability of $S_n$ goes to one with $n$, 
+  the same holds, with high probability, for a string $X$.
   
   \end{proof}
 \end{enumerate}
