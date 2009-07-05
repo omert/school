@@ -114,19 +114,124 @@
 \begin{enumerate}
 \item
 Since $E$ depends only on $x$, then $p(x)=Pr(x|E)$ is either zero, if $E$
-does not happen for $x$, or $Pr(x)/Pr(E)=q(x)/Pr(E)$ if it does. Hence:
+does not happen for $x$, or $Pr(x)/\alpha=q(x)/\alpha$ if it does. Hence:
   \begin{eqnarray*}
     D(p||q) &=& \sum_xp(x)\log{p(x)\over q(x)}
     \\ &=& \sum_{x\in E}p(x)\log{p(x)\over q(x)}
-    \\ &=& \sum_{x\in E}{q(x)\over Pr(E)}\log{1\over Pr(E)}
-    \\ &=& {-\log Pr(E) \over Pr(E)}\sum_{x\in E}q(x)
-    \\ &=& {-\log Pr(E) \over Pr(E)}Pr(E)
-    \\ &=& -\log Pr(E)
+    \\ &=& \sum_{x\in E}{q(x)\over \alpha}\log{1\over \alpha}
+    \\ &=& {-\log \alpha \over \alpha}\sum_{x\in E}q(x)
+    \\ &=& {-\log \alpha \over \alpha}\alpha
+    \\ &=& -\log \alpha
   \end{eqnarray*}
 
 \item
+In the general case
+\begin{equation*}
+ p(x)=Pr(x|E)={Pr(E|x)Pr(x)\over Pr(E)}={Pr(E|x)q(x)\over \alpha}. 
+\end{equation*}
+Then:
+  \begin{eqnarray*}
+    D(p||q) &=& \sum_xp(x)\log{p(x)\over q(x)}
+    \\ &=& \sum_xp(x)\log{p(x)\over q(x)}
+    \\ &=& \sum_xp(x)\log{Pr(E|x)\over \alpha}
+    \\ &\leq& \sum_xp(x)\log{1\over \alpha}
+    \\ &=& -\log\alpha\sum_xp(x)
+    \\ &=& -\log\alpha
+  \end{eqnarray*}
+so that $D(p||q)$ is at most $-\log \alpha$.
 
+\item
+  \begin{eqnarray*}
+    I(X;Y)&=&D(Pr(X,Y)||Pr(X)Pr(Y))
+    \\ &=& \sum_{x,y}Pr(x,y)\log{Pr(x,y)\over Pr(x)Pr(y)}
+    \\ &=& \sum_{x,y}Pr(x|y)Pr(y)\log{Pr(x|y)Pr(y)\over Pr(x)Pr(y)}
+    \\ &=& \sum_{x,y}Pr(x|y)Pr(y)\log{Pr(x|y)\over Pr(x)}
+    \\ &=& \sum_xPr(x|y=0)Pr(y=0)\log{Pr(x|y=0)\over Pr(x)}
+    \\ &&+\sum_xPr(x|y=1)Pr(y=1)\log{Pr(x|y=1)\over Pr(x)}
+    \\ &=& Pr(y=0)\sum_xp_0(x)\log{p_0(x)\over q(x)}
+    \\ &&+Pr(y=1)\sum_xp_1(x)\log{p_1(x)\over q(x)}
+    \\ &=&Pr(y=0)D(p_0||q)+Pr(y=1)D(p_1||q)
+  \end{eqnarray*}
+\item
+  Note: I assume that the phrase ``with high probability X occurs'' means: for 
+  any probability $q<1$, $X_n$ occurs for high enough $n$'s. 
+      
+  In this solution we will assume that the programming language with which 
+  we're defining Kolmogorov complexity is binary. Therefore, the number 
+  of syntactically correct programs of length $n$ is at most $2^n$.
+  \begin{lemma*}
+    Let $Y=Y_1,\ldots,Y_n$ be a binary string of length $n$ picked from
+    the {\bf uniform distribution}. Then
+    for every $q>1$ and $\epsilon>0$, there exists an $n_0$ s.t. 
+    for every $n>n_0$,
+    with probability $>q$ the Kolmogorov complexity of $Y$ is between
+    $n(1-\epsilon)$ and $n(1+\epsilon)$.
+  \end{lemma*}
+  \begin{proof}
+  We showed in class that there exists a constant $C$ s.t. the Kolmogorov
+  complexity of every binary string of length $n$ is less than $n+C$. Hence,
+  given $\epsilon>0$, for $n>n_0=C/\epsilon$, 
+  with probability {\bf one} the Kolomogorov 
+  complexity  of $Y$ is less than $n+C<n+n\epsilon=n(1+\epsilon)$.
+  
+  Given a probability $q<1$, let $D$ be such that $1-2^{-D}>q$.
+  Given $\epsilon>0$, let $n_0=D/\epsilon$.   
+  For any $n>n_0$, the number of strings produced by programs of 
+  length less than  $n-D$ is less than the number of such programs, 
+  which is less than $2^{n-D}$. Hence, the rest of the strings have complexity
+  at least $n-D>n-n\epsilon=n(1-\epsilon)$. 
+  There are at least $2^n-2^{n-D}$ such strings, so the probability that $Y$
+  is among them is
+  \begin{equation*}
+    {2^n-2^{n-D} \over 2^n}=1-2^{-D}>q.           
+  \end{equation*}
+ 
+  Hence, for any $q<1$ and $\epsilon>0$ there exists an $n_0$ large enough
+  so that with probability higher than $q$ the Kolmogorov complexity of
+  $Y$ is higher than $n(1-\epsilon)$.
+  \end{proof}
+  
+  \begin{theorem*}
+    For every $q>1$ and $\epsilon>0$, 
+    there exists an $n_0$ s.t. for every $n>n_0$,
+    with probability $>q$ the Kolmogorov complexity of $X$ is between
+    $H(p,1-p)n(1-\epsilon)$ and $H(p,1-p)n(1+\epsilon)$.
+  \end{theorem*}
+  \begin{proof}
 
+  Let $S_n\subset \{0,1\}^n$ be the set of strings of 
+  size $2^{H(p,1-p)n}$ which have a number 
+  of ones closest to $pn$ (ambiguities can be resolved by choosing the 
+  first strings, ordered lexicographically). We showed in class
+  that because the entropy of $X$ is $H(p,1-p)n$, 
+  for any $q<1$ there exists an $n_0$ s.t. for $n>n_0$, 
+  the probability of $X$ being in $S_n$ is greater than $q$. 
+
+  Now, $S_n$ is obviously enumerable. Let $\mathcal{T}$ be 
+  a program that enumerates the $S_n$'s. That is, 
+  given a string $t$ (intrepreted as a number) of length $H(p,1-p)n$ and the 
+  number $p$, let $\mathcal{T}(t,p)$ be  
+  the $t$'th string in $S_n$.
+  Then the Kolmogorov complexity of any string
+  $s$ in $S_n$ is at most a constant plus the complexity of $t\in \{0,1\}^{H(p,-1p)}$, where 
+  $\mathcal{T}(t,p)=s$. This is true because $s$ can be produced by a 
+  program that
+  produces $t$ and then runs $\mathcal{T}$ on it (and the length of $\mathcal{T}$ is 
+  constant).
+  Since the length of $t$ is $H(p,1-p)$, there exists a constant $C'$ s.t. 
+  the complexity of $t$ is less than $H(p,1-p)+C'$. Hence,
+  there exists a constant $C$ s.t.
+  the complexity of $s\in S_n$ is at most $H(p,1-p)n+C$. If $n>n_0=C/\epsilon$, 
+  then for {\bf all} strings in $S_n$, the Kolmogorov complexity is less than 
+  $H(p,1-p)n(1+\epsilon)$, and hence with probability larger than $q$, $X$
+  has complexity less than $H(p,1-p)n(1+\epsilon)$.
+  
+  Let $\mathcal{T}^{-1}$ be the inverse of $\mathcal{T}$. That is,
+  $\mathcal{T}^{-1}(s,p)=t$ iff $\mathcal{T}(t,p)=s$. 
+  Then, since, by the lemma above, for given $q<1$ and $\epsilon>0$ there
+  exists 
+  
+  \end{proof}
 \end{enumerate}
 \end{document}
 
