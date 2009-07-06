@@ -136,7 +136,7 @@
   distinct $m,m'\in \mathbb{F}_{2^c}^{k/c}$, respectively. Then by $C$'s definition, $y$ and $y'$
   differ by at least $\delta n$ bits. Let $S$ be the set of nodes on the left
   side of $G$ that correspond to those bits. Let $P$ be $S$'s neighbors.
-  Then by the expander's defintion, $|P|\geq\gamma\delta n$. This will be the number
+  Then by the expander's definition, $|P|\geq\gamma\delta n$. This will be the number
   of nodes, $u_j$, where the codewords $M$ and $M'$ will differ in at
   least one place, and hence the distance will be at least $\gamma\delta n$.
   
@@ -259,31 +259,142 @@
     about $C$:
     \begin{eqnarray*}
       l &\leq& {n(t-m)\over t^2 - mn}
-      \\l &\leq& {n(n-e-(n-d))\over t^2 - mn}
-      \\l &\leq& {n(d-e)\over t^2 - mn}
-      \\l &\leq& n^2
+      \\ &\leq& {n(n-e-(n-d))\over t^2 - mn}
+      \\ &\leq& {n(d-e)\over t^2 - mn}
+      \\ &\leq& n(d-e)
+      \\ &\leq& n^2
     \end{eqnarray*}
 
     and hence there are no more than $n^2$ such codewords.
 
     \item
-      Let $C=(n,m,d)_q$ be a Reed-Solomon code, with $d=3n/4$. Then 
-      $m=n-d=n/4$. Let 
-      $e=n-\sqrt{n(n-d)}+1=n-\sqrt{n^2/4}+1=n/2+1$. Then for large enough
-      $n$, it holds that $t=n-e > 0.99\sqrt{n(n-d)}=0.99\sqrt{mn}$.
+      Let $\zeta$ be a fixed number below $0.005$.
 
+      We construct a random code in $F_q^n$ by picking a series of random 
+      codewords from the uniform distribution over the ball of 
+      radius $e=n/2+\zeta n$, around zero. We prove below that with non-zero 
+      probability (actually with probability approaching one for large 
+      values of $n$) we will choose a code with distance $d\geq{3n\over 4}$
+      and an exponential number of codewords, for a particular radius.
 
- 
-      Let $m=n/4$ and $t>0.99\sqrt{mn}$. Then $t>0.99\cdot 2m$. Assume $2m>t$.
+      Let $d={3n\over 4}$. Define $m$ by $m=n-d=n/4$. Then
+      $e=n/2+\zeta n=n-\sqrt{nm}+\zeta n$, 
+      $t=n-e=\sqrt{nm}-\zeta n$, and for $\zeta < 0.005$
+       it holds that
+      \begin{equation*}
+        t=\sqrt{nm} - \zeta n > 0.99\sqrt{mn}.
+      \end{equation*}
 
+      Let $x$ be a random point, picked from the uniform distribution
+      over $B(\vec{0},e)\subset F_q^n$. The probability of $x$ to be non-zero
+      in its $i$'th coordinate is independent of $i$, by symmetry,
+      and we denote it by $p_n$. Given $\epsilon>0$, as $n$ increases, 
+      the probability that a codeword has less than $e-\epsilon n$ non-zero
+      coordinates approaches zero, and therefore $p$ approaches 
+      $e/n={1\over 2}+\zeta$:
+      \begin{equation*}
+        \lim_{n\to\infty}p_n=\half+\zeta.
+      \end{equation*}
+
+      Given that a codeword is non-zero, then again by symmetry each
+      of the other $q-1$ symbols is equally likely. Hence, the probability
+      that two codewords are equal in some coordinate is
+      \begin{equation*}
+        (1-p_n)^2+p_n^2{1\over q-1}=1-2p_n+p_n^2{q\over 1-q}
+      \end{equation*}
+      and the expected distance between them is
+      \begin{equation*}
+        \E[\mbox{dist}]=2p_nn-p_n^2{q\over q-1}n
+      \end{equation*}
+      as $n$ goes to infinity, this approaches
+      \begin{eqnarray*}
+        \lim_{n\to\infty}\E[\mbox{dist}] &=&  2{e\over n}n-{e^2\over n^2}{q\over q-1}n 
+        \\ &=&2e-\left({e\over n}\right)^2{q\over q-1}n
+        \\ &=&2\left(n/2+\zeta n\right)-\left({1\over 2}+\zeta\right)^2{q\over q-1}n
+        \\ &=&n+2\zeta n-\left({1\over 4}+\zeta+\zeta^2\right){q\over q-1}n
+        \\ &=&n+2\zeta n-\left({n\over 4}+\zeta n+\zeta^2n\right){q\over q-1}
+      \end{eqnarray*}
+      We assume now that ${q\over q-1}=1-\zeta$ (a '$>$' inequality would suffice). 
+      Then:
+      \begin{eqnarray*}
+        \lim_{n\to\infty}\E[\mbox{dist}]&=& n+2\zeta n-
+        \left({n\over 4}+\zeta n+\zeta^2n\right)(1-\zeta)
+        \\ &=& n+2\zeta n-{n\over 4}-\zeta n-\zeta^2n+
+        {\zeta n\over 4}+\zeta^2 n+\zeta^3n
+        \\ &=& {3n\over 4}+{5\zeta n\over 4}+\zeta^3n
+      \end{eqnarray*}
+
+      As a consequence, for large enough $n$, 
+      by the Chernoff bound the probability of the distance
+      between two codewords to be below $d={3n\over 4}$ is 
+      less than $\exp(-2\zeta^2n)$. Hence, if we choose $\exp(\half\zeta^2n)$ 
+      random codewords
+      for our code, there will be codes for which, by union bound, the number
+      of codeword pairs of distance less than ${3n\over 4}$ would be lower
+      than $\exp(\zeta^2n)\exp(-2\zeta^2n)=exp(-\zeta^2n)$, which goes to zero as $n$ goes
+      to infinity. Hence, there exist codes with an exponential number
+      of codewords within a ball of radius $e=\half n+\zeta n$, 
+      with distance at least $d={3n\over 4}$ between codewords.
+
+      This implies that the Johnson bound is tight.
     \end{enumerate}
   \item       
-    Let $C=(n,k,n-k)_q$ be a Reed-Solomon code, where $q$ is a prime power,
-    and $k=q/9$. Then, given a message $M$ produced by $C$, with a most
-    $e$ errors, where 
+
+    Given a function $f$ as described in the question, let $G=(V_L,V_R,E)$ 
+    be a bipartite graph. Let $|V_L|=q$, where
+    each node $u_q\in V_L$ corresponds to an element of $F_q$. Let each node 
+    $v_p\in V_R$ correspond to a distinct polynomial $p\in F_q[x]$ which agrees with
+    $f$ in at least $0.34q$ elements of $F_q$. Let there be an edge between
+    $u_q$ and $v_p$ iff $p$ agrees with $f$ on $q$. The size of $V_R$ is then
+    the number of polynomials the question asks about.
+
+    Because the degree of the polynomials is at most $q/9$, then
+    two distinct polynomials cannot agree on more than $q/9$ elements   
+    of $F_q$. Hence, the intersection of the neighbor sets of two 
+    nodes of $V_R$ cannot be larger than $q/9$. 
+
+    We can bound the number of paths $P$ of length three starting on the
+    left and ending on the left, in a similar fashion to the previous 
+    question. Let such a path be characterized by the triplet
+    of vertices $(v_1,u,v_2)$. Then one way of choosing a path is
+    to choose $v_1$ and $v_2$, and then choose $u$. If $v_1=v_2$, then
+    there are at most $q$ possible choices for $u$. If $v_1\neq v_2$, then
+    there are at most $q/9$ options:
+    \begin{equation*}
+      P\leq |V_R|q+|V_R|(|V_R|-1)q/9.
+    \end{equation*}
+    
+    We may also build a path by choosing $u$ and then choosing two of
+    its edges and calling their ends $v_1$ and $v_2$:
+
+   \begin{eqnarray*}
+      P&=&\sum_{u\in V_L}\deg(u)^2
+      \\ &\geq&{1\over q}\left(\sum_{u\in V_L}\deg(u)\right)^2
+      \\ &=&{1\over q}\left(\sum_{v\in V_R}\deg(v)\right)^2
+      \\ &\geq&{1\over q}\left(\sum_{v\in V_R}0.66q\right)^2
+      \\ &=&{1\over q}(0.66q)^2|V_R|^2
+      \\ &=&0.66^2q|V_R|^2
+    \end{eqnarray*}
+
+   We now have
+   \begin{equation*}
+     0.66^2q|V_R|^2\leq P\leq |V_R|q + |V_R|(|V_R|-1)q/9.
+   \end{equation*}
+   Hence
+   \begin{eqnarray*}
+     0.66^2q|V_R|^2&\leq& |V_R|q + |V_R|(|V_R|-1)q/9
+     \\ 0.66^2|V_R|&\leq& 1 + (|V_R|-1)1/9
+     \\ 9\cdot0.66^2|V_R|&\leq& 9 + |V_R|-1
+     \\ 9\cdot0.66^2(|V_R|-1)&\leq& 8
+     \\ |V_R|-1&\leq& {8\over 9\cdot0.66^2}
+     \\ |V_R|&\leq& {8\over 9\cdot0.66^2}+1
+   \end{eqnarray*}
+   
+   and the number of polynomials is indeed bounded by a constant.
 \end{enumerate}
 \end{document}
 
 
 
 
+% 03-643-6205
