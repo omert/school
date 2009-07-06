@@ -213,7 +213,7 @@ so that $D(p||q)$ is at most $-\log \alpha$.
   Because of (\ref{setsmall}) - $|S_n|<2^{H(p,1-p)n(1+\delta)}$, and because
   the set is obviously enumerable, each element of the set can be calculated
   by a program that enumerates the elements in $S_n$ and stops after
-  $\O(|S_n|)$ steps. The length of this program would be a constant
+  $O(|S_n|)$ steps. The length of this program would be a constant
   plus $O(\log|S_n|)$, or $O(H(p,1-p)n(1+\delta))$. Hence, the Kolmogorov
   complexity of the strings in $S_n$ is at most $H(p,1-p)n(1+\delta)+C$. Given
   $\epsilon>0$, let $\zeta,\delta>0$ be s.t. $(1+\delta)(1+\zeta)=1+\epsilon$. 
@@ -222,7 +222,6 @@ so that $D(p||q)$ is at most $-\log \alpha$.
   and since, again, the probability of $S_n$ goes to one with $n$, 
   the same holds, with high probability, for a string $X$.
   
-  \end{proof}
 \end{enumerate}
 \end{document}
 
