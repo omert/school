@@ -1,0 +1,184 @@
+\documentclass[11pt]{article} \usepackage{amssymb}
+\usepackage{amsfonts} \usepackage{amsmath} \usepackage{bm}
+\usepackage{latexsym} \usepackage{epsfig}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+
+\setlength{\textwidth}{6.5 in} \setlength{\textheight}{8.25in}
+\setlength{\oddsidemargin}{0in} \setlength{\topmargin}{0in}
+\addtolength{\textheight}{.8in} \addtolength{\voffset}{-.5in}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{example}[theorem]{Example}
+\newenvironment{proof}{\noindent \textbf{Proof:}}{$\Box$}
+
+\newcommand{\ignore}[1]{}
+
+\newcommand{\enote}[1]{} \newcommand{\knote}[1]{}
+\newcommand{\rnote}[1]{}
+
+
+
+% \newcommand{\enote}[1]{{\bf [[Elchanan:} {\emph{#1}}{\bf ]]}}
+% \newcommand{\knote}[1]{{\bf [[Krzysztof:} {\emph{#1}}{\bf ]]}}
+% \newcommand{\rnote}[1]{{\bf [[Ryan:} {\emph{#1}}{\bf ]]}}
+
+
+
+\DeclareMathOperator{\Support}{Supp} \DeclareMathOperator{\Opt}{Opt}
+\DeclareMathOperator{\Ordo}{\mathcal{O}}
+\newcommand{\MaxkCSP}{\textsc{Max $k$-CSP}}
+\newcommand{\MaxkCSPq}{\textsc{Max $k$-CSP$_{q}$}}
+\newcommand{\MaxCSP}[1]{\textsc{Max CSP}(#1)} \renewcommand{\Pr}{{\bf
+    P}} \renewcommand{\P}{{\bf P}} \newcommand{\Px}{\mathop{\bf P\/}}
+\newcommand{\E}{{\bf E}} \newcommand{\Cov}{{\bf Cov}}
+\newcommand{\Var}{{\bf Var}} \newcommand{\Varx}{\mathop{\bf Var\/}}
+
+\newcommand{\bits}{\{-1,1\}}
+
+\newcommand{\nsmaja}{\textstyle{\frac{2}{\pi}} \arcsin \rho}
+
+\newcommand{\Inf}{\mathrm{Inf}} \newcommand{\I}{\mathrm{I}}
+\newcommand{\J}{\mathrm{J}}
+
+\newcommand{\eps}{\epsilon} \newcommand{\lam}{\lambda}
+
+% \newcommand{\trunc}{\ell_{2,[-1,1]}}
+\newcommand{\trunc}{\zeta} \newcommand{\truncprod}{\chi}
+
+\newcommand{\N}{\mathbb N} \newcommand{\R}{\mathbb R}
+\newcommand{\Z}{\mathbb Z} \newcommand{\CalE}{{\mathcal{E}}}
+\newcommand{\CalC}{{\mathcal{C}}} \newcommand{\CalM}{{\mathcal{M}}}
+\newcommand{\CalR}{{\mathcal{R}}} \newcommand{\CalS}{{\mathcal{S}}}
+\newcommand{\CalV}{{\mathcal{V}}}
+\newcommand{\CalX}{{\boldsymbol{\mathcal{X}}}}
+\newcommand{\CalG}{{\boldsymbol{\mathcal{G}}}}
+\newcommand{\CalH}{{\boldsymbol{\mathcal{H}}}}
+\newcommand{\CalY}{{\boldsymbol{\mathcal{Y}}}}
+\newcommand{\CalZ}{{\boldsymbol{\mathcal{Z}}}}
+\newcommand{\CalW}{{\boldsymbol{\mathcal{W}}}}
+\newcommand{\CalF}{{\mathcal{Z}}}
+% \newcommand{\boldG}{{\boldsymbol G}}
+% \newcommand{\boldQ}{{\boldsymbol Q}}
+% \newcommand{\boldP}{{\boldsymbol P}}
+% \newcommand{\boldR}{{\boldsymbol R}}
+% \newcommand{\boldS}{{\boldsymbol S}}
+% \newcommand{\boldX}{{\boldsymbol X}}
+% \newcommand{\boldB}{{\boldsymbol B}}
+% \newcommand{\boldY}{{\boldsymbol Y}}
+% \newcommand{\boldZ}{{\boldsymbol Z}}
+% \newcommand{\boldV}{{\boldsymbol V}}
+\newcommand{\boldi}{{\boldsymbol i}} \newcommand{\boldj}{{\boldsymbol
+    j}} \newcommand{\boldk}{{\boldsymbol k}}
+\newcommand{\boldr}{{\boldsymbol r}}
+\newcommand{\boldsigma}{{\boldsymbol \sigma}}
+\newcommand{\boldupsilon}{{\boldsymbol \upsilon}}
+\newcommand{\hone}{{\boldsymbol{H1}}}
+\newcommand{\htwo}{\boldsymbol{H2}}
+\newcommand{\hthree}{\boldsymbol{H3}}
+\newcommand{\hfour}{\boldsymbol{H4}}
+
+
+\newcommand{\sgn}{\mathrm{sgn}} \newcommand{\Maj}{\mathrm{Maj}}
+\newcommand{\Acyc}{\mathrm{Acyc}}
+\newcommand{\UniqMax}{\mathrm{UniqMax}}
+\newcommand{\Thr}{\mathrm{Thr}} \newcommand{\littlesum}{{\textstyle
+    \sum}}
+
+\newcommand{\half}{{\textstyle \frac12}}
+\newcommand{\third}{{\textstyle \frac13}}
+\newcommand{\fourth}{{\textstyle \frac14}}
+
+\newcommand{\Stab}{\mathbb{S}}
+\newcommand{\StabThr}[2]{\Gamma_{#1}(#2)}
+\newcommand{\StabThrmin}[2]{{\underline{\Gamma}}_{#1}(#2)}
+\newcommand{\StabThrmax}[2]{{\overline{\Gamma}}_{#1}(#2)}
+\newcommand{\TestFcn}{\Psi}
+
+\renewcommand{\phi}{\varphi}
+
+\begin{document}
+\title{Algorithms - Exercise 1}
+
+ \author{Omer Tamuz, 035696574}
+\maketitle
+
+
+\begin{enumerate}
+  \item 
+    Let $G=(V,E)$ be a simple connected graph. Let $w:E\to \R\cup\{\infty\}$ be a length
+    function on the edges of $G$. WLOG, let $G$ be a full graph (one can use
+    $w(u,v)=\infty$ where one, for all practical purposes, does not want an 
+    edge between $u$ and $v$).
+    Let $w(v_1,v_2,\ldots,v_k)$ equal 
+    $w(v_1,v_2)+w(v_2,v_3)+\cdots+w(v_{k-1},v_k)$.
+    
+    Let $\mathcal{I}(G)$ be the set of pairs $(W,(u,v))$ such that $W$ is a 
+    subset of $V$, and $u$ and $v$ are vertices in $W$:
+    \begin{equation*}
+      \mathcal{I}=\{S = (W,(u,v))|W\subseteq V\: \textrm{and}\: u,v\in W\}
+    \end{equation*}
+
+    The function min-TOUR calculates, given a set 
+    $S=(W,(u,v))\in \mathcal{I}$, a tour of minimum length that starts at $u$, ends at $v$
+    and visits each vertex exactly once. Note that by the definitions above
+    such a tour exists, even if its length is not finite.
+
+    \begin{algorithmic}
+      \IF {$W=\{u,v\}$}
+        \STATE {\bf return $(u,v)$}
+      \ELSE
+        \STATE {$T \leftarrow$ an arbitrary tour in $W$ starting in $u$ and ending in $v$} 
+        \FORALL {$w\in W\setminus\{u,v\}$}
+          \STATE {$S\leftarrow \textrm{min-TOUR}(W\setminus\{u\},(w,v))$} 
+          \IF {$w(u,w)+w(S)< w(T)$}
+            \STATE {$T\leftarrow(u,w)$ concatenated with $S$}
+          \ENDIF
+         
+        \ENDFOR
+        \STATE {\bf return $T$}
+      \ENDIF
+    \end{algorithmic}
+    
+    \begin{proposition}
+      The function min-TOUR, as defined above, indeed returns a tour of minimum
+      length that starts at $u$, ends at $v$ and visits each vertex exactly
+      once.
+    \end{proposition}
+    \begin{proof}
+      If $W=\{u,v\}$, then obviously the shortest such tour is $(u,v)$, and 
+      hence the stopping criterion is obviously correct. Otherwise,
+      a shortest tour will go from $u$ to some $w$, and then continue along
+      a shortest tour from $w$ to $v$ in $W\setminus \{u\}$. Since
+      the algorithm checks all such possiblities for a sortest path,
+      it will certainly find one.
+    \end{proof}
+    \begin{proposition}
+      If the results of previous calls are stored in a table, the running
+      time of the algorithm will be $O(n^32^n)$.
+    \end{proposition}
+    \begin{proof}
+      The running time without the recursive calls is obviously
+      $O(n)$. Since there are $|\mathcal{I}|\leq n^22^n$ possible inputs to 
+      the algorithm,
+      running time will be at most $n^32^n$ if each function call is carried
+      out only once, and found in a table in subsequent times in $O(1)$.
+    \end{proof}
+
+    To now find a shortest {\bf cycle}, one can run min-TOUR on $(V,(u,v))$, 
+    trying all possible pairs $(u,v)$, adding to the length of the tour
+    $w(v,u)$ to find the length of the cycle, and choosing the minimum cycle.
+    This would take $O(n^2)$ times the running time of min-TOUR, and hence
+    $O(n^52^n)$.
+\end{enumerate}
+\end{document}
+
+
