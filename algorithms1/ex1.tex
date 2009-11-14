@@ -174,10 +174,15 @@
     \end{proof}
 
     To now find a shortest {\bf cycle}, one can run min-TOUR on $(V,(u,v))$, 
-    trying all possible pairs $(u,v)$, adding to the length of the tour
-    $w(v,u)$ to find the length of the cycle, and choosing the minimum cycle.
-    This would take $O(n^2)$ times the running time of min-TOUR, and hence
-    $O(n^52^n)$.
+    choosing an arbitrary $u$ and trying all possible$v$'s, 
+    adding $w(v,u)$ to the length of the tour
+     to find the length of the cycle, and choosing the minimum cycle.
+    This would take $O(n)$ times the running time of min-TOUR, and hence
+    $O(n^42^n)$.
+  \item
+    The algorithm described in class keeps a table, where each entry is
+    indexed by a set of $k$ vertices and a set of dangling edges, which 
+    divide the graph into two connected components. 
 \end{enumerate}
 \end{document}
 
