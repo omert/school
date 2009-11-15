@@ -1,0 +1,275 @@
+\documentclass[11pt]{article} \usepackage{amssymb}
+\usepackage{amsfonts} \usepackage{amsmath} \usepackage{bm}
+\usepackage{latexsym} \usepackage{epsfig}
+
+\setlength{\textwidth}{6.5 in} \setlength{\textheight}{8.25in}
+\setlength{\oddsidemargin}{0in} \setlength{\topmargin}{0in}
+\addtolength{\textheight}{.8in} \addtolength{\voffset}{-.5in}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{example}[theorem]{Example}
+\newenvironment{proof}{\noindent \textbf{Proof:}}{$\Box$}
+
+\newcommand{\ignore}[1]{}
+
+\newcommand{\enote}[1]{} \newcommand{\knote}[1]{}
+\newcommand{\rnote}[1]{}
+
+
+
+% \newcommand{\enote}[1]{{\bf [[Elchanan:} {\emph{#1}}{\bf ]]}}
+% \newcommand{\knote}[1]{{\bf [[Krzysztof:} {\emph{#1}}{\bf ]]}}
+% \newcommand{\rnote}[1]{{\bf [[Ryan:} {\emph{#1}}{\bf ]]}}
+
+
+
+\DeclareMathOperator{\Support}{Supp} \DeclareMathOperator{\Opt}{Opt}
+\DeclareMathOperator{\Ordo}{\mathcal{O}}
+\newcommand{\MaxkCSP}{\textsc{Max $k$-CSP}}
+\newcommand{\MaxkCSPq}{\textsc{Max $k$-CSP$_{q}$}}
+\newcommand{\MaxCSP}[1]{\textsc{Max CSP}(#1)} \renewcommand{\Pr}{{\bf
+    P}} \renewcommand{\P}{{\bf P}} \newcommand{\Px}{\mathop{\bf P\/}}
+\newcommand{\E}{{\bf E}} \newcommand{\Cov}{{\bf Cov}}
+\newcommand{\Var}{{\bf Var}} \newcommand{\Varx}{\mathop{\bf Var\/}}
+
+\newcommand{\bits}{\{-1,1\}}
+
+\newcommand{\nsmaja}{\textstyle{\frac{2}{\pi}} \arcsin \rho}
+
+\newcommand{\Inf}{\mathrm{Inf}} \newcommand{\I}{\mathrm{I}}
+\newcommand{\J}{\mathrm{J}}
+
+\newcommand{\eps}{\epsilon} \newcommand{\lam}{\lambda}
+
+% \newcommand{\trunc}{\ell_{2,[-1,1]}}
+\newcommand{\trunc}{\zeta} \newcommand{\truncprod}{\chi}
+
+\newcommand{\N}{\mathbb N} \newcommand{\R}{\mathbb R}
+\newcommand{\Z}{\mathbb Z} \newcommand{\CalE}{{\mathcal{E}}}
+\newcommand{\CalC}{{\mathcal{C}}} \newcommand{\CalM}{{\mathcal{M}}}
+\newcommand{\CalR}{{\mathcal{R}}} \newcommand{\CalS}{{\mathcal{S}}}
+\newcommand{\CalV}{{\mathcal{V}}}
+\newcommand{\CalX}{{\boldsymbol{\mathcal{X}}}}
+\newcommand{\CalG}{{\boldsymbol{\mathcal{G}}}}
+\newcommand{\CalH}{{\boldsymbol{\mathcal{H}}}}
+\newcommand{\CalY}{{\boldsymbol{\mathcal{Y}}}}
+\newcommand{\CalZ}{{\boldsymbol{\mathcal{Z}}}}
+\newcommand{\CalW}{{\boldsymbol{\mathcal{W}}}}
+\newcommand{\CalF}{{\mathcal{Z}}}
+% \newcommand{\boldG}{{\boldsymbol G}}
+% \newcommand{\boldQ}{{\boldsymbol Q}}
+% \newcommand{\boldP}{{\boldsymbol P}}
+% \newcommand{\boldR}{{\boldsymbol R}}
+% \newcommand{\boldS}{{\boldsymbol S}}
+% \newcommand{\boldX}{{\boldsymbol X}}
+% \newcommand{\boldB}{{\boldsymbol B}}
+% \newcommand{\boldY}{{\boldsymbol Y}}
+% \newcommand{\boldZ}{{\boldsymbol Z}}
+% \newcommand{\boldV}{{\boldsymbol V}}
+\newcommand{\boldi}{{\boldsymbol i}} \newcommand{\boldj}{{\boldsymbol
+    j}} \newcommand{\boldk}{{\boldsymbol k}}
+\newcommand{\boldr}{{\boldsymbol r}}
+\newcommand{\boldsigma}{{\boldsymbol \sigma}}
+\newcommand{\boldupsilon}{{\boldsymbol \upsilon}}
+\newcommand{\hone}{{\boldsymbol{H1}}}
+\newcommand{\htwo}{\boldsymbol{H2}}
+\newcommand{\hthree}{\boldsymbol{H3}}
+\newcommand{\hfour}{\boldsymbol{H4}}
+
+
+\newcommand{\sgn}{\mathrm{sgn}} \newcommand{\Maj}{\mathrm{Maj}}
+\newcommand{\Acyc}{\mathrm{Acyc}}
+\newcommand{\UniqMax}{\mathrm{UniqMax}}
+\newcommand{\Thr}{\mathrm{Thr}} \newcommand{\littlesum}{{\textstyle
+    \sum}}
+
+\newcommand{\half}{{\textstyle \frac12}}
+\newcommand{\third}{{\textstyle \frac13}}
+\newcommand{\fourth}{{\textstyle \frac14}}
+
+\newcommand{\Stab}{\mathbb{S}}
+\newcommand{\StabThr}[2]{\Gamma_{#1}(#2)}
+\newcommand{\StabThrmin}[2]{{\underline{\Gamma}}_{#1}(#2)}
+\newcommand{\StabThrmax}[2]{{\overline{\Gamma}}_{#1}(#2)}
+\newcommand{\TestFcn}{\Psi}
+
+\renewcommand{\phi}{\varphi}
+
+\begin{document}
+\title{Algebra Through Examples - Exercise 1}
+
+ \author{Omer Tamuz, 035696574}
+\maketitle
+
+
+\begin{enumerate}
+  \item Let $I$ be an ideal in $R$, and let $I+a$ and $I+b$ be cosets of $I$. We
+    would like to show that they are disjoint or equal. We will do this by
+    showing that if they are not disjoint then they are equal. 
+    
+    If $I+a$ and $I+b$ are not disjoint, then there exists an element $x$
+    such that $x\in I+a$ and $x\in I+b$. Hence $x-a$ is in $I$ and $x-b$ is
+    in $I$. It follows from this that $(x-b)-(x-a)=a-b$ is in $I$, since $I$ is
+    closed to addition and negation. Now:
+    \begin{eqnarray*}
+      I+a&=&\{x|\exists s\in I:x=s+a\}
+      \\ &=& \{x|\exists s\in I:x=s+a-b+b\}
+      \\ &=& \{x|\exists s\in I:x=s+(a-b)+b\}
+      \\ &=& \{x|\exists t\in I:x=t+b\}
+      \\ &=& I+b,
+    \end{eqnarray*}
+    where the change of bound variables, from $s$ to $t$, is justified by the
+    fact that $a-b$ is in $I$.
+    
+  \item Let $I,J$ be ideals in $R$.
+    To prove that $I+J$ is an ideal, 
+    we have to show that it is closed
+    under addition, that every element's
+    additive inverse in also in $I+J$, and that it is closed to 
+    multiplication by any element in $R$:
+    \begin{itemize}
+    \item {em Closure under addition:} Let $x$ and $x'$ be 
+      elements of $I+J$. Then there exist $a,a'\in I$ and $b,b'\in J$
+      such that $x=a+b$ and $x'=a'+b'$. 
+      Then $x+x'=(a+b)+(a'+b')=(a+a')+(b+b')\in I+J$.
+      \item {\em Additive inverse:} Let $x=a+b$, where $a\in I$ and $b\in J$.
+        Then $-a$ is in $I$, and $-b$ is in $J$, and hence $y=(-a)+(-b)$
+        is in $I+J$. Since $x+y=(a+b)+((-a)+(-b))=0$, $x$ has an additive
+        inverse.
+      \item{\em Closure under multiplication by an element in $R$:}
+        Let $x=a+b$, where $a\in I$ and $b\in J$, and let $r$ be some element
+        of $R$. Then $rx=r(a+b)=ra+rb$. Since $I$ and $J$ are ideal, then
+        $ra\in I$ and $rb\in J$, and hence $rx\in I+J$.
+      
+      Note: We have shown that if $I$ and $J$ are left-side ideals, then
+      so is $I+J$. The proof can be trivially extended to right-sided ideals,
+      and hence to two-sided ideals.
+    \end{itemize}
+  \item Let $K$ be the kernel of $\phi$, where $\phi:R\to S$ is a ring 
+    homomorphism. To show that $K$ is an ideal, we need to show that it is 
+    closed under addition, that each of its elements' additive inverse is in $K$,
+    and that it is closed to multiplication by elements of $R$. 
+    \begin{itemize}
+      \item {em Closure under addition:} Let $k$ and
+        $k'$ be elements of $K$. Then $\phi(k+k')=\phi(k)+\phi(k')=0+0=0$.
+      \item {\em Additive inverse:} Let $k$ be some element of $K$. Then
+        $0=\phi(0)=\phi(k+(-k))=\phi(k)+\phi(-k)=0+\phi(-k)=\phi(-k)$.
+      \item {\em Closure under multiplication in $R$:} 
+        Let $k$ be some element of $K$.
+        Let $r$ be some element of $R$. Then 
+        $\phi(rk)=\phi(r)\phi(k)=\phi(r)\cdot 0=0$.
+    \end{itemize}
+  \item
+    Let $\Z_n=\Z/n\Z$. We would like to prove that $\Z_n$ is a field iff $n$ is
+    prime. 
+
+    \begin{itemize}
+    \item {\em First direction:}
+      Assume $n=kl$, where $k,l>1$. Then $(n\Z+k)\cdot(n\Z+l)=n\Z+kl=n\Z+n=n\Z$.
+      Now if $n\Z+k$ had a multiplicative inverse, say $n\Z+m$, then
+      $(n\Z+m)\cdot(n\Z+k)\cdot(n\Z+l)$ would, on the one hand, equal $n\Z+l$,
+      if one performed the left operation first, or $n\Z$, if one performed the
+      right operation first. Since multiplication here is associative, $n\Z+k$
+      has no multiplicative inverse, and $\Z_n$ is not a field.
+      
+    \item{\em Second direction:}
+      Now assume $n$ is prime. We will show that for every $0<k<n$, there
+      is a multiplicative inverse to $n\Z+k$. Since $n$ is prime, the GCD
+      of $n$ and $k$ is one. By B\'ezout's theorem, there exist $x,y\in\Z$
+      such that $xn+yk=1$. Hence, $yk\equiv 1\:\mod n$, and 
+      $(n\Z+k)\cdot(n\Z+y)=(n\Z+1)$.
+      Since $n\Z+1$ is the unit element in $\Z_n$, we have shown that $\Z_n$
+      has a multiplicative inverse to every non-zero element, and hence is
+      a field.
+    \end{itemize}
+    \item
+    Let $F$ be a field, and let $f(x)$ be some element of $F[x]$. Let
+    $G=f(x)\cdot F[x]$. We would like to show that $G$ is an ideal of $F[x]$. As
+    above, we'll show this by showing that it is closed under addition,
+    that it includes each element's additive inverse, and that it is closed to 
+    multiplication by any element of $F[x]$.
+    \begin{itemize}
+      \item {em Closure under addition:} Let $g(x)$ and
+        $g'(x)$ be elements of $G$. Then there exists $h(x),h'(x)\in F[x]$ 
+        such that $g(x)=f(x)k(x)$ and $g'(x)=f(x)h'(x)$. Then
+        $g(x)+g'(x)=f(x)(h(x)+h'(x))\in f(x)\cdot F[x]$.
+      \item {\em Additive inverse:} Let $g(x)$ be some element of $G$. 
+        Then there exists an $h(x)\in F[x]$ such that $g(x)=f(x)h(x)$. But then
+        $f(x)(-h(x))=-g(x)$ is also an element of $G$.
+      \item {\em Closure to multiplication by an element in $F[x]$:} 
+        Let $g$ be some element of $G$.
+        Then, again, there exists an $h(x)\in F[x]$ such that $g(x)=f(x)h(x)$.
+        Let $r(x)$ be some element of $F[x]$. Then $g(x)r(x)=f(x)h(x)r(x)$, 
+        which is also an element of $G$.
+    \end{itemize}
+    
+    Next, we would like to show that {\em every} ideal of $F[x]$ is of this
+    form. Let $G$ be some ideal in $F[x]$, and let $f(x)$ be a polynomial of 
+    minimal degree in $G$. We claim that
+    $f(x)$ divides any element in $G$ (except the zero element), and hence that 
+    $G=f(x)\cdot F[x]$. Proof: Assume by contradiction that $f(x)$ is a 
+    polynomial of minimal degree in $G$, and that there exists a $g(x)\in G$
+    such that $f(x)$ does not divide $g(x)$. Then, by the rules of polynomial
+    division, there exists another polynomial $r(x)$ such that 
+    $g(x)=a(x)f(x)+r(x)$, and the degree of $r(x)$ is less than that of $f(x)$.
+    That contradicts the definition of $f(x)$ as a minimal degree polynomial.
+    
+    \item 
+      Let $I$ be an ideal in $R$. To show that $M_n(I)$ is an ideal in
+      $M_n(R)$, we need to show, as in the questions above, 
+      that $M_n(I)$ is closed under addition,
+      that every one of its elements' additive inverse 
+      is also a memeber, and that it is closed to multiplication by any
+      element in $M_n(R)$.
+      \begin{itemize}
+      \item {\em Closure under addition:} 
+        Let $A=\{a_{ij}\}$ and $B=\{b_{ij}\}$ be elements of $M_n(I)$. Then
+        for $1\leq i,j\leq n$, $a_{ij}$ and $b_{ij}$ are elements of $I$,
+        and hence $a_{ij}+b_{ij}$ is an element of $I$. Since 
+        $A+B=\{a_{ij}+b_{ij}\}$, then $A+B$ is also in $M_n(I)$.
+      \item {\em Additive inverse:} Let $A=\{a_{ij}\}$ be some element of 
+        $M_n(I)$ then each $a_{ij}$ is an element of $I$, and hence so is 
+        $-a_{ij}$. Hence $-A=\{-a_{ij}\}$, which is the additive inverse of $A$,
+        is also in $M_n(I)$.
+      \item {\em Closure to multiplication:} Let $A=\{a_{ij}\}$ be some 
+        element of $M_n(I)$, and $B=\{b_{ij}\}$ be some element of 
+        $M_n(R)$. Then $(AB)_{ij}=\sum_ka_{ik}b_{kj}$. Since every term of the
+        sum is an element of $I$ (since $I$ is an ideal and hence closed to 
+        multiplication), then the sum is also an element of $I$, and 
+        $AB$ is an element of $M_n(I)$.
+      \end{itemize}
+
+      Next, we would like to show that every ideal $J$ of $M_n(R)$ is of 
+      this form. 
+
+      Let $D(r)\in M_n(R)$ be the diagonal matrix that has $r\in R$ in the
+      diagonal. Since
+      Let $I_{i,j}$ be the set of elements appearing as entry $(i,j)$ of any
+      matrix in $J$. Then, since $J$ is an ideal and hence closed to 
+      multiplication by the matrices $D(r)$, $I_{i,j}$ is closed to 
+      multiplication by elements of $R$. 
+      $I_{i,j}$ is clearly closed with respect to addition and negation, 
+      since $J$ is a ring, and hence each of the sets $I_{i,j}$ is an ideal
+      in $R$. 
+
+      Since $J$ is closed with respect to left multiplication it is closed
+      in particular to multiplication by the matrix whose entries are
+      all $R$'s unit. Therefore, 
+      by the definition of matrix multiplication, it follows that
+      $I_{i,j}=\sum_{i'=1}^nI_{i',j}$, and hence for all $i,i'$, it holds that
+      $I_{i,j}=I_{i',j}$. Since the same argument can be used on the columns, 
+      we've shown that all the $I_{i,j}$'s are equal to some $I$, and that 
+      hence $J=M_n(I)$.
+    
+\end{enumerate}
+\end{document}
+
+
