@@ -181,8 +181,17 @@
     $O(n^42^n)$.
   \item
     The algorithm described in class keeps a table, where each entry is
-    indexed by a set of $k$ vertices and a set of dangling edges, which 
-    divide the graph into two connected components. 
+    indexed by a set of $k$ vertices and a set of dangling edges. For each
+    entry, after it has been visited, a boolean is kept in the table,
+    holding the truth value of whether or not that set of edges and 
+    vertices can be part of a valid ordering of the edges.
+
+    If, in addition, the number of times that each index key was visited 
+    were to be kept in the table, and finally all the counts of all the valid 
+    terminal sets (the ones with no dangling edges, signifying a solution) 
+    are summed, then that sum will be the number of solutions, at no additional
+    time complexity cost.
+    
 \end{enumerate}
 \end{document}
 
