@@ -1,0 +1,216 @@
+\documentclass[11pt]{article} \usepackage{amssymb}
+\usepackage{amsfonts} \usepackage{amsmath} \usepackage{bm}
+\usepackage{latexsym} \usepackage{epsfig}
+
+\setlength{\textwidth}{6.5 in} \setlength{\textheight}{8.25in}
+\setlength{\oddsidemargin}{0in} \setlength{\topmargin}{0in}
+\addtolength{\textheight}{.8in} \addtolength{\voffset}{-.5in}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{example}[theorem]{Example}
+\newenvironment{proof}{\noindent \textbf{Proof:}}{$\Box$}
+
+\newcommand{\ignore}[1]{}
+
+\newcommand{\enote}[1]{} \newcommand{\knote}[1]{}
+\newcommand{\rnote}[1]{}
+
+
+
+% \newcommand{\enote}[1]{{\bf [[Elchanan:} {\emph{#1}}{\bf ]]}}
+% \newcommand{\knote}[1]{{\bf [[Krzysztof:} {\emph{#1}}{\bf ]]}}
+% \newcommand{\rnote}[1]{{\bf [[Ryan:} {\emph{#1}}{\bf ]]}}
+
+
+
+\DeclareMathOperator{\Support}{Supp} \DeclareMathOperator{\Opt}{Opt}
+\DeclareMathOperator{\Ordo}{\mathcal{O}}
+\newcommand{\MaxkCSP}{\textsc{Max $k$-CSP}}
+\newcommand{\MaxkCSPq}{\textsc{Max $k$-CSP$_{q}$}}
+\newcommand{\MaxCSP}[1]{\textsc{Max CSP}(#1)} \renewcommand{\Pr}{{\bf
+    P}} \renewcommand{\P}{{\bf P}} \newcommand{\Px}{\mathop{\bf P\/}}
+\newcommand{\E}{{\bf E}} \newcommand{\Cov}{{\bf Cov}}
+\newcommand{\Var}{{\bf Var}} \newcommand{\Varx}{\mathop{\bf Var\/}}
+
+\newcommand{\bits}{\{-1,1\}}
+
+\newcommand{\nsmaja}{\textstyle{\frac{2}{\pi}} \arcsin \rho}
+
+\newcommand{\Inf}{\mathrm{Inf}} \newcommand{\I}{\mathrm{I}}
+\newcommand{\J}{\mathrm{J}}
+
+\newcommand{\eps}{\epsilon} \newcommand{\lam}{\lambda}
+
+% \newcommand{\trunc}{\ell_{2,[-1,1]}}
+\newcommand{\trunc}{\zeta} \newcommand{\truncprod}{\chi}
+
+\newcommand{\N}{\mathbb N} \newcommand{\R}{\mathbb R}
+\newcommand{\Z}{\mathbb Z} \newcommand{\CalE}{{\mathcal{E}}}
+\newcommand{\CalC}{{\mathcal{C}}} \newcommand{\CalM}{{\mathcal{M}}}
+\newcommand{\CalR}{{\mathcal{R}}} \newcommand{\CalS}{{\mathcal{S}}}
+\newcommand{\CalV}{{\mathcal{V}}}
+\newcommand{\CalX}{{\boldsymbol{\mathcal{X}}}}
+\newcommand{\CalG}{{\boldsymbol{\mathcal{G}}}}
+\newcommand{\CalH}{{\boldsymbol{\mathcal{H}}}}
+\newcommand{\CalY}{{\boldsymbol{\mathcal{Y}}}}
+\newcommand{\CalZ}{{\boldsymbol{\mathcal{Z}}}}
+\newcommand{\CalW}{{\boldsymbol{\mathcal{W}}}}
+\newcommand{\CalF}{{\mathcal{Z}}}
+% \newcommand{\boldG}{{\boldsymbol G}}
+% \newcommand{\boldQ}{{\boldsymbol Q}}
+% \newcommand{\boldP}{{\boldsymbol P}}
+% \newcommand{\boldR}{{\boldsymbol R}}
+% \newcommand{\boldS}{{\boldsymbol S}}
+% \newcommand{\boldX}{{\boldsymbol X}}
+% \newcommand{\boldB}{{\boldsymbol B}}
+% \newcommand{\boldY}{{\boldsymbol Y}}
+% \newcommand{\boldZ}{{\boldsymbol Z}}
+% \newcommand{\boldV}{{\boldsymbol V}}
+\newcommand{\boldi}{{\boldsymbol i}} \newcommand{\boldj}{{\boldsymbol
+    j}} \newcommand{\boldk}{{\boldsymbol k}}
+\newcommand{\boldr}{{\boldsymbol r}}
+\newcommand{\boldsigma}{{\boldsymbol \sigma}}
+\newcommand{\boldupsilon}{{\boldsymbol \upsilon}}
+\newcommand{\hone}{{\boldsymbol{H1}}}
+\newcommand{\htwo}{\boldsymbol{H2}}
+\newcommand{\hthree}{\boldsymbol{H3}}
+\newcommand{\hfour}{\boldsymbol{H4}}
+
+
+\newcommand{\sgn}{\mathrm{sgn}} \newcommand{\Maj}{\mathrm{Maj}}
+\newcommand{\Acyc}{\mathrm{Acyc}}
+\newcommand{\UniqMax}{\mathrm{UniqMax}}
+\newcommand{\Thr}{\mathrm{Thr}} \newcommand{\littlesum}{{\textstyle
+    \sum}}
+
+\newcommand{\half}{{\textstyle \frac12}}
+\newcommand{\third}{{\textstyle \frac13}}
+\newcommand{\fourth}{{\textstyle \frac14}}
+
+\newcommand{\Stab}{\mathbb{S}}
+\newcommand{\StabThr}[2]{\Gamma_{#1}(#2)}
+\newcommand{\StabThrmin}[2]{{\underline{\Gamma}}_{#1}(#2)}
+\newcommand{\StabThrmax}[2]{{\overline{\Gamma}}_{#1}(#2)}
+\newcommand{\TestFcn}{\Psi}
+
+\renewcommand{\phi}{\varphi}
+
+\begin{document}
+\title{Algebra Through Examples - Exercise 2}
+
+ \author{Omer Tamuz, 035696574}
+\maketitle
+
+
+\begin{enumerate}
+  \item An element $x$ of $\Z[\sqrt{-5}]$ is of the form $x=a+b\sqrt{-5}$, with $a,b\in\Z$. 
+
+    Let $\delta(x)=|x|^2=a^2+5b^2$. Since $a,b$ are in $\Z$, then so is $\delta(x)$. Also,
+    it is easy to see that $\delta(xy)=\delta(x)\delta(y)$, and that 
+    $\delta(x)=1\leftrightarrow x\in\{-1,1\}$.
+
+    Let
+    $x=a+b\sqrt{-5}$ be invertible, and let $y=c+d\sqrt{-5}$ be its inverse, 
+    so that $xy=1$. 
+    
+
+    Then, since $\delta(xy)=\delta(x)\delta(y)$,
+    we have $\delta(y)=1/\delta(z)$. Since $\delta(x),\delta(y)\in\Z$, we have 
+    $\delta(x)=\delta(y)=1$. And since the only members of $\Z[\sqrt{-5}]$
+    for which $\delta$ is one are one and minus one, the proof is concluded.
+    
+  \item Assume $x$ is a gcd of $6$ and $2+2\sqrt{-5}$ in $\Z[\sqrt{-5}]$, so that there exist
+    $y,z$ such that $xy=6$
+    and $xz=2+2\sqrt{-5}$, and all other common divisors also divide $x$.
+
+
+    Using the definition of $\delta$ from above, we note that any for divisor $a$
+    of $6$ and $2+2\sqrt{-5}$ it will hold that 
+    $\delta(a)\leq \min(\delta(6),\delta(2+2\sqrt{-5}))=\min(36,24)=24$. The number of elements of 
+    $\Z[\sqrt{-5}]$ which are common divisors and for which this condition holds is 
+    finite, and in fact
+    rather small: $1,2,1+\sqrt{-5}$ and $1-\sqrt{-5}$. Since none of them can be divided
+    by all the rest no gcd exists. Hence $\Z[\sqrt{-5}]$ is not Euclidean.
+
+  \item Let $R$ be a PID.  Let $x$ be an element of $R$, and let
+    $x=\Pi_ip_i=\Pi_jq_j$, with $p_i$ and $q_j$ irreducible.
+
+    We showed in class that any increasing chain
+    of ideals stabilizes in $R$.
+
+  \item
+    \begin{enumerate}
+      \item To show that $\phi$ is an automorphism, we first show that it
+        is an isomorphism,
+        conserving addition and multiplication:
+        \begin{enumerate}
+          \item {\em Addition:} 
+            \begin{eqnarray*}
+              \phi(x)+\phi(y)&=& \phi(a_x+b_x\sqrt{10})+\phi(a_y+b_y\sqrt{10})
+              \\ &=& a_x-b_x\sqrt{10}+a_y-b_y\sqrt{10}
+              \\ &=& a_x+a_y-(b_x+b_y)\sqrt{10}
+              \\ &=& \phi(a_x+a_y+(b_x+b_y)\sqrt{10})
+              \\ &=& \phi(x+y)
+            \end{eqnarray*}
+          \item {\em Multiplication:} 
+            \begin{eqnarray*}
+              \phi(x)\cdot\phi(y)
+              &=& \phi(a_x+b_x\sqrt{10})\cdot\phi(a_y+b_y\sqrt{10})
+              \\ &=& (a_x-b_x\sqrt{10})\cdot(a_y-b_y\sqrt{10})
+              \\ &=& a_xa_y+10b_xb_y-(a_xb_y+a_yb_x)\sqrt{10}
+              \\ &=& \phi(a_xa_y+10b_xb_y+(a_xb_y+a_yb_x)\sqrt{10})
+              \\ &=& \phi((a_x+b_x\sqrt{10})\cdot(a_y+b_y\sqrt{10}))
+              \\ &=& \phi(x\cdot y)
+            \end{eqnarray*}
+        \end{enumerate}
+        We then show that it's a automorphism by noting that it is a bijection,
+        since it is its own inverse.
+      \item 
+        Let $U=\{x=a+b\sqrt{10}:a^2-10b^2=\pm1\}$. Let $I$ be the set of invertible
+        element of $\Z[\sqrt{10}]$. We would like to show that $U=I$.
+        \begin{enumerate}
+          \item $I \subseteq U$.
+
+            Let $x=a_x+b_x\sqrt{10}\in I$ be a unit, so that there 
+            exists a $y=a_y+b_y\sqrt{10}$ such that $xy=1$. 
+
+            By the previous question $1=\phi(1)=\phi(xy)=\phi(x)\phi(y)$, and 
+            so $\phi(x)$ is also invertible, with $\phi(y)$ its inverse. Then
+            \begin{eqnarray*}
+              1=(xy)(\phi(x)\phi(y))=(x\phi(x))(y\phi(y))
+              =(a_x^2-10b_x^2)(a_y^2-10b_y^2)
+            \end{eqnarray*}
+            Since $a_x,b_x,a_y,b_y\in\Z$, this is only possible if 
+            $a_x^2-10b_x^2=\pm 1$ and $a_y^2-10b_y^2=\pm 1$, and in particular when $x\in U$.
+          \item $U \subseteq I$.
+
+            Let $x=a+b\sqrt{10}\in U$ 
+            be such that $a^2-10b^2=\pm1$. Let $y=\pm (a- b\sqrt{10})$. Then
+            $xy=(a+b\sqrt{10})\cdot\pm(a- b\sqrt{10})=
+            \pm (a^2- 10b^2)=\pm 1$, and hence
+            $x$ is invertible and in $I$.
+          \end{enumerate}
+          and hence $U=I$.  
+        \item 
+    \end{enumerate}
+  \item Let $R$ be a Euclidean domain with Euclidean norm $d$. Then by
+    definition $\forall x,y\in R:d(x)\leq d(xy)$. 
+
+    Let $u$
+    be a unit in $R$, and let $x$ be some other element in $R$. Then
+    there exists an element $v$ such that $uv=1$. Futhermore, 
+    $d(u)\leq d(uv) \leq d(uvx) = d(1x) = d(x)$. Hence, $d(u)$ is minimal.
+    
+      
+\end{enumerate}
+\end{document}
+
+

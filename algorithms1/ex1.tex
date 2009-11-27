@@ -127,9 +127,11 @@
       \mathcal{I}=\{S = (W,(u,v))|W\subseteq V\: \textrm{and}\: u,v\in W\}
     \end{equation*}
 
-    The function min-TOUR calculates, given a set 
-    $S=(W,(u,v))\in \mathcal{I}$, a tour of minimum length that starts at $u$, ends at $v$
-    and visits each vertex exactly once. Note that by the definitions above
+    The function min-TOUR calculates, given a pair 
+    $S=(W,(u,v))\in \mathcal{I}$, a tour of minimum length that starts at 
+    $u$, ends at $v$
+    and visits each vertex in $W$ exactly once. 
+    Note that by the definitions above
     such a tour exists, even if its length is not finite.
 
     \begin{algorithmic}
@@ -150,12 +152,12 @@
     
     \begin{proposition}
       The function min-TOUR, as defined above, indeed returns a tour of minimum
-      length that starts at $u$, ends at $v$ and visits each vertex exactly
-      once.
+      length that starts at $u$, ends at $v$ and visits each vertex in $W$ 
+      exactly once.
     \end{proposition}
     \begin{proof}
-      If $W=\{u,v\}$, then obviously the shortest such tour is $(u,v)$, and 
-      hence the stopping criterion is obviously correct. Otherwise,
+      If $W=\{u,v\}$, then the shortest such tour is $(u,v)$, and 
+      hence the stopping criterion is clearly correct. Otherwise,
       a shortest tour will go from $u$ to some $w$, and then continue along
       a shortest tour from $w$ to $v$ in $W\setminus \{u\}$. Since
       the algorithm checks all such possiblities for a sortest path,
@@ -174,7 +176,7 @@
     \end{proof}
 
     To now find a shortest {\bf cycle}, one can run min-TOUR on $(V,(u,v))$, 
-    choosing an arbitrary $u$ and trying all possible$v$'s, 
+    choosing an arbitrary $u$ and trying all possible $v$'s, 
     adding $w(v,u)$ to the length of the tour
      to find the length of the cycle, and choosing the minimum cycle.
     This would take $O(n)$ times the running time of min-TOUR, and hence
@@ -186,11 +188,18 @@
     holding the truth value of whether or not that set of edges and 
     vertices can be part of a valid ordering of the edges.
 
-    If, in addition, the number of times that each index key was visited 
-    were to be kept in the table, and finally all the counts of all the valid 
-    terminal sets (the ones with no dangling edges, signifying a solution) 
-    are summed, then that sum will be the number of solutions, at no additional
-    time complexity cost.
+    To count the number of valid solutions, we must also, in each table
+    entry, count the number of valid orderings of the $k$ vertices and the
+    ones preceding them (i.e., the ones not reachable from the dangling 
+    edges). Noting that the number of such valid orderings is the sum
+    of the same number, for table entries which directly precede a given entry,
+    we can perform the calculation as part of the existing algorithm, at no
+    additional complexity cost. By ordering the table indices by
+    the size of the prefix (increasing), we will, by the time we reach
+    a given entry, know the count for all its direct predecessors, and will
+    be able to sum them to arrive at its count. Finally, the sum of these
+    counts for all the ``terminal'' sets (the ones with no dangling edges)
+    will give us the total number of valid orderings.
     
 \end{enumerate}
 \end{document}
