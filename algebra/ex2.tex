@@ -141,10 +141,24 @@
     by all the rest no gcd exists. Hence $\Z[\sqrt{-5}]$ is not Euclidean.
 
   \item Let $R$ be a PID.  Let $x$ be an element of $R$, and let
-    $x=\Pi_ip_i=\Pi_jq_j$, with $p_i$ and $q_j$ irreducible.
+    $x=\Pi_{i=1}^Mp_i$, with $p_i$ irreducible non-units.
+    Let $x$ also equal $\Pi_{j=1}^Nq_j$, with $q_j$ irreducible non-units.
+    In a PID all irreducibles are
+    prime, and hence, because $p_1$ divides $x=\Pi_jq_j=q_1\Pi_{j>1}q_j$,
+    it either divides $q_1$ or $\Pi_{j>1}q_j$. 
+    Since $q_1$ is irreducible, then either $p_1=q_1$ (up to multiplication by
+    a unit), or else $p$ divides
+    $\Pi_{j>1}q_j$, and by induction $p_1=q_j$ for some $j$. WLOG assume $p_1=q_1$. Then
+    we can apply the above procedure by induction to 
+    $x_1=\Pi_{i>1}p_i=\Pi_{j>1}q_j$ and show that
+    $\forall i:p_i=q_i$, up to multiplication by a unit. For all $i\leq M,N$.  
 
-    We showed in class that any increasing chain
-    of ideals stabilizes in $R$.
+    If $M<N$ then $x_M$ is equal to both one (what is left of the product
+    of the $p$'s) and to $\Pi_{j>M}q_j$, which can't be one, since the $q_j$'s 
+    are not units. By symmetry $N<M$ is also impossible.
+
+    We have therefore shown that $M=N$ and that for every $i$, $p_i=q_i$, and
+    hence $R$ is a UFD.
 
   \item
     \begin{enumerate}
