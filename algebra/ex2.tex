@@ -140,25 +140,60 @@
     rather small: $1,2,1+\sqrt{-5}$ and $1-\sqrt{-5}$. Since none of them can be divided
     by all the rest no gcd exists. Hence $\Z[\sqrt{-5}]$ is not Euclidean.
 
-  \item Let $R$ be a PID.  Let $x$ be an element of $R$, and let
-    $x=\Pi_{i=1}^Mp_i$, with $p_i$ irreducible non-units.
-    Let $x$ also equal $\Pi_{j=1}^Nq_j$, with $q_j$ irreducible non-units.
-    In a PID all irreducibles are
-    prime, and hence, because $p_1$ divides $x=\Pi_jq_j=q_1\Pi_{j>1}q_j$,
-    it either divides $q_1$ or $\Pi_{j>1}q_j$. 
-    Since $q_1$ is irreducible, then either $p_1=q_1$ (up to multiplication by
-    a unit), or else $p$ divides
-    $\Pi_{j>1}q_j$, and by induction $p_1=q_j$ for some $j$. WLOG assume $p_1=q_1$. Then
-    we can apply the above procedure by induction to 
-    $x_1=\Pi_{i>1}p_i=\Pi_{j>1}q_j$ and show that
-    $\forall i:p_i=q_i$, up to multiplication by a unit. For all $i\leq M,N$.  
+  \item Let $R$ be a PID.  To show that $R$ is a UFD we need to show that
+    it each element can be written as a product of irreducibles, and then
+    show that this product is unique.
 
-    If $M<N$ then $x_M$ is equal to both one (what is left of the product
-    of the $p$'s) and to $\Pi_{j>M}q_j$, which can't be one, since the $q_j$'s 
-    are not units. By symmetry $N<M$ is also impossible.
+    \begin{itemize}
+    \item {\bf Existence of a Decomposition into Irreducibles}
 
-    We have therefore shown that $M=N$ and that for every $i$, $p_i=q_i$, and
-    hence $R$ is a UFD.
+      Let $R^*$ be the set of elements of $R$ that cannot be written as products
+      of irreducible elements.
+      Assume by contradiction that $R^*$ is non-empty and let $x$ be a member
+      of $R^*$.
+      Then $x$ is reducible and $x=a_1a_2$, where both $a_1$ and $a_2$ are not 
+      units. Furthermore, at least one of $a_1$ and $a_2$ is also in $R^*$.
+
+      We can therefore define tha function $f:R^*\to R^*$ to be a function
+      that assigns to every $x\in R^*$ one of its factors in $R^*$, 
+      where the factor is part of a non-unit decomposition of $x$.
+
+      We now define a series of elements of $a_j\in R$, with $a_0=x$, 
+      and $a_{j+1}=f(a_j)$. We claim that the series of ideals $I_j=a_jR$ is strictly
+      increasing. Since $a_j=a_{j+1}b$ for some $b$, then $I_j$ is clearly
+      contained in $I_{j+1}$. However, $a_{j+1}$ is not a member of $I_j$ (but
+      is a member of $I_{j+1}$): we have $a_j=a_{j+1}b$ for some non-unit $b$. If 
+      $a_{j+1}$ were to be in $I_j$, then 
+      there would be a $c\in R$ such that $a_{j+1}bc=a_{j+1}$, and hence $b$ would be
+      a unit.
+
+      However, since $R$ is a PID, then the series $\{I_j\}$ stabilizes, and 
+      hence cannot be strictly increasing, and we have a contradiction. Hence
+      $R^*$ is empty, and every element of $R$ can be written as a product
+      of irreducibles.
+      
+    \item {\bf Decomposition into Irreducibles is unique}
+
+      Let $x$ be an element of $R$, so that 
+      $x=\Pi_{i=1}^Mp_i$, with $p_i$ irreducible non-units.
+      Let $x$ also equal $\Pi_{j=1}^Nq_j$, with $q_j$ irreducible non-units.
+      In a PID all irreducibles are
+      prime, and hence, because $p_1$ divides $x=\Pi_jq_j=q_1\Pi_{j>1}q_j$,
+      it either divides $q_1$ or $\Pi_{j>1}q_j$. 
+      Since $q_1$ is irreducible, then either $p_1=q_1$ (up to multiplication by
+      a unit), or else $p$ divides
+      $\Pi_{j>1}q_j$, and by induction $p_1=q_j$ for some $j$. WLOG assume $p_1=q_1$. Then
+      we can apply the above procedure by induction to 
+      $x_1=\Pi_{i>1}p_i=\Pi_{j>1}q_j$ and show that
+      $\forall i:p_i=q_i$, up to multiplication by a unit. For all $i\leq M,N$.  
+      
+      If $M<N$ then $x_M$ is equal to both one (what is left of the product
+      of the $p$'s) and to $\Pi_{j>M}q_j$, which can't be one, since the $q_j$'s 
+      are not units. By symmetry $N<M$ is also impossible.
+      
+      We have therefore shown that $M=N$ and that for every $i$, $p_i=q_i$, and
+      hence $R$ is a UFD.
+    \end{itemize}
 
   \item
     \begin{enumerate}
@@ -213,7 +248,23 @@
             $x$ is invertible and in $I$.
           \end{enumerate}
           and hence $U=I$.  
-        \item 
+        \item We will show that $\Z[\sqrt{10}]$ is not a UFD by showing that
+          it has irreducibles that are not prime, in contradiction to what
+          was stated in class.
+          \begin{itemize}
+          \item {\bf 2 is irreducible in $\Z[\sqrt{10}]$}
+            
+            Let $xy=2$. Then $xy\phi(xy)=2\phi(2)$, and so
+            $x\phi(x)y\phi(y)=4$. Assume by contradiction that neither $x$ or 
+            $y$ are units. Then $x\phi(x)=\pm 2$.
+            Let $a=a+b\sqrt{10}$. Then $a^2-10b^2=\pm 2$, and in particular  
+            $a^2=\pm 2\mod 10$. However, no number squared is equal to 2 or 8 mod
+            10.
+          \item {\bf 2 is not prime in $\Z[\sqrt{10}]$}
+            $2=\sqrt{10}\sqrt{10}$. But 2 clearly does not divide $\sqrt{10}$,
+            and hence it is not prime.
+
+          \end{itemize}
     \end{enumerate}
   \item Let $R$ be a Euclidean domain with Euclidean norm $d$. Then by
     definition $\forall x,y\in R:d(x)\leq d(xy)$. 

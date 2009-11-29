@@ -1,0 +1,179 @@
+\documentclass[11pt]{article} \usepackage{amssymb}
+\usepackage{amsfonts} \usepackage{amsmath} \usepackage{bm}
+\usepackage{latexsym} \usepackage{epsfig}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+
+\setlength{\textwidth}{6.5 in} \setlength{\textheight}{8.25in}
+\setlength{\oddsidemargin}{0in} \setlength{\topmargin}{0in}
+\addtolength{\textheight}{.8in} \addtolength{\voffset}{-.5in}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{example}[theorem]{Example}
+\newenvironment{proof}{\noindent \textbf{Proof:}}{$\Box$}
+
+\newcommand{\ignore}[1]{}
+
+\newcommand{\enote}[1]{} \newcommand{\knote}[1]{}
+\newcommand{\rnote}[1]{}
+
+
+
+% \newcommand{\enote}[1]{{\bf [[Elchanan:} {\emph{#1}}{\bf ]]}}
+% \newcommand{\knote}[1]{{\bf [[Krzysztof:} {\emph{#1}}{\bf ]]}}
+% \newcommand{\rnote}[1]{{\bf [[Ryan:} {\emph{#1}}{\bf ]]}}
+
+
+
+\DeclareMathOperator{\Support}{Supp} \DeclareMathOperator{\Opt}{Opt}
+\DeclareMathOperator{\Ordo}{\mathcal{O}}
+\newcommand{\MaxkCSP}{\textsc{Max $k$-CSP}}
+\newcommand{\MaxkCSPq}{\textsc{Max $k$-CSP$_{q}$}}
+\newcommand{\MaxCSP}[1]{\textsc{Max CSP}(#1)} \renewcommand{\Pr}{{\bf
+    P}} \renewcommand{\P}{{\bf P}} \newcommand{\Px}{\mathop{\bf P\/}}
+\newcommand{\E}{{\bf E}} \newcommand{\Cov}{{\bf Cov}}
+\newcommand{\Var}{{\bf Var}} \newcommand{\Varx}{\mathop{\bf Var\/}}
+
+\newcommand{\bits}{\{-1,1\}}
+
+\newcommand{\nsmaja}{\textstyle{\frac{2}{\pi}} \arcsin \rho}
+
+\newcommand{\Inf}{\mathrm{Inf}} \newcommand{\I}{\mathrm{I}}
+\newcommand{\J}{\mathrm{J}}
+
+\newcommand{\eps}{\epsilon} \newcommand{\lam}{\lambda}
+
+% \newcommand{\trunc}{\ell_{2,[-1,1]}}
+\newcommand{\trunc}{\zeta} \newcommand{\truncprod}{\chi}
+
+\newcommand{\N}{\mathbb N} \newcommand{\R}{\mathbb R}
+\newcommand{\Z}{\mathbb Z} \newcommand{\CalE}{{\mathcal{E}}}
+\newcommand{\CalC}{{\mathcal{C}}} \newcommand{\CalM}{{\mathcal{M}}}
+\newcommand{\CalR}{{\mathcal{R}}} \newcommand{\CalS}{{\mathcal{S}}}
+\newcommand{\CalV}{{\mathcal{V}}}
+\newcommand{\CalX}{{\boldsymbol{\mathcal{X}}}}
+\newcommand{\CalG}{{\boldsymbol{\mathcal{G}}}}
+\newcommand{\CalH}{{\boldsymbol{\mathcal{H}}}}
+\newcommand{\CalY}{{\boldsymbol{\mathcal{Y}}}}
+\newcommand{\CalZ}{{\boldsymbol{\mathcal{Z}}}}
+\newcommand{\CalW}{{\boldsymbol{\mathcal{W}}}}
+\newcommand{\CalF}{{\mathcal{Z}}}
+% \newcommand{\boldG}{{\boldsymbol G}}
+% \newcommand{\boldQ}{{\boldsymbol Q}}
+% \newcommand{\boldP}{{\boldsymbol P}}
+% \newcommand{\boldR}{{\boldsymbol R}}
+% \newcommand{\boldS}{{\boldsymbol S}}
+% \newcommand{\boldX}{{\boldsymbol X}}
+% \newcommand{\boldB}{{\boldsymbol B}}
+% \newcommand{\boldY}{{\boldsymbol Y}}
+% \newcommand{\boldZ}{{\boldsymbol Z}}
+% \newcommand{\boldV}{{\boldsymbol V}}
+\newcommand{\boldi}{{\boldsymbol i}} \newcommand{\boldj}{{\boldsymbol
+    j}} \newcommand{\boldk}{{\boldsymbol k}}
+\newcommand{\boldr}{{\boldsymbol r}}
+\newcommand{\boldsigma}{{\boldsymbol \sigma}}
+\newcommand{\boldupsilon}{{\boldsymbol \upsilon}}
+\newcommand{\hone}{{\boldsymbol{H1}}}
+\newcommand{\htwo}{\boldsymbol{H2}}
+\newcommand{\hthree}{\boldsymbol{H3}}
+\newcommand{\hfour}{\boldsymbol{H4}}
+
+
+\newcommand{\sgn}{\mathrm{sgn}} \newcommand{\Maj}{\mathrm{Maj}}
+\newcommand{\Acyc}{\mathrm{Acyc}}
+\newcommand{\UniqMax}{\mathrm{UniqMax}}
+\newcommand{\Thr}{\mathrm{Thr}} \newcommand{\littlesum}{{\textstyle
+    \sum}}
+
+\newcommand{\half}{{\textstyle \frac12}}
+\newcommand{\third}{{\textstyle \frac13}}
+\newcommand{\fourth}{{\textstyle \frac14}}
+
+\newcommand{\Stab}{\mathbb{S}}
+\newcommand{\StabThr}[2]{\Gamma_{#1}(#2)}
+\newcommand{\StabThrmin}[2]{{\underline{\Gamma}}_{#1}(#2)}
+\newcommand{\StabThrmax}[2]{{\overline{\Gamma}}_{#1}(#2)}
+\newcommand{\TestFcn}{\Psi}
+
+\renewcommand{\phi}{\varphi}
+
+\begin{document}
+\title{Complexity - Exercise 1}
+
+ \author{Omer Tamuz, 035696574}
+\maketitle
+
+
+\begin{enumerate}
+  \item
+  \item
+  \item
+    
+    Let $D$ be a machine that decides whether or not a graph has a clique
+    of size $k$, os that $D(G,k)\in \{0,1\}$ where $G$ is a graph.
+
+    The following is an algorithm $S(G,k)$ to find a clique of size $k$ in a 
+    graph $G$, if one exists:
+
+    
+    Let $G_{N(v)}$ be $G$ with vertex $v$ and its non-neighbors removed. 
+    \begin{algorithmic} 
+      \IF {$D(G,k)=0$}
+        \STATE {\bf return $\varnothing$}
+      \ELSE
+        \STATE {Find a vertex $v$ from $G$ such that $D(G_{N(v)},k-1)=1$}
+          \STATE {\bf return $\{v\}\cup S(G_{N(v)},k-1)$} 
+      \ENDIF
+    \end{algorithmic}
+    
+    This algorithm finds a clique of size $k$ if one exists, and returns
+    $\varnothing$ otherwise.
+
+    \begin{proof}
+      If no clique of size $k$ exists then the algorithm, in the first line, 
+      returns $\varnothing$. 
+      Otherwise, the algorithm will find a vertex $v$ such that 
+      $D(G_{N(v)},k-1)=1$, since this will be true for any vertex in a clique
+      of size $k$, and such a vertex must exist.
+      
+      $S(G,0)$ clearly returns the correct answer. Assume $S(G,k-1)$ does, too.
+      Then given a vertex $v$ such that $D(G_{N(v)},k-1)=1$, the graph of its
+      neighbors $G_{n(v)}$ will have a clique of size $k-1$, which, when
+      united with $v$, will form a clique of size $k$.
+
+
+    \end{proof}
+  \item We will show a reduction from 3SAT to restricted-3SAT. Given a 3SAT
+    clause $\phi$ with variables $a_1,\ldots,a_n$, change the occurences
+    of $a_i$ to $a_{i,1},a_{i,2},\ldots,a_{i,k}$, and AND the resulting 
+    $\phi$ with
+    \begin{equation*}
+    (\bar{a}_{i,1}\vee a_{i,2})\wedge(\bar{a}_{i,2}\vee a_{i,3})\wedge\cdots\wedge
+(\bar{a}_{i,k-1}\vee a_{i,k})\wedge(\bar{a}_{i,k}\vee a_{i,1})  
+    \end{equation*}
+     for each $i$, which is the same as 
+
+    \begin{equation*}
+    (a_{i,1}\to a_{i,2})\wedge(a_{i,2}\to a_{i,3})\wedge\cdots\wedge
+(a_{i,k-1}\to a_{i,k})\wedge(a_{i,k}\to a_{i,1}).
+    \end{equation*}
+
+    Since the added clause ensures that all the new variants of $a_i$ will have
+    the same truth value, it will be satisfied iff the original one was. And
+    clearly, each variable appears in it only once, and it is polynomially
+    constructible from $\phi$.
+
+    
+
+\end{enumerate}
+\end{document}
+
+
