@@ -114,7 +114,55 @@
 
 \begin{enumerate}
   \item
+    \begin{itemize}
+      Let $S$ be some decision problem. We would like to show that there exists
+      an indeterministic Turing machine that solves it in polynomial time
+      iff there exists a polynomial time proof system for it.
+      \item {\bf First Direction}
+
+        Assume that there exists an indeterministic Turing machine $M$ that
+        solves $S$ in polynomial time. Then, given an input $x$, there exists
+        a set of ``correct decisions'' $d_i$ made by the Turing machine that
+        leads to the Turing machine outputting ``1''. Encode this series
+        $d_i$ by a binary string $y$. Even if each $d_i$ is not two sided, this
+        series can still be encoded by a binary string of polynomial length
+        in the length of the series, as long as the number of options in each
+        choice is bounded, which it is in this case.
+        
+        Let $M'$ be the following algorithm: given $x$ and $y$, emulate $M$
+        on $x$, interpreting $y$ as an encoding of $d_i$. Then for an $x$
+        there exists a $y$ for which $M'$ returns
+        ``1'' iff $M$ accepts $x$.
+
+      \item {\bf Second Direction}
+
+        Assume that there is a polynomial time proof system $M$ such that for 
+        an input $x$ there exists a $y$ such that $M(x,y)=1$ iff $x\in S$. 
+        In particular, let $M$ be a (deterministic) Turing machine. Let $M'$
+        be a similar machine, but indeterministic. Furthermore, the input to
+        $M'$ is $x$ alone. $M'$'s states and transition function include
+        those of $M$. Additionally, 
+        when the head reaches an area of the input strip
+        where no input is written, it can transition to two possible 
+        states/directions/characters - one to which $M$ would have gone had
+        there been a one written there, and one to which $M$ would have gone
+        had there been a zero there. Then clearly $M'$ can accept an input
+        $x$ iff there exist a $y$ such that $M$ accepts $x$.
+
+      \end{itemize}
   \item
+    \begin{enumerate}
+      \item 
+        Given a Karp reduction $f$ from
+        $S_1$ to $S_2$, a Cook reduction from $S_1$ to $S_2$ would use $f$
+        to translate the input into an input to an $S_2$ oracle, then
+        run the oracle and return its answer.
+      \item
+        Given a Levin reduction $f,g$ from $R_1$ to $R_2$, a Cook reduction
+        from $R_1$ to $R_2$ would use $f$ to translate the input into an
+        input to $R_2$, use the oracle to get a solution, and then return $g$
+        of the original input and this solution.
+    \end{enumerate}
   \item
     
     Let $D$ be a machine that decides whether or not a graph has a clique
