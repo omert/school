@@ -1,0 +1,185 @@
+\documentclass[11pt]{article} \usepackage{amssymb}
+\usepackage{amsfonts} \usepackage{amsmath} \usepackage{bm}
+\usepackage{latexsym} \usepackage{epsfig}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+
+\setlength{\textwidth}{6.5 in} \setlength{\textheight}{8.25in}
+\setlength{\oddsidemargin}{0in} \setlength{\topmargin}{0in}
+\addtolength{\textheight}{.8in} \addtolength{\voffset}{-.5in}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{example}[theorem]{Example}
+\newenvironment{proof}{\noindent \textbf{Proof:}}{$\Box$}
+
+\newcommand{\ignore}[1]{}
+
+\newcommand{\enote}[1]{} \newcommand{\knote}[1]{}
+\newcommand{\rnote}[1]{}
+
+
+
+% \newcommand{\enote}[1]{{\bf [[Elchanan:} {\emph{#1}}{\bf ]]}}
+% \newcommand{\knote}[1]{{\bf [[Krzysztof:} {\emph{#1}}{\bf ]]}}
+% \newcommand{\rnote}[1]{{\bf [[Ryan:} {\emph{#1}}{\bf ]]}}
+
+
+
+\DeclareMathOperator{\Support}{Supp} \DeclareMathOperator{\Opt}{Opt}
+\DeclareMathOperator{\Ordo}{\mathcal{O}}
+\newcommand{\MaxkCSP}{\textsc{Max $k$-CSP}}
+\newcommand{\MaxkCSPq}{\textsc{Max $k$-CSP$_{q}$}}
+\newcommand{\MaxCSP}[1]{\textsc{Max CSP}(#1)} \renewcommand{\Pr}{{\bf
+    P}} \renewcommand{\P}{{\bf P}} \newcommand{\Px}{\mathop{\bf P\/}}
+\newcommand{\E}{{\bf E}} \newcommand{\Cov}{{\bf Cov}}
+\newcommand{\Var}{{\bf Var}} \newcommand{\Varx}{\mathop{\bf Var\/}}
+
+\newcommand{\bits}{\{-1,1\}}
+
+\newcommand{\nsmaja}{\textstyle{\frac{2}{\pi}} \arcsin \rho}
+
+\newcommand{\Inf}{\mathrm{Inf}} \newcommand{\I}{\mathrm{I}}
+\newcommand{\J}{\mathrm{J}}
+
+\newcommand{\eps}{\epsilon} \newcommand{\lam}{\lambda}
+
+% \newcommand{\trunc}{\ell_{2,[-1,1]}}
+\newcommand{\trunc}{\zeta} \newcommand{\truncprod}{\chi}
+
+\newcommand{\N}{\mathbb N} \newcommand{\R}{\mathbb R}
+\newcommand{\Z}{\mathbb Z} \newcommand{\CalE}{{\mathcal{E}}}
+\newcommand{\CalC}{{\mathcal{C}}} \newcommand{\CalM}{{\mathcal{M}}}
+\newcommand{\CalR}{{\mathcal{R}}} \newcommand{\CalS}{{\mathcal{S}}}
+\newcommand{\CalV}{{\mathcal{V}}}
+\newcommand{\CalX}{{\boldsymbol{\mathcal{X}}}}
+\newcommand{\CalG}{{\boldsymbol{\mathcal{G}}}}
+\newcommand{\CalH}{{\boldsymbol{\mathcal{H}}}}
+\newcommand{\CalY}{{\boldsymbol{\mathcal{Y}}}}
+\newcommand{\CalZ}{{\boldsymbol{\mathcal{Z}}}}
+\newcommand{\CalW}{{\boldsymbol{\mathcal{W}}}}
+\newcommand{\CalF}{{\mathcal{Z}}}
+% \newcommand{\boldG}{{\boldsymbol G}}
+% \newcommand{\boldQ}{{\boldsymbol Q}}
+% \newcommand{\boldP}{{\boldsymbol P}}
+% \newcommand{\boldR}{{\boldsymbol R}}
+% \newcommand{\boldS}{{\boldsymbol S}}
+% \newcommand{\boldX}{{\boldsymbol X}}
+% \newcommand{\boldB}{{\boldsymbol B}}
+% \newcommand{\boldY}{{\boldsymbol Y}}
+% \newcommand{\boldZ}{{\boldsymbol Z}}
+% \newcommand{\boldV}{{\boldsymbol V}}
+\newcommand{\boldi}{{\boldsymbol i}} \newcommand{\boldj}{{\boldsymbol
+    j}} \newcommand{\boldk}{{\boldsymbol k}}
+\newcommand{\boldr}{{\boldsymbol r}}
+\newcommand{\boldsigma}{{\boldsymbol \sigma}}
+\newcommand{\boldupsilon}{{\boldsymbol \upsilon}}
+\newcommand{\hone}{{\boldsymbol{H1}}}
+\newcommand{\htwo}{\boldsymbol{H2}}
+\newcommand{\hthree}{\boldsymbol{H3}}
+\newcommand{\hfour}{\boldsymbol{H4}}
+
+
+\newcommand{\sgn}{\mathrm{sgn}} \newcommand{\Maj}{\mathrm{Maj}}
+\newcommand{\Acyc}{\mathrm{Acyc}}
+\newcommand{\UniqMax}{\mathrm{UniqMax}}
+\newcommand{\Thr}{\mathrm{Thr}} \newcommand{\littlesum}{{\textstyle
+    \sum}}
+
+\newcommand{\half}{{\textstyle \frac12}}
+\newcommand{\third}{{\textstyle \frac13}}
+\newcommand{\fourth}{{\textstyle \frac14}}
+
+\newcommand{\Stab}{\mathbb{S}}
+\newcommand{\StabThr}[2]{\Gamma_{#1}(#2)}
+\newcommand{\StabThrmin}[2]{{\underline{\Gamma}}_{#1}(#2)}
+\newcommand{\StabThrmax}[2]{{\overline{\Gamma}}_{#1}(#2)}
+\newcommand{\TestFcn}{\Psi}
+
+\renewcommand{\phi}{\varphi}
+
+\begin{document}
+\title{Algorithms - Exercise 3}
+
+ \author{Omer Tamuz, 035696574}
+\maketitle
+Let an interval graph $G=(V,E)$, where $v_i=[a_i,b_i]$, be ordered by the 
+{\em starting points} of the intervals, so that $i<j\to a_i\leq a_j$.
+\begin{definition}
+Let {\bf INT-COL} be the following algorithm: at iteration $k$, for $i$
+from one to $|V|$, color an uncolored $v_i$ with color $k$ if it doesn't 
+intersect any
+other interval which was previously colored $k$. In pseudo-code:
+
+    \begin{algorithmic}
+      \STATE {$k \to 0$}
+      \WHILE {any vertices are not colored}
+        \STATE {$k \to k+1$}
+        \FOR {$i=1$ to $|V|$}
+          \IF {$v_i$ is uncolored and does not intersect any interval colored with color $k$}
+            \STATE {color $v_i$ with color $k$}
+          \ENDIF
+        \ENDFOR
+      \ENDWHILE  
+    \end{algorithmic}
+\end{definition}
+
+
+  Let $G_k$ be a subgraph of $G$, induced by the vertices colored with colors 
+  $\geq k$. That is, $G_k$ is induced by all vertices which are uncolored at the
+  beginning of iteration $k$.
+\begin{proposition}
+  For any $a_i$ such that $v_i$ is in $G_k$, INT-COL colors 
+  in iteration $k$ at least one interval containing 
+  $a_i$.
+\end{proposition}
+\begin{proof}
+  Assume by way of contradiction that for some $v_i$ in $G_k$, no interval
+  colored in iteration $k$ covers $a_i$. Then none of the intervals
+  which were colored before $v_i$ was examined (in that iteration) 
+  cover $a_i$, and
+  therefore none of them intersect $v_i$, and $v_i$ would be colored -
+  contradiction.
+\end{proof}
+
+\begin{proposition}
+  INT-COL colors at least one vertex in each clique in $G_k$.
+\end{proposition}
+\begin{proof}
+  Since the interval covered by all the members of a clique starts with the 
+  starting
+  point of the last member of the clique, this follows easily from the 
+  previous proposition.
+\end{proof}
+
+\begin{proposition}
+  INT-COL colors exactly one vertex in each clique in $G_k$.
+\end{proposition}
+\begin{proof}
+  Since no two intervals that cover the same point can be colored by the same
+  color, this proposition follows trivially from the previous.
+\end{proof}
+
+\begin{proposition}
+  INT-COL colors $G$ with a number of colors equal to the size of the maximal
+  clique in $G$. 
+\end{proposition}
+\begin{proof}
+  We will use induction on the size $c$ of the maximal clique in $G$. The base
+  of the induction $c=0$ is trivial. Assume the algorithm works for all 
+  maximal clique sizes less than $c$. Then, given a graph with a maximal clique
+  size $c$, INT-COL will, in the first iteration, color exactly one vertex
+  in each clique with color $k=1$. The graph of the uncolored vertices, $G_2$,
+  will therefore have a clique of maximal size $c-1$, and will be colored with 
+  $c-1$ colors. Hence, $G$ would be colored with $c$ colors.
+\end{proof}
+\end{document}
+
+
