@@ -1,0 +1,154 @@
+\documentclass[11pt]{article} \usepackage{amssymb}
+\usepackage{amsfonts} \usepackage{amsmath} \usepackage{bm}
+\usepackage{latexsym} \usepackage{epsfig}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+
+\setlength{\textwidth}{6.5 in} \setlength{\textheight}{8.25in}
+\setlength{\oddsidemargin}{0in} \setlength{\topmargin}{0in}
+\addtolength{\textheight}{.8in} \addtolength{\voffset}{-.5in}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{example}[theorem]{Example}
+\newenvironment{proof}{\noindent \textbf{Proof:}}{$\Box$}
+
+\newcommand{\ignore}[1]{}
+
+\newcommand{\enote}[1]{} \newcommand{\knote}[1]{}
+\newcommand{\rnote}[1]{}
+
+
+
+% \newcommand{\enote}[1]{{\bf [[Elchanan:} {\emph{#1}}{\bf ]]}}
+% \newcommand{\knote}[1]{{\bf [[Krzysztof:} {\emph{#1}}{\bf ]]}}
+% \newcommand{\rnote}[1]{{\bf [[Ryan:} {\emph{#1}}{\bf ]]}}
+
+
+
+\DeclareMathOperator{\Support}{Supp} \DeclareMathOperator{\Opt}{Opt}
+\DeclareMathOperator{\Ordo}{\mathcal{O}}
+\newcommand{\MaxkCSP}{\textsc{Max $k$-CSP}}
+\newcommand{\MaxkCSPq}{\textsc{Max $k$-CSP$_{q}$}}
+\newcommand{\MaxCSP}[1]{\textsc{Max CSP}(#1)} \renewcommand{\Pr}{{\bf
+    P}} \renewcommand{\P}{{\bf P}} \newcommand{\Px}{\mathop{\bf P\/}}
+\newcommand{\E}{{\bf E}} \newcommand{\Cov}{{\bf Cov}}
+\newcommand{\Var}{{\bf Var}} \newcommand{\Varx}{\mathop{\bf Var\/}}
+
+\newcommand{\bits}{\{-1,1\}}
+
+\newcommand{\nsmaja}{\textstyle{\frac{2}{\pi}} \arcsin \rho}
+
+\newcommand{\Inf}{\mathrm{Inf}} \newcommand{\I}{\mathrm{I}}
+\newcommand{\J}{\mathrm{J}}
+
+\newcommand{\eps}{\epsilon} \newcommand{\lam}{\lambda}
+
+% \newcommand{\trunc}{\ell_{2,[-1,1]}}
+\newcommand{\trunc}{\zeta} \newcommand{\truncprod}{\chi}
+
+\newcommand{\N}{\mathbb N} \newcommand{\R}{\mathbb R}
+\newcommand{\Z}{\mathbb Z} \newcommand{\CalE}{{\mathcal{E}}}
+\newcommand{\CalC}{{\mathcal{C}}} \newcommand{\CalM}{{\mathcal{M}}}
+\newcommand{\CalR}{{\mathcal{R}}} \newcommand{\CalS}{{\mathcal{S}}}
+\newcommand{\CalV}{{\mathcal{V}}}
+\newcommand{\CalX}{{\boldsymbol{\mathcal{X}}}}
+\newcommand{\CalG}{{\boldsymbol{\mathcal{G}}}}
+\newcommand{\CalH}{{\boldsymbol{\mathcal{H}}}}
+\newcommand{\CalY}{{\boldsymbol{\mathcal{Y}}}}
+\newcommand{\CalZ}{{\boldsymbol{\mathcal{Z}}}}
+\newcommand{\CalW}{{\boldsymbol{\mathcal{W}}}}
+\newcommand{\CalF}{{\mathcal{Z}}}
+% \newcommand{\boldG}{{\boldsymbol G}}
+% \newcommand{\boldQ}{{\boldsymbol Q}}
+% \newcommand{\boldP}{{\boldsymbol P}}
+% \newcommand{\boldR}{{\boldsymbol R}}
+% \newcommand{\boldS}{{\boldsymbol S}}
+% \newcommand{\boldX}{{\boldsymbol X}}
+% \newcommand{\boldB}{{\boldsymbol B}}
+% \newcommand{\boldY}{{\boldsymbol Y}}
+% \newcommand{\boldZ}{{\boldsymbol Z}}
+% \newcommand{\boldV}{{\boldsymbol V}}
+\newcommand{\boldi}{{\boldsymbol i}} \newcommand{\boldj}{{\boldsymbol
+    j}} \newcommand{\boldk}{{\boldsymbol k}}
+\newcommand{\boldr}{{\boldsymbol r}}
+\newcommand{\boldsigma}{{\boldsymbol \sigma}}
+\newcommand{\boldupsilon}{{\boldsymbol \upsilon}}
+\newcommand{\hone}{{\boldsymbol{H1}}}
+\newcommand{\htwo}{\boldsymbol{H2}}
+\newcommand{\hthree}{\boldsymbol{H3}}
+\newcommand{\hfour}{\boldsymbol{H4}}
+
+
+\newcommand{\sgn}{\mathrm{sgn}} \newcommand{\Maj}{\mathrm{Maj}}
+\newcommand{\Acyc}{\mathrm{Acyc}}
+\newcommand{\UniqMax}{\mathrm{UniqMax}}
+\newcommand{\Thr}{\mathrm{Thr}} \newcommand{\littlesum}{{\textstyle
+    \sum}}
+
+\newcommand{\half}{{\textstyle \frac12}}
+\newcommand{\third}{{\textstyle \frac13}}
+\newcommand{\fourth}{{\textstyle \frac14}}
+
+\newcommand{\Stab}{\mathbb{S}}
+\newcommand{\StabThr}[2]{\Gamma_{#1}(#2)}
+\newcommand{\StabThrmin}[2]{{\underline{\Gamma}}_{#1}(#2)}
+\newcommand{\StabThrmax}[2]{{\overline{\Gamma}}_{#1}(#2)}
+\newcommand{\TestFcn}{\Psi}
+
+\renewcommand{\phi}{\varphi}
+
+\begin{document}
+\title{Complexity - Exercise 2}
+
+ \author{Omer Tamuz, 035696574}
+\maketitle
+
+
+\begin{enumerate}
+  \item
+    We would like to show that a set is in $\P/poly$ iff it is Cook-reducible
+    to a sparse set. Will will first show that 
+    \begin{proposition}
+      A sparse set is in $\P/poly$.
+    \end{proposition}
+    \begin{proof}
+      Let $S$ be a sparse set, so that for the polynomial $p(n)$, it holds that
+      $|S\cap\{0,1\}^n|\leq p(n)$. Let $C_n$ be a circuit that implements the DNF
+      formula $\phi_n(t)=\vee_{s\in S\cap\{0,1\}^n}\wedge_{i=1}^n(t_i\leftrightarrow s_i)$, where $t_i\leftrightarrow s_i$ stands for 
+      $t_i$ when $s_1=1$ and for $\neg t_i$ when $s_i=0$. Then $\phi_n(t)$ clearly equals one 
+      whenever $t\in S\cap\{0,1\}^n$. Furthermore, $\phi_n$ is polynomial
+      in $n$, and therefore $C_n$ is too. Hence the $C_n$'s are a family of 
+      polynomial circuits that decide $S$ for inputs of size $n$, and $S$
+      is in $\P/poly$.
+    \end{proof}
+
+    We now prove the theorem:
+
+    {\bf First Direction}
+    
+    Let $S$ be Cook-reducible to some sparse set $S'$. Then the reduction, being
+    a polynomial algorithm, can be implemented by a circuit $D_n$ for inputs of
+    size $n$, with $D_n$
+    polynomial in $n$. By the proposition above, there exists a family
+    of circuits $C_n$ that decide $S'$, and hence the composition of $D_n$
+    and $C_n$ (i.e., inserting $C_n$ where ever the reduction uses the $S'$
+    oracle) is also polynomial. Therefore $S$, too, has a polynomial family
+    of circuits that decides it, and is in $\P/poly$.
+
+    {\bf Second Direction}
+    
+    Let $S$ be in $\P/poly$, so that it is decided by a machine $A$ that takes
+    advice $a_n$, where $a_n$ is of polynomial length.
+    
+\end{enumerate}
+\end{document}
+
+
