@@ -180,6 +180,20 @@ other interval which was previously colored $k$. In pseudo-code:
   will therefore have a clique of maximal size $c-1$, and will be colored with 
   $c-1$ colors. Hence, $G$ would be colored with $c$ colors.
 \end{proof}
+
+\begin{proposition}
+  INT-COL runs in polynomial time.
+\end{proposition}
+\begin{proof}
+  Sorting the intervals takes $|V|\log|V|$.
+
+  Each iteration cycles through all the intervals checking the edges of each
+  one, so each iteration takes at most $|E|$. 
+  Since there are at most $|V|$ iterations, running time is at most 
+  $|E||V|+|V|\log|V|$.
+\end{proof}
+
+
 \end{document}
 
 

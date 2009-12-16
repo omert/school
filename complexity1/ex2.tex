@@ -4,9 +4,12 @@
 \usepackage{algorithm}
 \usepackage{algorithmic}
 
-\setlength{\textwidth}{6.5 in} \setlength{\textheight}{8.25in}
-\setlength{\oddsidemargin}{0in} \setlength{\topmargin}{0in}
-\addtolength{\textheight}{.8in} \addtolength{\voffset}{-.5in}
+\setlength{\textwidth}{7 in} \setlength{\textheight}{9in}
+\setlength{\oddsidemargin}{-0.5in} %\setlength{\topmargin}{0in}
+\setlength{\evensidemargin}{-0.5in} %\setlength{\topmargin}{0in}
+%\addtolength{\textheight}{.8in} 
+%\addtolength{\voffset}{-1in}
+\setlength{\topmargin}{-0.5in} 
 
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{lemma}[theorem]{Lemma}
@@ -114,40 +117,189 @@
 
 \begin{enumerate}
   \item
-    We would like to show that a set is in $\P/poly$ iff it is Cook-reducible
-    to a sparse set. Will will first show that 
-    \begin{proposition}
-      A sparse set is in $\P/poly$.
-    \end{proposition}
-    \begin{proof}
-      Let $S$ be a sparse set, so that for the polynomial $p(n)$, it holds that
-      $|S\cap\{0,1\}^n|\leq p(n)$. Let $C_n$ be a circuit that implements the DNF
-      formula $\phi_n(t)=\vee_{s\in S\cap\{0,1\}^n}\wedge_{i=1}^n(t_i\leftrightarrow s_i)$, where $t_i\leftrightarrow s_i$ stands for 
-      $t_i$ when $s_1=1$ and for $\neg t_i$ when $s_i=0$. Then $\phi_n(t)$ clearly equals one 
-      whenever $t\in S\cap\{0,1\}^n$. Furthermore, $\phi_n$ is polynomial
-      in $n$, and therefore $C_n$ is too. Hence the $C_n$'s are a family of 
-      polynomial circuits that decide $S$ for inputs of size $n$, and $S$
-      is in $\P/poly$.
-    \end{proof}
-
-    We now prove the theorem:
-
     {\bf First Direction}
     
-    Let $S$ be Cook-reducible to some sparse set $S'$. Then the reduction, being
-    a polynomial algorithm, can be implemented by a circuit $D_n$ for inputs of
-    size $n$, with $D_n$
-    polynomial in $n$. By the proposition above, there exists a family
-    of circuits $C_n$ that decide $S'$, and hence the composition of $D_n$
-    and $C_n$ (i.e., inserting $C_n$ where ever the reduction uses the $S'$
-    oracle) is also polynomial. Therefore $S$, too, has a polynomial family
-    of circuits that decides it, and is in $\P/poly$.
+    Let $S$ be Cook-reducible to some sparse set $S'$. Then there exists
+    a reduction $M$ that decides $S$, using an oracle for $S'$, in time
+    less than some polynomial $q(n)$.
+
+    Let 
+    \begin{equation*}
+    a_n=S' \cap \left(\bigcup_{k=0}^{q(n)}\{0,1\}^k\right),
+    \end{equation*}
+    so $a_n$ includes all the strings in $S'$ of length at most $q(n)$.
+
+    Let $A(a_{|x|},x)$ be a machine that 
+    takes advice $a_n$, so that $A$ runs the same algorithm as $M$, but
+    instead of calling the oracle to decide if some $s'$ is in $S'$, it simply 
+    checks if it is in $a_n$. Since $a_n$ is polynomial in length (by the
+    sparcity of $S'$), and
+    includes any string in $S'$ that $M$ might produce, $A$ would indeed
+    decide $S$ in polynomial time.
 
     {\bf Second Direction}
     
     Let $S$ be in $\P/poly$, so that it is decided by a machine $A$ that takes
-    advice $a_n$, where $a_n$ is of polynomial length.
+    advice $a_n$, where $a_n$ is of polynomial length. Let
+    $S'$ is equal the set of pairs $(n, b_n$), where $b_n$ is a prefix of
+    $a_n$. Then $S'$ is clearly sparse.
     
+    Let $M$ be a machine that has an oracle for $S'$. Given an input $s$, 
+    of length $n$, $M$ greedily builds $a_n$, then calls $A$ with $s$ and
+    advice $a_n$. Hence $M$ is a cook reduction of $S$ to $S'$.
+    
+  \item
+    
+    \begin{enumerate}
+    \item Let $F_n \subseteq \{0,1\}^n$ be the preimage of one in $f$. Let $\phi$ be 
+      the following DNF expression:
+      \begin{equation*}
+        \phi(t)=\bigvee_{s\in F_n}\bigwedge_{i=1}^nt_i \leftrightarrow s_i
+      \end{equation*}
+      where $t_i \leftrightarrow s_i$ stands for $t_i$ when $s_i=1$, and for
+      $\neg t_i$ when $s_i=0$. Then $\phi$ clearly equals $f$.
+
+      Let $C$ be a circuit that implements $\phi$. $C$ has a wire from
+      each input node to at most $2^n$ AND gates, then a wire from each AND
+      gate to a single OR gate. Hence $C$ has at most 
+      $2\cdot 2^n \cdot n$ wires.
+
+    \item The number of functions from $\{0,1\}^n$ to $\{0,1\}$ is $2^{2^n}$.
+      The circuits
+      of size $s=2^n/(c_1\cdot n)$ can be represented by a number of bits which is
+      \begin{eqnarray*}
+        l_n&=&c_1\cdot s\cdot \log s
+        \\ &=& c_1\cdot 2^n/(c_1\cdot n)\cdot \log \left(2^n/(c_1\cdot n)\right)
+        \\ &=& 2^n/n\cdot \left(n - \log \left(c_1\cdot n\right)\right)
+        \\ &=& 2^n - 2^n/n\cdot \log \left(c_1\cdot n\right)
+        \\ &<& 2^n.
+      \end{eqnarray*}
+      Hence there are strictly less than $2^{2^n}$ circuits of size
+      $2^n/(c_1\cdot n)$. Since every circuit of size less than $2^n/(c_1\cdot n)$ is
+      equivalent to some circuit of that size (e.g., add parallel wires), 
+      there must be a function
+      from $\{0,1\}^n$ to $\{0,1\}$ that cannot be represented by a
+      circuit of size $2^n/(c_1\cdot n)$.
+
+      \item
+        Let $c_2$ be some constant.
+        Given $n$ and $s_1$ and $s_2$ such that 
+        $c_2 \cdot s_2\log^2s_s\leq s_1\leq 2^n$, let $k$ be such that $s_2=2^k/(c_1k)$. 
+        Then there exist function from $\{0,1\}^k$ to $\{0,1\}$ that cannot
+        be computed by a circuit of size $s_2$. However,
+        \begin{eqnarray*}
+          s_1&\geq& c_2 \cdot s_2\log^2s_s
+          \\ &\geq& c_22^k/(c_1k) \cdot \log^2\left(2^k/(c_1k)\right)
+          \\ &\geq& c_22^k/(c_1k) \cdot \left(k-\log(c_1k)\right)^2
+          \\ &\geq& (c_2/c_1)2^kk - c_22^k/(c_1k)\cdot\left(k\log(c_1k)-\log^2(c_1k)\right)^2
+          \\ &\geq& (c_2/c_1)2^kk
+        \end{eqnarray*}
+        For large enough values, $k\log(c_1k)\geq \log^2(c_1k)$ and hence
+        \begin{equation*}
+          s_1 \geq (c_2/c_1)2^kk,
+        \end{equation*}
+        So there exists a value for $c_2$ such that all these functions
+        can be computed by circuits of size $s_1$.
+
+
+    \end{enumerate}
+    
+
+  \item
+    \begin{enumerate}
+    \item 
+      {\bf First Direction}
+
+      Let $S\in\Sigma_{k+1}$. Then there exists a polynomial $p(n)$ and a
+      turing machine $V$ such that
+      \begin{equation*}
+        S=\{x|\exists y_{k+1}\in\{0,1\}^{p(|x|)}\forall y_k\in\{0,1\}^{p(|x|)}\cdots Q_1y_1\in\{0,1\}^{p(|x|)}V(x,y_1,\ldots,y_{k+1}) \;\mbox{accepts}\}
+      \end{equation*}
+      Let $S'$ be
+      \begin{equation*}
+        S'=\{(x,y_{k+1})|\forall y_k\in\{0,1\}^{p(|x|)}\exists y_{k-1}\in\{0,1\}^{p(|x|)}\cdots Q_1y_1\in\{0,1\}^{p(|x|)}V(x,y_1,\ldots,y_k,y_{k+1}) \;\mbox{accepts}\}
+      \end{equation*}
+      Then by definition $S'$ is in $\Pi_k$, and 
+      \begin{equation*}
+        S=\{x|\exists y:\; (x,y)\in S'\;\mbox{and}\;y\in\{0,1\}^{p(|x|)}\}
+      \end{equation*}
+      
+      {\bf Second Direction}
+      
+      Let 
+      \begin{equation*}
+        S=\{x|\exists y:\; (x,y)\in S'\;\mbox{and}\;y\in\{0,1\}^{p(|x|)}\}
+      \end{equation*}
+      such that $p(n)$ a polynomial and $S'$ a set in $\Pi_k$. Then there exists
+      a Turing machine $V$ and a polynomial $q(n)$ such that
+      \begin{equation*}
+        S'=\{(x,y_{k+1})|\forall y_k\in\{0,1\}^{q(|x|)}\exists y_{k-1}\in\{0,1\}^{q(|x|)}\cdots Q_1y_1\in\{0,1\}^{q(|x|)}V(x,y_1,\ldots,y_k,y_{k+1}) \;\mbox{accepts}\}
+      \end{equation*}
+      Let $r(n)=\max(p(n),q(n))$. Then $r(n)$ is a polynomial (or bound by one) and
+      \begin{equation*}
+        S=\{x|\exists y_{k+1}\forall y_k\cdots Q_1y_1V(x,y_1,\ldots,y_{k+1}) \;\mbox{accepts and }\; \forall i\leq k+1, y_i\in\{0,1\}^{r(|x|)}\}
+      \end{equation*}.
+      Hence $S$ is by definition in $\Sigma_{k+1}$.
+
+    \item
+      Let $k>0$ be such that $\Sigma_k=\Pi_k$. Let $S$ be a set in $\Sigma_{k+1}$. Then,
+      by the previous question,
+      there exist a set $S'$ in $\Pi_k$ and a polynomial  $p$
+      such that 
+      \begin{equation*}
+        S=\{x|\exists y:\; (x,y)\in S'\;\mbox{and}\;y\in\{0,1\}^{p(|x|)}\}.
+      \end{equation*}
+      
+      Since $\Pi_k=\Sigma_k$, then $S'$ is also in $\Sigma_k$, and there exists a polytime machine
+      $U$ and a polynomial $q$ such that 
+      \begin{equation*}
+        S'=\{(x,y_{k+1})|\exists y_k\in\{0,1\}^{q(|x|)}\forall y_{k-1}\in\{0,1\}^{q(|x|)}\cdots Q_1y_1\in\{0,1\}^{q(|x|)}U(x,y_1,\ldots,y_k,y_{k+1}) \;\mbox{accepts}\},
+      \end{equation*}
+      
+      Let $r(n)=\max(q(n),p(n))$. Then $S$ can be written as 
+      \begin{eqnarray*}
+        S  &=&\{x|\exists y:\; (x,y)\in S'\;\mbox{and}\;y\in\{0,1\}^{p(|x|)}\}.
+        \\ &=&\{x|\exists y_{k+1}y_k\in\{0,1\}^{r(|x|))}\forall y_{k-1}\in\{0,1\}^{r(|x|))}\cdots Q_1y_1\in\{0,1\}^{r(|x|))}U(x,y_1,\ldots,y_k,y_{k+1}) \;\mbox{accepts}\},
+      \end{eqnarray*}
+      and so $S$ is clearly in $\Sigma_k$. Since $\Sigma_{k+1}$ includes
+      $\Sigma_k$, we've shown that they are equal.
+      This argument can now be applied
+      inductively to show that for all $n\geq k$, it holds that 
+      $\Sigma_n=\Sigma_k$. Since ${\bf PH}=\bigcup_n\Sigma_n$, and since $\Sigma_k$ includes $\Sigma_n$ for
+      $n<k$, we've shown that
+      ${\bf PH}$ is equal to $\Sigma_k$.
+
+      \item
+        We would like to show that ${\bf NP}^{\Pi_k}\subseteq \Sigma_{k+1}$. 
+        Let $S\in {\bf NP}^{\Pi_k}$, so that there exists a set $S_1\in\Pi_k$, a
+        polynomial $p(n)$ and
+        a polytime machine with an oracle for $S_1$, $V^{S_1}$, such that
+        \begin{equation*}
+          S=\{x|\exists y\in\{0,1\}^{p(|x|)}\;\mbox{s.t.}\;V^{S_1}(x,y) \;\mbox{accepts}\}.
+        \end{equation*}
+
+        Let $S_1'$ be the set of triplets $(x,y,Q,A)$ such that $V^{S_1}$
+        accepts when it 
+        is run on $(x,y)$, $Q=(q_1,\ldots,q_k)$ are the queries it makes to 
+        the $S_1$ oracle,
+        and  $A=(a_1,\ldots,a_k)$ are the answers it gets back. 
+        Note that since $V^{S_1}$ is polynomial
+        in $|x|$ then so are $Q$ and $A$.
+
+        By definition, there exists a polynomial $q(n)$ and a polytime machine
+        $U$ such that
+        \begin{equation*}
+          S_1=\{x|\forall y_k\in\{0,1\}^{q(|x|)}\exists y_{k-1}\in\{0,1\}^{q(|x|)}\cdots Q_1y_1\in\{0,1\}^{q(|x|)}U(x,y_1,\ldots,y_k) \;\mbox{accepts}\}.
+        \end{equation*}
+
+        Since
+        \begin{equation*}
+          S=\{x|\exists y,Q,A:\; (x,y,Q,A)\in S_1'\;\mbox{and}\;y,Q,A\in\{0,1\}^{p(|x|)}\}.
+        \end{equation*}
+        and $S_1'\in\Pi_k$ then $S\in\Sigma_{k+1}$.
+    \end{enumerate}
+    
+
 \end{enumerate}
 \end{document}
 
