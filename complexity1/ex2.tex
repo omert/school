@@ -277,26 +277,57 @@
         \begin{equation*}
           S=\{x|\exists y\in\{0,1\}^{p(|x|)}\;\mbox{s.t.}\;V^{S_1}(x,y) \;\mbox{accepts}\}.
         \end{equation*}
+        Let the running time of $V^{S_1}$ be bounded by $r(|x|)$.
 
-        Let $S_1'$ be the set of triplets $(x,y,Q,A)$ such that $V^{S_1}$
-        accepts when it 
-        is run on $(x,y)$, $Q=(q_1,\ldots,q_k)$ are the queries it makes to 
-        the $S_1$ oracle,
-        and  $A=(a_1,\ldots,a_k)$ are the answers it gets back. 
-        Note that since $V^{S_1}$ is polynomial
-        in $|x|$ then so are $Q$ and $A$.
 
-        By definition, there exists a polynomial $q(n)$ and a polytime machine
-        $U$ such that
+        Since $S_1\in\Pi_k$, then by definition there exists a polynomial 
+        $q(n)$ and a polytime machine $U$ such that
         \begin{equation*}
-          S_1=\{x|\forall y_k\in\{0,1\}^{q(|x|)}\exists y_{k-1}\in\{0,1\}^{q(|x|)}\cdots Q_1y_1\in\{0,1\}^{q(|x|)}U(x,y_1,\ldots,y_k) \;\mbox{accepts}\}.
+          S_1=\{x|\forall z_k\in\{0,1\}^{q(|x|)}\exists z_{k-1}\in\{0,1\}^{q(|x|)}\cdots Q_1z_1\in\{0,1\}^{q(|x|)}U(x,z_1,\ldots,z_k) \;\mbox{accepts}\}.
         \end{equation*}
 
-        Since
+        
+        We will now build a ``verifier'' of $V^{S_1}$. Let $m < r(|x|)$.
+        Let $Z=\{z_i^j\}$ be a $k$-by-$m$ matrix of strings in 
+        $\{0,1\}^{q(|x|)}$. Denote
+        by $z_i$ the $i$'th row of $Z$, and by $z^j$ the $j$'th column of $Z$.
+        Let $H$ and $Q$ be vectors length $m$ of strings in $\{0,1\}^{q(|x|)}$. Let $A$ be 
+        a binary vector of length $m$. Note that all these are polynomial
+        in $|x|$.
+
+        Let $W$ be the following TM: $W$ gets as input $x,y,Q,A,H,Z$. It runs
+        an emulation of $V^{S_1}$ on input $(x,y)$, but instead of making a 
+        query $q_i$ to the oracle, it runs $U(q_i,z_k^i,\ldots,z_1^i)$ 
+        if $a_i=1$ and 
+        $U(q_i,h_i,z_k^i,\ldots,z_2^i)$ if $a_i=0$. If
+        $U$ returns $a_i$ it continues, and if not it stops and rejects. If the
+        end of the emulation is reached then it returns what $V^{S_1}(x,y)$ 
+        would have returned. 
+
+        We would like to show that
         \begin{equation*}
-          S=\{x|\exists y,Q,A:\; (x,y,Q,A)\in S_1'\;\mbox{and}\;y,Q,A\in\{0,1\}^{p(|x|)}\}.
+          S=\{x | \exists y,Q,A,H\forall z_k \exists z_{k-1} \cdots Q_1z_1 
+                     W(x,y,Q,A,Z,H)\}.
         \end{equation*}
-        and $S_1'\in\Pi_k$ then $S\in\Sigma_{k+1}$.
+        which would prove that $S$ is in $\Sigma_{k+1}$, since all the arguments
+        of the $k+1$ quantifiers are polynomial in length. This
+        follows quiet simply from the definitions. Assume that for some
+        $x$ indeed 
+        $\exists y,Q,A,H\forall z_k \exists z_{k-1} \cdots Q_1z_1 W(x,y,Q,A,Z,H)$. Then the verifier would indeed
+        verify that there exists a $y$ such that $V^{S_1}$ accepts 
+        $(x,y)$. Conversely, given an $x$ in $S$, we know that there exist
+        $y,Q,A$ such that $V^{S_1}(x,y)$ accepts, makes queries $q_i$ and
+        gets responses $a_i$. For all the $i$'s for which $a_i=1$, since $q_i\in S_1$,
+        then indeed for all $z_k^i$ there exists... such that $U(q_i,z^i)$
+        accepts. For all the $i$'s for which $a_i=0$, since $q_i\not\in S_1$, 
+        there exists an $h_i$ such that for all $z_k^i$ there exists a $z_{k-1}^i$...
+        such that $U(q_i,h_i,z_{k}^i,\ldots,z_2^i)$ rejects.
+        
+        
+
+
+
+
     \end{enumerate}
     
 
