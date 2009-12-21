@@ -1,0 +1,252 @@
+\documentclass[11pt]{article} \usepackage{amssymb}
+\usepackage{amsfonts} \usepackage{amsmath} \usepackage{bm}
+\usepackage{latexsym} \usepackage{epsfig}
+
+\setlength{\textwidth}{6.5 in} \setlength{\textheight}{8.25in}
+\setlength{\oddsidemargin}{0in} \setlength{\topmargin}{0in}
+\addtolength{\textheight}{.8in} \addtolength{\voffset}{-.5in}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{example}[theorem]{Example}
+\newenvironment{proof}{\noindent \textbf{Proof:}}{$\Box$}
+
+\newcommand{\ignore}[1]{}
+
+\newcommand{\enote}[1]{} \newcommand{\knote}[1]{}
+\newcommand{\rnote}[1]{}
+
+
+
+% \newcommand{\enote}[1]{{\bf [[Elchanan:} {\emph{#1}}{\bf ]]}}
+% \newcommand{\knote}[1]{{\bf [[Krzysztof:} {\emph{#1}}{\bf ]]}}
+% \newcommand{\rnote}[1]{{\bf [[Ryan:} {\emph{#1}}{\bf ]]}}
+
+
+
+\DeclareMathOperator{\Support}{Supp} \DeclareMathOperator{\Opt}{Opt}
+\DeclareMathOperator{\Ordo}{\mathcal{O}}
+\newcommand{\MaxkCSP}{\textsc{Max $k$-CSP}}
+\newcommand{\MaxkCSPq}{\textsc{Max $k$-CSP$_{q}$}}
+\newcommand{\MaxCSP}[1]{\textsc{Max CSP}(#1)} \renewcommand{\Pr}{{\bf
+    P}} \renewcommand{\P}{{\bf P}} \newcommand{\Px}{\mathop{\bf P\/}}
+\newcommand{\E}{{\bf E}} \newcommand{\Cov}{{\bf Cov}}
+\newcommand{\Var}{{\bf Var}} \newcommand{\Varx}{\mathop{\bf Var\/}}
+
+\newcommand{\bits}{\{-1,1\}}
+
+\newcommand{\nsmaja}{\textstyle{\frac{2}{\pi}} \arcsin \rho}
+
+\newcommand{\Inf}{\mathrm{Inf}} \newcommand{\I}{\mathrm{I}}
+\newcommand{\J}{\mathrm{J}}
+
+\newcommand{\eps}{\epsilon} \newcommand{\lam}{\lambda}
+
+% \newcommand{\trunc}{\ell_{2,[-1,1]}}
+\newcommand{\trunc}{\zeta} \newcommand{\truncprod}{\chi}
+
+\newcommand{\N}{\mathbb N} \newcommand{\R}{\mathbb R}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\Z}{\mathbb Z} \newcommand{\CalE}{{\mathcal{E}}}
+\newcommand{\CalC}{{\mathcal{C}}} \newcommand{\CalM}{{\mathcal{M}}}
+\newcommand{\CalR}{{\mathcal{R}}} \newcommand{\CalS}{{\mathcal{S}}}
+\newcommand{\CalV}{{\mathcal{V}}}
+\newcommand{\CalX}{{\boldsymbol{\mathcal{X}}}}
+\newcommand{\CalG}{{\boldsymbol{\mathcal{G}}}}
+\newcommand{\CalH}{{\boldsymbol{\mathcal{H}}}}
+\newcommand{\CalY}{{\boldsymbol{\mathcal{Y}}}}
+\newcommand{\CalZ}{{\boldsymbol{\mathcal{Z}}}}
+\newcommand{\CalW}{{\boldsymbol{\mathcal{W}}}}
+\newcommand{\CalF}{{\mathcal{Z}}}
+% \newcommand{\boldG}{{\boldsymbol G}}
+% \newcommand{\boldQ}{{\boldsymbol Q}}
+% \newcommand{\boldP}{{\boldsymbol P}}
+% \newcommand{\boldR}{{\boldsymbol R}}
+% \newcommand{\boldS}{{\boldsymbol S}}
+% \newcommand{\boldX}{{\boldsymbol X}}
+% \newcommand{\boldB}{{\boldsymbol B}}
+% \newcommand{\boldY}{{\boldsymbol Y}}
+% \newcommand{\boldZ}{{\boldsymbol Z}}
+% \newcommand{\boldV}{{\boldsymbol V}}
+\newcommand{\boldi}{{\boldsymbol i}} \newcommand{\boldj}{{\boldsymbol
+    j}} \newcommand{\boldk}{{\boldsymbol k}}
+\newcommand{\boldr}{{\boldsymbol r}}
+\newcommand{\boldsigma}{{\boldsymbol \sigma}}
+\newcommand{\boldupsilon}{{\boldsymbol \upsilon}}
+\newcommand{\hone}{{\boldsymbol{H1}}}
+\newcommand{\htwo}{\boldsymbol{H2}}
+\newcommand{\hthree}{\boldsymbol{H3}}
+\newcommand{\hfour}{\boldsymbol{H4}}
+
+
+\newcommand{\sgn}{\mathrm{sgn}} \newcommand{\Maj}{\mathrm{Maj}}
+\newcommand{\Acyc}{\mathrm{Acyc}}
+\newcommand{\UniqMax}{\mathrm{UniqMax}}
+\newcommand{\Thr}{\mathrm{Thr}} \newcommand{\littlesum}{{\textstyle
+    \sum}}
+
+\newcommand{\half}{{\textstyle \frac12}}
+\newcommand{\third}{{\textstyle \frac13}}
+\newcommand{\fourth}{{\textstyle \frac14}}
+
+\newcommand{\Stab}{\mathbb{S}}
+\newcommand{\StabThr}[2]{\Gamma_{#1}(#2)}
+\newcommand{\StabThrmin}[2]{{\underline{\Gamma}}_{#1}(#2)}
+\newcommand{\StabThrmax}[2]{{\overline{\Gamma}}_{#1}(#2)}
+\newcommand{\TestFcn}{\Psi}
+
+\renewcommand{\phi}{\varphi}
+
+\begin{document}
+\title{Algebra Through Examples - Exercise 3}
+
+ \author{Omer Tamuz, 035696574}
+\maketitle
+
+
+\begin{enumerate}
+\item 
+  Let $\xi_m$ be the $m$-th root of unity. Then $\Q(\xi_m)$ is the splitting
+  field of $x^m-1 \in \Q[x]$. Denote by $G_m$ the Galois
+  Group of $\Q(\xi_m) / \Q$.
+
+  By the theorem stated in class, $|\Q(\xi_m):\Q|$ is
+  equal to the size of  $G_m$. Hence 
+  $|\Q(\xi_m):\Q|$ is equal to two for values of $m$ for which the group of 
+  automorphisms of $\Q(\xi_m)$ that fix $\Q$ is of size two. 
+
+  Denote complex conjugation by $\phi$. We know that $\phi$ is always in $G_m$,
+  since it preserves $\Q$ and maps roots of unity to roots of unity. Hence we 
+  need to show that $G_m=\{I,\phi\}$, where $I$ is the identity, in order to
+  show that $|\Q(\xi_m):\Q|=2$.
+
+  Denote by $a_0,a_1,\ldots,a_{m-1}$ the $m$ roots of unity of order $m$,
+  where $a_0=1$ and $a_1=\xi_m$.
+  \begin{itemize}
+  \item For $m=1,2$ we know that $\Q(\xi_m)=Q$ and so $|\Q(\xi_m):Q|=1$.
+  \item For $m=3$, and $\psi \in G_m$ must leave $a_0$ in place. Hence the only
+    possible automorphisms are the identity and $\phi$. Therefore 
+     $|\Q(\xi_3):Q|=2$.
+  \item For $m=4$, and $\psi \in G_m$ must leave $a_0$ and $a_2=-1$ in place. 
+    Hence the again only possible automorphisms are the identity and $\phi$. 
+    Therefore $|\Q(\xi_3):Q|=2$.
+  \item For $m>4$, 
+  \end{itemize}
+  
+  
+  
+
+
+
+
+  Since $\xi_m$ is a root of $f_m(x)=x^m-1$, it is algebraic, has
+  a minimum polynomial $g_m(x)$, and $|\Q(\xi_m):\Q|=\deg g_x(x)$. 
+  We showed in class that
+  there exists some polynomial $q_m(x)$ such that $f_m(x)=g_m(x)q_m(x)$. Since both
+  $f_m(x)$ and $g_m(x)$ are monic, then so is $q_m(x)$. Furthermore, both $g_m(x)$ and
+  $q_m(x)$ have integer coefficients. 
+
+  Assume $m>2$, since for $m=1,2$ we know that $\Q(\xi_m)=Q$ and so 
+  $|\Q(\xi_m):Q|=1$.
+  Assume $|\Q(\xi_m):\Q|=2$. Then $\deg g_x(x)$ and there exist $b,c \in \Z$ such that
+  $g_m(x)=x^2+bx+c$, and $\xi_m=-\half b\pm \sqrt{b^2/4-c}$. 
+
+  \begin{itemize}
+  \item For $m=3$ we have $f_3=x^3-1=(x-1)(x^2+x+1)$, and so indeed 
+    $|\Q(\xi_3):\Q|=2$, since $x^2+x+1$ is irreducible.
+  \item For $m=4$ we have $\xi_4=i$, $\Q(i)=\mbox{span}\{1,i\}$ and again indeed
+    $|\Q(\xi_4):\Q|=2$.
+  \item For $m>4$ we know that both the real part and the imaginary part
+    of $\xi_m$ are strictly between zero and one, and hence $b$ must equal $-1$
+    and $b^2/4-c=1/4-c$ must be between minus one and zero, and so $c$
+    must equal one. This leaves a single option for $\xi_m$, which is
+    $\half+i\sqrt{3/4}$. Since this number is not a root of unity for any
+    $m$, then for no $m>4$ we have that $|\Q(\xi_m):\Q|=2$.
+  \end{itemize}
+
+  \item 
+    In all the answers below, $\mbox{span}A$ refers to the vector space
+    over $\Q$ spanned by the members of $A$. All the fields trivially contain
+    1 and -1, second roots of unity.
+    \begin{itemize}
+    \item $\Q(i)$
+      Since $x^2+1$ is the minimum polynomial of  $i$, 
+      then $i$ is algebraic and $\Q(i)=\Q[i]$. Furthermore, $|\Q(i):\Q|=2$, and so
+      every $f(i) \in \Q[i]$ is of the form $a+ib$.
+
+      Let $a(i) \in \Q[i]$ be a root of unity. Then for some $m$ it holds
+      that $a(i)$ is a root of $g(x)=x^m-1$. If $m$ is divisible by four, then
+      we can write $g(x)=(x^{m-2}-x^{m-4}+\cdots-1)(x^2+1)$. 
+      
+      Since $x^2+1$ is the minimum polynomial of  $i$, 
+      then $|\Q(i):\Q|=2$ and $\Q(i)=\mbox{span}\{1,i\}$. 
+      
+      Since $i^2=-1\in \Q$, then $\Q(i)=\mbox{span}\{1,i\}$, and it includes 
+      $i$ and $-i$, fourth roots of unity.
+      
+    \item $\Q(\sqrt{-2})$
+      
+      Since $x^2+2$ is the minimum polynomial of  $\sqrt{-2}$, 
+      then $|\Q(\sqrt{-2}):\Q|=2$ and  $\Q(\sqrt{-2})=\mbox{span}\{1,\sqrt{-2}\}$. 
+      Hence it includes no non-trivial roots of unity.
+
+    \item $\Q(\sqrt{2})$, $\Q(\sqrt{3})$
+
+      Both of these fields are subsets of $\R$, and hence include no
+      roots of unity other than 1 and -1.
+
+
+    \end{itemize}
+  \item Let $F$ be an infinite field, and let $F^*=F \setminus \{0\}$ be
+    its multiplicitive group. Assume by way of contradiction that
+    there exists some $a\in F^*$ such that $F^*=\{a^k | k \in \Z\}$. Then, since 
+    $F^*$ includes $F$'s unity, there must exist some $k$ such that
+    $a^k=1$. But then
+    for every $m$ such that $|m|>k$ there exist some $q$ and $0\leq r<k$ 
+    such that $m=qk+r$, so that  $a^m=a^{qk+r}=a^{qk}a^r=\left(a^{k}\right)^qa^r=1a^r=a^r$.
+    Hence $|F^*| \leq k$, and we have a contradiction.
+  \item
+  \item
+  \item
+    Let $F$ be a subfield of a field $K$, and $a$ an element of $K$.
+    {\bf First Direction}
+
+    Let $a$ be algebraic over $F$. Then there exists some polynomial in $F[x]$
+    which has $a$ as a root. Let $g(x)$ be the minimum polynomial of $a$, and
+    let $n=\deg g(x)$. 
+    We showed in class that $F(a)=\mbox{span}\{1, a, a^2, \ldots, a^{n-1}\}$. 
+    
+    Let $h(a)$ be in $F[a]$. 
+    Then there exists a polynomial
+    $r(x)$ with $\deg r(x) < n$, and a polynomial $q(x)$ such that 
+    $h(x)=q(x)g(x)+r(x)$. Since $g(a)=0$, we have 
+    $h(a)=r(a)=\sum_{0\leq i <n}c_ia^i$, for some $c_i$'s in $F$. Since
+    $\sum_{0\leq i <n}c_ia^i \in F(a)$, we have shown that $F[a] \subseteq F(a)$. 
+    Conversely, given $k \in F(a)$, there exist $c_i$'s such that $k=\sum_{0\leq i <n}c_ia^i$,
+    and so $k=r(a)$, where $r(x)=\sum_{0\leq i <n}c_ix^i \in F[x]$. 
+    Hence $F(a) \subseteq F[a]$.
+
+    {\bf Second Direction}
+
+    Let $a$ be such that $F[a]=F(a)$. Then there exists a polynomial 
+    $g(x) \in F[x]$ such that $g(a)=a^{-1}$. Let $g(x)=\sum_{0\leq i < n}c_ix^i$. Then
+    \begin{eqnarray*}
+      g(a)=a^{-1}&=&\sum_{0\leq i < n}c_ia^i
+      \\ 1 &=& \sum_{1\leq i < n + 1}c_ia^i
+      \\ 0 &=& \sum_{1\leq i < n + 1}c_ia^i - 1
+    \end{eqnarray*}
+    
+    Hence $h(x)=\sum_{1\leq i < n + 1}c_ia^i - 1$ is a polynomial in $F[x]$ which
+    has $a$ as a root, and hence $a$ is algebraic.
+
+\end{enumerate}
+\end{document}
+
+
