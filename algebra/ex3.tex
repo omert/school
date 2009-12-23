@@ -113,89 +113,71 @@
 
 \begin{enumerate}
 \item 
-  Let $\xi_m$ be the $m$-th root of unity. Then $\Q(\xi_m)$ is the splitting
-  field of $x^m-1 \in \Q[x]$. Denote by $G_m$ the Galois
-  Group of $\Q(\xi_m) / \Q$.
-
-  By the theorem stated in class, $|\Q(\xi_m):\Q|$ is
-  equal to the size of  $G_m$. Hence 
-  $|\Q(\xi_m):\Q|$ is equal to two for values of $m$ for which the group of 
-  automorphisms of $\Q(\xi_m)$ that fix $\Q$ is of size two. 
-
-  Denote complex conjugation by $\phi$. We know that $\phi$ is always in $G_m$,
-  since it preserves $\Q$ and maps roots of unity to roots of unity. Hence we 
-  need to show that $G_m=\{I,\phi\}$, where $I$ is the identity, in order to
-  show that $|\Q(\xi_m):\Q|=2$.
-
-  Denote by $a_0,a_1,\ldots,a_{m-1}$ the $m$ roots of unity of order $m$,
-  where $a_0=1$ and $a_1=\xi_m$.
-  \begin{itemize}
-  \item For $m=1,2$ we know that $\Q(\xi_m)=Q$ and so $|\Q(\xi_m):Q|=1$.
-  \item For $m=3$, and $\psi \in G_m$ must leave $a_0$ in place. Hence the only
-    possible automorphisms are the identity and $\phi$. Therefore 
-     $|\Q(\xi_3):Q|=2$.
-  \item For $m=4$, and $\psi \in G_m$ must leave $a_0$ and $a_2=-1$ in place. 
-    Hence the again only possible automorphisms are the identity and $\phi$. 
-    Therefore $|\Q(\xi_3):Q|=2$.
-  \item For $m>4$, 
-  \end{itemize}
-  
-  
-  
-
-
-
-
-  Since $\xi_m$ is a root of $f_m(x)=x^m-1$, it is algebraic, has
+  Since $\xi_m$ is a root of $x^m-1$, it is algebraic, has
   a minimum polynomial $g_m(x)$, and $|\Q(\xi_m):\Q|=\deg g_x(x)$. 
-  We showed in class that
-  there exists some polynomial $q_m(x)$ such that $f_m(x)=g_m(x)q_m(x)$. Since both
-  $f_m(x)$ and $g_m(x)$ are monic, then so is $q_m(x)$. Furthermore, both $g_m(x)$ and
+  Since $g_m(x)$ is minimal then it we showed in class that it divides
+  $x^m-1$ and
+  there exists some polynomial $q_m(x)$ such that $x^m-1=g_m(x)q_m(x)$. Since both
+  $x^m-1$ and $g_m(x)$ are monic, then so is $q_m(x)$. Furthermore, both $g_m(x)$ and
   $q_m(x)$ have integer coefficients. 
 
   Assume $m>2$, since for $m=1,2$ we know that $\Q(\xi_m)=Q$ and so 
   $|\Q(\xi_m):Q|=1$.
-  Assume $|\Q(\xi_m):\Q|=2$. Then $\deg g_x(x)$ and there exist $b,c \in \Z$ such that
-  $g_m(x)=x^2+bx+c$, and $\xi_m=-\half b\pm \sqrt{b^2/4-c}$. 
+  Assume $|\Q(\xi_m):\Q|=2$. Then $\deg g_x(x)=2$ and there exist $b,c \in \Z$ such that
+  $g_m(x)=x^2+bx+c$, and $\xi_m=-b/2\pm \sqrt{b^2/4-c}$. Since for $m>2$ 
+  we know that $\xi_m$
+  is not real, then $b^2/4-c$ must be negative. Then, since $|\xi_m|=1$, we
+  know that $1=(-b/2)^2+(c-b^2/4)=c$. Since the real part of $\xi_m$, $-b/2$, must be
+  strictly between minus one and one, then $b$ must be in $\{0,1,-1\}$. 
 
   \begin{itemize}
-  \item For $m=3$ we have $f_3=x^3-1=(x-1)(x^2+x+1)$, and so indeed 
+  \item For $m=3$ we have $g_m(x)=x^2+x+1$, and so indeed 
     $|\Q(\xi_3):\Q|=2$, since $x^2+x+1$ is irreducible.
-  \item For $m=4$ we have $\xi_4=i$, $\Q(i)=\mbox{span}\{1,i\}$ and again indeed
+  \item For $m=4$ we have $g_m(x)=x^2+1$, and again indeed
     $|\Q(\xi_4):\Q|=2$.
-  \item For $m>4$ we know that both the real part and the imaginary part
-    of $\xi_m$ are strictly between zero and one, and hence $b$ must equal $-1$
-    and $b^2/4-c=1/4-c$ must be between minus one and zero, and so $c$
-    must equal one. This leaves a single option for $\xi_m$, which is
-    $\half+i\sqrt{3/4}$. Since this number is not a root of unity for any
-    $m$, then for no $m>4$ we have that $|\Q(\xi_m):\Q|=2$.
+  \item For $m>4$ the only option left for $b$ is -1, so $g_m(x)=x^2-x+1$, 
+    and $\xi_m$ is
+    $\half+i\sqrt{3/4}$. This number is a sixth (and no less) root of unity, and hence
+    $m=6$ is the final value of $m$ for which  $|\Q(\xi_m):\Q|=2$.
   \end{itemize}
 
   \item 
     In all the answers below, $\mbox{span}A$ refers to the vector space
     over $\Q$ spanned by the members of $A$. All the fields trivially contain
     1 and -1, second roots of unity.
-    \begin{itemize}
-    \item $\Q(i)$
-      Since $x^2+1$ is the minimum polynomial of  $i$, 
-      then $i$ is algebraic and $\Q(i)=\Q[i]$. Furthermore, $|\Q(i):\Q|=2$, and so
-      every $f(i) \in \Q[i]$ is of the form $a+ib$.
 
-      Let $a(i) \in \Q[i]$ be a root of unity. Then for some $m$ it holds
-      that $a(i)$ is a root of $g(x)=x^m-1$. If $m$ is divisible by four, then
-      we can write $g(x)=(x^{m-2}-x^{m-4}+\cdots-1)(x^2+1)$. 
+    \begin{itemize}
+    \item $\Q(i)$, $\Q(\sqrt{-2})$, $\Q(\sqrt{-3})$, $\Q(\sqrt{-5})$
+
+      Let $a\in\{1, \sqrt{2}, \sqrt{3}, \sqrt{5}\}$. 
+      We know that $|\Q(ia):\Q|=2$. Assume a primitive root of unity of 
+      order $m$, $\xi_m$, is in $\Q(ia)$. Then $\Q(ia)$ must include $\Q(\xi_m)$ and 
+      $2=|\Q(ia):\Q|=|\Q(ia):\Q(\xi_m)||\Q(\xi_m):\Q|$. Since both
+      $|\Q(ia):\Q(\xi_m)|$ and 
+      $|\Q(\xi_m):\Q|$ are positive integers, this is possible only if one of
+      them is one and the other is two. If $|\Q(\xi_m):\Q|=1$  then
+      $\Q=\Q(\xi_m)$, which is only possible if $\xi_m$ is 1 or -1. And indeed
+      $\Q(ia)$ includes both 1 and -1. Otherwise $|\Q(\xi_m):\Q|=2$
+      and so $m\in\{3,4,6\}$ (as we showed above). $\Q(\xi_m)$ is hence either
+      $\Q(i)$ or $\Q(\alpha)$, with $\alpha=\half+\half i\sqrt{3}$, 
+      $\alpha^6=1$. In this case, because  $|\Q(ia):\Q(\xi_m)|=1$, then 
+      $\Q(ia)=\Q(\xi_m)$.
+
+      $\Q(i)$ does not include $\alpha$, since the imaginary part of
+      $\alpha$ is irrational, and the imaginary part of any $x\in\Q(i)$ is
+      rational. Hence the roots of unity in $\Q(i)$ are 1, -1, $i$ and $-i$.
+
+      Since $\Q(\sqrt{-3})$ includes $\alpha$ then it equals $\Q(\alpha)$, and its roots
+      of unity are the six powers of $\alpha$.
       
-      Since $x^2+1$ is the minimum polynomial of  $i$, 
-      then $|\Q(i):\Q|=2$ and $\Q(i)=\mbox{span}\{1,i\}$. 
+      $\Q(\sqrt{-2})$ and $\Q(\sqrt{-5})$ are equal to neither $\Q(i)$ nor
+      $\Q(\alpha)$, and hence the roots of unity that they include are only
+      1 and -1. They are not equal to $\Q(i)$ since the imaginary part of their
+      elements are irrational. They are not equal to $\Q(\sqrt{-3})$ because
+      $\sqrt{3}/\sqrt{2}$ and $\sqrt{3}/\sqrt{5}$ are irrational, so $\alpha$
+      is not an element of $\Q(\sqrt{2})$ or $\Q(\sqrt{5})$, respectively.
       
-      Since $i^2=-1\in \Q$, then $\Q(i)=\mbox{span}\{1,i\}$, and it includes 
-      $i$ and $-i$, fourth roots of unity.
       
-    \item $\Q(\sqrt{-2})$
-      
-      Since $x^2+2$ is the minimum polynomial of  $\sqrt{-2}$, 
-      then $|\Q(\sqrt{-2}):\Q|=2$ and  $\Q(\sqrt{-2})=\mbox{span}\{1,\sqrt{-2}\}$. 
-      Hence it includes no non-trivial roots of unity.
 
     \item $\Q(\sqrt{2})$, $\Q(\sqrt{3})$
 
@@ -205,7 +187,7 @@
 
     \end{itemize}
   \item Let $F$ be an infinite field, and let $F^*=F \setminus \{0\}$ be
-    its multiplicitive group. Assume by way of contradiction that
+    its multiplicative group. Assume by way of contradiction that
     there exists some $a\in F^*$ such that $F^*=\{a^k | k \in \Z\}$. Then, since 
     $F^*$ includes $F$'s unity, there must exist some $k$ such that
     $a^k=1$. But then
@@ -213,7 +195,74 @@
     such that $m=qk+r$, so that  $a^m=a^{qk+r}=a^{qk}a^r=\left(a^{k}\right)^qa^r=1a^r=a^r$.
     Hence $|F^*| \leq k$, and we have a contradiction.
   \item
+    \begin{itemize}
+    \item $x^3-x-1$
+
+      This polynomial is irreducible, since it has a single real root which
+      is strictly between 1 and 2 (proof omitted), and hence irrational. 
+      Call its real root
+      $\alpha$ and its complex roots $\beta$ and $-\beta$. 
+
+      Since $\alpha$ is irrational and $\beta$ is complex, then 
+      $|\Q(\alpha,\beta):\Q|=2$. Hence the Galois group of this polynomial
+      includes the identity and complex conjugation only, and is isomorphic
+      to $C_2$.
+      
+    \item $x^3-10$
+      
+      The same proof of the previous item applies to this polynomial, with the
+      minor modification that the real root is strictly between 2 and three.
+
+    \item $x^3-10$ over $\Q(\sqrt{2})$
+
+      Since $\sqrt[3]{10}$ is not a rational multiple of $\sqrt{2}$ then
+      $x^3-10$ is irreducible also over $\Q(\sqrt{2})$ then the same
+      also holds is this case.
+
+    \end{itemize}
+    In the answers above we used these facts, which were shown in class:
+    \begin{enumerate}
+    \item If a 
+      polynomial with integer coefficients has a rational root then that root
+      is also an integer.
+    \item Complex conjugation is an element of the Galois group of any 
+      polynomial, and is different than the identity map for any polynomial
+      with complex roots.
+    \end{enumerate}
+    
+      
   \item
+    Let $K=\Q(\sqrt[4]{5}, i)$.
+    The roots of $x^4-5$ are 
+    $\{\sqrt[4]{5},-\sqrt[4]{5}, i\sqrt[4]{5},-i\sqrt[4]{5}\}$.
+    Hence the splitting field of $x^4-5$ is $K$.
+
+    \begin{itemize}
+    \item $x^4-5$ over $\Q$
+
+      Since the first 
+      power of $\sqrt[4]{5}$ which is rational is 4, then 
+      $\{1,\sqrt[4]{5}, \sqrt[4]{5}^2, \sqrt[4]{5}^3\}$ are all linearly
+      independent over $\Q$, $|\Q(\sqrt[4]{5}):\Q|=4$ and 
+      $|K:\Q|=8$.
+
+      The Galois group of $K:\Q$ is therefore of order 8, has an element of
+      order two (complex conjugation) and an element of maximal order four (map
+      each of the four roots to the next cyclically), and so can only be 
+      isomorphic to $D_8$. This proof is identical to the one done in class
+      for $x^4-2$.
+      
+    \item $x^4-5$ over $\Q(\sqrt{5})$
+      
+      $|K:\Q(\sqrt{5})|=|K:\Q(\sqrt{5},i)|\cdot|\Q(\sqrt{5},i):\Q(\sqrt{5})|$.
+      Since both expressions on the right are equal to two then the Galois
+      group is either $C_4$ or $C_2\times C_2$. Since it has an element of order four 
+      (the same cyclical map) then it must be $C_4$.
+
+    \item $x^4-5$ over $\Q(\sqrt{-5})$
+
+    \end{itemize}  
+
   \item
     Let $F$ be a subfield of a field $K$, and $a$ an element of $K$.
     {\bf First Direction}
