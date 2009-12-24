@@ -244,7 +244,7 @@
       power of $\sqrt[4]{5}$ which is rational is 4, then 
       $\{1,\sqrt[4]{5}, \sqrt[4]{5}^2, \sqrt[4]{5}^3\}$ are all linearly
       independent over $\Q$, $|\Q(\sqrt[4]{5}):\Q|=4$ and 
-      $|K:\Q|=8$.
+      $|K:\Q|=|K:\Q(\sqrt[4]{5})|\cdot|\Q(\sqrt[4]{5}):\Q|=8$.
 
       The Galois group of $K:\Q$ is therefore of order 8, has an element of
       order two (complex conjugation) and an element of maximal order four (map
@@ -254,12 +254,55 @@
       
     \item $x^4-5$ over $\Q(\sqrt{5})$
       
+      We can write the order of the Galois group as:
       $|K:\Q(\sqrt{5})|=|K:\Q(\sqrt{5},i)|\cdot|\Q(\sqrt{5},i):\Q(\sqrt{5})|$.
-      Since both expressions on the right are equal to two then the Galois
-      group is either $C_4$ or $C_2\times C_2$. Since it has an element of order four 
-      (the same cyclical map) then it must be $C_4$.
+      Since both expressions on the right are equal to two, then the Galois
+      group is either $C_4$ or $C_2\times C_2$. Let $\psi$ be defined by 
+      $\psi(\sqrt[4]{5})=-\sqrt[4]{5}$, and $\psi$ fixes the rationals and imaginaries. 
+      Then $\psi$ is an automorphism that
+      fixes $\Q(\sqrt{5})$:
+      \begin{equation*}
+        \psi(\sqrt{5})=\psi(\sqrt[4]{5}\sqrt[4]{5})=\psi(\sqrt[4]{5})^2
+        = (-\sqrt[4]{5})^2=\sqrt{5}.
+      \end{equation*}
+      Since $\psi$ is a member of the Galois group, and since complex 
+      conjugation is too, then the group has two distinct members of order
+      two, and hence is isomorphic to $C_2\times C_2$.
 
     \item $x^4-5$ over $\Q(\sqrt{-5})$
+      We can write the order of the Galois group as:
+      $|K:\Q(\sqrt{5})|=|K:\Q(i\sqrt[4]{5})|\cdot|\Q(i\sqrt[4]{5}):\Q(\sqrt{-5})|$.
+      
+      Again, both expressions on the right are equal to two, so the Galois
+      group is either $C_4$ or $C_2\times C_2$. Let $\psi$ be defined by 
+      $\psi(\sqrt[4]{5})=-\sqrt[4]{5}$, $\psi(i\sqrt[4]{5})=-i\sqrt[4]{5}$,
+      and $\psi$ fixes the rationals. Then $\psi$ is an automorphism that
+      fixes $\Q(\sqrt{-5})$:
+      \begin{equation*}
+        \psi(\sqrt{-5})=\psi(i\sqrt[4]{5}\cdot\sqrt[4]{5})
+        = \psi(i\sqrt[4]{5})\psi(\sqrt[4]{5})
+        = (-i\sqrt[4]{5})(-\sqrt[4]{5})=\sqrt{-5}
+      \end{equation*}
+      
+      As in the last case, since $\psi$ is a member of the Galois group, and 
+      since complex 
+      conjugation is too, then the group has two distinct members of order
+      two, and hence is isomorphic to $C_2\times C_2$.
+      
+    \item $x^4-5$ over $\Q(i)$
+
+      Since 
+      $\{1,\sqrt[4]{5}, \sqrt[4]{5}^2, \sqrt[4]{5}^3\}$ are all linearly
+      independent over $\Q(i)$ then the order of the Galois group is four.
+      If we define $\psi$ to cyclically map each root to the next, then
+      \begin{equation*}
+        \psi(i)=\psi(i\sqrt[4]{5}/\sqrt[4]{5})
+        =\psi(i\sqrt[4]{5})/\psi(\sqrt[4]{5})
+        =-\sqrt[4]{5})/(i\sqrt[4]{5})
+        =i
+      \end{equation*}
+      Hence $\psi$ is an automorphism that fixes $\Q(i)$. Since it is of order
+      four then the Galois group is of order four.
 
     \end{itemize}  
 
