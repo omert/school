@@ -251,9 +251,14 @@
       for $x^4-2$.
       
     \item $x^4-5$ over $\Q(\sqrt{5})$
-      
-      We can write the order of the Galois group as:
-      $|K:\Q(\sqrt{5})|=|K:\Q(\sqrt{5},i)|\cdot|\Q(\sqrt{5},i):\Q(\sqrt{5})|$.
+
+      Over $\Q(\sqrt{5})$ we can decompose $x^4-5$ into 
+      $(x^2+\sqrt{5})(x^2-\sqrt{5})$. The minimum polynomial of $\sqrt[4]{5}$
+      in $\Q(\sqrt{5})$ is therefore $x^2-\sqrt{5}$, and so 
+      $|\Q(\sqrt[4]{5}):\Q(\sqrt{5})|=2$. 
+
+      We can therefore write the order of the Galois group as:
+      $|K:\Q(\sqrt{5})|=|K:\Q(\sqrt[4]{5})|\cdot|\Q(\sqrt[4]{5}):\Q(\sqrt{5})|$.
       Since both expressions on the right are equal to two, then the Galois
       group is either $C_4$ or $C_2\times C_2$. Let $\psi$ be defined by 
       $\psi(\sqrt[4]{5})=-\sqrt[4]{5}$, and $\psi$ fixes the rationals and imaginaries. 
@@ -268,6 +273,7 @@
       two, and hence is isomorphic to $C_2\times C_2$.
 
     \item $x^4-5$ over $\Q(\sqrt{-5})$
+
       We can write the order of the Galois group as:
       $|K:\Q(\sqrt{5})|=|K:\Q(i\sqrt[4]{5})|\cdot|\Q(i\sqrt[4]{5}):\Q(\sqrt{-5})|$.
       
