@@ -188,12 +188,29 @@
     \end{itemize}
   \item Let $F$ be an infinite field, and let $F^*=F \setminus \{0\}$ be
     its multiplicative group. Assume by way of contradiction that
-    there exists some $a\in F^*$ such that $F^*=\{a^k | k \in \Z\}$. Then, since 
-    $F^*$ includes $F$'s unity, there must exist some $k$ such that
-    $a^k=1$. But then
-    for every $m$ such that $|m|>k$ there exist some $q$ and $0\leq r<k$ 
-    such that $m=qk+r$, so that  $a^m=a^{qk+r}=a^{qk}a^r=\left(a^{k}\right)^qa^r=1a^r=a^r$.
-    Hence $|F^*| \leq k$, and we have a contradiction.
+    there exists some $a\in F^*$ such that $F^*=\{a^k | k \in \Z\}$. Let $m$ be such that
+    $a^m=-1$. Then $a^{2m}=1$. Note that if $k\neq l$ then $a^k \neq a^l$, otherwise
+    $a^{k-l}=1$ and the group would be of size at most $|k-l|$.
+
+    Consider first the case where the character of $F$ is greater than two. Then
+    1 is different than -1, since otherwise $1+1=0$, and the character would
+    be two. Now, since $a^0=1$ and $-1\neq 1$, $m$ must be different than zero, 
+    and so must $2m$.
+    But since $a^{2m}=1$, then there are no more than $|2m|$ elements 
+    in $F^*=\{a^k | k \in \Z\}$, which we know is infinite - contradiction.
+    
+    Consider next the case where the character of $F$ is two, so that $1+1=0$.
+    Assume $F*$ is cyclic, so that $a$ generates it. Then there must exist
+    some $k$ such that $a+1=a^k$. Clearly $k\neq 0,1$ (since $1\neq0$), 
+    and we further assume $k>0$ (otherwise take $-a$ 
+    instead of $a$). Let $n$ be such that $|n|>k$. Then there exist polynomials
+    in $a$ over $\Z_2$, 
+    $q(a)$ and $r(a)$, such that $a^n=q(a)(a^k+a+1)+r(a)$, and where
+    the degree of $r(a)$ is less than $k$. Since $a^k+a+1=0$, then $a^n$ is equal
+    to some polynomial in $a$ over $\Z_2$ of degree less than $k$. Since
+    there are only finitely many such polynomials, then $F$ is finite - 
+    contradiction.
+
   \item
     \begin{itemize}
     \item $x^3-x-1$
@@ -252,9 +269,8 @@
       
     \item $x^4-5$ over $\Q(\sqrt{5})$
 
-      Over $\Q(\sqrt{5})$ we can decompose $x^4-5$ into 
-      $(x^2+\sqrt{5})(x^2-\sqrt{5})$. The minimum polynomial of $\sqrt[4]{5}$
-      in $\Q(\sqrt{5})$ is therefore $x^2-\sqrt{5}$, and so 
+      The minimum polynomial of $\sqrt[4]{5}$
+      over $\Q(\sqrt{5})$ is $x^2-\sqrt{5}$, and so 
       $|\Q(\sqrt[4]{5}):\Q(\sqrt{5})|=2$. 
 
       We can therefore write the order of the Galois group as:
@@ -273,6 +289,10 @@
       two, and hence is isomorphic to $C_2\times C_2$.
 
     \item $x^4-5$ over $\Q(\sqrt{-5})$
+
+      The minimum polynomial of $i\sqrt[4]{5}$
+      over $\Q(\sqrt{5})$ is $x^2-\sqrt{-5}$, and so 
+      $|\Q(\sqrt[4]{5}):\Q(\sqrt{5})|=2$. 
 
       We can write the order of the Galois group as:
       $|K:\Q(\sqrt{5})|=|K:\Q(i\sqrt[4]{5})|\cdot|\Q(i\sqrt[4]{5}):\Q(\sqrt{-5})|$.
