@@ -201,9 +201,11 @@
     
     Consider next the case where the character of $F$ is two, so that $1+1=0$.
     Assume $F*$ is cyclic, so that $a$ generates it. Then there must exist
-    some $k$ such that $a+1=a^k$. Clearly $k\neq 0,1$ (since $1\neq0$), 
-    and we further assume $k>0$ (otherwise take $-a$ 
-    instead of $a$). Let $n$ be some number in $\Z$. Then there exist polynomials
+    some $k$ such that $a+1=a^k$, and so $a^k+a+1=0$. 
+    Clearly $k\neq 0,1$ (since $1\neq0$), 
+    and we further assume $k>0$ (otherwise take $a^{-k}(a^k+a+1)$). 
+    Let $n$ be some number in $\Z$. 
+    Then there exist polynomials
     in $a$ over $\Z_2$, 
     $q(a)$ and $r(a)$, such that $a^n=q(a)(a^k+a+1)+r(a)$, and where
     the degree of $r(a)$ is less than $k$. Since $a^k+a+1=0$, then $a^n$ is equal
