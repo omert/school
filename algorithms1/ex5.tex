@@ -1,0 +1,172 @@
+\documentclass[11pt]{article} \usepackage{amssymb}
+\usepackage{amsfonts} \usepackage{amsmath} \usepackage{bm}
+\usepackage{latexsym} \usepackage{epsfig}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+
+\setlength{\textwidth}{6.5 in} \setlength{\textheight}{8.25in}
+\setlength{\oddsidemargin}{0in} \setlength{\topmargin}{0in}
+\addtolength{\textheight}{.8in} \addtolength{\voffset}{-.5in}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{example}[theorem]{Example}
+\newenvironment{proof}{\noindent \textbf{Proof:}}{$\Box$}
+
+\newcommand{\ignore}[1]{}
+
+\newcommand{\enote}[1]{} \newcommand{\knote}[1]{}
+\newcommand{\rnote}[1]{}
+
+
+
+% \newcommand{\enote}[1]{{\bf [[Elchanan:} {\emph{#1}}{\bf ]]}}
+% \newcommand{\knote}[1]{{\bf [[Krzysztof:} {\emph{#1}}{\bf ]]}}
+% \newcommand{\rnote}[1]{{\bf [[Ryan:} {\emph{#1}}{\bf ]]}}
+
+
+
+\DeclareMathOperator{\Support}{Supp} \DeclareMathOperator{\Opt}{Opt}
+\DeclareMathOperator{\Ordo}{\mathcal{O}}
+\newcommand{\MaxkCSP}{\textsc{Max $k$-CSP}}
+\newcommand{\MaxkCSPq}{\textsc{Max $k$-CSP$_{q}$}}
+\newcommand{\MaxCSP}[1]{\textsc{Max CSP}(#1)} \renewcommand{\Pr}{{\bf
+    P}} \renewcommand{\P}{{\bf P}} \newcommand{\Px}{\mathop{\bf P\/}}
+\newcommand{\E}{{\bf E}} \newcommand{\Cov}{{\bf Cov}}
+\newcommand{\Var}{{\bf Var}} \newcommand{\Varx}{\mathop{\bf Var\/}}
+
+\newcommand{\bits}{\{-1,1\}}
+
+\newcommand{\nsmaja}{\textstyle{\frac{2}{\pi}} \arcsin \rho}
+
+\newcommand{\Inf}{\mathrm{Inf}} \newcommand{\I}{\mathrm{I}}
+\newcommand{\J}{\mathrm{J}}
+
+\newcommand{\eps}{\epsilon} \newcommand{\lam}{\lambda}
+
+% \newcommand{\trunc}{\ell_{2,[-1,1]}}
+\newcommand{\trunc}{\zeta} \newcommand{\truncprod}{\chi}
+
+\newcommand{\N}{\mathbb N} \newcommand{\R}{\mathbb R}
+\newcommand{\Z}{\mathbb Z} \newcommand{\CalE}{{\mathcal{E}}}
+\newcommand{\CalC}{{\mathcal{C}}} \newcommand{\CalM}{{\mathcal{M}}}
+\newcommand{\CalR}{{\mathcal{R}}} \newcommand{\CalS}{{\mathcal{S}}}
+\newcommand{\CalV}{{\mathcal{V}}}
+\newcommand{\CalX}{{\boldsymbol{\mathcal{X}}}}
+\newcommand{\CalG}{{\boldsymbol{\mathcal{G}}}}
+\newcommand{\CalH}{{\boldsymbol{\mathcal{H}}}}
+\newcommand{\CalY}{{\boldsymbol{\mathcal{Y}}}}
+\newcommand{\CalZ}{{\boldsymbol{\mathcal{Z}}}}
+\newcommand{\CalW}{{\boldsymbol{\mathcal{W}}}}
+\newcommand{\CalF}{{\mathcal{Z}}}
+% \newcommand{\boldG}{{\boldsymbol G}}
+% \newcommand{\boldQ}{{\boldsymbol Q}}
+% \newcommand{\boldP}{{\boldsymbol P}}
+% \newcommand{\boldR}{{\boldsymbol R}}
+% \newcommand{\boldS}{{\boldsymbol S}}
+% \newcommand{\boldX}{{\boldsymbol X}}
+% \newcommand{\boldB}{{\boldsymbol B}}
+% \newcommand{\boldY}{{\boldsymbol Y}}
+% \newcommand{\boldZ}{{\boldsymbol Z}}
+% \newcommand{\boldV}{{\boldsymbol V}}
+\newcommand{\boldi}{{\boldsymbol i}} \newcommand{\boldj}{{\boldsymbol
+    j}} \newcommand{\boldk}{{\boldsymbol k}}
+\newcommand{\boldr}{{\boldsymbol r}}
+\newcommand{\boldsigma}{{\boldsymbol \sigma}}
+\newcommand{\boldupsilon}{{\boldsymbol \upsilon}}
+\newcommand{\hone}{{\boldsymbol{H1}}}
+\newcommand{\htwo}{\boldsymbol{H2}}
+\newcommand{\hthree}{\boldsymbol{H3}}
+\newcommand{\hfour}{\boldsymbol{H4}}
+
+
+\newcommand{\sgn}{\mathrm{sgn}} \newcommand{\Maj}{\mathrm{Maj}}
+\newcommand{\Acyc}{\mathrm{Acyc}}
+\newcommand{\UniqMax}{\mathrm{UniqMax}}
+\newcommand{\Thr}{\mathrm{Thr}} \newcommand{\littlesum}{{\textstyle
+    \sum}}
+
+\newcommand{\half}{{\textstyle \frac12}}
+\newcommand{\third}{{\textstyle \frac13}}
+\newcommand{\fourth}{{\textstyle \frac14}}
+
+\newcommand{\Stab}{\mathbb{S}}
+\newcommand{\StabThr}[2]{\Gamma_{#1}(#2)}
+\newcommand{\StabThrmin}[2]{{\underline{\Gamma}}_{#1}(#2)}
+\newcommand{\StabThrmax}[2]{{\overline{\Gamma}}_{#1}(#2)}
+\newcommand{\TestFcn}{\Psi}
+
+\renewcommand{\phi}{\varphi}
+
+\begin{document}
+\title{Algorithms - Exercise 5}
+
+ \author{Omer Tamuz, 035696574}
+\maketitle
+
+\begin{enumerate}
+\item 
+  
+  Let $a$ and $b$ be two $n$ digit numbers in base $d$. 
+  Assume $n$ is a power of two (otherwise add at most $n-1$ leading zeros).
+  Let $a_h$ be the $n/2$ high order digits, and $a_l$ be the $n/2$ low order
+  digits. Define $b_h$ and $b_l$ likewise. Let $M=2^{n/2}$. 
+
+  We would like to calculate $a\cdot b$. Let 
+  $x=(a_l+a_h)\cdot (b_l+b_h)=a_l \cdot b_l+a_l\cdot b_h+a_h\cdot b_l + a_h\cdot b_h$, 
+  $y=a_h \cdot b_h$ and $z=a_l\cdot b_l$. Then: 
+  \begin{eqnarray*}
+    a\cdot b&=& (a_hM+a_l)\cdot(b_hM+b_l)
+    \\ &=& a_h \cdot b_hM^2+(a_h\cdot b_l+a_l\cdot b_h)M+a_l\cdot b_l
+    \\ &=& yM^2+(x-y-z)M+z
+  \end{eqnarray*}
+
+
+  Let $T(n)$ be the amount of time it takes to multiply to $n$ digit numbers.
+  Then
+  \begin{itemize}
+  \item The addition of two $n$ digit numbers is $O(n)$, by the naive algorithm.
+  \item Multiplication by $M$ is linear, since all one has to do is add $n/2$
+  trailing zeros.
+  \item $x$, $y$ and $z$ are products of $n/2$ digit numbers. They each take 
+    $T(n/2) + O(n)$  to calculate, since $x$ requires some additions, too.
+  \item Once $x$, $y$ and $z$ are known then only additions and multiplications
+    by $M$ are required.
+  \item Hence  $T(n)=3T(n/2)+O(n)$ and $T(n)$ is $O(n^{\log 3})$.
+
+  \end{itemize}
+
+
+  \item Let $G$ be a graph. We would like to determine if this graph has
+    a 9 vertex clique. 
+
+    We first find all the triangles in the graph, by naively checking every
+    triplet of vertices. We then construct a new graph, $G'$, where the 
+    vertices of $G'$ correspond to the triangles of $G$. Two vertices $u,v$ 
+    in $G'$ are connected iff every vertex in triangle $u$ in $G$ is connected
+    to every vertex in triangle $v$ in $G$. 
+
+    Next, we apply to $G'$
+    the algorithm we saw in class for determining if a graph
+    has triangles. Since a triangle in $G'$ corresponds to three triangles in
+    $G$ where all the vertices are connected, then $G'$ has a triangle iff
+    $G$ has a clique of size 9.
+
+    $G'$ has $O(n^3)$ vertices, and so its construction will take 
+    $O(n^6)$. Determining if it has a triangle, using Fast Matrix 
+    Multiplication, will take $O(n^{3\omega})$. Since $3\omega \geq 6$ 
+    then the total running time will be $O(n^{3\omega})$.
+    
+   
+\end{enumerate}
+
+\end{document}
+
+
