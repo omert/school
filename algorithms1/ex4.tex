@@ -151,23 +151,17 @@
   $|C|-|S|$ it must be that $|C|=|S|$ and that we have a perfect matching.
 
 \item
-  Let $C$, $S$, $R$ be the Gallai-Edmond decomposition of a $d$-regular
-  bipartite graph. Let $N_{XY}$ be the number of edges between 
-  $X,Y\in \{C,S,R\}$. Then we know that
-  \begin{itemize}
-  \item $N_{CC}=N_{CR}=0$, by the definition of the Gallai-Edmond decomposition.
-  \item $N_{CS}=d|C|$, since these are all the edges that originate in $C$.
-  \item $N_{RR}+N_{RS}=d|R|$, since these are all the edges that originate
-    in a vertex in $|R|$.
-  \item The total number of edges is $\half d(|C|+|S|+|R|)$. 
-  \end{itemize}
-  
-  Hence $N_{SS}=\half d(|C|+|S|+|R|) - d|C|-d|R|=\half d(-|C|+|S|-|R|)$. Since this number
-  is non-negative, we know that $|S|-|C|\geq |R|$. However $|S|-|C|$ is at most
-  zero, and therefore the only possibility is that $|R|=0$, and $|C|=|S|$. 
-  Since the number of unmathced vertices is $|C|-|S|$, then we know that there
-  exists a perfect matching. 
 
+  Let $H$ be some set of vertices of a $d$-regular
+  bipartite graph, where all the vertices in $H$ are on the same side of the 
+  graph. Then the number of edges adjacent to $H$ is $n=d|H|$. Since $n$
+  is less than or equal to the number of edges adjacent to $N(H)$, then
+  $|N(H)|\geq n/d=|H|$. 
+
+  Given a set $H$ which is not one-sided, we can, by decomposing it into 
+  $H_L$ and $H_R$ as above and using the exact same calculation, show that 
+  $|N(H)|\geq|H|$. Hence any $d$-regular bipartite graph has a perfect matching.
+  
   
   A one-regular bipartite graph is clearly a perfect matching. 
   Since, as we just showed, every $d$-regular bipartite graph has a perfect
@@ -176,12 +170,28 @@
   this repeatedly, we decompose the graph into $d$ perfect matchings.
 
 \item
-  Let $G$ be a bipartite graph of maximal degree $\Delta$. We can complete it
-  to a $\Delta$-regular bipartite graph by repeatedly adding edges to vertices
-  of degree less than $\Delta$. The resulting graph is the disjoint union
-  of $\Delta$ perfect matchings, and so the original graph is the disjoint
-  union of $\Delta$ matchings, where each matching is the intersection of
-  a matching in the regular graph with the set of edges of the original graph.
+  Let $G$ be a simple bipartite graph of maximal degree $\Delta$. We can 
+  complete it to a simple $\Delta$-regular bipartite graph by adding isolated
+  vertices  to the side with less vertices (if one exists), so that
+  the number of vertices on both sides is equal, and then repeating the 
+  following:
+  \begin{itemize}
+  \item Choose some pair of vertices
+    $u,v$ with sub-maximal degrees. Such a pair must exist as long as the graph
+    is not $\Delta$-regular, by a simple edges / vertices counting argument.
+  \item Add to the graph the complete bipartite
+    graph of size $2d$, with one edge, $(u',v')$, removed. Then connect
+    $u$ to $v'$ and $v$ to $u'$.
+  \end{itemize}
+  Since at each step of this process we increased the degrees of vertices
+  in $G$ and added no new vertices of degree less than $\Delta$, the process 
+  will
+  stop, and the resulting graph will be $\Delta$-regular. 
+
+  Since a $\Delta$-regular bipartite graph is the disjoint union
+  of $\Delta$ perfect matchings, then the original graph is the disjoint
+  union of $\Delta$ matchings. Its matchings are each an intersection of a 
+  matching in the regular graph, with the set of edges of the original graph.
 \end{enumerate}
 
 \end{document}
