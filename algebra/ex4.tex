@@ -1,0 +1,212 @@
+\documentclass[11pt]{article} \usepackage{amssymb}
+\usepackage{amsfonts} \usepackage{amsmath} \usepackage{bm}
+\usepackage{latexsym} \usepackage{epsfig}
+
+\setlength{\textwidth}{6.5 in} \setlength{\textheight}{8.25in}
+\setlength{\oddsidemargin}{0in} \setlength{\topmargin}{0in}
+\addtolength{\textheight}{.8in} \addtolength{\voffset}{-.5in}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{example}[theorem]{Example}
+\newenvironment{proof}{\noindent \textbf{Proof:}}{$\Box$}
+
+\newcommand{\ignore}[1]{}
+
+\newcommand{\enote}[1]{} \newcommand{\knote}[1]{}
+\newcommand{\rnote}[1]{}
+
+
+
+% \newcommand{\enote}[1]{{\bf [[Elchanan:} {\emph{#1}}{\bf ]]}}
+% \newcommand{\knote}[1]{{\bf [[Krzysztof:} {\emph{#1}}{\bf ]]}}
+% \newcommand{\rnote}[1]{{\bf [[Ryan:} {\emph{#1}}{\bf ]]}}
+
+
+
+\DeclareMathOperator{\Support}{Supp} \DeclareMathOperator{\Opt}{Opt}
+\DeclareMathOperator{\Ordo}{\mathcal{O}}
+\newcommand{\MaxkCSP}{\textsc{Max $k$-CSP}}
+\newcommand{\MaxkCSPq}{\textsc{Max $k$-CSP$_{q}$}}
+\newcommand{\MaxCSP}[1]{\textsc{Max CSP}(#1)} \renewcommand{\Pr}{{\bf
+    P}} \renewcommand{\P}{{\bf P}} \newcommand{\Px}{\mathop{\bf P\/}}
+\newcommand{\E}{{\bf E}} \newcommand{\Cov}{{\bf Cov}}
+\newcommand{\Var}{{\bf Var}} \newcommand{\Varx}{\mathop{\bf Var\/}}
+
+\newcommand{\bits}{\{-1,1\}}
+
+\newcommand{\nsmaja}{\textstyle{\frac{2}{\pi}} \arcsin \rho}
+
+\newcommand{\Inf}{\mathrm{Inf}} \newcommand{\I}{\mathrm{I}}
+\newcommand{\J}{\mathrm{J}}
+
+\newcommand{\eps}{\epsilon} \newcommand{\lam}{\lambda}
+
+% \newcommand{\trunc}{\ell_{2,[-1,1]}}
+\newcommand{\trunc}{\zeta} \newcommand{\truncprod}{\chi}
+
+\newcommand{\N}{\mathbb N} \newcommand{\R}{\mathbb R}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\Z}{\mathbb Z} \newcommand{\CalE}{{\mathcal{E}}}
+\newcommand{\CalC}{{\mathcal{C}}} \newcommand{\CalM}{{\mathcal{M}}}
+\newcommand{\CalR}{{\mathcal{R}}} \newcommand{\CalS}{{\mathcal{S}}}
+\newcommand{\CalV}{{\mathcal{V}}}
+\newcommand{\CalX}{{\boldsymbol{\mathcal{X}}}}
+\newcommand{\CalG}{{\boldsymbol{\mathcal{G}}}}
+\newcommand{\CalH}{{\boldsymbol{\mathcal{H}}}}
+\newcommand{\CalY}{{\boldsymbol{\mathcal{Y}}}}
+\newcommand{\CalZ}{{\boldsymbol{\mathcal{Z}}}}
+\newcommand{\CalW}{{\boldsymbol{\mathcal{W}}}}
+\newcommand{\CalF}{{\mathcal{Z}}}
+% \newcommand{\boldG}{{\boldsymbol G}}
+% \newcommand{\boldQ}{{\boldsymbol Q}}
+% \newcommand{\boldP}{{\boldsymbol P}}
+% \newcommand{\boldR}{{\boldsymbol R}}
+% \newcommand{\boldS}{{\boldsymbol S}}
+% \newcommand{\boldX}{{\boldsymbol X}}
+% \newcommand{\boldB}{{\boldsymbol B}}
+% \newcommand{\boldY}{{\boldsymbol Y}}
+% \newcommand{\boldZ}{{\boldsymbol Z}}
+% \newcommand{\boldV}{{\boldsymbol V}}
+\newcommand{\boldi}{{\boldsymbol i}} \newcommand{\boldj}{{\boldsymbol
+    j}} \newcommand{\boldk}{{\boldsymbol k}}
+\newcommand{\boldr}{{\boldsymbol r}}
+\newcommand{\boldsigma}{{\boldsymbol \sigma}}
+\newcommand{\boldupsilon}{{\boldsymbol \upsilon}}
+\newcommand{\hone}{{\boldsymbol{H1}}}
+\newcommand{\htwo}{\boldsymbol{H2}}
+\newcommand{\hthree}{\boldsymbol{H3}}
+\newcommand{\hfour}{\boldsymbol{H4}}
+
+
+\newcommand{\sgn}{\mathrm{sgn}} \newcommand{\Maj}{\mathrm{Maj}}
+\newcommand{\Acyc}{\mathrm{Acyc}}
+\newcommand{\UniqMax}{\mathrm{UniqMax}}
+\newcommand{\Thr}{\mathrm{Thr}} \newcommand{\littlesum}{{\textstyle
+    \sum}}
+
+\newcommand{\half}{{\textstyle \frac12}}
+\newcommand{\third}{{\textstyle \frac13}}
+\newcommand{\fourth}{{\textstyle \frac14}}
+
+\newcommand{\Stab}{\mathbb{S}}
+\newcommand{\StabThr}[2]{\Gamma_{#1}(#2)}
+\newcommand{\StabThrmin}[2]{{\underline{\Gamma}}_{#1}(#2)}
+\newcommand{\StabThrmax}[2]{{\overline{\Gamma}}_{#1}(#2)}
+\newcommand{\TestFcn}{\Psi}
+
+\renewcommand{\phi}{\varphi}
+
+\begin{document}
+\title{Algebra Through Examples - Exercise 4}
+
+ \author{Omer Tamuz, 035696574}
+\maketitle
+
+
+\begin{enumerate}
+\item 
+  \begin{enumerate}
+  \item 
+
+    $x^4+x^3+x^2+x+1$ is equal to one when $x=0$ and when $x=1$, by
+    substitution. This is true for any polynomial with an odd number
+    of non-zero terms which include the free term.
+  \item
+
+    Represent $GF(4)$ as $\{0,1,\alpha,\alpha+1\}$, where $\alpha$ is the
+    root of $x^2+x+1$, which is irreducible of $GF(2)$. 
+    Then:
+    \begin{itemize}
+    \item $x^4+x^3+x^2+x+1=$
+    \end{itemize}
+
+  \end{enumerate}
+\item
+
+  Let $F$ be a finite field of characteristic $p$. Let $\phi:F\to F$ be defined
+  by $\phi(a)=a^p$. We would like to show that $\phi$ is an automorphism. 
+
+
+  We showed in class that the multiplicative group of a 
+  finite field is cyclic. Let $g$ be a generator of $F^*$.
+  We know that the order of $F$ is $p^k$ for some $k$. 
+  Hence by Euler's theorem $g^{p^k-1}=1$ and so $\left(g^p\right)^k=g$, and 
+  therefore $g^p$ is also a generator. 
+
+  We showed in class that given two fields of identical order, and generators
+  of each field, then the homomorphism defined by mapping one generator to the
+  other is a field isomorphism. Hence $\phi$ is also an isomorphism, and since
+  its domain is the same as its image then it is an automorphism.
+
+\item
+
+  By definition $i$ and $j$ are both roots of $x^2+1$. 
+
+  Let $q=a+bi+cj+dk$ be a root of $x^2+1$. Then
+  \begin{eqnarray*}
+    1 &=&(a+bi+cj+dk)^2
+    \\ &=&(a+bi+cj+dk)(a+bi+cj+dk)
+    \\ &=&a^2-b^2-c^2-d^2+2abi+2acj+2adk
+  \end{eqnarray*}
+
+  Hence $q$ is a root iff $a=0$ and $b^2+c^2+d^2=1$. Hence there clearly are
+  infinitely many roots to $x^2+1$.
+
+\item
+  Let $f(x)=1+\sum_{i=1}^mf_ix^i$. Then:
+  \begin{enumerate}
+  \item 
+    \begin{eqnarray*}
+      g(x)&=&x^mf(x^{-1})
+      \\ &=& x^m\left(1+\sum_{i=1}^mf_ix^{-i}\right)
+      \\ &=& x^m+\sum_{i=1}^mf_ix^{-i+m}
+      \\ &=& x^m+\sum_{k=0}^{m-1}f_{m-k}x^k \;\;\;\; (k=-i+m).
+    \end{eqnarray*}
+    Hence we've showed that $g(x)$ is also a polynomial of degree $m$.
+
+  \item
+    Since $f$ has a non-zero constant term, then $\alpha\neq 0$. Hence
+    $g(\alpha^{-1})=(\alpha^{-1})^mf((\alpha^{-1})^{-1})=\alpha^{-m}f(\alpha)=0$, and so
+    $\alpha^{-1}$ is a root of $g(x)$.
+
+  \item
+
+    Assume $f(x)$ is {\em not} irreducible. Then for some $p(x)$ and $q(x)$, 
+    both of degree at least one, it holds
+    that $f(x)=p(x)q(x)$. Let $n$ be the degree of $p$, and $m-n$ the degree of 
+    $q$. Since $zero$ is not a root of $f(x)$ it is also not a root of $p(x)$
+    or $q(x)$, and so they both have non-zero constant terms. So by
+    the proof above, $p'(x)=x^np(x^{-1})$ is polynomial of degree $n$ and 
+    $q'(x)=x^{m-n}q(x^{-1})$ is a polnomial of degree $m-n$. Hence:
+    \begin{eqnarray*}
+      g(x)&=& x^mf(x^{-1})
+      \\ &=& x^mp(x^{-1})q(x^{-1})
+      \\ &=& x^np(x^{-1})x^{m-n}q(x^{-1})
+      \\ &=& p'(x)q'(x),
+    \end{eqnarray*}
+
+    and so $g'$ is {\em not} irreducible. 
+
+    We've shown that if $f$ is not irreducible then $g$ is not irreducible. 
+    Hence if $g$ is irreducible then $f$ is irreducible. Since $f(x)$ is
+    the reciprocal of $f(x)$, then this proof would also work with the roles
+    of $g(x)$ and $f(x)$ reversed, and therefore we've shown that $f(x)$
+    is irreducible iff $g(x)$ is irreducible.
+
+  \item
+    
+    
+  
+  \end{enumerate}
+\end{enumerate}
+\end{document}
+
+
