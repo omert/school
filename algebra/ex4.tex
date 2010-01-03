@@ -121,11 +121,30 @@
     of non-zero terms which include the free term.
   \item
 
-    Represent $GF(4)$ as $\{0,1,\alpha,\alpha+1\}$, where $\alpha$ is the
-    root of $x^2+x+1$, which is irreducible of $GF(2)$. 
-    Then:
+    Represent $GF(4)$ as $\{0,1,a,a+1\}$, where $a$ is the
+    root of $x^2+x+1$, which is irreducible over $GF(2)$. Then
     \begin{itemize}
-    \item $x^4+x^3+x^2+x+1=$
+    \item The polynomial $x^4+x^3+x^2+x+1$ does not have a root in $GF(4)$
+      (by substitution), and so any factoring into two quadratic factors
+      would be a factoring into irreducibles. A possible solutions is
+      $x^4+x^3+x^2+x+1=(x^2+ax+1)(x^2+a^2x+1)$.
+
+    \item 
+      Likewise, $x^4+x^3+1=(x^2+a^2x+a)(x^2+ax+a^2)$.
+
+    \end{itemize}
+
+    Represent $GF(8)$ as $\mbox{span}\{1,a,a^2\}$ over $GF(2)$, where $a$
+    is a root of the irreducible (over $GF(2)$) polynomial $x^3+x^2+1$.
+    \begin{itemize}
+    \item The polynomial $x^4+x^3+x^2+x+1$ does not have a root in $GF(4)$
+      (by substitution), and so any factoring into two quadratic factors
+      would be a factoring into irreducibles. A possible solutions is
+      $x^4+x^3+x^2+x+1=(x^2+ax+1)(x^2+a^2x+1)$. 
+
+    \item 
+      Likewise, $x^4+x^3+1=(x^2+a^2x+a)(x^2+ax+a^2)$.
+
     \end{itemize}
 
   \end{enumerate}
