@@ -141,21 +141,21 @@
     and the elements of $GF(8)^*$ have orders in $\{1,7\}$.
 
     Assume one of the polynomials can be factored into a linear factor $x-a$
-    and a cubic factor, in $GF(8)$. $a$ is not zero, since zero is clearly
-    not a root. Then $a$ has order $7$ (or order
-    $1$, but $x-1$ is not a factor, so this is impossible). However $a$ is 
+    and a cubic factor, in $GF(8)$. $a$ is neither zero nor one, since 
+    both are clearly not roots. Then $a$ has order $7$. However $a$ is 
     also a member of $GF(16)$, and so has order $3$, $5$ or $15$ - 
     contradiction.
 
     Let $x^2+ix+j$ be a quadratic factor of one of the polynomials over $GF(8)$.
     Then, by the argument above, each of $i$ and $j$ would either have to be 
     zero, or have orders 
-    both in $\{1,7\}$ and in $\{1,3,5,15\}$, and so have to be one. But then
+    both in $\{1,7\}$ and in $\{1,3,5,15\}$, and so have to be one. But then 
+    $i,j\in\{0,1\}$ and
     the polynomial can be factored in $GF(2)$, which is not true - 
     contradiction.
     
-    We have shown that the polynomials don't have linear or quadratic factors,
-    and so they cannot be factored in $GF(8)$.
+    We have thus shown that the polynomials don't have linear or quadratic 
+    factors, and so they cannot be factored in $GF(8)$.
   \end{enumerate}
 \item
 
@@ -177,7 +177,7 @@
   its domain is the same as its image then it is an automorphism.
 
   Let $G$ be a subfield of $F$. We showed in class that $G$ is the set of
-  roots of $x^{p^m}-x$ where $m$ divides $k$. Then $G$ is the set of
+  roots of $x^{p^m}-x$ for some $m$ that divides $k$. Then $G$ is the set of
   fixed points of $\phi^m$, since $\phi^m(x)=x^{p^m}$.
 
 \item
