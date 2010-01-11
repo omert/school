@@ -126,7 +126,7 @@
     \begin{itemize}
     \item The polynomial $x^4+x^3+x^2+x+1$ does not have a root in $GF(4)$
       (by substitution), and so any factoring into two quadratic factors
-      would be a factoring into irreducibles. A possible solutions is
+      would be a factoring into irreducibles. A possible solution is
       $x^4+x^3+x^2+x+1=(x^2+ax+1)(x^2+a^2x+1)$.
 
     \item 
@@ -134,36 +134,51 @@
 
     \end{itemize}
 
-    Represent $GF(8)$ as $\mbox{span}\{1,a,a^2\}$ over $GF(2)$, where $a$
-    is a root of the irreducible (over $GF(2)$) polynomial $x^3+x^2+1$.
-    \begin{itemize}
-    \item The polynomial $x^4+x^3+x^2+x+1$ does not have a root in $GF(4)$
-      (by substitution), and so any factoring into two quadratic factors
-      would be a factoring into irreducibles. A possible solutions is
-      $x^4+x^3+x^2+x+1=(x^2+ax+1)(x^2+a^2x+1)$. 
+    We showed in class that $x^4+x^3+1$ can be factored completely over 
+    $GF(16)$. An identical proof works for $x^4+x^3+x^2+x+1$. 
+    
+    We note that the elements of $GF(16)^*$ have orders in $\{1,3,5,15\}$
+    and the elements of $GF(8)^*$ have orders in $\{1,7\}$.
 
-    \item 
-      Likewise, $x^4+x^3+1=(x^2+a^2x+a)(x^2+ax+a^2)$.
+    Assume one of the polynomials can be factored into a linear factor $x-a$
+    and a cubic factor, in $GF(8)$. $a$ is not zero, since zero is clearly
+    not a root. Then $a$ has order $7$ (or order
+    $1$, but $x-1$ is not a factor, so this is impossible). However $a$ is 
+    also a member of $GF(16)$, and so has order $3$, $5$ or $15$ - 
+    contradiction.
 
-    \end{itemize}
-
+    Let $x^2+ix+j$ be a quadratic factor of one of the polynomials over $GF(8)$.
+    Then, by the argument above, each of $i$ and $j$ would either have to be 
+    zero, or have orders 
+    both in $\{1,7\}$ and in $\{1,3,5,15\}$, and so have to be one. But then
+    the polynomial can be factored in $GF(2)$, which is not true - 
+    contradiction.
+    
+    We have shown that the polynomials don't have linear or quadratic factors,
+    and so they cannot be factored in $GF(8)$.
   \end{enumerate}
 \item
 
-  Let $F$ be a finite field of characteristic $p$. Let $\phi:F\to F$ be defined
+  Let $F=GF(p^k)$ be a finite field of characteristic $p$. 
+  Let $\phi:F\to F$ be defined
   by $\phi(a)=a^p$. We would like to show that $\phi$ is an automorphism. 
 
 
   We showed in class that the multiplicative group of a 
   finite field is cyclic. Let $g$ be a generator of $F^*$.
-  We know that the order of $F$ is $p^k$ for some $k$. 
+  We know that the order of $F$ is $p^k$. 
   Hence by Euler's theorem $g^{p^k-1}=1$ and so $\left(g^p\right)^k=g$, and 
   therefore $g^p$ is also a generator. 
 
   We showed in class that given two fields of identical order, and generators
-  of each field, then the homomorphism defined by mapping one generator to the
-  other is a field isomorphism. Hence $\phi$ is also an isomorphism, and since
+  of each field, then the map defined by mapping one generator to the
+  other is a field homomoprishm, and in particular an isomorphism. 
+  Hence $\phi$ is also an isomorphism, and since
   its domain is the same as its image then it is an automorphism.
+
+  Let $G$ be a subfield of $F$. We showed in class that $G$ is the set of
+  roots of $x^{p^m}-x$ where $m$ divides $k$. Then $G$ is the set of
+  fixed points of $\phi^m$, since $\phi^m(x)=x^{p^m}$.
 
 \item
 
