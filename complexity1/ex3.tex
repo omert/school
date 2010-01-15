@@ -1,0 +1,174 @@
+\documentclass[11pt]{article} \usepackage{amssymb}
+\usepackage{amsfonts} \usepackage{amsmath} \usepackage{bm}
+\usepackage{latexsym} \usepackage{epsfig}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+
+\setlength{\textwidth}{7 in} \setlength{\textheight}{9in}
+\setlength{\oddsidemargin}{-0.5in} %\setlength{\topmargin}{0in}
+\setlength{\evensidemargin}{-0.5in} %\setlength{\topmargin}{0in}
+%\addtolength{\textheight}{.8in} 
+%\addtolength{\voffset}{-1in}
+\setlength{\topmargin}{-0.5in} 
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{example}[theorem]{Example}
+\newenvironment{proof}{\noindent \textbf{Proof:}}{$\Box$}
+
+\newcommand{\ignore}[1]{}
+
+\newcommand{\enote}[1]{} \newcommand{\knote}[1]{}
+\newcommand{\rnote}[1]{}
+
+
+
+% \newcommand{\enote}[1]{{\bf [[Elchanan:} {\emph{#1}}{\bf ]]}}
+% \newcommand{\knote}[1]{{\bf [[Krzysztof:} {\emph{#1}}{\bf ]]}}
+% \newcommand{\rnote}[1]{{\bf [[Ryan:} {\emph{#1}}{\bf ]]}}
+
+
+
+\DeclareMathOperator{\Support}{Supp} \DeclareMathOperator{\Opt}{Opt}
+\DeclareMathOperator{\Ordo}{\mathcal{O}}
+\newcommand{\MaxkCSP}{\textsc{Max $k$-CSP}}
+\newcommand{\MaxkCSPq}{\textsc{Max $k$-CSP$_{q}$}}
+\newcommand{\MaxCSP}[1]{\textsc{Max CSP}(#1)} \renewcommand{\Pr}{{\bf
+    P}} \renewcommand{\P}{{\bf P}} \newcommand{\Px}{\mathop{\bf P\/}}
+\newcommand{\E}{{\bf E}} \newcommand{\Cov}{{\bf Cov}}
+\newcommand{\Var}{{\bf Var}} \newcommand{\Varx}{\mathop{\bf Var\/}}
+
+\newcommand{\bits}{\{-1,1\}}
+
+\newcommand{\nsmaja}{\textstyle{\frac{2}{\pi}} \arcsin \rho}
+
+\newcommand{\Inf}{\mathrm{Inf}} \newcommand{\I}{\mathrm{I}}
+\newcommand{\J}{\mathrm{J}}
+
+\newcommand{\eps}{\epsilon} \newcommand{\lam}{\lambda}
+
+% \newcommand{\trunc}{\ell_{2,[-1,1]}}
+\newcommand{\trunc}{\zeta} \newcommand{\truncprod}{\chi}
+
+\newcommand{\N}{\mathbb N} \newcommand{\R}{\mathbb R}
+\newcommand{\Z}{\mathbb Z} \newcommand{\CalE}{{\mathcal{E}}}
+\newcommand{\CalC}{{\mathcal{C}}} \newcommand{\CalM}{{\mathcal{M}}}
+\newcommand{\CalR}{{\mathcal{R}}} \newcommand{\CalS}{{\mathcal{S}}}
+\newcommand{\CalV}{{\mathcal{V}}}
+\newcommand{\CalX}{{\boldsymbol{\mathcal{X}}}}
+\newcommand{\CalG}{{\boldsymbol{\mathcal{G}}}}
+\newcommand{\CalH}{{\boldsymbol{\mathcal{H}}}}
+\newcommand{\CalY}{{\boldsymbol{\mathcal{Y}}}}
+\newcommand{\CalZ}{{\boldsymbol{\mathcal{Z}}}}
+\newcommand{\CalW}{{\boldsymbol{\mathcal{W}}}}
+\newcommand{\CalF}{{\mathcal{Z}}}
+% \newcommand{\boldG}{{\boldsymbol G}}
+% \newcommand{\boldQ}{{\boldsymbol Q}}
+% \newcommand{\boldP}{{\boldsymbol P}}
+% \newcommand{\boldR}{{\boldsymbol R}}
+% \newcommand{\boldS}{{\boldsymbol S}}
+% \newcommand{\boldX}{{\boldsymbol X}}
+% \newcommand{\boldB}{{\boldsymbol B}}
+% \newcommand{\boldY}{{\boldsymbol Y}}
+% \newcommand{\boldZ}{{\boldsymbol Z}}
+% \newcommand{\boldV}{{\boldsymbol V}}
+\newcommand{\boldi}{{\boldsymbol i}} \newcommand{\boldj}{{\boldsymbol
+    j}} \newcommand{\boldk}{{\boldsymbol k}}
+\newcommand{\boldr}{{\boldsymbol r}}
+\newcommand{\boldsigma}{{\boldsymbol \sigma}}
+\newcommand{\boldupsilon}{{\boldsymbol \upsilon}}
+\newcommand{\hone}{{\boldsymbol{H1}}}
+\newcommand{\htwo}{\boldsymbol{H2}}
+\newcommand{\hthree}{\boldsymbol{H3}}
+\newcommand{\hfour}{\boldsymbol{H4}}
+
+
+\newcommand{\sgn}{\mathrm{sgn}} \newcommand{\Maj}{\mathrm{Maj}}
+\newcommand{\Acyc}{\mathrm{Acyc}}
+\newcommand{\UniqMax}{\mathrm{UniqMax}}
+\newcommand{\Thr}{\mathrm{Thr}} \newcommand{\littlesum}{{\textstyle
+    \sum}}
+
+\newcommand{\half}{{\textstyle \frac12}}
+\newcommand{\third}{{\textstyle \frac13}}
+\newcommand{\fourth}{{\textstyle \frac14}}
+
+\newcommand{\Stab}{\mathbb{S}}
+\newcommand{\StabThr}[2]{\Gamma_{#1}(#2)}
+\newcommand{\StabThrmin}[2]{{\underline{\Gamma}}_{#1}(#2)}
+\newcommand{\StabThrmax}[2]{{\overline{\Gamma}}_{#1}(#2)}
+\newcommand{\TestFcn}{\Psi}
+
+\renewcommand{\phi}{\varphi}
+
+\begin{document}
+\title{Complexity - Exercise 3}
+
+ \author{Omer Tamuz, 035696574}
+\maketitle
+
+
+\section{}
+    For $i\neq j$ and some $u$ and $v$, let 
+    \begin{equation*}
+      A=
+      \begin{bmatrix}
+        1& \alpha_i\\ 
+        1& \alpha_j
+      \end{bmatrix},
+    \end{equation*}
+    \begin{equation*}
+      b=
+      \begin{bmatrix}
+        u\\ 
+        v
+      \end{bmatrix}
+    \end{equation*}
+    and
+    \begin{equation*}
+      x=
+      \begin{bmatrix}
+        r\\ 
+        s
+      \end{bmatrix}
+    \end{equation*}
+
+    The determinent of $A$ is $\alpha_i-\alpha_j$, which is
+    non-zero since the $\alpha$'s are distinct. Hence $x=A^{-1}b$, and there's
+    a single assignment to $r,s$ which satisfies both $r+\alpha_is=u$ and
+    $r+\alpha_js=v$. Since any pair of values for $r,s$ is equally likely, and
+    since there are $|F|^2$ possible values, then
+    $$\P[r+\alpha_is=u \wedge r+\alpha_js=v]=1/|F|^2.$$
+\section{}
+\subsection{}
+Let $p$ be a polynomial.
+From the definition of $\mathcal{RP}$ it follows directly that 
+$\mathcal{RP}_{1-2^p} \subseteq \mathcal{RP}_{1/p} \subseteq \mathcal{RP}$. 
+We would like to show that 
+$\mathcal{RP} \subseteq \mathcal{RP}_{1/p} \subseteq \mathcal{RP}_{1-2^p}$.
+
+
+\begin{itemize}
+\item 
+  Let $A$ be a TM that decides a set $S\in\mathcal{RP}$. Let $A'$ be a 
+  machine that one input $x$ runs $A(x)$ $\log p(n)$ times, 
+  and returns 1 iff $A$ returned 1
+  on at least one of these occassions. Then, on an input $x\not\in S$, $A'$ will
+  for sure return 0. For $x\in S$, the probability of failure will be
+  less than $(1/2)^{\log p}=1/p$, and so $A'$ is a machine that decides
+  $S$, and $S$ is in $\mathcal{RP}_{1/p}$.
+
+
+\end{itemize}
+
+
+\end{document}
+
+
