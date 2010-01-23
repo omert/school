@@ -116,12 +116,22 @@
 
   \begin{enumerate}
   \item 
-
+    Similarly to the proof for the bound on $C^*$ that we saw in class, we
+    order the vertices of $G$ in descending value of their coefficients in the 
+    eigenvector with the largest eigenvalue. Then, as noted in class, no
+    vertex can have more than $\lambda_1$ neighbors that precede it in the list.
+    
+    We now start coloring from the beginning of the list, i.e. from the vertex
+    with the highest coeffecient in the eigenvector of $\lambda_1$. Each vertex
+    that we shall get to will have at most $\lambda$ neighbors that are already 
+    colored, and so we'll always have an available color for it, given that
+    $\lambda_1+1$ colors are available.
 
   \item 
-    
-    Let $G$ be a $d$-regular graph. $G$ can clearly not be colored with 
-    less than $d+1$ colors. Since $\lambda_1=d$ then it cannot be
+    Let $G$ be $K_{d+1}$, the complete graph on $d+1$ vertices.
+    $G$ can clearly not be colored with 
+    less than $d+1$ colors. Since $G$ is regular with degree $d$ then 
+    $\lambda_1=d$ and it cannot be
     colored with less than $\lambda_1+1$ colors
   \end{enumerate}
 
