@@ -147,28 +147,64 @@
     since there are $|F|^2$ possible values, then
     $$\P[r+\alpha_is=u \wedge r+\alpha_js=v]=1/|F|^2.$$
 \section{}
-\subsection{}
+\subsection{$\mathcal{RP}$}
 Let $p$ be a polynomial.
-From the definition of $\mathcal{RP}$ it follows directly that 
-$\mathcal{RP}_{1-2^p} \subseteq \mathcal{RP}_{1/p} \subseteq \mathcal{RP}$. 
+From the definition of $\mathcal{RP}_\alpha$ it follows directly that 
+$\mathcal{RP}_{1-2^p}  \subseteq \mathcal{RP} \subseteq \mathcal{RP}_{1/p}$. 
 We would like to show that 
-$\mathcal{RP} \subseteq \mathcal{RP}_{1/p} \subseteq \mathcal{RP}_{1-2^p}$.
+$\mathcal{RP}_{1/p} \subseteq \mathcal{RP}$ and $\mathcal{RP} \subseteq \mathcal{RP}_{1-2^p}$. We'll show this by showing that 
+$\mathcal{RP}_{1/p} \subseteq \mathcal{RP}_{1-2^p}$
 
 
-\begin{itemize}
-\item 
-  Let $A$ be a TM that decides a set $S\in\mathcal{RP}$. Let $A'$ be a 
-  machine that one input $x$ runs $A(x)$ $\log p(n)$ times, 
-  and returns 1 iff $A$ returned 1
-  on at least one of these occassions. Then, on an input $x\not\in S$, $A'$ will
-  for sure return 0. For $x\in S$, the probability of failure will be
-  less than $(1/2)^{\log p}=1/p$, and so $A'$ is a machine that decides
-  $S$, and $S$ is in $\mathcal{RP}_{1/p}$.
+Let $p$ be a polynomial and let $A$ be a TM that decides a set 
+$S\in\mathcal{RP}_{1/p}$. Let $A'$ be a 
+machine that on input $x$ runs $N=-p(|x|)/\log(1-1/p(|x|))$ invocations of
+$A(x)$, 
+and returns 1 iff $A$ returned 1
+on at least one of these occassions. Then, on an input $x\not\in S$, $A'$ will
+for sure return 0. For $x\in S$, the probability of a mistake will be
+at most 
+\begin{equation*}
+  (1-p(|x|))^{p(|x|) \over \log(1-1/p(|x|))} = 2^{-p(|x|)}.
+\end{equation*}
+$A'$ is still polynomial, since $N=p/\log(1-1/p)<p^3$ 
+is. Hence $A'$ is a machine that decides
+$S$, and $S$ is in $\mathcal{RP}_{1-2^p}$.
 
 
-\end{itemize}
+Again using the same argument, Let $A$ be in 
+$\mathcal{RP}_{\alpha_1}$. Running it $N$ times gives a mistake 
+probability of $(1-\alpha_1)^N$. Then, if $(1-\alpha_1)^N=1-\alpha_2$ then 
+$N=\log(1-\alpha_2)/\log(1-\alpha_1)$. This then is the number of invocations
+required to move from $\mathcal{RP}_{\alpha_1}$ to $\mathcal{RP}_{\alpha_2}$.
 
+\subsection{$\mathcal{BPP}$}
+We repeat here the same argumentation line as above, running a machine 
+$A$, which decides $S\in\mathcal{BPP}_{\alpha_1}$,
+$N$ times (for $N$ odd). Here, however, we return the majority vote of the
+different invocations. Using the Chernoff bound, the probability of error
+is less than $\exp\left(-2N(\alpha_1-\half)^2\right)$. For this to equal $1-\alpha_2$, we need
+\begin{eqnarray*}
+  \exp\left(-2N(\alpha_1-\half)^2\right) &=& 1-\alpha_2
+\\ 2N(\alpha_1-\half)^2 &=& -\ln(1-\alpha_2)
+\\ N = {-\ln(1-\alpha_2) \over (\alpha_1-\half)^2}
+\end{eqnarray*}
 
+As in the previous question, to show that 
+$\mathcal{BPP}=\mathcal{BPP}_{0.5+1/p}=\mathcal{BPP}_{1-2^{-p}}$ we need only
+show that $\mathcal{BPP}_{0.5+1/p} \subseteq \mathcal{BPP}_{1-2^{-p}}$. In
+this case $N=-\ln(1-(1-2^{-p}))/(\half+1/p-\half)^2=p^3$ is polynomial and so the scheme
+above will result in a polynomial machine with error probability $1-2^{-p}$
+given a machine with error probability $0.5+1/p$.
+
+\subsection{$\mathcal{ZPP}$}
+
+The reduction in this case is identical to that of 
+$\mathcal{RP}$, except that after running the machine $N$ times we return
+$\bot$ if all the answers were $\bot$ and whatever other answer was
+returned otherwise. The probability calculation is completely identical to that
+of $\mathcal{RP}$, and hence so is that proof that 
+$\mathcal{ZPP}=\mathcal{ZPP}_{1/p}=\mathcal{ZPP}_{1-2^{-p}}$. Likewise $N=\log(1-\alpha_2)/\log(1-\alpha_1)$.
 \end{document}
 
 
