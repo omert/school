@@ -1,0 +1,174 @@
+\documentclass[11pt]{article} \usepackage{amssymb}
+\usepackage{amsfonts} \usepackage{amsmath} \usepackage{bm}
+\usepackage{latexsym} \usepackage{epsfig}
+
+\setlength{\textwidth}{6.5 in} \setlength{\textheight}{8.25in}
+\setlength{\oddsidemargin}{0in} \setlength{\topmargin}{0in}
+\addtolength{\textheight}{.8in} \addtolength{\voffset}{-.5in}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{example}[theorem]{Example}
+\newenvironment{proof}{\noindent \textbf{Proof:}}{$\Box$}
+
+\newcommand{\ignore}[1]{}
+
+\newcommand{\enote}[1]{} \newcommand{\knote}[1]{}
+\newcommand{\rnote}[1]{}
+
+
+
+% \newcommand{\enote}[1]{{\bf [[Elchanan:} {\emph{#1}}{\bf ]]}}
+% \newcommand{\knote}[1]{{\bf [[Krzysztof:} {\emph{#1}}{\bf ]]}}
+% \newcommand{\rnote}[1]{{\bf [[Ryan:} {\emph{#1}}{\bf ]]}}
+
+
+
+\DeclareMathOperator{\Support}{Supp} \DeclareMathOperator{\Opt}{Opt}
+\DeclareMathOperator{\Ordo}{\mathcal{O}}
+\newcommand{\MaxkCSP}{\textsc{Max $k$-CSP}}
+\newcommand{\MaxkCSPq}{\textsc{Max $k$-CSP$_{q}$}}
+\newcommand{\MaxCSP}[1]{\textsc{Max CSP}(#1)} \renewcommand{\Pr}{{\bf
+    P}} \renewcommand{\P}{{\bf P}} \newcommand{\Px}{\mathop{\bf P\/}}
+\newcommand{\E}{{\bf E}} \newcommand{\Cov}{{\bf Cov}}
+\newcommand{\Var}{{\bf Var}} \newcommand{\Varx}{\mathop{\bf Var\/}}
+
+\newcommand{\bits}{\{-1,1\}}
+
+\newcommand{\nsmaja}{\textstyle{\frac{2}{\pi}} \arcsin \rho}
+
+\newcommand{\Inf}{\mathrm{Inf}} \newcommand{\I}{\mathrm{I}}
+\newcommand{\J}{\mathrm{J}}
+
+\newcommand{\eps}{\epsilon} \newcommand{\lam}{\lambda}
+
+% \newcommand{\trunc}{\ell_{2,[-1,1]}}
+\newcommand{\trunc}{\zeta} \newcommand{\truncprod}{\chi}
+
+\newcommand{\N}{\mathbb N} \newcommand{\R}{\mathbb R}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\Z}{\mathbb Z} \newcommand{\CalE}{{\mathcal{E}}}
+\newcommand{\CalC}{{\mathcal{C}}} \newcommand{\CalM}{{\mathcal{M}}}
+\newcommand{\CalR}{{\mathcal{R}}} \newcommand{\CalS}{{\mathcal{S}}}
+\newcommand{\CalV}{{\mathcal{V}}}
+\newcommand{\CalX}{{\boldsymbol{\mathcal{X}}}}
+\newcommand{\CalG}{{\boldsymbol{\mathcal{G}}}}
+\newcommand{\CalH}{{\boldsymbol{\mathcal{H}}}}
+\newcommand{\CalY}{{\boldsymbol{\mathcal{Y}}}}
+\newcommand{\CalZ}{{\boldsymbol{\mathcal{Z}}}}
+\newcommand{\CalW}{{\boldsymbol{\mathcal{W}}}}
+\newcommand{\CalF}{{\mathcal{Z}}}
+% \newcommand{\boldG}{{\boldsymbol G}}
+% \newcommand{\boldQ}{{\boldsymbol Q}}
+% \newcommand{\boldP}{{\boldsymbol P}}
+% \newcommand{\boldR}{{\boldsymbol R}}
+% \newcommand{\boldS}{{\boldsymbol S}}
+% \newcommand{\boldX}{{\boldsymbol X}}
+% \newcommand{\boldB}{{\boldsymbol B}}
+% \newcommand{\boldY}{{\boldsymbol Y}}
+% \newcommand{\boldZ}{{\boldsymbol Z}}
+% \newcommand{\boldV}{{\boldsymbol V}}
+\newcommand{\boldi}{{\boldsymbol i}} \newcommand{\boldj}{{\boldsymbol
+    j}} \newcommand{\boldk}{{\boldsymbol k}}
+\newcommand{\boldr}{{\boldsymbol r}}
+\newcommand{\boldsigma}{{\boldsymbol \sigma}}
+\newcommand{\boldupsilon}{{\boldsymbol \upsilon}}
+\newcommand{\hone}{{\boldsymbol{H1}}}
+\newcommand{\htwo}{\boldsymbol{H2}}
+\newcommand{\hthree}{\boldsymbol{H3}}
+\newcommand{\hfour}{\boldsymbol{H4}}
+
+
+\newcommand{\sgn}{\mathrm{sgn}} \newcommand{\Maj}{\mathrm{Maj}}
+\newcommand{\Acyc}{\mathrm{Acyc}}
+\newcommand{\UniqMax}{\mathrm{UniqMax}}
+\newcommand{\Thr}{\mathrm{Thr}} \newcommand{\littlesum}{{\textstyle
+    \sum}}
+
+\newcommand{\half}{{\textstyle \frac12}}
+\newcommand{\third}{{\textstyle \frac13}}
+\newcommand{\fourth}{{\textstyle \frac14}}
+
+\newcommand{\Stab}{\mathbb{S}}
+\newcommand{\StabThr}[2]{\Gamma_{#1}(#2)}
+\newcommand{\StabThrmin}[2]{{\underline{\Gamma}}_{#1}(#2)}
+\newcommand{\StabThrmax}[2]{{\overline{\Gamma}}_{#1}(#2)}
+\newcommand{\TestFcn}{\Psi}
+
+\renewcommand{\phi}{\varphi}
+
+\begin{document}
+\title{Algebra Through Examples - Exercise 5}
+
+ \author{Omer Tamuz, 035696574}
+\maketitle
+
+
+\begin{enumerate}
+\item 
+  By the notation defined in class, we interpret the first four bits of
+  an 8 bit vector as $b$, an element of $GF(16)$, and the last four
+  bits as $c$, also an element of the same field. We denote by $a$ a root of
+  $x^4+x^3+1$ over $GF(2)$, a generator
+  of $GF(16)$. Given $b$ and $c$, let $b_i=a^{i-1}$ and $b_j=a^{j-1}$ be the 
+  roots of
+  $x^2+bx+cb^{-1}+b^2$. Then we showed in class that $i$ and $j$ are the 
+  positions of the errors, if there are two errors. If there is one error, then
+  $c=b^3$, and if $b=a^{i-1}$ then the error is in position $i$. 
+  \begin{enumerate}
+  \item 
+    For this vector we have $b=a$, $c=1+a+a^2+a^3=a^6$. Then there are at least
+    two errors (since $b^3=a^3 \neq a^6=c$). If there are two then they are the roots 
+    of $p(x)$, where 
+    \begin{eqnarray*}
+      p(x)&=& x^2+ax+a^6a^{-1}+a^2
+      \\ &=&  x^2+ax+a^5+a^2
+      \\ &=& x^2+ax+a^3+a+1+a^2
+      \\ &=& x^2+ax+a^6.
+    \end{eqnarray*}
+    However, this polynomial has no roots in $GF(16)$, and hence there are more
+    than two errors.
+  \item
+    In this case $b=c=a^2$, again there are at least two errors and
+    \begin{eqnarray*}
+      p(x)&=& x^2+a^2x+a^2a^{-2}+a^4
+      \\ &=&  x^2+a^2x+1+a^3+1
+      \\ &=& x^2+a^2x+a^3
+      \\ &=& (x+a^8)(x+a^{10})
+    \end{eqnarray*}
+    Hence the errors are in positions 8 and 10.
+  \end{enumerate}
+\item
+  Let $G$ be a group of order 30. The prime factorization of 30 is 
+  $30=3 \cdot 5 \cdot 2$. 
+  Hence $G$ has Sylow $p$-subgroups of order 3, 5 and 2. 
+
+  For the number of Sylow $p$-subgroups, $n_p$, it holds that $n_p=1\mod p$ and
+  $n_p$ divides $m=30/p$. Hence $n_3=1 \mod 3$ and $n_3$ divides 10. The only
+  possible values are 1 or 10. If $n_3=1$ then $P_3$ is a normal subgroup 
+  of $G$ and $G$ is simple. If $n_3=10$ then, since the 10 Sylow 3-subgroups
+  intersect trivially (since any other element is a generator), and there
+  are 20 elements of order 3. Now, $n_5=1\mod 5$ and divides 6. If $n_5=1$ then
+  $G$ is simple again. Otherwise $n_5=6$, and by the same argument as above
+  we have 24 elements of order 5. But this is impossible (there aren't enough
+  elements in $G$ - $20+24>30$) and so $G$ is simple.
+
+\item
+  Let $G$ be a group of order $p^2$ for some prime $p$. Then $n$, the number of
+  conjugacy classes of $G$ divides $p^2$, and so can only be $p$ or
+  $p^2$ (it cannot be one, since for any group of size more that two the number
+  of conjugacy classes is more than one). Assume $n=p$. Then 
+
+\item
+  
+\end{enumerate}
+\end{document}
+
+
