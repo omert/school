@@ -155,30 +155,20 @@
   Let $G$ be a group of order $p^2$ for some prime $p$. Then, as we showed in class,
   the size of its center $Z(G)$ is equal to $0\mod p$. Since $|Z(G)|$ must also
   divide $p^2$ then it can either equal to $p$ or to $p^2$. If $|Z(G)|=p^2$ then
-  $G$ is Abelian and we're done, since an Abelian group can always be 
-  decomposed to a product of cyclic groups, and the only options for that 
+  $G$ is Abelian and we're done, since an Abelian group is isomorphic  
+  to a product of cyclic groups, and the only options for that 
   are $C_{p^2}$ and $C_p \times C_p$.
 
   Assume by way of contradiction that $|Z(G)|=p$, and so $G$ is not Abelian.
-  Let $a$ be some element of $G$ which is {\em not} in $Z(G)$. Consider
-  its equivalence class $Cl(a)$. Its size must divide $|G|=p^2$, and so can 
-  only equal 1, $p$ or $p^2$. It cannot equal $p^2$, since the identity
-  element is in its own equivalence class, and the equivalence classes are
-  a partition of $G$. It cannot equal 1, since then $a$ would commute with
-  all the elements of $G$, whereas we picked $a \not \in Z(G)$. Hence
-  $|Cl(a)|=p$. 
-
-
- Since for every $g \in G$
-  the centralizer $C_G(g)$ contains $Z(G)$ then there exists a $g$ such that
-  $|C_G(g)|=p$ (since if $C_G(g)=p^2$ for all $g$ then the group would be 
-  Abelian).
-
- Then $n$, the number of
-  conjugacy classes of $G$ divides $p^2$, and so can only be $p$ or
-  $p^2$ (it cannot be one, since, as we showed in class, for any group of size
-  more that two the number
-  of conjugacy classes is more than one). Assume $n=p$. Then 
+  Let $a,b \in G$ be two elements that do not commmute. The orders of $C_G(a)$
+  and $C_G(b)$ must divide $p^2$ (since they are subgroups of $G$), 
+  cannot equal $p^2$ ($a$ and $b$ don't commute and 
+  hence $b \not \in C_G(a)$ and $a\not \in C_G(b)$), and cannot equal
+  1 since $x\in C_G(x)$. Hence $|C_G(a)|=|C_G(b)|=p$, and since for any $x \in G$ it 
+  holds that $Z(G)\subseteq C_G(x)$ then $C_G(a)=C_G(b)=Z(G)$. Then $a$ and $b$ are
+  in $Z(G)$. But unfortunately (or rather, fortunately), $a$ and $b$ don't 
+  commute - contradiction. We've therefore shown that $G$ is Abelian and
+  so, as stated above, must be isomorphic to  $C_{p^2}$ or $C_p \times C_p$.
 
 \item
   Let $G$ be a group of order at least 3. We consider several cases:
