@@ -119,31 +119,22 @@
   $x^4+x^3+1$ over $GF(2)$, a generator
   of $GF(16)$. Given $b$ and $c$, let $b_i=a^{i-1}$ and $b_j=a^{j-1}$ be the 
   roots of
-  $x^2+bx+cb^{-1}+b^2$. Then we showed in class that $i$ and $j$ are the 
+  $p(x)=x^2+bx+cb^{-1}+b^2$. Then we showed in class that $i$ and $j$ are the 
   positions of the errors, if there are two errors. If there is one error, then
   $c=b^3$, and if $b=a^{i-1}$ then the error is in position $i$. 
   \begin{enumerate}
   \item 
-    For this vector we have $b=a$, $c=1+a+a^2+a^3=a^6$. Then there are at least
-    two errors (since $b^3=a^3 \neq a^6=c$). If there are two then they are the roots 
-    of $p(x)$, where 
-    \begin{eqnarray*}
-      p(x)&=& x^2+ax+a^6a^{-1}+a^2
-      \\ &=&  x^2+ax+a^5+a^2
-      \\ &=& x^2+ax+a^3+a+1+a^2
-      \\ &=& x^2+ax+a^6.
-    \end{eqnarray*}
-    However, this polynomial has no roots in $GF(16)$, and hence there are more
-    than two errors.
+    For this vector we have $b=a^2$, $c=1+a+a^2+a^3=a^6$. Then is only 
+    a single error, since $b^3= a^6=c$. This error is then in position 3.
   \item
-    In this case $b=c=a^2$, again there are at least two errors and
+    In this case $b=c=a$, there are at least two errors since 
+    $b^3=a^3\neq c$, and
     \begin{eqnarray*}
-      p(x)&=& x^2+a^2x+a^2a^{-2}+a^4
-      \\ &=&  x^2+a^2x+1+a^3+1
-      \\ &=& x^2+a^2x+a^3
-      \\ &=& (x+a^8)(x+a^{10})
+      p(x)&=& x^2+ax+1+a^2
+      \\ &=&  x^2+ax+a^9
+      \\ &=& (x+a^4)(x+a^5)
     \end{eqnarray*}
-    Hence the errors are in positions 8 and 10.
+    Hence the errors are in positions 5 and 6.
   \end{enumerate}
 \item
   Let $G$ be a group of order 30. The prime factorization of 30 is 
@@ -161,54 +152,65 @@
   elements in $G$ - $20+24>30$) and so $G$ is simple.
 
 \item
-  Let $G$ be a group of order $p^2$ for some prime $p$. Then $n$, the number of
+  Let $G$ be a group of order $p^2$ for some prime $p$. Then, as we showed in class,
+  the size of its center $Z(G)$ is equal to $0\mod p$. Since $|Z(G)|$ must also
+  divide $p^2$ then it can either equal to $p$ or to $p^2$. If $|Z(G)|=p^2$ then
+  $G$ is Abelian and we're done, since an Abelian group can always be 
+  decomposed to a product of cyclic groups, and the only options for that 
+  are $C_{p^2}$ and $C_p \times C_p$.
+
+  Assume by way of contradiction that $|Z(G)|=p$, and so $G$ is not Abelian.
+  Let $a$ be some element of $G$ which is {\em not} in $Z(G)$. Consider
+  its equivalence class $Cl(a)$. Its size must divide $|G|=p^2$, and so can 
+  only equal 1, $p$ or $p^2$. It cannot equal $p^2$, since the identity
+  element is in its own equivalence class, and the equivalence classes are
+  a partition of $G$. It cannot equal 1, since then $a$ would commute with
+  all the elements of $G$, whereas we picked $a \not \in Z(G)$. Hence
+  $|Cl(a)|=p$. 
+
+
+ Since for every $g \in G$
+  the centralizer $C_G(g)$ contains $Z(G)$ then there exists a $g$ such that
+  $|C_G(g)|=p$ (since if $C_G(g)=p^2$ for all $g$ then the group would be 
+  Abelian).
+
+ Then $n$, the number of
   conjugacy classes of $G$ divides $p^2$, and so can only be $p$ or
-  $p^2$ (it cannot be one, since for any group of size more that two the number
+  $p^2$ (it cannot be one, since, as we showed in class, for any group of size
+  more that two the number
   of conjugacy classes is more than one). Assume $n=p$. Then 
 
 \item
-  To answer this question we first prove a little lemma. Let 
-  $X=\{x_0,\ldots,x_n\}$ and $Y=\{y_0,\ldots,y_n\}$ be minimal sets of 
-  generators of a finite group $G$, such that for all $i$, the order of $x_i$ 
-  is equal to the order of $y_i$. We define a map $\phi:G \to G$ recursively 
-  by 
-  \begin{enumerate}
-  \item $\phi(1)=1$,
-  \item for all $i$, $\phi(x_i)=y_i$ and
-  \item for any $g \in G$ and $i$, $\phi(x_ig)=y_i\phi(g)$.
-  \end{enumerate}
-  This map is defined for all elements of $G$, since $X$ is a set 
-  of generators.
+  Let $G$ be a group of order at least 3. We consider several cases:
+  \begin{itemize}
+  \item 
+    If $G$ is non-Abelian then let
+    $a,b \in G$ be a pair of elements that don't commute. Define the map
+    $\phi:G \to G$ by $\phi(g)=a^{-1}ga$. We showed in class that $\phi$ is an
+    automorphism. It is non trivial because $\phi(b) \neq b$.
+  \item
+    If $G$ is Abelian then  it is isomorphic to 
+    $C_{q_1} \times \cdots \times C_{q_n}$,
+    and an element of it $g$ can be written as $(g_1,\ldots,g_n)$ where 
+    $g_i \in C_{q_i}$. 
+    \begin{itemize}
+    \item 
+      If $q_1=q_2=\cdots=q_n=2$ then because the order of $G$ is greater than 2 then
+      $n$ is greater than one. We can then define 
+      $\phi(g_1,g_2,\ldots,g_n)=(g_2,g_1,\ldots,g_n)$, which is clearly a 
+      non-trivial automorphism. 
+    \item 
+      Otherwise assume w.l.o.g that $q_1>2$. Then we showed in class that
+      $\phi(g_1)=g_1^{q_1-1}$ is an automorphism of $C_{q_1}$, and in this case a 
+      non-trivial one, since if $g_1$ is a generator of $C_{q_1}$ then 
+      $g_1^{q_1-1}$ is another distinct generator when $q_1>2$.
 
-  To show that this map is well defined, we note that if $a=x_ig=x_jh$ then
-  
+      Hence $\phi(g_1,\ldots,g_n)=(g_1^{q_1-1},\ldots,g_n)$ is a non-trivial
+      automorphism of $G$.
+    \end{itemize}
+  \end{itemize}
 
 
-
- Any non-unity element of $G$ can be written as
-  $\Pi_ig_{k_i}^{m_i}$, where for all $i$ the order of $g_{k_i}$ is larger than
-  $m_i$, and $m_i$ is larger than zero. We define the map $\phi:G \to G$ by $\phi(1)=1$ and
-  $$\phi(\Pi_ig_{k_i}^{m_i})=\Pi_if_{k_i}^{m_i}.$$
-  Then $\phi$ is clearly a group homomorphism. It is an automorphism since it
-  is onto, as any non-unity element of $G$ can also be written as 
-  $\Pi_if_{k_i}^{m_i}$.
-
-  Now, let $G$ be a group of order at least 3.
-  let $H$ be  a subgroup of $G$, of maximal prime order (not necessarily
-  a proper subgroup). If the order of $H$ is larger 
-  than 2 then $H$ has two distinct generators, $a$ and $b$, since every non-unity
-  element of it is a generator. Let 
-  $\{a,g_1,\ldots,g_n\}$  be a minimal set of 
-  generators of $G$. Then $\{b,g_1,\ldots,g_n\}$ is also a minimal generator set,
-  since $a$ is a power of $b$ and vice versa. Furthermore, $a$ and $b$ are of
-  the same order and so, by the lemma above, there exists an automorphism
-  on $G$ which is not trivial since it maps $a$ to $b$.
-
-  Finally, we consider the case where the maximal order of a prime subgroup
-  is 2. Then by the Sylow Theorems, the order of $G$ is $2^k$ for some $k$. 
-
-Let
-  $H=\{1,h\}$ be a subgroup of order 2, and let $N_G(H)$ be its normalizer. If 
   
 \end{enumerate}
 \end{document}
