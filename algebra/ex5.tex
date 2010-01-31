@@ -167,6 +167,48 @@
   of conjugacy classes is more than one). Assume $n=p$. Then 
 
 \item
+  To answer this question we first prove a little lemma. Let 
+  $X=\{x_0,\ldots,x_n\}$ and $Y=\{y_0,\ldots,y_n\}$ be minimal sets of 
+  generators of a finite group $G$, such that for all $i$, the order of $x_i$ 
+  is equal to the order of $y_i$. We define a map $\phi:G \to G$ recursively 
+  by 
+  \begin{enumerate}
+  \item $\phi(1)=1$,
+  \item for all $i$, $\phi(x_i)=y_i$ and
+  \item for any $g \in G$ and $i$, $\phi(x_ig)=y_i\phi(g)$.
+  \end{enumerate}
+  This map is defined for all elements of $G$, since $X$ is a set 
+  of generators.
+
+  To show that this map is well defined, we note that if $a=x_ig=x_jh$ then
+  
+
+
+
+ Any non-unity element of $G$ can be written as
+  $\Pi_ig_{k_i}^{m_i}$, where for all $i$ the order of $g_{k_i}$ is larger than
+  $m_i$, and $m_i$ is larger than zero. We define the map $\phi:G \to G$ by $\phi(1)=1$ and
+  $$\phi(\Pi_ig_{k_i}^{m_i})=\Pi_if_{k_i}^{m_i}.$$
+  Then $\phi$ is clearly a group homomorphism. It is an automorphism since it
+  is onto, as any non-unity element of $G$ can also be written as 
+  $\Pi_if_{k_i}^{m_i}$.
+
+  Now, let $G$ be a group of order at least 3.
+  let $H$ be  a subgroup of $G$, of maximal prime order (not necessarily
+  a proper subgroup). If the order of $H$ is larger 
+  than 2 then $H$ has two distinct generators, $a$ and $b$, since every non-unity
+  element of it is a generator. Let 
+  $\{a,g_1,\ldots,g_n\}$  be a minimal set of 
+  generators of $G$. Then $\{b,g_1,\ldots,g_n\}$ is also a minimal generator set,
+  since $a$ is a power of $b$ and vice versa. Furthermore, $a$ and $b$ are of
+  the same order and so, by the lemma above, there exists an automorphism
+  on $G$ which is not trivial since it maps $a$ to $b$.
+
+  Finally, we consider the case where the maximal order of a prime subgroup
+  is 2. Then by the Sylow Theorems, the order of $G$ is $2^k$ for some $k$. 
+
+Let
+  $H=\{1,h\}$ be a subgroup of order 2, and let $N_G(H)$ be its normalizer. If 
   
 \end{enumerate}
 \end{document}
