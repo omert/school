@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include <deque>
 #include <vector>
 #include <map>
 
@@ -101,9 +102,89 @@ rootTable()
 	
 }
 
-int
-main()
+struct Poly : public deque<int> {
+    Poly() {}
+    Poly(const string& s) {
+	for (size_t i = 0; i < s.size(); ++i)
+	    push_front(s[i] - '0');
+	normalize();
+    }
+
+    void normalize();
+};
+
+ostream&
+operator << (ostream& os, const Poly& p)
 {
-    rootTable();
+    bool printed = false;
+    for (size_t i = 0; i < p.size(); ++i)
+	if (p[i] != 0){
+	    if (printed)
+		os << " + ";
+	    printed = true;
+	    if (i == 0)
+		os << p[i];
+	    else{
+		if (p[i] != 1)
+		    os << p[i];
+		if (i == 1)
+		    os << "x";
+		else
+		    os << "x^" << i;
+	    }
+	}
+    return os;
+}
+
+void
+Poly::normalize()
+{
+    for (size_t i = 0; i < size(); ++i){
+	(*this)[i] %= 3;
+	(*this)[i] += 3;
+	(*this)[i] %= 3;
+    }
+    while (size() && back() == 0)
+	pop_back();
+}
+
+void
+divide(Poly p1, const Poly& p2, Poly& q, Poly& r)
+{
+    q.resize(p1.size());
+    while (p1.size() >= p2.size()){
+	int f = p1.back() * p2.back();
+	int e = p1.size() - p2.size();
+	q[e] = f;
+	for (size_t i = 0; i < p2.size(); ++i)
+	    p1[i + e] -= f * p2[i];
+	p1.normalize();
+    }
+    r = p1;
+}
+
+void
+polyDiv(int argc, char* argv[])
+{
+    if (argc < 3){
+	cout << "need two args" << endl;
+	return;
+    }
+    string p1s(argv[1]);
+    string p2s(argv[2]);
+    Poly p1(p1s);
+    Poly p2(p2s);
+    Poly q;
+    Poly r;
+    divide(p1, p2, q, r);
+    cout << p1 << " divided by " << p2 << " = " 
+	 << q << " with reminder " << r << endl;
+}
+
+int
+main(int argc, char* argv[])
+{
+//    rootTable();
+    polyDiv(argc, argv);
     return 0;
 }
