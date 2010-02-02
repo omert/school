@@ -117,21 +117,19 @@ struct Poly : public deque<int> {
 ostream&
 operator << (ostream& os, const Poly& p)
 {
-    bool printed = false;
-    for (size_t i = 0; i < p.size(); ++i)
-	if (p[i] != 0){
-	    if (printed)
+    for (size_t i = p.size(); i > 0; --i)
+	if (p[i - 1] != 0){
+	    if (i < p.size())
 		os << " + ";
-	    printed = true;
-	    if (i == 0)
-		os << p[i];
+	    if (i == 1)
+		os << p[i - 1];
 	    else{
-		if (p[i] != 1)
-		    os << p[i];
-		if (i == 1)
+		if (p[i - 1] != 1)
+		    os << p[i - 1];
+		if (i == 2)
 		    os << "x";
 		else
-		    os << "x^" << i;
+		    os << "x^" << i - 1;
 	    }
 	}
     return os;
@@ -199,14 +197,30 @@ polyMath(int argc, char* argv[])
 void
 cubicPolys()
 {
-    
+    for (size_t i = 1; i < 3; ++i)
+	for (size_t j = 1; j < 3; ++j)
+	    for (size_t k = 1; k < 3; ++k){
+		Poly p;
+		p.push_back(i);
+		p.push_back(1);
+		Poly q;
+		q.push_back(j);
+		q.push_back(1);
+		Poly r;
+		r.push_back(k);
+		r.push_back(1);
+		cout << "(" << p << ")"
+		     << "(" << q << ")"
+		     << "(" << r << ")"
+		     << " &=& " << p * q * r << "\\\\" << endl;
+	    }
 }
 
 int
 main(int argc, char* argv[])
 {
 //    rootTable();
-    polyMath(argc, argv);
+//    polyMath(argc, argv);
     cubicPolys();
     return 0;
 }
