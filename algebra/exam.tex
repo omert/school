@@ -149,15 +149,43 @@
 %    We note (to be used in the next question), that $x^3+2x+1$ is a minimum
 %    polynomial of $a$. 
   \item
-    We would like to factor $x^{27}-x$. All the elements of $GF(27)$ are roots
-    of thi polynomial: 0 is clearly a root,
-    and the elements of $GF(27)^*$ are roots since their orders divide 26. 
-    Because a polynomial of degree 27 cannot have more than 27 distinct
-    roots (and all are accounted for in $GF(27)$), then $GF(27)$ is
-    the set of roots of $x^{27}-x$.
+%    We would like to factor $x^{27}-x$. 
+%    All the elements of $GF(27)$ are roots
+%    of thi polynomial: 0 is clearly a root,
+%    and the elements of $GF(27)^*$ are roots since their orders divide 26. 
+%    Because a polynomial of degree 27 cannot have more than 27 distinct
+%    roots (and all are accounted for in $GF(27)$), then $GF(27)$ is
+%    the set of roots of $x^{27}-x$.
 
-    The irreducible (over $GF(3)$) factors of $x^{27}-x$ are therefore the 
-    minimal polynomials (over $GF(3)$) of the elements of $GF(27)^*$.
+%    The irreducible (over $GF(3)$) factors of $x^{27}-x$ are therefore the 
+%    minimal polynomials (over $GF(3)$) of the elements of $GF(27)^*$. A minimal
+%    polynomial of $g \in GF(27)$ cannot be of degree more than three, since
+%    then the powers of $g$ would constitute a group of size larger than 26, 
+%    which is impossible since the order of $g$ is at most 26. We can therefore
+%    find these minimum polynomials by searching for all the irreducible
+%    polynomials of degree at most three, over $GF(3)$.
+    
+    We would like to factor $x^{27}-x$. 
+    We showed in class that this factoring can be done using monic factors
+    only.  The {\em reducible} monic polynomials over $GF(3)$ can be constructed 
+    by  multiplying all the possible linear factors of type $x-a$ where 
+    $a \in GF(3)$. The linear polynomials are all irreducible. The quadratic
+    monic reducibles are:
+
+    \begin{tabular}{l| c c c}
+     $\times$   & $x$    & $x+1$   & $x+2$\\
+            \hline
+     $x$    & $x^2$  & $x^2+x$ & $x^2+2x$\\ 
+     $x+1$  &        & $x^2+2x+1$ & $x^2+2$ \\
+     $x+2$  &        &            & $x^2+x+1$
+    \end{tabular}
+
+    There are nine monic quadratic polynomials, and so the three not in the
+    table above must be 
+    irreducible. They are $x^2+1$, $x^2+2x+2$ and $x^2+x+2$.
+
+    The tables below show the reducible cubic monic polynomials, except the
+    ones with factor $x$:
     
   \item
   \end{enumerate}

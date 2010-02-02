@@ -113,6 +113,7 @@ struct Poly : public deque<int> {
     void normalize();
 };
 
+
 ostream&
 operator << (ostream& os, const Poly& p)
 {
@@ -148,6 +149,19 @@ Poly::normalize()
 	pop_back();
 }
 
+Poly
+operator * (const Poly& p, const Poly& q)
+{
+    Poly res;
+    res.resize(p.size() * q.size());
+    for (size_t i = 0; i < p.size(); ++i)
+	for (size_t j = 0; j < q.size(); ++j)
+	    res[i + j] += p[i] * q[j];
+	
+    res.normalize();
+    return res;
+}
+
 void
 divide(Poly p1, const Poly& p2, Poly& q, Poly& r)
 {
@@ -164,7 +178,7 @@ divide(Poly p1, const Poly& p2, Poly& q, Poly& r)
 }
 
 void
-polyDiv(int argc, char* argv[])
+polyMath(int argc, char* argv[])
 {
     if (argc < 3){
 	cout << "need two args" << endl;
@@ -179,12 +193,20 @@ polyDiv(int argc, char* argv[])
     divide(p1, p2, q, r);
     cout << p1 << " divided by " << p2 << " = " 
 	 << q << " with reminder " << r << endl;
+    cout << p1 << " times " << p2 << " = " << p1 * p2 << endl;
+}
+
+void
+cubicPolys()
+{
+    
 }
 
 int
 main(int argc, char* argv[])
 {
 //    rootTable();
-    polyDiv(argc, argv);
+    polyMath(argc, argv);
+    cubicPolys();
     return 0;
 }
