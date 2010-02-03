@@ -149,52 +149,100 @@
 %    We note (to be used in the next question), that $x^3+2x+1$ is a minimum
 %    polynomial of $a$. 
   \item
-%    We would like to factor $x^{27}-x$. 
-%    All the elements of $GF(27)$ are roots
-%    of thi polynomial: 0 is clearly a root,
-%    and the elements of $GF(27)^*$ are roots since their orders divide 26. 
-%    Because a polynomial of degree 27 cannot have more than 27 distinct
-%    roots (and all are accounted for in $GF(27)$), then $GF(27)$ is
-%    the set of roots of $x^{27}-x$.
+    We would like to factor $x^{27}-x$. We showed in class that for $p$ 
+    prime and $n$ natural the 
+    polynomial $x^{p^n}-x$ is the product of all the monic irreducible 
+    polynomials of degrees that divide $n$ over $GF(p)$. Hence $x^{27}-x$
+    is the product of the irreducible linear and cubic monic polynomials
+    over $GF(3)$.
 
-%    The irreducible (over $GF(3)$) factors of $x^{27}-x$ are therefore the 
-%    minimal polynomials (over $GF(3)$) of the elements of $GF(27)^*$. A minimal
-%    polynomial of $g \in GF(27)$ cannot be of degree more than three, since
-%    then the powers of $g$ would constitute a group of size larger than 26, 
-%    which is impossible since the order of $g$ is at most 26. We can therefore
-%    find these minimum polynomials by searching for all the irreducible
-%    polynomials of degree at most three, over $GF(3)$.
+    The linear monics ($x$, $x+1$ and $x+2$) are all
+    trivially irreducible. To find the cubic factors of $x^{27}-x$ we list all 
+    the {\em reducible} cubics, and infer that the rest are irreducible. 
+    We restrict
+    ourselves to monic polynomials with non-zero free coefficients, of which
+    there are $3 \cdot 3 \cdot 2=18$ --- one needs to choose coefficients 
+    for $x^2$ and $x$ in $GF(3)$, and a free coefficient in $\{1,2\}$.
     
-    We would like to factor $x^{27}-x$. 
-    We showed in class that this factoring can be done using monic factors
-    only.  The {\em reducible} monic polynomials over $GF(3)$ can be constructed 
-    by  multiplying all the possible linear factors of type $x-a$ where 
-    $a \in GF(3)$. The linear polynomials are all irreducible. The quadratic
-    monic reducibles are:
-
-    \begin{tabular}{l| c c c}
-     $\times$   & $x$    & $x+1$   & $x+2$\\
-            \hline
-     $x$    & $x^2$  & $x^2+x$ & $x^2+2x$\\ 
-     $x+1$  &        & $x^2+2x+1$ & $x^2+2$ \\
-     $x+2$  &        &            & $x^2+x+1$
-    \end{tabular}
-
-    There are nine monic quadratic polynomials, and so the three not in the
-    table above must be 
-    irreducible. They are $x^2+1$, $x^2+2x+2$ and $x^2+x+2$.
-
-    We show below the reducible cubic monic polynomials, except the
-    ones with factor $x$:
+    Of the class of cubics described above, the ones reducible to linear
+    coefficients are
     \begin{eqnarray*}
-      (x + 1)(x + 1)(x + 1) &=& x^3 + 1\\
-      (x + 1)(x + 1)(x + 2) &=& x^3 + x^2 + 2x + 2\\
-      (x + 1)(x + 2)(x + 2) &=& x^3 + 2x^2 + 2x + 1\\
-      (x + 2)(x + 2)(x + 2) &=& x^3 + 2
+      (x + 1)^3 &=& x^3 + 1\\
+      (x + 1)^2(x + 2) &=& x^3 + x^2 + 2x + 2\\
+      (x + 1)(x + 2)^2 &=& x^3 + 2x^2 + 2x + 1\\
+      (x + 2)^3 &=& x^3 + 2.
     \end{eqnarray*}
-    There are ${3\choose 2}=3$ more reducibles with factor $x$, and so seven reducibles.
-    Since there are   
+
+    To find the ones reducible to an irreducible quadratic and a linear 
+    coefficient, we note that the {\em reducible} quadratics are
+    \begin{eqnarray*}
+      (x+1)^2 &=& x^2+2x+1\\
+      (x+1)(x+2) &=& x^2+2\\
+      (x+2)^2 &=& x^2+x+1\\
+    \end{eqnarray*}
+    and so the {\em irreducible} quadratics are  $x^2+1$, $x^2+2x+2$ and 
+    $x^2+x+2$. Hence the monic cubics (with a free coefficient) reducible to a 
+    quadratic and a linear are
+    \begin{eqnarray*}
+      (x^2 + 1)(x + 1) &=& x^3 + x^2 + x + 1\\
+      (x^2 + 2x + 2)(x + 1) &=& x^3 + x + 2\\
+      (x^2 + x + 2)(x + 1) &=& x^3 + 2x^2 + 2\\
+      (x^2 + 1)(x + 2) &=& x^3 + 2x^2 + x + 2\\
+      (x^2 + 2x + 2)(x + 2) &=& x^3 + x^2 + 1\\
+      (x^2 + x + 2)(x + 2) &=& x^3 + x + 1.
+    \end{eqnarray*}
+
+    We found ten reducible monic cubics (with a free coefficient), and so
+    there remain eight irreducible ones. They are:
+    \begin{eqnarray*}
+      x^3 + 2x + 1\\
+      x^3 + 2x + 2\\
+      x^3 + x^2 + 2\\
+      x^3 + x^2 + x + 2\\
+      x^3 + x^2 + 2x + 1\\
+      x^3 + 2x^2 + 1\\
+      x^3 + 2x^2 + x + 1\\
+      x^3 + 2x^2 + 2x + 2\\
+    \end{eqnarray*}
+
+    And therefore
+    \begin{eqnarray*}
+       x^{27} - x = (x^3 + 2x + 1)(x^3 + 2x + 2)(x^3 + x^2 + 2)(x^3 + x^2 + x + 2)(x^3 + x^2 + 2x + 1)&\\
+    (x^3 + 2x^2 + 1)(x^3 + 2x^2 + x + 1)(x^3 + 2x^2 + 2x + 2)(x + 1)(x + 2)x&
+    \end{eqnarray*}
+
+
   \item
+    All the elements of $GF(27)$ are roots of $x^{27}-x$: 0 is clearly a root,
+    and the order of $g \in GF(27)^*$ divides 26, and so $g^{26}=1$ or
+    $g^{27}=g$. 
+    Because a polynomial of degree 27 cannot have more than 27 distinct
+    roots (and all are accounted for in $GF(27)$), then $GF(27)$ is precisely
+    the set of roots of $x^{27}-x$.
+
+    Therefore (as we've shown in class) the irreducible factors of $x^{27}-x$
+    (bar $x$) are the minimal polynomials of the elements of $GF(27)^*$, which are 
+    precisely those that can be written in the form $a^i,\:0 \leq i \leq 25$.
+
+    This task can be performed by substituting each $a^i$ into each of the 
+    factors of $x^{27}-x$. It is possible, however, to perform this using
+    less tedious (but more devious) techniques:
+
+    \begin{itemize}
+    \item 
+      Trivially, $x+2$ is the minimum polynomial of $a^0=1$, as
+      $x+1$ is of $a^{13}=2$.
+    \item
+      By definition, $a$ is a root of $x^3+2x+1$, and so the latter is the
+      former's minimum 
+      polynomial. By the ``Freshman's dream'', $(p+q+r)^3=p^3+q^3+r^3$ under
+      $GF(3)$. Hence $a^3=a+2$ is a root of $(x^3+2x+1)^3=x^9+2x^3+1=2x^3+x+2$ 
+      and so (multiply the polynomial by two) {\em also} a root of $x^3+2x+1$!
+      By the same argument $a^9=a+1$ is too a root of $x^3+2x+1$.
+    \item
+      The reciprocal polynomial of 
+    \end{itemize}
+    
   \end{enumerate}
 \end{enumerate}
 \end{document}

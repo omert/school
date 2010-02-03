@@ -214,6 +214,43 @@ cubicPolys()
 		     << "(" << r << ")"
 		     << " &=& " << p * q * r << "\\\\" << endl;
 	    }
+    vector<Poly> q;
+    q.push_back(Poly("101"));
+    q.push_back(Poly("122"));
+    q.push_back(Poly("112"));
+    for (size_t i = 1; i < 3; ++i){
+	Poly p;
+	p.push_back(i);
+	p.push_back(1);
+	for (size_t j = 0; j < q.size(); ++j)
+	    cout << "(" << q[j] << ")"
+		 << "(" << p << ")"
+		 << " &=& " << p * q[j] << "\\\\" << endl;
+    }
+}
+
+void
+factor()
+{
+    vector<Poly> p;
+    p.push_back(Poly("1021"));
+    p.push_back(Poly("1022"));
+    p.push_back(Poly("1102"));
+    p.push_back(Poly("1112"));
+    p.push_back(Poly("1121"));
+    p.push_back(Poly("1201"));
+    p.push_back(Poly("1211"));
+    p.push_back(Poly("1222"));
+    p.push_back(Poly("10"));
+    p.push_back(Poly("11"));
+    p.push_back(Poly("12"));
+    Poly q;
+    q.push_back(1);
+    for (size_t i = 0; i < p.size(); ++i){
+	q = q * p[i];
+	cout << p[i] << "\\\\" << endl;
+    }
+    cout << " = " << q << endl;
 }
 
 int
@@ -221,6 +258,7 @@ main(int argc, char* argv[])
 {
 //    rootTable();
 //    polyMath(argc, argv);
-    cubicPolys();
+//    cubicPolys();
+    factor();
     return 0;
 }
