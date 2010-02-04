@@ -102,6 +102,45 @@ rootTable()
 	
 }
 
+void
+minpolyTable()
+{
+    GF27 zero;
+    GF27 one;
+    one[0] = 1;
+    GF27 two;
+    two[0] = 2;
+    for (size_t i = 0; i < 26; ++i){
+	GF27 x;
+	x[i] = 1;
+	x.normalize();
+	cout << "$a^{" << i << "}$" << " & ";
+	if (x + one == zero)
+	    cout << "$" << "x-2" << "$" << " & " << "(i)";
+	if (x + two == zero)
+	    cout << "$" << "x-1" << "$" << " & " << "(i)";
+	if (x * x * x + two * x + one == zero)
+	    cout << "$" << "x^3+2x+1" << "$"  << " & " << "(ii)";
+	if (x * x * x + two * x + two == zero)
+	    cout << "$" << "x^3+2x+2" << "$" << " & " << "(vi)";
+	if (x * x * x + x * x + two == zero)
+	    cout << "$" << "x^3+x^2+2" << "$"  << " & " << "(vi)";
+	if (x * x * x + x * x + x + two == zero)
+	    cout << "$" << "x^3+x^2+x+2" << "$" << " & " << "(v)";
+	if (x * x * x + x * x + two * x + one == zero)
+	    cout << "$" << "x^3+x^2+2x+1" << "$"  << " & " << "(iv)";
+	if (x * x * x + two * x * x + one == zero)
+	    cout << "$" << "x^3+2x^2+1" << "$" << " & " << "(iii)";
+	if (x * x * x + two * x * x + x + one == zero)
+	    cout << "$" << "x^3+2x^2+x+1" << "$"  << " & " << "(iv)";
+	if (x * x * x + two * x * x + two * x + two == zero)
+	    cout << "$" << "x^3+2x^2+2x+2" << "$" << " & " << "(v)";
+	cout << "\\\\" << endl;
+	
+    }
+}
+
+
 struct Poly : public deque<int> {
     Poly() {}
     Poly(const string& s) {
@@ -259,6 +298,7 @@ main(int argc, char* argv[])
 //    rootTable();
 //    polyMath(argc, argv);
 //    cubicPolys();
-    factor();
+//    factor();
+    minpolyTable();
     return 0;
 }
