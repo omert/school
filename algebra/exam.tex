@@ -392,16 +392,14 @@
     \item Be two disjoint cycles of size two, e.g. $(12)(34)$. The number of 
       such permutations
       is fifteen (choose a number to leave out and then choose a cycle member
-      for the lowest number). These elements are of order two.
+      for the lowest number left). These elements are of order two.
     \item Be a cycle of size three, e.g. $(123)$. There are 
       $2{5 \choose 3}=20$ such cycles. These elements are of order three.
     \item Be a cycle of size five, e.g. $(12345)$. There are $4!=24$ such 
       cycles. These elements are of order five.
     \end{itemize}
     The total number of elements listed above is sixty, and so all are accounted
-    for. We note that two elements of different orders (both larger than one)
-    cannot commute, as they have cycles of different sizes which cannot all
-    be disjoint.
+    for.
 
     We are now ready to turn to the actual problem of classifying the subgroups
     of $A_5$.
@@ -477,8 +475,7 @@
       of order three, and a Sylow $2$-subgroup, of order four. Since no 
       element of order four exists, then the Sylow $2$-subgroup must be 
       $C_2\times C_2$. $G$ cannot be Abelian, since it would have to have 
-      an element of order three that commutes with an element of order two,
-      which is impossible.
+      an element of order six.
 
       The numbers of Sylow subgroups, $n_3$ and $n_4$, cannot therefore both
       be one. By the Sylow theorems, $n_3$ must equal $1\mod 3$ and divide
@@ -500,7 +497,43 @@
       pairs of transpositions: $(12)(34)$, $(13)(24)$ and $(14)(23)$. 
       
     \item {\bf 20}
+      Let $G$ be a subgroup of order 20.
+      As above, the Sylow $2$-subgroup would
+      be $C_2\times C_2$. 
+      Also as above, $G$  cannot be Abelian, since it would have
+      to have a element of order ten.
+
+      The number of Sylow $5$-subgroups equals $1\mod 5$ and divides four,
+      and so must equal one. Hence the number of Sylow $2$-subgroups cannot
+      equal one as well. Since it is odd and divides five then it must equal
+      five. Hence $G$ would have an identity element, five elements of order 
+      two and four elements of order one - not enough to make 20 elements.
+      Hence no subgroup of order 20 exists.
+
     \item {\bf 30}
+      Let $G$ be a subgroup of order 30. Then $G$ would have a Sylow 
+      $2$-subgroup, a Sylow $3$-subgroup and a Sylow $5$-subgroup. 
+      It is impossible that two of them are normal, since their
+      Cartesian product would be an Abelian subgroup of $G$ with order 
+      greater than five, and again no element of such order exists.
+
+      The number of Sylow $5$-subgroups, $n_5$, equals $1\mod 5$ and 
+      divides six. Hence it may equal one or six.
+
+      The number of Sylow $3$-subgroups, $n_3$, equals $1\mod 3$ and 
+      divides ten. Hence it may equal one, or ten.
+
+      The number of Sylow $2$-subgroups, $n_2$, equals $1\mod 2$ and 
+      divides fifteen. Hence it may equal one, three, five or fifteen.
+
+      Assume first that $n_2=1$. Then $n_5=6$ and $n_3=10$. This makes too 
+      many elements, and so $n_2=1$ is an impossibility. By the same argument
+      it is impossible that all three are greater than one.
+
+      Next assume $n_5=1$. Then $n_3=10$ and $n_2 \in \{3,5,15\}$. The number
+      of elements adds up to 30 iff $n_2=5$.
+
+      
     \item {\bf 60}
       
       The only subgroup of order 60 is, trivially, $A_5$ itself.
