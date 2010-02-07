@@ -1,0 +1,269 @@
+\documentclass[11pt]{article} \usepackage{amssymb}
+\usepackage{amsfonts} \usepackage{amsmath} \usepackage{bm}
+\usepackage{latexsym} \usepackage{epsfig}
+
+\setlength{\textwidth}{6.5 in} \setlength{\textheight}{8.25in}
+\setlength{\oddsidemargin}{0in} \setlength{\topmargin}{0in}
+\addtolength{\textheight}{.8in} \addtolength{\voffset}{-.5in}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{example}[theorem]{Example}
+\newenvironment{proof}{\noindent \textbf{Proof:}}{$\Box$}
+
+\newcommand{\ignore}[1]{}
+
+\newcommand{\enote}[1]{} \newcommand{\knote}[1]{}
+\newcommand{\rnote}[1]{}
+
+
+
+% \newcommand{\enote}[1]{{\bf [[Elchanan:} {\emph{#1}}{\bf ]]}}
+% \newcommand{\knote}[1]{{\bf [[Krzysztof:} {\emph{#1}}{\bf ]]}}
+% \newcommand{\rnote}[1]{{\bf [[Ryan:} {\emph{#1}}{\bf ]]}}
+
+
+
+\DeclareMathOperator{\Support}{Supp} \DeclareMathOperator{\Opt}{Opt}
+\DeclareMathOperator{\Ordo}{\mathcal{O}}
+\newcommand{\MaxkCSP}{\textsc{Max $k$-CSP}}
+\newcommand{\MaxkCSPq}{\textsc{Max $k$-CSP$_{q}$}}
+\newcommand{\MaxCSP}[1]{\textsc{Max CSP}(#1)} \renewcommand{\Pr}{{\bf
+    P}} \renewcommand{\P}{{\bf P}} \newcommand{\Px}{\mathop{\bf P\/}}
+\newcommand{\E}{{\bf E}} \newcommand{\Cov}{{\bf Cov}}
+\newcommand{\Var}{{\bf Var}} \newcommand{\Varx}{\mathop{\bf Var\/}}
+
+\newcommand{\bits}{\{-1,1\}}
+
+\newcommand{\nsmaja}{\textstyle{\frac{2}{\pi}} \arcsin \rho}
+
+\newcommand{\Inf}{\mathrm{Inf}} \newcommand{\I}{\mathrm{I}}
+\newcommand{\J}{\mathrm{J}}
+
+\newcommand{\eps}{\epsilon} \newcommand{\lam}{\lambda}
+
+% \newcommand{\trunc}{\ell_{2,[-1,1]}}
+\newcommand{\trunc}{\zeta} \newcommand{\truncprod}{\chi}
+
+\newcommand{\N}{\mathbb N} \newcommand{\R}{\mathbb R}
+\newcommand{\Z}{\mathbb Z} \newcommand{\CalE}{{\mathcal{E}}}
+\newcommand{\CalC}{{\mathcal{C}}} \newcommand{\CalM}{{\mathcal{M}}}
+\newcommand{\CalR}{{\mathcal{R}}} \newcommand{\CalS}{{\mathcal{S}}}
+\newcommand{\CalV}{{\mathcal{V}}}
+\newcommand{\CalX}{{\boldsymbol{\mathcal{X}}}}
+\newcommand{\CalG}{{\boldsymbol{\mathcal{G}}}}
+\newcommand{\CalH}{{\boldsymbol{\mathcal{H}}}}
+\newcommand{\CalY}{{\boldsymbol{\mathcal{Y}}}}
+\newcommand{\CalZ}{{\boldsymbol{\mathcal{Z}}}}
+\newcommand{\CalW}{{\boldsymbol{\mathcal{W}}}}
+\newcommand{\CalF}{{\mathcal{Z}}}
+% \newcommand{\boldG}{{\boldsymbol G}}
+% \newcommand{\boldQ}{{\boldsymbol Q}}
+% \newcommand{\boldP}{{\boldsymbol P}}
+% \newcommand{\boldR}{{\boldsymbol R}}
+% \newcommand{\boldS}{{\boldsymbol S}}
+% \newcommand{\boldX}{{\boldsymbol X}}
+% \newcommand{\boldB}{{\boldsymbol B}}
+% \newcommand{\boldY}{{\boldsymbol Y}}
+% \newcommand{\boldZ}{{\boldsymbol Z}}
+% \newcommand{\boldV}{{\boldsymbol V}}
+\newcommand{\boldi}{{\boldsymbol i}} \newcommand{\boldj}{{\boldsymbol
+    j}} \newcommand{\boldk}{{\boldsymbol k}}
+\newcommand{\boldr}{{\boldsymbol r}}
+\newcommand{\boldsigma}{{\boldsymbol \sigma}}
+\newcommand{\boldupsilon}{{\boldsymbol \upsilon}}
+\newcommand{\hone}{{\boldsymbol{H1}}}
+\newcommand{\htwo}{\boldsymbol{H2}}
+\newcommand{\hthree}{\boldsymbol{H3}}
+\newcommand{\hfour}{\boldsymbol{H4}}
+
+
+\newcommand{\sgn}{\mathrm{sgn}} \newcommand{\Maj}{\mathrm{Maj}}
+\newcommand{\Acyc}{\mathrm{Acyc}}
+\newcommand{\UniqMax}{\mathrm{UniqMax}}
+\newcommand{\Thr}{\mathrm{Thr}} \newcommand{\littlesum}{{\textstyle
+    \sum}}
+
+\newcommand{\half}{{\textstyle \frac12}}
+\newcommand{\third}{{\textstyle \frac13}}
+\newcommand{\fourth}{{\textstyle \frac14}}
+
+\newcommand{\Stab}{\mathbb{S}}
+\newcommand{\StabThr}[2]{\Gamma_{#1}(#2)}
+\newcommand{\StabThrmin}[2]{{\underline{\Gamma}}_{#1}(#2)}
+\newcommand{\StabThrmax}[2]{{\overline{\Gamma}}_{#1}(#2)}
+\newcommand{\TestFcn}{\Psi}
+
+\renewcommand{\phi}{\varphi}
+
+\begin{document}
+\title{Random Spatial Processes - Homework}
+
+ \author{Omer Tamuz, 035696574}
+\maketitle
+
+
+\begin{enumerate}
+  \item
+  \begin{enumerate}
+  \item Let $G_X(\eta)=\E[\eta^X]$ where $X$ is distributed geometrically with
+    parameter $p$. We showed in class that when $p \leq \half$ then the 
+    extinction probability is one,
+    since the expcted number of offsprings is less than or equal to one.
+    For $p>\half$ we showed that the extinction probability $\eta$ is
+    the smallest solution of $\eta=G_X(\eta)$:
+    \begin{eqnarray*}
+      \eta &=& G_X(\eta)
+      \\ &=& \E[\eta^X]
+      \\ &=& \sum_{i=0}^\infty \eta^i\P[X=i]
+      \\ &=& \sum_{i=0}^\infty \eta^i(1-p)p^i
+      \\ &=& (1-p)\sum_{i=0}^\infty (\eta p)^i
+      \\ &=& {1-p \over 1 - \eta p}
+    \end{eqnarray*}
+    This gives a quadratic equation on $\eta$: $p\eta^2-\eta+1-p=0$.
+    \begin{eqnarray*}
+      0 &=& p\eta^2-\eta+1-p
+      \\ 0 &=& \eta^2-\eta/p+{1-p \over p}
+      \\ 0 &=& (\eta-1)(\eta-(1/p-1)).
+    \end{eqnarray*}
+    Since $p>\half$ then $\eta=1/p-1$.
+  \end{enumerate}
+  \item
+  \item
+    \begin{enumerate}
+    \item 
+      Let $G(n,p)$ be a random E-R graph with $p={\log n-a_n\over n}$ as defined
+      in the question. Let $X=\sum_{v\in[n]}{\bf 1}_{C(v)=\{v\}}$, also as defined
+      in the question. Then the expectation of $X$ is:
+      \begin{eqnarray*}
+        \E[X] &=& \E\left[\sum_{v\in[n]}{\bf 1}_{C(v)=\{v\}}\right]
+        \\ &=& n\P[C(v_0)=\{v_0\}]
+        \\ &=& n\P[C(v_0)=\{v_0\}]
+        \\ &=& n(1-p)^{n-1}.
+        \\ &=& n\left(1-{\log n-a_n\over n}\right)^{n-1}.
+      \end{eqnarray*}
+      The limit of $\E[X]$ as $n$ tends to infinity is 
+      $n\exp(a_n-\log n)=\exp(a_n)=\infty$.
+      The expectation of $X^2$ is:
+      \begin{eqnarray*}
+        \E[X^2] &=& \E\left[\left(\sum_{v\in[n]}{\bf 1}_{C(v)=\{v\}}\right)^2\right]
+        \\ &=& \E\left[\sum_{u,v\in[n]}{\bf 1}_{C(v)=\{v\}}{\bf 1}_{C(u)=\{u\}}\right]
+        \\ &=& \sum_{u,v\in[n]}\P[C(v)=\{v\} \mbox{ and } C(u)=\{u\}]
+        \\ &=& \sum_{u\neq v\in[n]}\P[C(v)=\{v\} \mbox{ and } C(u)=\{u\}]+\sum_{v\in[n]}\P[C(v)=\{v\}]
+        \\ &=& n(n-1)\P[C(v)=\{v\} \mbox{ and } C(u)=\{u\}]+\E[X]
+        \\ &=& n(n-1)(1-p)^{2(n-1)-1}+\E[X]
+        \\ &=& {n-1\over n(1-p)}\E[X]^2+\E[X]
+      \end{eqnarray*}
+      Hence
+      \begin{eqnarray*}
+        \Var[X]&=&\E[X^2]-\E[X]^2
+        \\ &=& {n-1\over n(1-p)}\E[X]^2+\E[X] - \E[X]^2
+        \\ &=& {np-1\over n-np}\E[X]^2+\E[X] 
+      \end{eqnarray*}
+      We can now bound the probability that the graph is not connected:
+      \begin{eqnarray*}
+        \P[\mbox{graph not connected}] &\geq& 
+        \P[\mbox{there exists an isolated vertex}]
+        \\ &=& \P[X>0]
+        \\ &\geq& \P\left[|X-\E[X]| < \E[X]/2\right]
+        \\ &\geq& 1-{\Var[X] \over \E[X]^2/4}
+        \\ &=& 1-{4(np-1)\over n-np}+{4 \over \E[X]}
+        \\ &=& 1-{4(\log n-a_n-1)\over n-\log n + a_n}+{4 \over \E[X]}.
+      \end{eqnarray*}
+      Since $a_n$ is bounded by $\log n$ then the second term vanishes as
+      $n$ tends to infinity, as does the last term. Hence the probability
+      that the graph is connected tends to zero as $n$ tends to infinity.
+    \end{enumerate}
+  \item
+    \begin{enumerate}
+    \item 
+      Let $T_k$ be the amount of time it takes the random walk to cover
+      $k+1$ vertices after having covered $k$ vertices. Then clearly
+      $C_n=\sum_{k=1}^{n-1}T_n$ (we start from $k=1$ since at time zero the
+      walk have already covered one vertex).
+      
+      $T_k$ is distributed geometrically with parameter 
+      $p_k=(n-k)/(n-1)$: The
+      probability of adding a new vertex to the set of those covered, after 
+      having already covered $k$ vertices, is the probability of choosing
+      one of the $n-k$ unvisited vertices out of the $n-1$ possible ones. 
+      Therefore
+      \begin{eqnarray*}
+        \E[C_n]&=&\E\left[\sum_{k=1}^{n-1}T_k\right]
+        \\ &=&\sum_{k=1}^{n-1}\E[T_k]
+        \\ &=&\sum_{k=1}^{n-1}{1\over p_k}
+        \\ &=&\sum_{k=1}^{n-1}{n-1\over (n-k)}
+        \\ &=&(n-1)\sum_{k=1}^{n-1}{1\over (n-k)}
+        \\ &=& (n-1)\left({1\over n-1}+{1\over n-2}+\cdots+1\right)
+      \end{eqnarray*}
+    \item
+      Let $P_k$ be the probability that vertex $x_0$ was not visited until
+      time $k$. Then $P_0=(n-1)/n$ and for $k>0$ we have that 
+      $P_k=P_{k-1}(n-2)/(n-1)$, since if $x_0$ was not visited up to time 
+      $P_{k-1}$ then in particular $X_{k-1}\neq x_0$ and the probability to visit
+      it at time $k$ is $(n-2)/(n-1)$. We can therefore deduce that
+      $$P_k={(n-1)\over n}\left({n-2\over n-1}\right)^k.$$
+      We use this in the  following calculation:
+      \begin{eqnarray*}
+        {\E[D_{[un]}]\over n} &=& {1\over n}\E\left[\sum_{x\in K_n}{\bf 1}_{x \not \in \{X_0,\ldots,X_{[un]}\}}\right]
+        \\ &=& {1\over n}\sum_{x\in K_n}\E\left[{\bf 1}_{x \not \in \{X_0,\ldots,X_{[un]}\}}\right]
+        \\ &=& {1\over n}n\P[x_0 \not \in \{X_0,\ldots,X_{[un]}\}]
+        \\ &=& P_{[un]}
+        \\ &=& {(n-1)\over n}\left({n-2\over n-1}\right)^{[un]}.
+        \end{eqnarray*}
+        Then
+        \begin{eqnarray*}
+          {(n-1)\over n}\left({n-2\over n-1}\right)^{un+1} &\leq {\E[D_{[un]}]\over n} \leq& {(n-1)\over n}\left({n-2\over n-1}\right)^{un-1}
+          \\ \lim_{n \to \infty}{(n-1)\over n}\left({n-2\over n-1}\right)^{un+1} &\leq \lim_{n \to \infty}{\E[D_{[un]}]\over n} \leq& \lim_{n \to \infty}{(n-1)\over n}\left({n-2\over n-1}\right)^{un-1}
+          \\ \lim_{n \to \infty}{n\over n+1}\left({n-1\over n}\right)^{u(n+1)+1} &\leq \lim_{n \to \infty}{\E[D_{[un]}]\over n} \leq& \lim_{n \to \infty}{n\over n+1}\left({n-1\over n}\right)^{u(n+1)-1}
+          \\ \lim_{n \to \infty}{n\over n+1}\left(1-{1\over n}\right)^{n(u+u/n+1/n)} &\leq \lim_{n \to \infty}{\E[D_{[un]}]\over n} \leq& \lim_{n \to \infty}{n\over n+1}\left(1-{1\over n}\right)^{n(u+u/n-1/n)}
+          \\ \lim_{n \to \infty}\exp(-u-u/n-1/n) &\leq \lim_{n \to \infty}{\E[D_{[un]}]\over n} \leq& \lim_{n \to \infty}\exp(-u-u/n+1/n)
+          \\ \exp(-u) &\leq \lim_{n \to \infty}{\E[D_{[un]}]\over n} \leq& \exp(-u)
+        \end{eqnarray*}
+      \item
+        The times $T_k$, as defined above, are independent. Hence
+        \begin{eqnarray*}
+          \Var[C_n] &=& \sum_{k=1}^{n-1}\Var[T_k]
+          \\ &=& \sum_{k=1}^{n-1}{1-p_k \over p_k^2}
+          \\ &=& \sum_{k=1}^{n-1}{1-(n-k)/(n-1) \over (n-k)^2/(n-1)^2}
+          \\ &=& \sum_{k=1}^{n-1}{(n-1)^2-(n-k)(n-1) \over (n-k)^2}
+          \\ &=& (n-1)\sum_{k=1}^{n-1}{k-1 \over (n-k)^2}
+          \\ &\leq& n^2\sum_{k=1}^{n-1}{1 \over (n-k)^2}
+          \\ &\leq& n^2\sum_{k=1}^n{1 \over k^2}
+          \\ &\leq& n^2{\pi^2 \over 6}
+        \end{eqnarray*}
+        Hence $\Var[C_n/(n\log n)] \leq 10/\log^2n$ and thus goes to zero as
+        $n$ tends to infinity. Hence it converges 
+        is the limit of 
+
+
+
+        \begin{eqnarray*}
+          \E\left[\left({C_n\over n\log n}-1\right)^2\right] 
+          &=& \E\left[\left({C_n\over n\log n}\right)^2-{2C_n\over n\log n}+1\right] 
+          \\ &=& \left({1\over n\log n}\right)^2\E\left[C_n^2\right]-{2\over n\log n}\E[C_n]+1
+        \end{eqnarray*}
+        We first calculate $\E[C_n^2]$:
+        \begin{eqnarray*}
+          \E[C_n^2] &=& \E\left[\left(\sum_{k=1}^{n-1}T_k\right)^2\right]
+          \\ &=& \E\left[\sum_{k,l=1}^{n-1}T_kT_l\right]
+          \\ &=& \E\left[\sum_{k,l=1,\:k \neq l}^{n-1}T_kT_l+\sum_{k=1}^{n-1}T_k^2\right]
+          \\ &=& \sum_{k,l=1,\:k \neq l}^{n-1}\E[T_k]\E[T_l]+\sum_{k=1}^{n-1}\Var[T_k]+\E[T_k]^2
+          \\ &=& \sum_{k,l=1,\:k \neq l}^{n-1}{1\over p_kp_l}+\sum_{k=1}^{n-1}{2-p_k\over p_k^2}
+        \end{eqnarray*}
+
+
+    \end{enumerate}
+
+
+\end{enumerate}
+\end{document}
+
+
