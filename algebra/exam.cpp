@@ -3,6 +3,8 @@
 #include <deque>
 #include <vector>
 #include <map>
+#include <set>
+#include <algorithm>
 
 using namespace std;
 
@@ -292,6 +294,59 @@ factor()
     cout << " = " << q << endl;
 }
 
+class Permutation : public vector<size_t>{
+    
+};
+
+Permutation
+operator * (const Permutation& g1, const Permutation& g2)
+{
+    Permutation ret;
+    ret.resize(g1.size());
+    for (size_t i = 0; i < g1.size(); ++i)
+	ret[i] = g2[g1[i]];
+    return ret;
+}
+
+ostream&
+operator << (ostream& os, const Permutation& g)
+{
+    set<size_t> inCycle;
+    for (size_t i = 0; i < g.size(); ++i){
+	vector<size_t> cycle;
+	for(size_t j = i; inCycle.count(j) == 0; j = g[j]){
+	    cycle.push_back(j);
+	    inCycle.insert(j);
+	}
+	    
+	if (cycle.size() > 0){
+	    os << "(";
+	    for (size_t j = 0; j < cycle.size(); ++j)
+		os << cycle[j];
+	    os << ")";
+	}
+    }
+    for (size_t j = 0; j < g.size(); ++j)
+	os << g[j];
+    return os;
+}
+
+typedef set<Permutation> PermGroup;
+
+void
+classifyA5()
+{
+    PermGroup G;
+    Permutation g;
+    g.resize(5);
+    for (size_t i = 0; i < 5; ++i)
+	g[i] = i;
+    for(; G.count(g) == 0; next_permutation(g.begin(), g.end())){
+	cout << g << endl;
+	G.insert(g);
+    }
+}
+
 int
 main(int argc, char* argv[])
 {
@@ -299,6 +354,7 @@ main(int argc, char* argv[])
 //    polyMath(argc, argv);
 //    cubicPolys();
 //    factor();
-    minpolyTable();
+//    minpolyTable();
+    classifyA5();
     return 0;
 }
