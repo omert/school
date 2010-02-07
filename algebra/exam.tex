@@ -364,10 +364,11 @@
       $G$ has $p$ Sylow $2$-subgroups.
     \end{proof}
 
-    We can use these to prove the following:
+    We can use these claims to prove the following:
     \begin{proposition}
       \label{prop:2p_unique}
-      A group of order is either Abelian or isomorphic to the single non-Abelian
+      A group of order $2p$, with $p>2$ prime, is either Abelian or isomorphic 
+      to the single non-Abelian
       group of order $2p$. In the latter case multiplication is defined by
       $a^ib=ba^{-1}$ where $b$ is an element of order two and $a$ is a generator
       of the Sylow $p$-subgroup.
@@ -378,9 +379,11 @@
       which can be represented as $a^i$ for some $a$, and $p$ elements of order
       two, which can be represented as $a^ib$ for some $b$ of order two. As
       elements of order two they are their own inverses, and so $a^iba^ib=1$ and
-      $a^ib=ba^{-i}$. This defines multiplication unambiguously: $a^ia^j=a^{i+j}$,
+      $a^ib=ba^{-i}$. This defines multiplication (and hence the group) 
+      unambiguously: $a^ia^j=a^{i+j}$,
       $(a^ib)a^j=a^{i-j}b$, $a^i(a^jb)=a^{i+j}b$ and $(a^ib)(a^jb)=a^{i-j}b$.
     \end{proof}
+
     Before starting to describe the subgroups of $A_5$, we classify its
     elements.
     The elements of $A_5$ are defined to be the even permutations of size five.
@@ -401,18 +404,22 @@
     The total number of elements listed above is sixty, and so all are accounted
     for.
 
+    A last fact that we use below is that a permutation can also be viewed
+    as a automorphism of $A_5$ - it merely changes the names of the items 
+    being permuted. Hence any element of order $p$
+    is a ``generic'' element of order $p$, in the sense that any statement
+    about it (which doesn't include relations to other elements) is true
+    for all other elements of order $p$. For example, if a subgroup $G$ is said
+    to ``have an element of order five'' then either it or some isomorphic
+    group has the element $(12345)$.
+
     We are now ready to turn to the actual problem of classifying the subgroups
     of $A_5$.
-    The prime factorisation of sixty is $60=2^2\cdot 3\cdot 5$. Hence its
-    divisors are $1,2,3,4,5,6,10,12,15,20,30,60$. We list below the subgroups
-    of each of these orders.
+    The prime factorisation of sixty is $60=2^2\cdot 3\cdot 5$. Hence its non-trivial
+    divisors are $2,3,4,5,6,10,12,15,20$ and $30$. We list below the subgroups
+    of each of these orders (up to isomorphism), or prove they don't exist.
 
     \begin{itemize}
-    \item {\bf 1}
-
-      The trivial subgroup containing the identity element is indeed trivially 
-      the only subgroup of order one.
-
     \item {\bf 2, 3, 5}
       
       For a prime divisor $p\in\{2,3,5\}$, a group of order $p$ exists 
@@ -457,7 +464,8 @@
       $5$-subgroup. Let 
       $\tau_i=\left(ii^{\sigma^3}\right)\left(i^{\sigma}i^{\sigma^2}\right)$ 
       be an element of $A_5$. Then there are five possible
-      choices for $\tau$ and $\tau_i^{-1}\sigma\tau_i=(54321)=\sigma^{-1}$, as 
+      choices for $\tau$, which generate the five Sylow $2$-subgroups. Furthermore, 
+      $\tau_i^{-1}\sigma\tau_i=(54321)=\sigma^{-1}$, as 
       required in proposition~\ref{prop:2p_unique}.
 
     \item {\bf 15}
@@ -511,7 +519,7 @@
       Hence no subgroup of order 20 exists.
 
     \item {\bf 30}
-      Let $G$ be a subgroup of order 30. Then $G$ would have a Sylow 
+      Let $G$ be a subgroup of order 30. Then $G$ has a Sylow 
       $2$-subgroup, a Sylow $3$-subgroup and a Sylow $5$-subgroup. 
       It is impossible that two of them are normal, since their
       Cartesian product would be an Abelian subgroup of $G$ with order 
@@ -526,18 +534,25 @@
       The number of Sylow $2$-subgroups, $n_2$, equals $1\mod 2$ and 
       divides fifteen. Hence it may equal one, three, five or fifteen.
 
+      Only one of $n_5$, $n_3$ and $n_2$ may be one, by the argument above.
+
       Assume first that $n_2=1$. Then $n_5=6$ and $n_3=10$. This makes too 
       many elements, and so $n_2=1$ is an impossibility. By the same argument
-      it is impossible that all three are greater than one.
+      it is impossible that all three of $n_5$, $n_3$ and $n_2$ are greater 
+      than one.
 
-      Next assume $n_5=1$. Then $n_3=10$ and $n_2 \in \{3,5,15\}$. The number
-      of elements adds up to 30 iff $n_2=5$.
+      Next assume $n_5=1$. Then $n_3=10$ and so $G$ includes all of $A_5$'s 
+      elements of order three, but only four element of order five. WLOG,
+      let $(12453)$ {\em not} belong to $G$. But $(12453)=(123)(345)$ --- contradiction.
 
-      
-    \item {\bf 60}
-      
-      The only subgroup of order 60 is, trivially, $A_5$ itself.
-        
+      Finally let $n_3=1$. Then $n_5=6$, and to make the number of elements
+      equal 30 we must have $n_2=3$. In this case $G$ includes all the elements
+      of order five, but not all the elements of order two. WLOG let 
+      $(13)(25)$ {\em not} belong to $G$. But $(12345)(12354)=(13)(25)$ ---
+      contradiction. 
+
+      We have ruled out all the possibilities for the number of Sylow subgroups
+      of $G$, and so $G$ is fictitious and $A_5$ has no subgroup of order 30.
     \end{itemize}
 \end{enumerate}
 \end{document}

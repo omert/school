@@ -4,6 +4,7 @@
 #include <vector>
 #include <map>
 #include <set>
+#include <queue>
 #include <algorithm>
 
 using namespace std;
@@ -308,8 +309,8 @@ operator * (const Permutation& g1, const Permutation& g2)
     return ret;
 }
 
-ostream&
-operator << (ostream& os, const Permutation& g)
+void
+buildCycles(const Permutation& g, vector<vector<size_t> >& rCycles)
 {
     set<size_t> inCycle;
     for (size_t i = 0; i < g.size(); ++i){
@@ -318,35 +319,123 @@ operator << (ostream& os, const Permutation& g)
 	    cycle.push_back(j);
 	    inCycle.insert(j);
 	}
-	    
-	if (cycle.size() > 0){
-	    os << "(";
-	    for (size_t j = 0; j < cycle.size(); ++j)
-		os << cycle[j];
-	    os << ")";
-	}
+	
+	if (cycle.size() > 1)
+	    rCycles.push_back(cycle);
     }
-    for (size_t j = 0; j < g.size(); ++j)
-	os << g[j];
+}
+
+ostream&
+operator << (ostream& os, const Permutation& g)
+{
+    vector<vector<size_t> > cycles;
+    buildCycles(g, cycles);
+    for (size_t i = 0; i < cycles.size(); ++i){
+	os << "(";
+	for (size_t j = 0; j < cycles[i].size(); ++j)
+	    os << cycles[i][j];
+	os << ")";
+    }
+//    for (size_t j = 0; j < g.size(); ++j)
+//	os << g[j];
     return os;
+}
+
+bool
+even(const Permutation& g)
+{
+    vector<vector<size_t> > cycles;
+    buildCycles(g, cycles);
+    size_t numTrans = 0;
+    for (size_t i = 0; i < cycles.size(); ++i)
+	numTrans += cycles[i].size() + 1;
+    return (numTrans % 2) == 0;
 }
 
 typedef set<Permutation> PermGroup;
 
-void
-classifyA5()
+PermGroup
+generateA5()
 {
-    PermGroup G;
+    PermGroup A5;
     Permutation g;
     g.resize(5);
     for (size_t i = 0; i < 5; ++i)
 	g[i] = i;
-    for(; G.count(g) == 0; next_permutation(g.begin(), g.end())){
-	cout << g << endl;
-	G.insert(g);
-    }
+    for(; A5.count(g) == 0; next_permutation(g.begin(), g.end()))
+	if (even(g))
+	    A5.insert(g);
+    return A5;
 }
 
+PermGroup
+generate(const vector<Permutation>& v)
+{
+    PermGroup G;
+    queue<Permutation> q;
+    for (size_t i = 0; i < v.size(); ++i){
+	G.insert(v[i]);
+	q.push(v[i]);
+    }
+    while(q.size()){
+	Permutation g = q.front();
+	q.pop();
+	for (PermGroup::const_iterator it = G.begin(); it != G.end(); ++it){
+	    Permutation a = g * (*it); 
+	    Permutation b = (*it) * g; 
+	    if (G.insert(a).second)
+		q.push(a);
+	    if (G.insert(b).second)
+		q.push(b);
+	}
+    }
+    return G;
+}
+
+set<PermGroup>
+addGenerator(const set<PermGroup>& groupSet, const PermGroup& G)
+{
+    set<PermGroup> ret;
+    for (set<PermGroup>::const_iterator itS = groupSet.begin();
+	 itS != groupSet.end(); ++itS)
+    {
+	for (PermGroup::const_iterator itG = G.begin(); itG != G.end(); ++itG){
+	    vector<Permutation> generators;
+	    generators.push_back(*itG);
+	    generators.insert(generators.end(), itS->begin(), itS->end());
+	    PermGroup H = generate(generators);
+	    if (ret.insert(H).second)
+		cout << H.size() << " ";
+	}
+    }
+    return ret;
+    
+}
+
+void
+classifyA5()
+{
+    const PermGroup A5 = generateA5();
+    set<PermGroup> singles;
+    for (PermGroup::const_iterator it = A5.begin(); it != A5.end(); ++it){
+	vector<Permutation> generators;
+	generators.push_back(*it);
+	singles.insert(generate(generators));
+    }
+    cout << "singles:" << endl << "    ";
+    for (set<PermGroup>::const_iterator it = singles.begin(); 
+	 it != singles.end(); ++it)
+    {
+	cout << it->size() << " ";
+    }
+    cout << endl;
+    cout << "doubles:" << endl << "    ";
+    set<PermGroup> doubles = addGenerator(singles, A5);
+    cout << endl;
+    cout << "triples:" << endl << "    ";
+    set<PermGroup> triples = addGenerator(doubles, A5);
+    cout << endl;
+}
 int
 main(int argc, char* argv[])
 {
