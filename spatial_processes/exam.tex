@@ -134,8 +134,62 @@
       \\ 0 &=& (\eta-1)(\eta-(1/p-1)).
     \end{eqnarray*}
     Since $p>\half$ then $\eta=1/p-1$.
-  \end{enumerate}
   \item
+    In the paper refered to in the question it is shown that a branching
+    process's geneological tree contains an infinite binary tree with
+    probability $\pi$ where $1-\pi$ is the smallest root in $[0,1]$ of
+    $$G_X(s)+(1-s)G'_X(s)=s.$$
+    In our case $G_X(s)=(1-p)/(1-sp)$ and $G'_X(s)=p(1-p)/(1-sp)^2$ 
+    and so $1-\pi_p$ is the smallest root in $[0,1]$ of
+    \begin{eqnarray*}
+      {1-p \over 1-sp}+{(1-s)p(1-p)\over (1-sp)^2}=s
+    \end{eqnarray*}
+    The solutions to this equation are $s_0=1$,
+    $$s_1={1\over p}-{1\over 2}-{1\over 2}\sqrt{5-4/p}$$
+    and
+    $$s_2={1\over p}-{1\over 2}+{1\over 2}\sqrt{5-4/p}.$$
+    
+    The following results are a consequence of simple analysis, which we
+    omit:
+
+    When $p<4/5$ then $s_1$ and $s_2$ are complex and so $\pi_p=1-s_0=0$ and no
+    infinite binary tree exists.
+
+    When $p=4/5$ then $s_1=s_2=5/4-1/2=3/4$ and so we have a phase transition,
+    and a binary tree exists with probability $\pi_p=1-s_1=1/4$.
+
+    When $4/5<p<1$ then $0<s_1<3/4<s_2$ and so $\pi_p=1-s_1$.
+
+    When $p=1$ then $s_1=0$ and $\pi_p=1-s_0=1$.
+  \item
+    Let $\theta_m$ be the probability that the geneological tree of a 
+    branching process with Binomial($n,p$) offspring distribution 
+    has an $(n-1)$-ary tree of depth $m$, rooted at the time 
+    zero individual. This happens if this individual has less than $n-1$ or $n$
+    offsprings and if at least $n-1$ of these offsprings have trees of 
+    depth $m-1$:
+    $$\theta_m=p_{n-1}\theta_{m-1}^{n-1}+p_n\left[\theta_{m-1}^n+
+      \theta_{m-1}^{n-1}(1-\theta_{m-1})n\right]$$
+    The probability $p_n$ for $n$ offsprings is $p^n$. The probability $p_{n-1}$ 
+    for $n-1$ offsprings is $np^{n-1}(1-p)$.
+    Hence $\theta$, the probability of an infinite $(n-1)$-ary tree, is a root
+    of the map
+    $$f_p(x)=np^{n-1}(1-p)x^{n-1}+p^n\left[ x^n+x^{n-1}(1-x)n \right]-x.$$
+    This is clearly a continuous function, and so we shall show that it has a 
+    root in $(0,1)$ by showing that it takes both negative and positive values
+    in this range:
+
+    $f_p(0)=0$ and $\lim_{x\to 0}f_p(x)/x=-1$
+    so for $\epsilon>0$ small enough $f_p(\epsilon)/\epsilon<0$ and in particular 
+    $f_p(\epsilon)<0$. On the other hand,
+    \begin{eqnarray*}
+      f_p(1)&=&np^{n-1}(1-p)1^{n-1}+p^n\left[ 1^n+1^{n-1}(1-1)n \right]-1
+      \\ &=& np^{n-1}(1-p)+p^n-1
+    \end{eqnarray*}
+    If we consider $g(p)=f_p(1)$ 
+    then $g(1)=0$ and $\lim_{p\to 1}g(p)/p^{n-1}=n>0$ . Hence for
+    $p$ close enough to one we have that $g(p)=f_p(1)>0$. 
+  \end{enumerate}
   \item
     \begin{enumerate}
     \item 
