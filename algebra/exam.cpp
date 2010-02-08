@@ -1,3 +1,4 @@
+#include <iomanip>
 #include <iostream>
 #include <fstream>
 #include <deque>
@@ -6,6 +7,7 @@
 #include <set>
 #include <queue>
 #include <algorithm>
+#include "Matrix.hpp"
 
 using namespace std;
 
@@ -436,6 +438,177 @@ classifyA5()
     set<PermGroup> triples = addGenerator(doubles, A5);
     cout << endl;
 }
+
+
+
+typedef Matrix<int> GL33El;
+
+GL33El::Base
+det(const GL33El& G)
+{
+    return 
+	G(0, 0) * (G(1, 1) * G(2, 2) - G(1, 2) * G(2, 1)) -
+	G(0, 1) * (G(1, 0) * G(2, 2) - G(2, 0) * G(1, 2)) +
+	G(0, 2) * (G(1, 0) * G(2, 1) - G(1, 1) * G(2, 0));
+}
+
+// 012 
+//0xxx
+//1xxx
+//2xxx
+
+ostream& 
+operator << (ostream& os, const GL33El& G)
+{
+    for (size_t i = 0; i < 3; ++i){
+	for (size_t j = 0; j < 3; ++j)
+	    os << G(i, j) << " ";
+	os << endl;
+    }
+    return os;
+}
+
+void
+normalize(GL33El& rG)
+{
+    for (size_t i = 0; i < 3; ++i)
+	for (size_t j = 0; j < 3; ++j)
+	    rG(i, j) = ((rG(i, j) % 3) + 3) % 3;
+}
+
+set<GL33El>
+buildGL33()
+{
+    GL33El G(3, 3);
+    set<GL33El> GL33;
+    for (size_t n = 0; n < 19683; ++n){
+	size_t m = n;
+	for (size_t i = 0; i < 3; ++i)
+	    for (size_t j = 0; j < 3; ++j){
+		G(i, j) = m;
+		m = m / 3;
+	    }
+	normalize(G);
+	if (det(G) % 3 != 0)
+	    GL33.insert(G);
+     }
+    cout << GL33.size() << endl; 
+    return GL33;
+}
+
+GL33El
+inv(const GL33El& m)
+{
+    GL33El md(m.rows(), 2 * m.cols());
+    for (size_t i = 0; i < md.rows(); ++i)
+        for (size_t j = 0; j < md.cols() / 2; ++j)
+            md(i, j) = m(i, j);
+    for (size_t i = 0; i < md.rows(); ++i)
+        for (size_t j = md.cols() / 2; j < md.cols(); ++j)
+            md(i, j) = 
+                (i == j - md.cols() / 2) ? 1 : 0;
+    for (size_t iter = 0; iter < min(m.rows(), m.cols()); ++iter){
+        size_t ipiv = iter;
+        for (; ipiv < md.rows() && (md(ipiv, iter) % 3) == 0; ++ipiv)
+            ;
+        assert(ipiv != md.rows());
+        if (ipiv != iter)
+            swapRows(md, ipiv, iter);
+	int factor = md(iter, iter);
+	for (size_t i = 0; i < md.cols(); ++i)
+	    md(iter, i) = md(iter, i) * factor;
+        for (size_t i = 0; i < md.rows(); ++i)
+            if (i != iter)
+                subRows(md, i, iter, md(i, iter));
+    }
+    
+    GL33El minv(m.rows(), m.cols());
+    for (size_t i = 0; i < minv.rows(); ++i)
+        for (size_t j = 0; j < minv.cols(); ++j)
+            minv(i, j) = md(i, j + md.cols() / 2);
+    
+//    assert(minv * m == Matrix<F>::eye(m.rows()));
+    return minv;
+}
+
+void
+findOrders()
+{
+    GL33El G(3, 3);
+    G(0, 0) = 2; G(0, 1) = 1; G(0, 2) = 0;
+    G(1, 0) = 0; G(1, 1) = 2; G(1, 2) = 1;
+    G(2, 0) = 0; G(2, 1) = 0; G(2, 2) = 2;
+    vector<GL33El> Gs;
+    Gs.push_back(G);
+    cout << "G=" << endl << G;
+    for (size_t i = 1; i < 6; ++i){
+	Gs.push_back(Gs[i - 1] * G);
+	normalize(Gs.back());
+	cout << "G^" << i + 1 << "=" << endl << Gs.back();
+    }
+}
+
+void
+disectGL33()
+{
+    
+    const set<GL33El> GL33 = buildGL33();
+    set<GL33El> todo = GL33;
+    vector<set<GL33El> > classes;
+    while (todo.size()){
+	GL33El G = *todo.begin();
+	classes.push_back(set<GL33El>());
+	for (set<GL33El>::const_iterator it = GL33.begin(); it != GL33.end(); 
+	     ++it)
+	{
+	    GL33El X = *it;
+	    GL33El Y = inv(X);
+	    GL33El Z = Y * X;
+	    normalize(Y);
+	    normalize(Z);
+	    if (!(Z == GL33El::eye(3)))
+		cout << Y << endl << X << endl << Z << endl << "xxx" << endl;
+	    GL33El H = Y * G * X;
+	    normalize(H);
+	    if (classes.back().insert(H).second 
+		&& H(1, 0)  == 0 && H(2, 0) == 0 
+		&& H(2, 1)  == 0 && H(0, 2) == 0
+		&& H(0, 1) < 2 && H(1, 2) < 2
+		&& H(0, 0) <= H(1, 1)
+		&& H(1, 1) <= H(2, 2))
+	    {
+/*		cout << H << "-----" << endl
+		     << G << "-----" << endl
+		     << X << "-----" << endl
+		     << Y << "-----" << endl
+		     << endl;
+*/
+	    }
+
+	    todo.erase(H);
+	}
+	cout << classes.back().size() <<  " " << endl;
+	for (set<GL33El>::const_iterator it = classes.back().begin();
+	     it != classes.back().end(); ++it)
+	{
+	    GL33El X = *it;
+	    if (it == classes.back().begin() ||
+		(X(1, 0)  == 0 && X(2, 0) == 0 
+		 && X(2, 1)  == 0 && X(0, 2) == 0
+//		 && X(0, 0) <= X(1, 1)
+//		 && X(1, 1) <= X(2, 2)
+		 && ((X(0, 1) == 0 && X(1, 2) == 0) ||
+		     (X(0, 1) == 1 && X(1, 2) == 0 && X(0, 0) == X(1, 1)) ||
+		     (X(0, 1) == 0 && X(1, 2) == 1 && X(1, 1) == X(2, 2)) ||
+		     (X(0, 1) == 1 && X(1, 2) == 1 && X(1, 1) == X(2, 2) && X(0, 0) == X(1, 1)))))
+	    {
+		cout << *it << endl;
+	    }
+	}
+
+	cout << "=========================" << endl;
+    }
+}
 int
 main(int argc, char* argv[])
 {
@@ -444,6 +617,8 @@ main(int argc, char* argv[])
 //    cubicPolys();
 //    factor();
 //    minpolyTable();
-    classifyA5();
+//    classifyA5();
+    findOrders();
+    disectGL33();
     return 0;
 }
