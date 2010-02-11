@@ -608,6 +608,9 @@ disectGL33()
 
 	cout << "=========================" << endl;
     }
+    for (size_t i = 0; i < classes.size(); ++i)
+	cout << classes[i].size() << " ";
+    cout << endl;
 }
 int
 main(int argc, char* argv[])

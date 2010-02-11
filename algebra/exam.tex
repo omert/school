@@ -286,10 +286,16 @@
       its reciprocal, $x^3+2x+2$, is the minimum polynomial of $a^{22}$,
       $a^{14}$ and $a^{16}$
     \end{enumerate}
-    These results are summarised in the table below. The number in parentheses
-    references the argument above by which it was derived.
+    These results are summarised in the tables below. In the first table 
+    we list for each element of $GF(27)^*$ its minimum polynomial. 
+    The number in parentheses references the argument above by which it was 
+    derived. In the second table we list the roots of each of these
+    polynomials.
+
+    {\bf Elements of $GF(27)^*$ and Their Minimum Polynomials}
 
     \begin{tabular}{l| l r}
+
       $a^{0}$ & $x-1$ & (i)\\
       $a^{1}$ & $x^3+2x+1$ & (ii)\\
       $a^{2}$ & $x^3+x^2+x+2$ & (v)\\
@@ -317,11 +323,30 @@
       $a^{24}$ & $x^3+2x^2+2x+2$ & (v)\\
       $a^{25}$ & $x^3+2x^2+1$ & (iii)\\
     \end{tabular}
+
+    {\bf Irreducible Monic Polynomials over $GF(3)$ of Orders One and Three, and
+      Their Roots}
+
+    \begin{tabular}{l| l }
+      \label{table:polys}
+      $x-1$ & $a^{0}$\\
+      $x-2$ & $a^{13}$\\
+      $x^3+2x+1$ & $a^{1}, a^3, a^9$\\
+      $x^3+x^2+x+2$ & $a^{2},a^6,a^{18}$\\
+      $x^3+x^2+2$ & $a^4, a^{12}, a^{10}$\\
+      $x^3+2x^2+x+1$ & $a^5,a^{15}, a^{19}$\\
+      $x^3+x^2+2x+1$ & $a^7,a^{11},a^{21}$\\
+      $x^3+2x^2+2x+2$ & $a^{8},a^{20},a^{24}$\\
+      $x^3+2x+2$ & $a^{14},a^{16},a^{22}$\\
+      $x^3+2x^2+1$ & $a^{17},a^{23},a^{25}$\\
+    \end{tabular}
+
   \end{enumerate}
   \item
-    The size of $|GL(3,3)|$ is $3^3(3^3-1)(3^2-1)(3-1)=11232$. The prime
-    factorisation of $11232$ is 
-    $27 \cdot 26 \cdot 8 \cdot 2=3^3 \cdot 13 \cdot 2^5$.
+
+    The analysis that follows is based on a fact stated in class (but not
+    proved): two matrices over a field $F$ are similar iff they have the same
+    Jordan form over an algebraic closure of $F$.
     \begin{enumerate}
     \item 
       We list below each of the conjugacy classes of $GL(3,3)$, and note
@@ -346,7 +371,8 @@
         and two, respectively. 
       \item
         The diagonalisable elements with characteristic polynomial $(x+2)^2(x+1)$
-        form a conjugacy class. A representative of this class is
+        form a conjugacy class. A representative of this class (in Jordan
+        form) is
         \begin{equation*}
           X=
           \begin{pmatrix}
@@ -402,7 +428,7 @@
       \item
         Similarly, the diagonalisable elements with characteristic polynomial 
         $(x+1)^2(x+2)$ also form a conjugacy class. A representative of this 
-        class is
+        class (again, and henceforth, in Jordan form) is
         \begin{equation*}
           X=
           \begin{pmatrix}
@@ -661,9 +687,169 @@
         Since $X$ equals to $I$ plus the representative of the previous class, 
         then their centres coincide, and in particular $|C_G(X)|=18$ and
         $|cl(X)|=624$ as well. We have thus concluded the analysis of all the
-        conjugacy classes of with characteristic polynomials reducible over
-        $GF(3)$.
+        conjugacy classes of elements with characteristic polynomials 
+        reducible over $GF(3)$. The rest of the classes will therefore not have
+        representitives in Jordan normal form.
+
+      \item
+        Let $p(x)=x^3+ax^2+bx+c$ be one of the eight irreducible monic 
+        cubic polynomials listed above. Then the following element
+        of $GL(3,3)$ has characteristic polynomial $p(x)$:
+        \begin{equation*}
+          X_p=
+          \begin{pmatrix}
+            0&1  &0 \\ 
+            0&0  &1 \\ 
+            -c&-b  &-a 
+          \end{pmatrix}.
+        \end{equation*}
+        Now by the second table in~\ref{table:polys}, $p(x)$ has three 
+        distinct roots, and so there is only one possible Jordan form for $X_p$
+        over $GF(27)$, where it is diagnolisable.
+        Hence the elements with characteristic polynomial $p(x)$
+        form a conjugacy class.
+        
+        Let $X_p'$ be the diagonalised matrix over $GF(27)$ that is similar
+        to $X_p$. Then again by the table in~\ref{table:polys}, $X_p'$ has
+        the values $a^i$, $a^{3i}$ and $a^{9i}$ on its diagonal, with $1 \leq i \leq 25$ and
+        $i \neq 13$. The value of $i$ depends on $p(x)$, by the said table.
+        The order of $X_p'$ is the order of $a^i$
+        and is thus equal to $26$ when $i$ is odd and to 13 when $i$ is even.
+        Equivalently, the order equals
+        26 when the free coefficient of $p(x)$ is 1, and 13 otherwise.
+        The order of $X_p$ is the order of $X_p'$, 
+        since similar matrices have identical orders.
+
+        
+
+        Let $Y=(y_{ij})$ be an element of $C_G(X_p)$. Then:
+        
+        \begin{eqnarray*}
+          \begin{pmatrix}
+            y_{11}&y_{12}  &y_{13} \\ 
+            y_{21}&y_{22}  &y_{23} \\ 
+            y_{31}&y_{32}  &y_{33} 
+          \end{pmatrix}
+          \cdot
+          \begin{pmatrix}
+            0&1  &0 \\ 
+            0&0  &1 \\ 
+            -c&-b  &-a 
+          \end{pmatrix}
+          &=&
+          \begin{pmatrix}
+            0&1  &0 \\ 
+            0&0  &1 \\ 
+            -c&-b  &-a 
+          \end{pmatrix}
+          \begin{pmatrix}
+            y_{11}&y_{12}  &y_{13} \\ 
+            y_{21}&y_{22}  &y_{23} \\ 
+            y_{31}&y_{32}  &y_{33} 
+          \end{pmatrix}
+        \end{eqnarray*}
+        \begin{eqnarray*}
+          \lefteqn{
+            \begin{pmatrix}
+              -cy_{13}&y_{11}-by_{13}  &y_{12}-ay_{13} \\ 
+              -cy_{23}&y_{21}-by_{23}  &y_{22}-ay_{23} \\ 
+              -cy_{33}&y_{31}-by_{33}  &y_{32}-ay_{33} 
+            \end{pmatrix}
+            =}
+          \\
+          &&
+          \begin{pmatrix}
+            y_{21}&y_{22}  &y_{23} \\ 
+            y_{31}&y_{32}  &y_{33} \\ 
+            -cy_{11}-by_{21}-ay_{31}&-cy_{12}-by_{22}-ay_{32}&-cy_{13}-by_{23}-ay_{33}
+          \end{pmatrix}.
+        \end{eqnarray*}
+        We first consider the case where $a=0$. Then by examining the 
+        polynomials take we see that $b$ must equal two. Hence
+        \begin{eqnarray*}
+          \lefteqn{
+            \begin{pmatrix}
+              -cy_{13}&y_{11}+y_{13}  &y_{12} \\ 
+              -cy_{23}&y_{21}+y_{23}  &y_{22} \\ 
+              -cy_{33}&y_{31}+y_{33}  &y_{32} 
+            \end{pmatrix}
+            =}
+          \\
+          &&
+          \begin{pmatrix}
+            y_{21}&y_{22}  &y_{23} \\ 
+            y_{31}&y_{32}  &y_{33} \\ 
+            -cy_{11}+y_{21}&-cy_{12}+y_{22}&-cy_{13}+y_{23}
+          \end{pmatrix}.
+        \end{eqnarray*}
+
+        We write this equation as a set of nine linear equations on the nine
+        variables $y_{ij}$:
+        \begin{eqnarray*}
+          \begin{pmatrix}
+            0& 0& -c& -1& 0& 0& 0& 0& 0 \\
+            0& 0& 0& 0& 0& 0& 0& 0& 0 \\
+            0& 0& 0& 0& 0& 0& 0& 0& 0 \\
+            0& 0& 0& 0& 0& 0& 0& 0& 0 \\
+            0& 0& 0& 0& 0& 0& 0& 0& 0 \\
+            0& 0& 0& 0& 0& 0& 0& 0& 0 \\
+            0& 0& 0& 0& 0& 0& 0& 0& 0 \\
+            0& 0& 0& 0& 0& 0& 0& 0& 0 \\
+            0& 0& 0& 0& 0& 0& 0& 0& 0 \\
+          \end{pmatrix}
+        \end{eqnarray*}
+        
+        Since $p(x)$ has a non-zero free coefficient then $c\in GF(3)^*$, and so
+        we can divide by it, which in $GF(3)^*$ is the same as multiplication.
+
+        We now consider several cases. $c$ may take values only in $\{1,2\}$,
+        since $p(x)$ has a non-zero free coefficient. We first consider the
+        case of $c=1$. Then the commutativity condition above is:
+        \begin{eqnarray*}
+          \lefteqn{
+            \begin{pmatrix}
+              -y_{13}&y_{11}-by_{13}  &y_{12}-ay_{13} \\ 
+              -y_{23}&y_{21}-by_{23}  &y_{22}-ay_{23} \\ 
+              -y_{33}&y_{31}-by_{33}  &y_{32}-ay_{33} 
+            \end{pmatrix}
+            =}
+          \\
+          &&
+          \begin{pmatrix}
+            y_{21}&y_{22}  &y_{23} \\ 
+            y_{31}&y_{32}  &y_{33} \\ 
+            -y_{11}-by_{21}-ay_{31}&-y_{12}-by_{22}-ay_{32}&-y_{13}-by_{23}-ay_{33}
+          \end{pmatrix}.
+        \end{eqnarray*}
+        
+        \begin{itemize}
+        \item 
+        \end{itemize}
       \end{itemize}
+    \item
+    The size of $|GL(3,3)|$ is $3^3(3^3-1)(3^2-1)(3-1)=11232$. The prime
+    factorisation of $11232$ is 
+    $27 \cdot 26 \cdot 8 \cdot 2=3^3 \cdot 13 \cdot 2^5$. Therefore $GL(3,3)$ has three Sylow $p$-subgroups:
+    a 3-subgroup of order 27, a 13-subgroup of order 13, and a
+    $2$-subgroup of order 32. 
+
+    \begin{itemize}
+    \item {\bf Sylow 3-subgroups}
+      
+      The number of Sylow 3-subgroups, $n_3$, equals to $1\mod 3$ and divides
+      $13\cdot 32=416$. It can therefore be one of $\{1,13,52,208\}$. 
+
+    \item {\bf Sylow 13-subgroups}
+      
+      The number of Sylow 13-subgroups, $n_{13}$, equals to $1\mod 13$ and 
+      divides $27\cdot 32=864$. It can therefore be one of $\{1,27,143\}$. 
+
+    \item {\bf Sylow 2-subgroups}
+      
+      The number of Sylow 2-subgroups, $n_2$, equals to $1\mod 2$ and divides
+      $27\cdot 13=351$. It can therefore be one of 
+      $\{1,3,9,13,27,39,117,351\}$. 
+    \end{itemize}
     \end{enumerate}
   \item
   \item
