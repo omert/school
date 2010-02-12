@@ -577,22 +577,27 @@ disectGL33()
 		&& H(0, 0) <= H(1, 1)
 		&& H(1, 1) <= H(2, 2))
 	    {
-/*		cout << H << "-----" << endl
-		     << G << "-----" << endl
-		     << X << "-----" << endl
-		     << Y << "-----" << endl
-		     << endl;
-*/
 	    }
 
 	    todo.erase(H);
 	}
-	cout << classes.back().size() <<  " " << endl;
+	cout << "conjugacy class of size "
+	     << classes.back().size() <<  " " << endl;
 	for (set<GL33El>::const_iterator it = classes.back().begin();
 	     it != classes.back().end(); ++it)
 	{
 	    GL33El X = *it;
-	    if (it == classes.back().begin() ||
+	    if (it == classes.back().begin()){
+		size_t i = 1;
+		
+		for (GL33El Y = X; !(Y == GL33El::eye(3)); ++i){
+		    Y = X * Y;
+		    normalize(Y);
+		}
+		cout << "elements of order " << i << endl;
+	    }
+
+	    if (
 		(X(1, 0)  == 0 && X(2, 0) == 0 
 		 && X(2, 1)  == 0 && X(0, 2) == 0
 //		 && X(0, 0) <= X(1, 1)
