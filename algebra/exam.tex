@@ -605,7 +605,7 @@
         which implies the same form for $A$ as above. Hence in this case, too,
         $|C_G(X)|=12$ and $|cl(X)|=11232/12=936$.
       \item
-        The second conjugacy class of the non-diagonalisable elements with 
+        The first conjugacy class of the non-diagonalisable elements with 
         characteristic polynomial
         $(x+2)^3$ has as representative the element
         \begin{equation*}
@@ -616,7 +616,7 @@
             0&0  &1 
           \end{pmatrix}.
         \end{equation*}
-        Here two the order is three, as can be seen by carrying out the 
+        Here the order is three, as can be seen by carrying out the 
         calculations for $X^2$ and $X^3$.
 
         Let $A$ be an element of $C_G(X)$. Then:
@@ -653,26 +653,41 @@
           &=&
           \begin{pmatrix}
             a_{11}+a_{21}&a_{12}+a_{22}  &a_{13}+a_{23} \\ 
-            a_{21}+a_{31}&a_{22}+a_{32}  &a_{23}+a_{33} \\ 
+            a_{21}&a_{22}  &a_{23} \\ 
             a_{31}&a_{32}  &a_{33} 
           \end{pmatrix}.
         \end{eqnarray*}
-        Hence $a_{21}=a_{31}=a_{32}=0$, $a_{11}=a_{22}=a_{33}$, and $a_{12}=a_{23}$. 
+        Hence $a_{21}=a_{23}=a_{31}=0$, $a_{11}=a_{22}$, and $a_{12}=a_{23}$. 
         $A$ can therefore be written as
         \begin{equation*}
           A=
           \begin{pmatrix}
-            a &b  &c \\ 
-            0 &a  &b \\ 
-            0 &0  &a 
+            a &c  &d \\ 
+            0 &a  &0 \\ 
+            0 &e  &b 
           \end{pmatrix}.
         \end{equation*}
-        There are two choices for $a$, as it cannot be zero. $b$ and $c$ have
-        three possible values each, and so the size of $C_G(X)$ is $18$
-        and that of $cl(X)$ is $11232/18=624$.
+        Neither $a$ nor $b$ can be zero, since $\det A=a^2b$. Hence there
+        are $2^23^3=108$ possible such $A$'s, the size of $C_G(X)$ is 108
+        and that of  $cl(X)$ is $11232/108=104$.
 
-      \item
         The first conjugacy class of the non-diagonalisable elements with 
+        characteristic polynomial
+        $(x+1)^3$ has as representative the element
+        \begin{equation*}
+          Y=
+          \begin{pmatrix}
+            2&1  &0 \\ 
+            0&2  &0 \\ 
+            0&0  &2 
+          \end{pmatrix}.
+        \end{equation*}
+        Since $Y=X+I$ then $Y^3=X^3+3X^2+3X+I=2I$ and the order of $Y$ is six.
+        Also by the property $Y=X+I$ we have that $C_G(X)=C_G(Y)$, and so
+        $|cl(Y)|=|cl(X)|$.
+        
+      \item
+        The second conjugacy class of the non-diagonalisable elements with 
         characteristic polynomial
         $(x+2)^3$ has as representative the element
         \begin{equation*}
@@ -683,10 +698,10 @@
             0&0  &1 
           \end{pmatrix}.
         \end{equation*}
-        It is easy (but uninteresting) to verify that the order of $X$ is
-        three, and thus three is the order of all the elements in this class.
-        
-        As usual, let $A$ be an element of $C_G(X)$. Then:
+        Here too the order is three, as again can be seen by carrying out the 
+        calculations for $X^2$ and $X^3$.
+
+        Let $A$ be an element of $C_G(X)$. Then:
         
         \begin{eqnarray*}
           \begin{pmatrix}
@@ -724,7 +739,8 @@
             a_{31}&a_{32}  &a_{33} 
           \end{pmatrix}.
         \end{eqnarray*}
-        Hence $a_{21}=a_{31}=a_{32}=0$, $a_{11}=a_{22}=a_{33}$, and $a_{12}=a_{23}$. 
+        Hence $a_{21}=a_{23}=a_{31}=a_{32}=0$ $a_{23}=a_{12}$ and 
+        $a_{11}=a_{22}=a_{33}$, 
         $A$ can therefore be written as
         \begin{equation*}
           A=
@@ -734,30 +750,30 @@
             0 &0  &a 
           \end{pmatrix}.
         \end{equation*}
-        There are two choices for $a$, as it cannot be zero. $b$ and $c$ have
-        three possible values each, and so the size of $C_G(X)$ is $18$
-        and that of $cl(X)$ is $11232/18=624$.
-        
-      \item
-        The first class of non-diagonalisable
-        elements with characteristic polynomial $(x+1)^3$ has representative
+        $a$ cannot be zero, since $\det A=a^3$. Hence there
+        are $23^2=18$ possible such $A$'s, the size of $C_G(X)$ is 18
+        and that of  $cl(X)$ is $11232/108=624$.
+
+        The second conjugacy class of the non-diagonalisable elements with 
+        characteristic polynomial
+        $(x+1)^3$ has as representative the element
         \begin{equation*}
-          X=
+          Y=
           \begin{pmatrix}
             2&1  &0 \\ 
             0&2  &1 \\ 
             0&0  &2 
-          \end{pmatrix},
+          \end{pmatrix}.
         \end{equation*}
-        which also here can (very slightly less) easily be verified to be of 
-        order six by repeated multiplication.
+        As above, $Y=X+I$ and so order of $Y$ is six,
+        $C_G(X)=C_G(Y)$, and so $|cl(Y)|=|cl(X)|$.
         
-        Since $X$ equals to $I$ plus the representative of the previous class, 
-        then their centres coincide, and in particular $|C_G(X)|=18$ and
-        $|cl(X)|=624$ as well. We have thus concluded the analysis of all the
+
+        We have thus concluded the analysis of all the
         conjugacy classes of elements with characteristic polynomials 
         reducible over $GF(3)$. The rest of the classes will therefore not have
         representitives in Jordan normal form.
+
 
       \item
         Let $p(x)=x^3+ax^2+bx+c$ be one of the eight irreducible monic 
@@ -890,10 +906,84 @@
           \end{pmatrix}.
         \end{eqnarray*}
         
-        \begin{itemize}
-        \item 
-        \end{itemize}
       \end{itemize}
+      The information above is summarised in the following table:
+
+      {\bf Conjugacy Classes of $GL(3,3)$}
+
+      \begin{tabular}{l|l|l|l|l}
+        Representative& Characteristic Polynomial& Element Order& Class Size& Centralizer Size\\
+        \hline
+          $\begin{pmatrix}
+            1&0  &0 \\ 
+            0&1  &0 \\ 
+            0&0  &1 
+          \end{pmatrix}$
+          & $(x+2)^3$ & 1 & 1 &11232\\
+        \hline
+          $\begin{pmatrix}
+            2&0  &0 \\ 
+            0&2  &0 \\ 
+            0&0  &2 
+          \end{pmatrix}$
+          & $(x+1)^3$ & 2 & 1&11232\\
+        \hline
+          $\begin{pmatrix}
+            1&0  &0 \\ 
+            0&1  &0 \\ 
+            0&0  &2 
+          \end{pmatrix}$
+          & $(x+2)^2(x+1)$ & 2 & 117&96\\
+        \hline
+          $\begin{pmatrix}
+            1&0  &0 \\ 
+            0&2  &0 \\ 
+            0&0  &2 
+          \end{pmatrix}$
+          & $(x+1)^2(x+2)$ & 2 & 117&96\\
+        \hline
+          $\begin{pmatrix}
+            1&1  &0 \\ 
+            0&1  &0 \\ 
+            0&0  &2 
+          \end{pmatrix}$
+          & $(x+2)^2(x+1)$ & 6 & 936&12\\
+        \hline
+          $\begin{pmatrix}
+            2&1  &0 \\ 
+            0&2  &0 \\ 
+            0&0  &1 
+          \end{pmatrix}$
+          & $(x+1)^2(x+2)$ & 6 & 936&12\\
+        \hline
+          $\begin{pmatrix}
+            1&1  &0 \\ 
+            0&1  &0 \\ 
+            0&0  &1 
+          \end{pmatrix}$
+          & $(x+2)^3$ & 3 & 104&108\\
+        \hline
+          $\begin{pmatrix}
+            2&1  &0 \\ 
+            0&2  &0 \\ 
+            0&0  &2 
+          \end{pmatrix}$
+          & $(x+1)^3$ & 6 & 104&108\\
+        \hline
+          $\begin{pmatrix}
+            1&1  &0 \\ 
+            0&1  &1 \\ 
+            0&0  &1 
+          \end{pmatrix}$
+          & $(x+1)^3$ & 3 & 624&18\\
+        \hline
+          $\begin{pmatrix}
+            2&1  &0 \\ 
+            0&2  &1 \\ 
+            0&0  &2 
+          \end{pmatrix}$
+          & $(x+2)^3$ & 6 & 624&18\\
+      \end{tabular}
     \item
     The size of $|GL(3,3)|$ is $3^3(3^3-1)(3^2-1)(3-1)=11232$. The prime
     factorisation of $11232$ is 
@@ -903,20 +993,27 @@
 
     \begin{itemize}
     \item {\bf Sylow 3-subgroups}
-      
       The number of Sylow 3-subgroups, $n_3$, equals to $1\mod 3$ and divides
-      $13\cdot 32=416$. It can therefore be one of $\{1,13,52,208\}$. 
+      $13\cdot 32=416$. It can therefore be one of $\{1,13,52,208\}$. The total number
+      of elements of order three is $104+624=728$. The most
+      elements these groups may include is $(27-1)n_3+1$, if they all 
+      intersect trivially. Hence there cannot be only one or 13 of them, since 
+      they would not include enough elements.
 
     \item {\bf Sylow 13-subgroups}
       
       The number of Sylow 13-subgroups, $n_{13}$, equals to $1\mod 13$ and 
-      divides $27\cdot 32=864$. It can therefore be one of $\{1,27,143\}$. 
+      divides $27\cdot 32=864$. It can therefore be one of $\{1,27,144\}$. Since
+      there are four conjugacy classes of elements of order 13, there there
+      are a total of $4\cdot 432=1728$ elements of order 13. Since each two
+      of these groups intersect trivially, there have to be $1728/12=144$ of
+      them, and $n_{13}=144$.
 
     \item {\bf Sylow 2-subgroups}
       
       The number of Sylow 2-subgroups, $n_2$, equals to $1\mod 2$ and divides
       $27\cdot 13=351$. It can therefore be one of 
-      $\{1,3,9,13,27,39,117,351\}$. 
+      $\{1,3,9,13,27,39,117,351\}$. There are 235 elements of order two.
     \end{itemize}
     \end{enumerate}
   \item
