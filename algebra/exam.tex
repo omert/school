@@ -776,7 +776,7 @@
         representitives in Jordan normal form.
 
       \item
-        Let $q(x)$ be one of $\{x^2+x+2,x^2+2x+x,x^2+1\}$ and let $b$ be a 
+        Let $q(x)$ be one of $\{x^2+x+2,x^2+2x+2,x^2+1\}$ and let $b$ be a 
         root of
         $q(x)$. Then $q(x)$ is irreducible over $GF(3)$ and $b$ has order
         eight or four (in the case of $x^2+1$ only), as we showed in class. 
@@ -785,7 +785,7 @@
         Then $p(x)$ has three distinct roots, and elements of
         $GL(3,3)$ which have $p(x)$ as a characteristic polynomial have a
         unique Jordan form and belong to a single conjugacy class. 
-        If $q(x)=x^2+rx+s$ then a 
+        If $q(x)=x^2+rx+s$ then a
         representative of this class is
         \begin{equation*}
           X_p=\begin{pmatrix}
@@ -796,10 +796,88 @@
         \end{equation*}
         and its order is four when $q(x)=x^2+1$ and eight otherwise, since
         the Jordan form over $GF(9)$ is diagnoal with values $b,b^3,-w$.
-
         
-        
-
+        Let $Y_p\in GF(2,3)$ equal the top left $2\times 2$ block of $X_p$:
+        $$Y_p=\begin{pmatrix}0 &1\\-s&-r\end{pmatrix}.$$
+        Then in block form
+        $$X_p=\begin{pmatrix}Y_p &0\\0&-w\end{pmatrix}.$$
+        Let $A=(a_{ij})$ be an element of $C_G(X_p)$. We denote 
+        $B=
+        \begin{pmatrix}
+          a_{11}&a_{12}\\a_{21}&a_{22}
+        \end{pmatrix}$ (the top 
+        left $2\times 2$ block of $A$),  $U=\begin{pmatrix}a_{13}\\a_{23}\end{pmatrix}$,
+        $V=\begin{pmatrix}a_{31}&a_{32}\end{pmatrix}$, and $c=a_{33}$:
+        \begin{equation*}
+          A=
+          \begin{pmatrix}
+            B &  U \\
+            V &  c
+          \end{pmatrix}
+        \end{equation*}
+        Then the commutativity condition $X_p^{-1}AX_p=A$ is:
+        \begin{eqnarray*}
+          \begin{pmatrix}
+            Y_p&0\\
+            0&-w
+          \end{pmatrix}^{-1}
+          \cdot
+          \begin{pmatrix}
+            B &  U \\
+            V &  c
+          \end{pmatrix}
+          \cdot
+          \begin{pmatrix}
+            Y_p&0\\
+            0&-w
+          \end{pmatrix}
+          &=&
+          \begin{pmatrix}
+            B &  U \\
+            V &  c
+          \end{pmatrix}\\
+          \begin{pmatrix}
+            Y_p^{-1}&0\\
+            0&-w
+          \end{pmatrix}
+          \cdot
+          \begin{pmatrix}
+            B &  U \\
+            V &  c
+          \end{pmatrix}
+          \cdot
+          \begin{pmatrix}
+            Y_p&0\\
+            0&-w
+          \end{pmatrix}
+          &=&
+          \begin{pmatrix}
+            B &  U \\
+            V &  c
+          \end{pmatrix}\\
+          \begin{pmatrix}
+            Y_p^{-1}BY_p &  -wY_p^{-1}U \\
+            -wYV &  c
+          \end{pmatrix}
+          &=&
+          \begin{pmatrix}
+            B &  U \\
+            V &  c
+          \end{pmatrix}
+        \end{eqnarray*}
+        Hence $A$ commutes with $X_p$ iff:
+        \begin{itemize}
+        \item $B$ commutes with $Y_p$. We mentioned in class that eight such
+          elements of $GL(2,3)$ exist, for any choice of  $p(x)$.
+        \item $U$ is an eigenvector of $Y_p$ with
+          eigenvalue $-w$. Since $Y_p$ does not have eigenvalues in $GF(3)$ then
+          this is only possible when $U=0$. 
+        \item Likewise, $V=0$.
+        \item $c\neq 0$, to ensure that $\det A\neq 0$.
+        \end{itemize}
+        There are, then, single options for each of $U$ and $V$, two options for $c$ 
+        and eight options for $B$. The size of $C_G(X_p)$ is therefore 16,
+        and $|cl(X_p)|=702$.
       \item
         Let $p(x)=x^3+rx^2+sx+t$ be one of the eight irreducible monic 
         cubic polynomials listed above. Then the following element
@@ -814,7 +892,7 @@
         \end{equation*}
         Now by the second table in~\ref{table:polys}, $p(x)$ has three 
         distinct roots, and so there is only one possible Jordan form for $X_p$
-        over $GF(27)$, where it is diagnolisable.
+        over $GF(27)$, since it is diagnolisable.
         Hence the elements with characteristic polynomial $p(x)$
         form a conjugacy class.
         
@@ -829,108 +907,15 @@
         The order of $X_p$ is the order of $X_p'$, 
         since similar matrices have identical orders.
 
-        
-
-        Let $Y=(y_{ij})$ be an element of $C_G(X_p)$. Then:
-        
-        \begin{eqnarray*}
-          \begin{pmatrix}
-            y_{11}&y_{12}  &y_{13} \\ 
-            y_{21}&y_{22}  &y_{23} \\ 
-            y_{31}&y_{32}  &y_{33} 
-          \end{pmatrix}
-          \cdot
-          \begin{pmatrix}
-            0&1  &0 \\ 
-            0&0  &1 \\ 
-            -c&-b  &-a 
-          \end{pmatrix}
-          &=&
-          \begin{pmatrix}
-            0&1  &0 \\ 
-            0&0  &1 \\ 
-            -c&-b  &-a 
-          \end{pmatrix}
-          \begin{pmatrix}
-            y_{11}&y_{12}  &y_{13} \\ 
-            y_{21}&y_{22}  &y_{23} \\ 
-            y_{31}&y_{32}  &y_{33} 
-          \end{pmatrix}
-        \end{eqnarray*}
-        \begin{eqnarray*}
-          \lefteqn{
-            \begin{pmatrix}
-              -cy_{13}&y_{11}-by_{13}  &y_{12}-ay_{13} \\ 
-              -cy_{23}&y_{21}-by_{23}  &y_{22}-ay_{23} \\ 
-              -cy_{33}&y_{31}-by_{33}  &y_{32}-ay_{33} 
-            \end{pmatrix}
-            =}
-          \\
-          &&
-          \begin{pmatrix}
-            y_{21}&y_{22}  &y_{23} \\ 
-            y_{31}&y_{32}  &y_{33} \\ 
-            -cy_{11}-by_{21}-ay_{31}&-cy_{12}-by_{22}-ay_{32}&-cy_{13}-by_{23}-ay_{33}
-          \end{pmatrix}.
-        \end{eqnarray*}
-        We first consider the case where $a=0$. Then by examining the 
-        polynomials take we see that $b$ must equal two. Hence
-        \begin{eqnarray*}
-          \lefteqn{
-            \begin{pmatrix}
-              -cy_{13}&y_{11}+y_{13}  &y_{12} \\ 
-              -cy_{23}&y_{21}+y_{23}  &y_{22} \\ 
-              -cy_{33}&y_{31}+y_{33}  &y_{32} 
-            \end{pmatrix}
-            =}
-          \\
-          &&
-          \begin{pmatrix}
-            y_{21}&y_{22}  &y_{23} \\ 
-            y_{31}&y_{32}  &y_{33} \\ 
-            -cy_{11}+y_{21}&-cy_{12}+y_{22}&-cy_{13}+y_{23}
-          \end{pmatrix}.
-        \end{eqnarray*}
-
-        We write this equation as a set of nine linear equations on the nine
-        variables $y_{ij}$:
-        \begin{eqnarray*}
-          \begin{pmatrix}
-            0& 0& -c& -1& 0& 0& 0& 0& 0 \\
-            0& 0& 0& 0& 0& 0& 0& 0& 0 \\
-            0& 0& 0& 0& 0& 0& 0& 0& 0 \\
-            0& 0& 0& 0& 0& 0& 0& 0& 0 \\
-            0& 0& 0& 0& 0& 0& 0& 0& 0 \\
-            0& 0& 0& 0& 0& 0& 0& 0& 0 \\
-            0& 0& 0& 0& 0& 0& 0& 0& 0 \\
-            0& 0& 0& 0& 0& 0& 0& 0& 0 \\
-            0& 0& 0& 0& 0& 0& 0& 0& 0 \\
-          \end{pmatrix}
-        \end{eqnarray*}
-        
-        Since $p(x)$ has a non-zero free coefficient then $c\in GF(3)^*$, and so
-        we can divide by it, which in $GF(3)^*$ is the same as multiplication.
-
-        We now consider several cases. $c$ may take values only in $\{1,2\}$,
-        since $p(x)$ has a non-zero free coefficient. We first consider the
-        case of $c=1$. Then the commutativity condition above is:
-        \begin{eqnarray*}
-          \lefteqn{
-            \begin{pmatrix}
-              -y_{13}&y_{11}-by_{13}  &y_{12}-ay_{13} \\ 
-              -y_{23}&y_{21}-by_{23}  &y_{22}-ay_{23} \\ 
-              -y_{33}&y_{31}-by_{33}  &y_{32}-ay_{33} 
-            \end{pmatrix}
-            =}
-          \\
-          &&
-          \begin{pmatrix}
-            y_{21}&y_{22}  &y_{23} \\ 
-            y_{31}&y_{32}  &y_{33} \\ 
-            -y_{11}-by_{21}-ay_{31}&-y_{12}-by_{22}-ay_{32}&-y_{13}-by_{23}-ay_{33}
-          \end{pmatrix}.
-        \end{eqnarray*}
-        
+        The cetralizer of $X_p$ must include all its powers, as well as
+        $2I$ (which isn't a power when the order of $X_p$ is 13), and so its 
+        order is a multiple of 26. If $|C_G(X_p)|=26$ for all $p(x)$ then
+        $|cl(X_p)|=432$, and the number of elements in all the classes sums
+        up to 11232, the size of $GL(3,3)$. Since $|cl(X_p)|$ cannot be more
+        than 432 (since $|C_G(X_p)| \geq 26$) then $|cl(X_p)|$ cannot be less
+        than 432 (or the elements of $GL(3,3)$ would not be covered by the
+        equivalence classes), and therefore 432 is the size of $cl(X_p)$
+        for all $p(x)$. 
       \end{itemize}
       The information above is summarised in the following table:
 
@@ -1036,6 +1021,9 @@
             0&0  &2 
           \end{pmatrix}$
           & $(x^2+2x+2)(x+1)$ & 8 & 702&16\\
+        \end{tabular}
+        \begin{tabular}{l|l|l|l|l}
+        Representative& Characteristic Polynomial& Element Order& Class Size& Centralizer Size\\
         \hline
           $\begin{pmatrix}
             0&1  &0 \\ 
@@ -1050,6 +1038,62 @@
             0&0  &2 
           \end{pmatrix}$
           & $(x^2+1)(x+1)$ & 4 & 702&16\\
+        \hline
+          $\begin{pmatrix}
+            0&1  &0 \\ 
+            0&0  &1 \\ 
+            2&1  &0 
+          \end{pmatrix}$
+          & $x^3+2x+1$ & 26 & 432&26\\
+        \hline
+          $\begin{pmatrix}
+            0&1  &0 \\ 
+            0&0  &1 \\ 
+            2&2  &1 
+          \end{pmatrix}$
+          & $x^3+2x^2+x+1$ & 26 & 432&26\\
+        \hline
+          $\begin{pmatrix}
+            0&1  &0 \\ 
+            0&0  &1 \\ 
+            2&1  &2 
+          \end{pmatrix}$
+          & $x^3+x^2+2x+1$ & 26 & 432&26\\
+        \hline
+          $\begin{pmatrix}
+            0&1  &0 \\ 
+            0&0  &1 \\ 
+            2&0  &1 
+          \end{pmatrix}$
+          & $x^3+2x^2+1$ & 26 & 432&26\\
+        \hline
+          $\begin{pmatrix}
+            0&1  &0 \\ 
+            0&0  &1 \\ 
+            1&2  &2 
+          \end{pmatrix}$
+          & $x^3+x^2+x+2$ & 13 & 432&26\\
+        \hline
+          $\begin{pmatrix}
+            0&1  &0 \\ 
+            0&0  &1 \\ 
+            1&0  &2 
+          \end{pmatrix}$
+          & $x^3+x^2+2$ & 13 & 432&26\\
+        \hline
+          $\begin{pmatrix}
+            0&1  &0 \\ 
+            0&0  &1 \\ 
+            1&1  &1 
+          \end{pmatrix}$
+          & $x^3+2x^2+2x+2$ & 13 & 432&26\\
+        \hline
+          $\begin{pmatrix}
+            0&1  &0 \\ 
+            0&0  &1 \\ 
+            1&0  &1 
+          \end{pmatrix}$
+          & $x^3+2x^2+2$ & 13 & 432&26\\
       \end{tabular}
     \item
     The size of $|GL(3,3)|$ is $3^3(3^3-1)(3^2-1)(3-1)=11232$. The prime
@@ -1060,14 +1104,15 @@
     
     A claim we use below is that the Sylow $p$-subgroups must include all
     elements of order $p^k$. This follows from the Sylow theorems: since
-    the Sylow $p$-subgroups include all the subgroups of order $p^k$ then
+    the Sylow $p$-subgroups include all the subgroups of order $p^k$ (up to 
+    the size of the Sylow $p$-subgroups) then
     given an element of order $p^k$ they must include the group it generates,
     and therefore also the element itself.
 
 
     \begin{itemize}
     \item {\bf Sylow 3-subgroups}
-      The number of Sylow 3-subgroups, $n_3$, equals to $1\mod 3$ and divides
+      The number of Sylow 3-subgroups, $n_3$, equals $1\mod 3$ and divides
       $13\cdot 32=416$. It must therefore be one of $\{1,13,52,208\}$. There are two 
       conjugacy classes with elements of order three, one of size 104 and
       the other of size 624. The most elements the Sylow 3-subgroups may 
@@ -1077,7 +1122,7 @@
       728 elements of order three.
 
       A Sylow 3-subgroup $P_3$ must have a group of size nine as a subgroup.
-      We showed in class that such groups are Abelian.
+      We showed in class that such groups are Abelian. 
 
     \item {\bf Sylow 13-subgroups}
       

@@ -356,87 +356,21 @@ even(const Permutation& g)
 
 typedef set<Permutation> PermGroup;
 
-PermGroup
-generateA5()
+void
+generate(PermGroup& G)
 {
-    PermGroup A5;
     Permutation g;
     g.resize(5);
     for (size_t i = 0; i < 5; ++i)
 	g[i] = i;
-    for(; A5.count(g) == 0; next_permutation(g.begin(), g.end()))
+    for(; G.count(g) == 0; next_permutation(g.begin(), g.end()))
 	if (even(g))
-	    A5.insert(g);
-    return A5;
-}
-
-PermGroup
-generate(const vector<Permutation>& v)
-{
-    PermGroup G;
-    queue<Permutation> q;
-    for (size_t i = 0; i < v.size(); ++i){
-	G.insert(v[i]);
-	q.push(v[i]);
-    }
-    while(q.size()){
-	Permutation g = q.front();
-	q.pop();
-	for (PermGroup::const_iterator it = G.begin(); it != G.end(); ++it){
-	    Permutation a = g * (*it); 
-	    Permutation b = (*it) * g; 
-	    if (G.insert(a).second)
-		q.push(a);
-	    if (G.insert(b).second)
-		q.push(b);
-	}
-    }
-    return G;
-}
-
-set<PermGroup>
-addGenerator(const set<PermGroup>& groupSet, const PermGroup& G)
-{
-    set<PermGroup> ret;
-    for (set<PermGroup>::const_iterator itS = groupSet.begin();
-	 itS != groupSet.end(); ++itS)
-    {
-	for (PermGroup::const_iterator itG = G.begin(); itG != G.end(); ++itG){
-	    vector<Permutation> generators;
-	    generators.push_back(*itG);
-	    generators.insert(generators.end(), itS->begin(), itS->end());
-	    PermGroup H = generate(generators);
-	    if (ret.insert(H).second)
-		cout << H.size() << " ";
-	}
-    }
-    return ret;
-    
+	    G.insert(g);
 }
 
 void
-classifyA5()
+normalize(Permutation& rP)
 {
-    const PermGroup A5 = generateA5();
-    set<PermGroup> singles;
-    for (PermGroup::const_iterator it = A5.begin(); it != A5.end(); ++it){
-	vector<Permutation> generators;
-	generators.push_back(*it);
-	singles.insert(generate(generators));
-    }
-    cout << "singles:" << endl << "    ";
-    for (set<PermGroup>::const_iterator it = singles.begin(); 
-	 it != singles.end(); ++it)
-    {
-	cout << it->size() << " ";
-    }
-    cout << endl;
-    cout << "doubles:" << endl << "    ";
-    set<PermGroup> doubles = addGenerator(singles, A5);
-    cout << endl;
-    cout << "triples:" << endl << "    ";
-    set<PermGroup> triples = addGenerator(doubles, A5);
-    cout << endl;
 }
 
 
@@ -476,11 +410,10 @@ normalize(GL33El& rG)
 	    rG(i, j) = ((rG(i, j) % 3) + 3) % 3;
 }
 
-set<GL33El>
-buildGL33()
+void
+generate(set<GL33El>& GL33)
 {
     GL33El G(3, 3);
-    set<GL33El> GL33;
     for (size_t n = 0; n < 19683; ++n){
 	size_t m = n;
 	for (size_t i = 0; i < 3; ++i)
@@ -493,7 +426,6 @@ buildGL33()
 	    GL33.insert(G);
      }
     cout << GL33.size() << endl; 
-    return GL33;
 }
 
 GL33El
@@ -548,11 +480,162 @@ findOrders()
     }
 }
 
+template<class T>
+set<T>
+generate(const vector<T>& v, size_t p)
+{
+    set<T> G;
+    queue<T> q;
+    for (size_t i = 0; i < v.size(); ++i){
+	G.insert(v[i]);
+	q.push(v[i]);
+    }
+    while(q.size()){
+	T g = q.front();
+	q.pop();
+	for (typename set<T>::const_iterator it = G.begin(); it != G.end(); 
+	     ++it)
+	{
+	    T a = g * (*it); 
+	    normalize(a);
+	    if (!isPowerOf(order(a), p)){
+		G.clear();
+		return G;
+	    }
+	    T b = (*it) * g; 
+	    normalize(b);
+	    if (!isPowerOf(order(b), p)){
+		G.clear();
+		return G;
+	    }
+	    if (G.insert(a).second)
+		q.push(a);
+	    if (G.insert(b).second)
+		q.push(b);
+	}
+    }
+    return G;
+}
+
+template<class T>
+size_t
+order(const T& t)
+{
+    T s = t * t;
+    if (s == t)
+	return 1;
+    size_t i = 2;
+    while(!(s == t)){
+	++i;
+	s = s * t;
+	normalize(s);
+    }
+    return i - 1;
+}
+
+bool 
+isPowerOf(size_t n, size_t p)
+{
+    if (p == 1 || n == 1)
+	return true;
+    size_t k = p;
+    while (k < n)
+	k *= p;
+    return k == n;
+}
+
+template<class T>
+set<set<T> >
+addGenerator(const set<set<T> >& groupSet, const set<T>& G, size_t p)
+{
+    set<set<T> > ret;
+    size_t i = 0;
+    for (typename set<set<T> >::const_iterator itS = groupSet.begin();
+	 itS != groupSet.end(); ++itS)
+    {
+	for (typename set<T>::const_iterator itG = G.begin(); itG != G.end(); 
+	     ++itG)
+	{
+	    vector<T> generators;
+	    generators.push_back(*itG);
+	    generators.insert(generators.end(), itS->begin(), itS->end());
+	    set<T> H = generate(generators, p);
+	    if (ret.insert(H).second)
+		;//cout << "found group of size " << H.size() << endl;
+	}
+	++i;
+	cout << i << "/" << groupSet.size() << endl;
+    }
+    return ret;
+    
+}
+
+template<class S>
+void
+histogram(ostream& os, const set<S>& m)
+{
+    map<size_t, size_t> hist;
+    for (typename set<S>::const_iterator it = m.begin(); it != m.end(); 
+	 ++it)
+    {
+	hist[it->size()]++;
+    }
+    for (map<size_t, size_t>::const_iterator it = hist.begin(); 
+	 it != hist.end(); ++it)
+    {
+	os << it->first << ": " << it->second << endl;
+    }
+}
+
+
+template<class T>
+void
+classify(size_t p)
+{
+    set<T> G;
+    generate(G);
+    typename set<T>::const_iterator itNext = G.begin();
+    for (typename set<T>::const_iterator it = itNext; it != G.end(); 
+	 it = itNext)
+    {
+	++itNext;
+	if (!isPowerOf(order(*it), p))
+	    G.erase(it);
+    }
+    
+    set<set<T> > singles;
+    for (typename set<T>::const_iterator it = G.begin(); it != G.end(); ++it){
+	vector<T> generators;
+	generators.push_back(*it);
+	set<T> H = generate(generators, p);
+	singles.insert(H);
+    }
+    cout << singles.size() << " singles:" << endl << "    ";
+    for (typename set<set<T> >::const_iterator it = singles.begin(); 
+	 it != singles.end(); ++it)
+    {
+	cout << it->size() << " ";
+    }
+    cout << endl;
+    histogram(cout, singles);
+
+    set<set<T> > doubles = addGenerator(singles, G, p);
+    cout << doubles.size() << " doubles:" << endl << "    ";
+    cout << endl;
+    histogram(cout, doubles);
+
+    set<set<T> > triples = addGenerator(doubles, G, p);
+    cout << triples.size() << " triples:" << endl << "    ";
+    cout << endl;
+    histogram(cout, triples);
+}
+
 void
 disectGL33()
 {
     
-    const set<GL33El> GL33 = buildGL33();
+    set<GL33El> GL33;
+    generate(GL33);
     set<GL33El> todo = GL33;
     vector<set<GL33El> > classes;
     while (todo.size()){
@@ -617,6 +700,8 @@ disectGL33()
 	cout << classes[i].size() << " ";
     cout << endl;
 }
+
+
 int
 main(int argc, char* argv[])
 {
@@ -625,8 +710,9 @@ main(int argc, char* argv[])
 //    cubicPolys();
 //    factor();
 //    minpolyTable();
-//    classifyA5();
-    findOrders();
-    disectGL33();
+//    classify<Permutation>(1);
+//    findOrders();
+//    disectGL33();
+    classify<GL33El>(2);
     return 0;
 }
