@@ -701,6 +701,89 @@ disectGL33()
     cout << endl;
 }
 
+size_t
+editDistance(const Matrix<size_t>& m1, const Matrix<size_t>& m2)
+{
+    size_t d = 0;
+    for (size_t i = 0; i < m1.rows(); ++i)
+	for (size_t j = 0; j < m1.cols(); ++j)
+	    if (m1(i, j) != m2(i, j))
+		++d;
+
+    return d;    
+}
+
+void
+analyzeCode()
+{
+    Matrix<size_t> C(3, 7);
+    C(0, 0) = 1; C(0, 1) = 0; C(0, 2) = 1; C(0, 3) = 1; C(0, 4) = 1; C(0, 5) = 0; C(0, 6) = 1; 
+    C(1, 0) = 1; C(1, 1) = 1; C(1, 2) = 1; C(1, 3) = 0; C(1, 4) = 0; C(1, 5) = 0; C(1, 6) = 0; 
+    C(2, 0) = 0; C(2, 1) = 1; C(2, 2) = 1; C(2, 3) = 0; C(2, 4) = 1; C(2, 5) = 1; C(2, 6) = 0; 
+    cout << C << endl;
+    vector<Matrix<size_t> > codewords;
+    for (size_t i = 0; i < 2; ++i)
+	for (size_t j = 0; j < 2; ++j)
+	    for (size_t k = 0; k < 2; ++k){
+		Matrix<size_t> M(1, 3);
+		M(0, 0) = i;
+		M(0, 1) = j;
+		M(0, 2) = k;
+		Matrix<size_t> x = M * C;
+		for (size_t m = 0; m < x.cols(); ++m)
+		    x(0, m) = x(0, m) % 2;
+		codewords.insert(codewords.end(), x);
+	    }
+    for (size_t i = 0; i < codewords.size(); ++i){
+	for (size_t j = 0; j < codewords[i].cols(); ++j){
+	    if (j > 0 && j < codewords[i].cols())
+		cout << "& "; 
+	    cout << codewords[i](0, j);
+	}
+	cout << "\\\\" << endl;
+    }
+    
+    size_t minDist = C.cols();
+    for (size_t i = 0; i < codewords.size(); ++i)
+	for (size_t j = i + 1; j < codewords.size(); ++j){
+	    size_t d = editDistance(codewords[i], codewords[j]);
+	    if (d < minDist)
+		minDist = d;
+	    cout << d << " ";
+	}
+    cout << endl << "min dist: " << minDist << endl;
+
+    Matrix<size_t> D = C;
+    for (size_t i = 0; i < C.cols(); ++i){
+	D(0, i) = (C(1, i) + C(2, i)) % 2;
+	D(1, i) = (C(0, i) + C(1, i)) % 2;
+	D(2, i) = (C(0, i) + C(1, i) + C(2, i)) % 2;
+    }
+    cout << "D: " << endl << D;
+
+    Matrix<size_t> H(7, 4);
+    H(0, 0) = 0; H(0, 1) = 1; H(0, 2) = 1; H(0, 3) = 0;
+    H(1, 0) = 1; H(1, 1) = 1; H(1, 2) = 0; H(1, 3) = 1;
+    H(2, 0) = 1; H(2, 1) = 0; H(2, 2) = 1; H(2, 3) = 1;
+    H(3, 0) = 1; H(3, 1) = 0; H(3, 2) = 0; H(3, 3) = 0;
+    H(4, 0) = 0; H(4, 1) = 1; H(4, 2) = 0; H(4, 3) = 0;
+    H(5, 0) = 0; H(5, 1) = 0; H(5, 2) = 1; H(5, 3) = 0;
+    H(6, 0) = 0; H(6, 1) = 0; H(6, 2) = 0; H(6, 3) = 1;
+    
+    cout << "parity check:" << endl;
+    cout << (C * H) % 2;
+    
+    Matrix<size_t> m1(1, 7);
+    m1(0, 0) = 1; m1(0, 1) = 1; m1(0, 2) = 1; m1(0, 3) = 0; m1(0, 4) = 1; m1(0, 5) = 1; m1(0, 6) = 1;
+    cout << "m1: " << endl << m1;
+    cout << "m1 * H" << endl << m1 * H;
+
+    for (size_t j = 0; j < codewords.size(); ++j)
+	cout <<  editDistance(m1, codewords[j]) << " " << codewords[j] << endl;
+    
+
+
+}
 
 int
 main(int argc, char* argv[])
@@ -713,6 +796,7 @@ main(int argc, char* argv[])
 //    classify<Permutation>(1);
 //    findOrders();
 //    disectGL33();
-    classify<GL33El>(2);
+//    classify<GL33El>(3);
+    analyzeCode();
     return 0;
 }

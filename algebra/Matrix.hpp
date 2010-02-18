@@ -180,6 +180,17 @@ operator * (const Matrix<F>& m, const F& f)
 
 template<class F>
 Matrix<F>
+operator % (const Matrix<F>& m, size_t p)
+{
+    Matrix<F> r(m.rows(), m.cols());
+    for (size_t i = 0; i < m.rows(); ++i)
+        for (size_t j = 0; j < m.cols(); ++j)
+            r(i, j) = ((m(i, j) % p) + p) % p;
+    return r;
+}
+
+template<class F>
+Matrix<F>
 operator / (const Matrix<F>& m, const F& f)
 {
     Matrix<F> r(m.rows(), m.cols());

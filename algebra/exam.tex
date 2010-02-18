@@ -1098,9 +1098,9 @@
     \item
     The size of $|GL(3,3)|$ is $3^3(3^3-1)(3^2-1)(3-1)=11232$. The prime
     factorisation of $11232$ is 
-    $27 \cdot 26 \cdot 8 \cdot 2=3^3 \cdot 13 \cdot 2^5$. Therefore $GL(3,3)$ has three Sylow $p$-subgroups:
-    a 3-subgroup of order 27, a 13-subgroup of order 13, and a
-    $2$-subgroup of order 32. We again denote $G=GL(3,3)$ for brevity.
+    $27 \cdot 26 \cdot 8 \cdot 2=3^3 \cdot 13 \cdot 2^5$. Therefore $GL(3,3)$ has three types of Sylow $p$-subgroups:
+    3-subgroups of order 27, 13-subgroups of order 13, and 
+    $2$-subgroups of order 32. We again denote $G=GL(3,3)$ for brevity.
     
     A claim we use below is that the Sylow $p$-subgroups must include all
     elements of order $p^k$. This follows from the Sylow theorems: since
@@ -1120,16 +1120,16 @@
       intersect trivially. Hence $n_3\neq 1,13$, since otherwise
       the Sylow 3-subgroups would not include enough elements to cover all the
       728 elements of order three.
-
+      
       A Sylow 3-subgroup $P_3$ must have a group of size nine as a subgroup.
       We showed in class that such groups are Abelian. 
-
+      
     \item {\bf Sylow 13-subgroups}
       
-      There are four conjugacy classes of elements of order 13 each of size
+      There are four conjugacy classes of elements of order 13. Each is of size
       432, and so in total there
       are $4\cdot 432=1728$ elements of order 13. Since each two
-      of the Sylow 13-subgroups (being of prime order) intersect trivially, 
+      of the Sylow 13-subgroups intersect trivially (being of prime order), 
       there have to be $1728/12=144$ of them, and $n_{13}=144$.
 
     \item {\bf Sylow 2-subgroups}
@@ -1147,6 +1147,85 @@
     \end{itemize}
     \end{enumerate}
   \item
+    \begin{enumerate}
+    \item The codewords are:
+
+      \begin{tabular}{c c c c c c c}
+        (0& 0& 0& 0& 0& 0& 0)\\
+        (0& 1& 1& 0& 1& 1& 0)\\
+        (1& 1& 1& 0& 0& 0& 0)\\
+        (1& 0& 0& 0& 1& 1& 0)\\
+        (1& 0& 1& 1& 1& 0& 1)\\
+        (1& 1& 0& 1& 0& 1& 1)\\
+        (0& 1& 0& 1& 1& 0& 1)\\
+        (0& 0& 1& 1& 0& 1& 1)\\
+      \end{tabular}
+
+      The minimum distance is three. Therefore if a vector is at distance one
+      from some codeword it cannot be at distance one or less from another
+      codeword, since the triangle inequlity holds for the Hamming distance.
+      Therefore this code can correct and locate all single errors.
+      
+    \item
+      A matrix $H$ is a parity check matrix for $C$ if has as rows a basis 
+      of the orthogonal
+      space to the row space of $C$. To find this matrix we first create a 
+      simpler matrix $D$, whose rows span the same space as those of $C$. If $C$'s
+      rows are $c_1$, $c_2$ and $c_3$, then $D$'s rows are $d_1=c_2+c_3$, 
+      $d_2=c_1+c_2$ and $d_3=c_1+c_2+c_3$. Clearly these rows are in the row 
+      space of $C$. It is
+      also easy to see that the rows of $C$ are in $D$'s row space:
+      $c_1=d_1+d_3$, $c_2=d_1+d_2+d_3$ and $c_3=d_2+d_3$. We have then
+      \begin{equation*}
+        D=
+        \begin{pmatrix}
+          1 & 0 & 0 & 0 & 1 & 1 & 0\\
+          0 & 1 & 0 & 1 & 1 & 0 & 1\\
+          0 & 0 & 1 & 1 & 0 & 1 & 1\\
+        \end{pmatrix}.
+      \end{equation*}
+      We let $G$ equal $D$'s rightmost four columns:
+      \begin{equation*}
+        G=
+        \begin{pmatrix}
+          0 & 1 & 1 & 0\\
+          1 & 1 & 0 & 1\\
+          1 & 0 & 1 & 1\\
+        \end{pmatrix}
+      \end{equation*}
+      Then $D=\begin{pmatrix}I_{33}& G\end{pmatrix}$.
+
+      \begin{claim}
+        $H=\begin{pmatrix}G^t & I_{44}\end{pmatrix}$ is a parity check 
+        matrix for $C$.
+      \end{claim}
+      \begin{proof}
+        Denote by $W$ the row space of $C$ (and also of $D$). Denote by
+        $W^\bot$ the space orthogonal to this space. 
+        The dimension $W$ is three: it cannot be more than
+        three since $D$ has but three rows. It is at least three since a
+        matrix's row dimension equals its column dimension, and $D$'s first
+        three columns are clearly independent. As we mentioned in class, this
+        means that the dimension of $W^\bot$ is four, since the dimensions
+        must sum to the dimension of the entire space.
+
+        $HD^T=G^T+G^T=0$, and so the rows of $H$ are orthogonal to the rows
+        of $D$. Hence the space spanned by the rows of $H$ is contained
+        in $W^\bot$.
+        
+        By the same argument above, $H$'s row space's dimension is four, since
+        its last four columns are linearly independent. Hence $H$'s rows space
+        is contained in $W^\bot$ and has the same dimension as $W^\bot$, and
+        therefore equals it.
+      \end{proof}
+      
+    \item $Hx^T=\begin{pmatrix}0\\1\\1\\1\end{pmatrix}$ and so $x$ is not a codeword. The most likely codeword,
+      in the sense that its Hamming distance to $x$ is minimal, is
+      $c=\begin{pmatrix}0 &1 &1 &0 &1 &1 &0\end{pmatrix}$. The distance
+      between $x$ and $c$ is two, whereas the distance between $x$ and the
+      rest of the codewords is larger. Hence $c$ is uniquly determined.
+
+    \end{enumerate}
   \item
     We commence by proving some auxiliary claims. 
 
