@@ -2,9 +2,6 @@
 \usepackage{amsfonts} \usepackage{amsmath} \usepackage{bm}
 \usepackage{latexsym} \usepackage{epsfig}
 
-\setlength{\textwidth}{6.5 in} \setlength{\textheight}{8.25in}
-\setlength{\oddsidemargin}{0in} \setlength{\topmargin}{0in}
-\addtolength{\textheight}{.8in} \addtolength{\voffset}{-.5in}
 
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{lemma}[theorem]{Lemma}
@@ -115,7 +112,7 @@ We would like to start by recalling some well known facts of analytical
 geometry.
 
 For our purposes, it will be useful to represent the points of a plane with
-a parallel coordinate system. We choose two intersecting lines 
+a parallel coordinate system. We choose two intersecting (straight) lines 
 in the plane and mark on each some direction as positive. We call these lines
 the $x_1$ and $x_2$ axes. Through a remaining point of the plane we pass
 parallels to the axes, and assign the corresponding segments of the axes 
@@ -147,9 +144,10 @@ This system of equations is solvable for $x$ when the determinant
   \end{vmatrix}
 \end{equation}
 is different than zero ($\neq 0$). Then, to each ${\bf x}^*$ corresponds 
-one and only one ${\bf x}$. Following Euler and M\"obius, this kind of mapping
+one and only one ${\bf x}$. Following Euler \cite{Euler:1749} and 
+M\"obius \cite{Mobius:1827}, this kind of mapping
 is called an ``affine mapping'', ``affine transformation'' or just ``affinity''.
-
+ 
 The inverse transformation, which one can determine by 
 solving~\ref{eq:affine_trans}, has again the same form: 
 \begin{equation}
@@ -174,8 +172,33 @@ The determinant
 \end{equation}
 is different than zero and hence the inverse transformation is also affine.
 
-The points ${\bf x}$ of a line $g$ are mapped by an affine transformation to
-the points ${\bf x}^*$ of a line $g^*$.
+The points ${\bf x}$ of a line $\mathfrak{g}$ are mapped by an affine 
+transformation to
+the points ${\bf x}^*$ of a line $\mathfrak{g}^*$. In fact, a line 
+$\mathfrak{g}$ can be
+represented by a linear equation ($g_1$, $g_2$ not both zero):
+\begin{equation}
+  \label{eq:line}
+  g_0+g_1x_1+g_2x_2=0.
+\end{equation}
+The substitution of~\ref{eq:inv_c} into this equation results, because of the
+invertibilty of the transformation, in an equation which is not trivially
+satisfied, and thus again the locus of ${\bf x}^*$ is a line.
+
+It further follows from~\ref{eq:affine_trans} that affine transformations are
+continuous mappings. That is, as ${\bf x}$ tends to ${\bf x}_0$ the 
+corresponding ${\bf x}^*$ tends to ${\bf x}^*_0$.
+
+With help from M\"obius nets ~\cite{Mobius:1827} one can show that the last
+two properties, whose dependence or independence remain to be decided, are
+the definitive properties of affine transformations: {\em Affine mappings are
+the only coordianate transformations (in the plane) which are without
+exception bijective, continuous and map lines to lines.}
+
+Affine transformations preserve parallelism, since parallel lines on the plane
+are characterized by not having common points.
+\bibliographystyle{plain} \bibliography{blaschke}
+
 \end{document}
 
 
