@@ -1,0 +1,181 @@
+\documentclass[11pt]{book} \usepackage{amssymb}
+\usepackage{amsfonts} \usepackage{amsmath} \usepackage{bm}
+\usepackage{latexsym} \usepackage{epsfig}
+
+\setlength{\textwidth}{6.5 in} \setlength{\textheight}{8.25in}
+\setlength{\oddsidemargin}{0in} \setlength{\topmargin}{0in}
+\addtolength{\textheight}{.8in} \addtolength{\voffset}{-.5in}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{example}[theorem]{Example}
+\newenvironment{proof}{\noindent \textbf{Proof:}}{$\Box$}
+
+\newcommand{\ignore}[1]{}
+
+\newcommand{\enote}[1]{} \newcommand{\knote}[1]{}
+\newcommand{\rnote}[1]{}
+
+
+
+% \newcommand{\enote}[1]{{\bf [[Elchanan:} {\emph{#1}}{\bf ]]}}
+% \newcommand{\knote}[1]{{\bf [[Krzysztof:} {\emph{#1}}{\bf ]]}}
+% \newcommand{\rnote}[1]{{\bf [[Ryan:} {\emph{#1}}{\bf ]]}}
+
+
+
+\DeclareMathOperator{\Support}{Supp} \DeclareMathOperator{\Opt}{Opt}
+\DeclareMathOperator{\Ordo}{\mathcal{O}}
+\newcommand{\MaxkCSP}{\textsc{Max $k$-CSP}}
+\newcommand{\MaxkCSPq}{\textsc{Max $k$-CSP$_{q}$}}
+\newcommand{\MaxCSP}[1]{\textsc{Max CSP}(#1)} \renewcommand{\Pr}{{\bf
+    P}} \renewcommand{\P}{{\bf P}} \newcommand{\Px}{\mathop{\bf P\/}}
+\newcommand{\E}{{\bf E}} \newcommand{\Cov}{{\bf Cov}}
+\newcommand{\Var}{{\bf Var}} \newcommand{\Varx}{\mathop{\bf Var\/}}
+
+\newcommand{\bits}{\{-1,1\}}
+
+\newcommand{\nsmaja}{\textstyle{\frac{2}{\pi}} \arcsin \rho}
+
+\newcommand{\Inf}{\mathrm{Inf}} \newcommand{\I}{\mathrm{I}}
+\newcommand{\J}{\mathrm{J}}
+
+\newcommand{\eps}{\epsilon} \newcommand{\lam}{\lambda}
+
+% \newcommand{\trunc}{\ell_{2,[-1,1]}}
+\newcommand{\trunc}{\zeta} \newcommand{\truncprod}{\chi}
+
+\newcommand{\N}{\mathbb N} \newcommand{\R}{\mathbb R}
+\newcommand{\Z}{\mathbb Z} \newcommand{\CalE}{{\mathcal{E}}}
+\newcommand{\CalC}{{\mathcal{C}}} \newcommand{\CalM}{{\mathcal{M}}}
+\newcommand{\CalR}{{\mathcal{R}}} \newcommand{\CalS}{{\mathcal{S}}}
+\newcommand{\CalV}{{\mathcal{V}}}
+\newcommand{\CalX}{{\boldsymbol{\mathcal{X}}}}
+\newcommand{\CalG}{{\boldsymbol{\mathcal{G}}}}
+\newcommand{\CalH}{{\boldsymbol{\mathcal{H}}}}
+\newcommand{\CalY}{{\boldsymbol{\mathcal{Y}}}}
+\newcommand{\CalZ}{{\boldsymbol{\mathcal{Z}}}}
+\newcommand{\CalW}{{\boldsymbol{\mathcal{W}}}}
+\newcommand{\CalF}{{\mathcal{Z}}}
+% \newcommand{\boldG}{{\boldsymbol G}}
+% \newcommand{\boldQ}{{\boldsymbol Q}}
+% \newcommand{\boldP}{{\boldsymbol P}}
+% \newcommand{\boldR}{{\boldsymbol R}}
+% \newcommand{\boldS}{{\boldsymbol S}}
+% \newcommand{\boldX}{{\boldsymbol X}}
+% \newcommand{\boldB}{{\boldsymbol B}}
+% \newcommand{\boldY}{{\boldsymbol Y}}
+% \newcommand{\boldZ}{{\boldsymbol Z}}
+% \newcommand{\boldV}{{\boldsymbol V}}
+\newcommand{\boldi}{{\boldsymbol i}} \newcommand{\boldj}{{\boldsymbol
+    j}} \newcommand{\boldk}{{\boldsymbol k}}
+\newcommand{\boldr}{{\boldsymbol r}}
+\newcommand{\boldsigma}{{\boldsymbol \sigma}}
+\newcommand{\boldupsilon}{{\boldsymbol \upsilon}}
+\newcommand{\hone}{{\boldsymbol{H1}}}
+\newcommand{\htwo}{\boldsymbol{H2}}
+\newcommand{\hthree}{\boldsymbol{H3}}
+\newcommand{\hfour}{\boldsymbol{H4}}
+
+
+\newcommand{\sgn}{\mathrm{sgn}} \newcommand{\Maj}{\mathrm{Maj}}
+\newcommand{\Acyc}{\mathrm{Acyc}}
+\newcommand{\UniqMax}{\mathrm{UniqMax}}
+\newcommand{\Thr}{\mathrm{Thr}} \newcommand{\littlesum}{{\textstyle
+    \sum}}
+
+\newcommand{\half}{{\textstyle \frac12}}
+\newcommand{\third}{{\textstyle \frac13}}
+\newcommand{\fourth}{{\textstyle \frac14}}
+
+\newcommand{\Stab}{\mathbb{S}}
+\newcommand{\StabThr}[2]{\Gamma_{#1}(#2)}
+\newcommand{\StabThrmin}[2]{{\underline{\Gamma}}_{#1}(#2)}
+\newcommand{\StabThrmax}[2]{{\overline{\Gamma}}_{#1}(#2)}
+\newcommand{\TestFcn}{\Psi}
+
+\renewcommand{\phi}{\varphi}
+
+\begin{document}
+\title{Affine Differential Geometry}
+
+ \author{Wilhelm Blaschke, Translated by Omer Tamuz}
+\maketitle
+
+\chapter{Introduction to Curves in the Plane}
+\section{Affine Mapping}
+We would like to start by recalling some well known facts of analytical 
+geometry.
+
+For our purposes, it will be useful to represent the points of a plane with
+a parallel coordinate system. We choose two intersecting lines 
+in the plane and mark on each some direction as positive. We call these lines
+the $x_1$ and $x_2$ axes. Through a remaining point of the plane we pass
+parallels to the axes, and assign the corresponding segments of the axes 
+the numbers $x_1$ and $x_2$. We have thus defined a bijection between 
+pairs of real number $x_1$ and $x_2$, to the points of the plane.
+
+We will thus deal with ``real'' points and lines, and in fact consider only
+those points and lines that in the framework of projective geometry are 
+considered ``proper'', as opposed to ``improper'' or infinitely remote elements.
+
+In place of the pair $x_1$, $x_2$ we use the shorter vector notation and 
+speak simply of the point ${\bf x}$.
+
+There exists a mapping ${\bf x}\to {\bf x}^*$ between the points of plane,
+which is given by a system of linear relations between their coordinates:
+\begin{equation}
+  \label{eq:affine_trans}
+  \begin{array}{rcl}
+    x_1^* &=& c_{10}+c_{11}x_1+c_{12}x_2\\
+    x_2^* &=& c_{20}+c_{21}x_1+c_{22}x_2.
+  \end{array}
+\end{equation}
+This system of equations is solvable for $x$ when the determinant 
+\begin{equation}
+  d=c_{11}c_{22}-c_{21}c_{12}=
+  \begin{vmatrix}
+    c_{11} & c_{12}\\
+    c_{21} & c_{22}
+  \end{vmatrix}
+\end{equation}
+is different than zero ($\neq 0$). Then, to each ${\bf x}^*$ corresponds 
+one and only one ${\bf x}$. Following Euler and M\"obius, this kind of mapping
+is called an ``affine mapping'', ``affine transformation'' or just ``affinity''.
+
+The inverse transformation, which one can determine by 
+solving~\ref{eq:affine_trans}, has again the same form: 
+\begin{equation}
+  \label{eq:affine_trans_inv}
+  \begin{array}{rcl}
+    x_1 &=& c_{10}^*+c_{11}^*x_1^*+c_{12}^*x_2^*\\
+    x_2 &=& c_{20}^*+c_{21}^*x_1^*+c_{22}^*x_2^*,
+  \end{array}
+\end{equation}
+where
+\begin{equation}
+  \label{eq:inv_c}
+  \begin{array}{lll}
+    c_{10}^*=-{c_{10}c_{22}-c_{20}c_{12} \over d},& c_{11}^*=+{c_{22}\over d},&c_{12}^*=-{c_{12}\over d},\\
+    c_{20}^*=-{c_{10}c_{21}-c_{20}c_{11} \over d},& c_{21}^*=+{c_{21}\over d},&c_{22}^*=-{c_{11}\over d}.
+  \end{array}
+\end{equation}
+The determinant
+\begin{equation}
+  \label{eq:inv_det}
+  d^*=c_{11}^*c_{22}^*-c_{12}^*c_{21}^*={1\over d}
+\end{equation}
+is different than zero and hence the inverse transformation is also affine.
+
+The points ${\bf x}$ of a line $g$ are mapped by an affine transformation to
+the points ${\bf x}^*$ of a line $g^*$.
+\end{document}
+
+
