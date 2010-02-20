@@ -165,8 +165,8 @@
     Let $\theta_m$ be the probability that the geneological tree of a 
     branching process with Binomial($n,p$) offspring distribution 
     has an $(n-1)$-ary tree of depth $m$, rooted at the time 
-    zero individual. This happens if this individual has less than $n-1$ or $n$
-    offsprings and if at least $n-1$ of these offsprings have trees of 
+    zero individual. This happens if this individual has $n-1$ or $n$
+    offsprings and if at least $n-1$ of these offsprings have such trees of 
     depth $m-1$:
     $$\theta_m=p_{n-1}\theta_{m-1}^{n-1}+p_n\left[\theta_{m-1}^n+
       \theta_{m-1}^{n-1}(1-\theta_{m-1})n\right]$$
@@ -193,20 +193,72 @@
   \item
     \begin{enumerate}
     \item 
+      Add fiducial $B_{1,1}^0$ ($=A_0$) and $X_{1,1}^0$ distributed as $X_{i,j}^n$
+      above. 
       Consider $B_{i,j}^n$ an offspring of $B_{k,l}^{n-1}$ if the latter contains
       the former. Then this problem is a representation of a branching process,
       with offspring
-      distribution $B(9,p)$. The event $A_0\neq \emptyset$ is equivalent to
+      distribution $B(9,p)$ (and conditioned on $X_{1,1}^0=1$). 
+      The event $A_0\neq \emptyset$ is equivalent to
       the branching process not dying out, and therefore has positive
       probability when $p>1/9$.
       
     \item
       \begin{claim}
-        If the branching process contains an 8-ary tree then $A_\infty$ has
-        a left-to-right crossing.
+        If the branching process contains an 8-ary infinite tree rooted
+        at $B_{1,1}^0$ then $A_\infty$ has a left-to-right crossing.
       \end{claim}
-      Note that by 1 (c) this means that $p_c<1$.
+      Note that by 1(c) this statement implies that $p_c<1$, since there exists
+      a $q<1$ such that there is a positive probability for an 8-are tree,
+      and by the above $p_c<q$.
+
       \begin{proof}
+        Let the branching process contain an 8-ary infinite tree rooted at 
+        $B_{1,1}^0$.
+        Let $f_1:[0,1]\to [0,1]^2$ be a function with $f_1(0)=(0,y_0)$ and 
+        $f_1(1)=(0,y_1)$ for some $y_0,y_1$, and $f_1$ only passes through
+        $B_{i,j}^1$'s that are part of the 8-ary binary tree rooted at the root.
+        Since there are at least eight such $B_{i,j}^1$'s, it is easy to see 
+        that such an $f_1$ exists.
+
+        We define $f_n$ recursively to only pass through the same $B_{i,j}^{n-1}$'s
+        that $f_{n-1}$ passed through, and in addition only pass through
+        the $B_{i,j}^n$'s that are
+        part of the 8-ary tree rooted at $B_{1,1}^0$. This can be done by slightly 
+        distorting the image of $f_{n-1}$:
+
+        Let $C$ and $D$ be
+        two neighboring 
+        $B_{i,j}^{n-1}$'s such that $f_{n-1}$ crosses from $C$ to $D$. Since they each have at 
+        least eight offsprings that are included in the tree, then $C$ and $D$
+        have adjacent offsprings $C'$ and $D'$ (in the sense that they share an 
+        edge).
+        Since $f_{n-1}$ crosses from $C$ to $D$, then if necessary we distort $f_n$ so 
+        that it will cross from
+        $C'$ to $D'$. We perfrom this distortion while keeping constant the $x$
+        in which the function crosses from $C$ to $D$.
+        
+        Having made sure that $f_n$ crosses from $C$ to $D$ in legal offsprings,
+        we may need to distort it some more so that {\em while in} $C$ it 
+        passes only
+        through offsprings belonging to the tree. It is easy to see that this
+        can also be done, again because $C$ has at least eight different 
+        offsprings, and so any two points on the edge of $C$ that belong to
+        offsprings can be connected through offsprings.
+
+        Finally, we may again need to shift $f_n$ slightly so that its starting
+        and end points are in the tree. This can also always be done (again
+        because we have eight offsprings) within
+        the $B_{i,j}^{n-1}$ that $f_{n-1}$ started (or ended) at, while keeping the condition
+        that $f_n(0)\in\{0\}\times [0,1]$ and $f_n(1)\in\{1\}\times [0,1]$.
+        
+        We've shown that the image of $f_n$ is in $A_n$. Furthermore, 
+        since all the distortions we performed are within boxes of dimensions
+        $3^{-n}\times 3^{-n}$, then the $L_\infty$ distance between $f_{n-1}$ and
+        $f_n$ is bounded by $O(3^{-n})$. Hence the series of functions
+        converges to a function $f_\infty$ such that the image of $f_\infty$ is in
+        $A_\infty$ and both $f_\infty(0)\in\{0\}\times [0,1]$ and 
+        $f_\infty(1)\in\{1\}\times [0,1]$.
         
       \end{proof}
     \end{enumerate}
