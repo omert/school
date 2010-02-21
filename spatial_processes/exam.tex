@@ -181,14 +181,10 @@
 
     $f_p(0)=0$ and $\lim_{x\to 0}f_p(x)/x=-1$
     so for $\epsilon>0$ small enough $f_p(\epsilon)/\epsilon<0$ and in particular 
-    $f_p(\epsilon)<0$. On the other hand,
-    \begin{eqnarray*}
-      f_p(1)&=&np^{n-1}(1-p)1^{n-1}+p^n\left[ 1^n+1^{n-1}(1-1)n \right]-1
-      \\ &=& np^{n-1}(1-p)+p^n-1
-    \end{eqnarray*}
-    If we consider $g(p)=f_p(1)$ 
-    then $g(1)=0$ and $\lim_{p\to 1}g(p)/p^{n-1}=n>0$ . Hence for
-    $p$ close enough to one we have that $g(p)=f_p(1)>0$. 
+    $f_p(\epsilon)<0$. On the other hand, at $p=1$, $x=1$ we have $f_1(1)=0$ and 
+    $f_1'(1)=-1$, and so since $f_p(x)$ is continuous in $x$ there exists an 
+    $\epsilon$ such that $f_1(1-\epsilon)>0$. Since $f_p(x)$ is also continuous
+    in $p$ then there exists a $\delta$ such that $f_{1-\delta}(1-\epsilon)>0$.
   \end{enumerate}
   \item
     \begin{enumerate}
@@ -256,7 +252,8 @@
         since all the distortions we performed are within boxes of dimensions
         $3^{-n}\times 3^{-n}$, then the $L_\infty$ distance between $f_{n-1}$ and
         $f_n$ is bounded by $O(3^{-n})$. Hence the series of functions
-        converges to a function $f_\infty$ such that the image of $f_\infty$ is in
+        converges uniformly to a continuous function $f_\infty$ such that the 
+        image of $f_\infty$ is in
         $A_\infty$ and both $f_\infty(0)\in\{0\}\times [0,1]$ and 
         $f_\infty(1)\in\{1\}\times [0,1]$.
         
@@ -354,38 +351,31 @@
           \\ \exp(-u) &\leq \lim_{n \to \infty}{\E[D_{[un]}]\over n} \leq& \exp(-u)
         \end{eqnarray*}
       \item
-        The times $T_k$, as defined above, are independent. Hence
+        By calculations nearly identical to the one above, we can show that
+        \begin{equation}
+          \label{eq:plus_eps}
+          \lim_{n\to\infty}{\E[D_{n\log n(1+\epsilon)}]\over n^{-\epsilon}}=1
+        \end{equation}
+        and
+        \begin{equation}
+          \label{eq:minus_eps}
+          \lim_{n\to\infty}{\E[D_{n\log n(1-\epsilon)}]\over n^{\epsilon}}=1.
+        \end{equation}
+        Now 
         \begin{eqnarray*}
-          \Var[C_n] &=& \sum_{k=1}^{n-1}\Var[T_k]
-          \\ &=& \sum_{k=1}^{n-1}{1-p_k \over p_k^2}
-          \\ &=& \sum_{k=1}^{n-1}{1-(n-k)/(n-1) \over (n-k)^2/(n-1)^2}
-          \\ &=& \sum_{k=1}^{n-1}{(n-1)^2-(n-k)(n-1) \over (n-k)^2}
-          \\ &=& (n-1)\sum_{k=1}^{n-1}{k-1 \over (n-k)^2}
-          \\ &\leq& n^2\sum_{k=1}^{n-1}{1 \over (n-k)^2}
-          \\ &\leq& n^2\sum_{k=1}^n{1 \over k^2}
-          \\ &\leq& n^2{\pi^2 \over 6}
+          \E[D_{n\log n(1+\epsilon)}] &=& \sum_{i=0}^n\P[D_{n\log n(1+\epsilon)}=i]i
+          \\ &\geq& \sum_{i=1}^n\P[D_{n\log n(1+\epsilon)}=i]
+          \\ &=& 1-\P[D_{n\log n(1+\epsilon)}=0],
         \end{eqnarray*}
-        Hence $\Var[C_n/(n\log n)] \leq 10/\log^2n$ and thus goes to zero as
-        $n$ tends to infinity. Hence it converges 
-        is the limit of 
-
-
-
-        \begin{eqnarray*}
-          \E\left[\left({C_n\over n\log n}-1\right)^2\right] 
-          &=& \E\left[\left({C_n\over n\log n}\right)^2-{2C_n\over n\log n}+1\right] 
-          \\ &=& \left({1\over n\log n}\right)^2\E\left[C_n^2\right]-{2\over n\log n}\E[C_n]+1
-        \end{eqnarray*}
-        We first calculate $\E[C_n^2]$:
-        \begin{eqnarray*}
-          \E[C_n^2] &=& \E\left[\left(\sum_{k=1}^{n-1}T_k\right)^2\right]
-          \\ &=& \E\left[\sum_{k,l=1}^{n-1}T_kT_l\right]
-          \\ &=& \E\left[\sum_{k,l=1,\:k \neq l}^{n-1}T_kT_l+\sum_{k=1}^{n-1}T_k^2\right]
-          \\ &=& \sum_{k,l=1,\:k \neq l}^{n-1}\E[T_k]\E[T_l]+\sum_{k=1}^{n-1}\Var[T_k]+\E[T_k]^2
-          \\ &=& \sum_{k,l=1,\:k \neq l}^{n-1}{1\over p_kp_l}+\sum_{k=1}^{n-1}{2-p_k\over p_k^2}
-        \end{eqnarray*}
-
-
+        and so since~\eqref{eq:plus_eps} implies that $\E[D_{n\log n(1+\epsilon)}]$
+        goes to zero as $n$ goes to infinity, then $\P[D_{n\log n(1+\epsilon)}=0]$
+        goes to one. Hence with probability that approaches one, after
+        $n\log n(1+\epsilon)$ steps all the vertices are covered. In terms
+        of $C_n$ this means that
+        $\P[C_n/(n\log n)<1+\epsilon]\to 1$.
+        
+        By ~\
+        
     \end{enumerate}
 
 
