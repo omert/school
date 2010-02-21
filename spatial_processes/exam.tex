@@ -251,7 +251,7 @@
         We've shown that the image of $f_n$ is in $A_n$. Furthermore, 
         since all the distortions we performed are within boxes of dimensions
         $3^{-n}\times 3^{-n}$, then the $L_\infty$ distance between $f_{n-1}$ and
-        $f_n$ is bounded by $O(3^{-n})$. Hence the series of functions
+        $f_n$ is bounded by $O(3^{-n})$. Hence this series of continuous functions
         converges uniformly to a continuous function $f_\infty$ such that the 
         image of $f_\infty$ is in
         $A_\infty$ and both $f_\infty(0)\in\{0\}\times [0,1]$ and 
@@ -327,24 +327,24 @@
         \\ &=& (n-1)\left({1\over n-1}+{1\over n-2}+\cdots+1\right)
       \end{eqnarray*}
     \item
-      Let $P_k$ be the probability that vertex $x_0$ was not visited until
+      Let $P_k^n$ be the probability that vertex $x_0$ was not visited until
       time $k$. Then $P_0=(n-1)/n$ and for $k>0$ we have that 
-      $P_k=P_{k-1}(n-2)/(n-1)$, since if $x_0$ was not visited up to time 
+      $P_k^n=P_{k-1}^n(n-2)/(n-1)$, since if $x_0$ was not visited up to time 
       $P_{k-1}$ then in particular $X_{k-1}\neq x_0$ and the probability to visit
       it at time $k$ is $(n-2)/(n-1)$. We can therefore deduce that
-      $$P_k={(n-1)\over n}\left({n-2\over n-1}\right)^k.$$
+      $$P_k^n={n-1\over n}\left({n-2\over n-1}\right)^k.$$
       We use this in the  following calculation:
       \begin{eqnarray*}
         {\E[D_{[un]}]\over n} &=& {1\over n}\E\left[\sum_{x\in K_n}{\bf 1}_{x \not \in \{X_0,\ldots,X_{[un]}\}}\right]
         \\ &=& {1\over n}\sum_{x\in K_n}\E\left[{\bf 1}_{x \not \in \{X_0,\ldots,X_{[un]}\}}\right]
         \\ &=& {1\over n}n\P[x_0 \not \in \{X_0,\ldots,X_{[un]}\}]
-        \\ &=& P_{[un]}
-        \\ &=& {(n-1)\over n}\left({n-2\over n-1}\right)^{[un]}.
+        \\ &=& P_{[un]}^n
+        \\ &=& {n-1\over n}\left({n-2\over n-1}\right)^{[un]}.
         \end{eqnarray*}
         Then
         \begin{eqnarray*}
-          {(n-1)\over n}\left({n-2\over n-1}\right)^{un+1} &\leq {\E[D_{[un]}]\over n} \leq& {(n-1)\over n}\left({n-2\over n-1}\right)^{un-1}
-          \\ \lim_{n \to \infty}{(n-1)\over n}\left({n-2\over n-1}\right)^{un+1} &\leq \lim_{n \to \infty}{\E[D_{[un]}]\over n} \leq& \lim_{n \to \infty}{(n-1)\over n}\left({n-2\over n-1}\right)^{un-1}
+          {n-1\over n}\left({n-2\over n-1}\right)^{un+1} &\leq {\E[D_{[un]}]\over n} \leq& {n-1\over n}\left({n-2\over n-1}\right)^{un-1}
+          \\ \lim_{n \to \infty}{n-1\over n}\left({n-2\over n-1}\right)^{un+1} &\leq \lim_{n \to \infty}{\E[D_{[un]}]\over n} \leq& \lim_{n \to \infty}{n-1\over n}\left({n-2\over n-1}\right)^{un-1}
           \\ \lim_{n \to \infty}{n\over n+1}\left({n-1\over n}\right)^{u(n+1)+1} &\leq \lim_{n \to \infty}{\E[D_{[un]}]\over n} \leq& \lim_{n \to \infty}{n\over n+1}\left({n-1\over n}\right)^{u(n+1)-1}
           \\ \lim_{n \to \infty}{n\over n+1}\left(1-{1\over n}\right)^{n(u+u/n+1/n)} &\leq \lim_{n \to \infty}{\E[D_{[un]}]\over n} \leq& \lim_{n \to \infty}{n\over n+1}\left(1-{1\over n}\right)^{n(u+u/n-1/n)}
           \\ \lim_{n \to \infty}\exp(-u-u/n-1/n) &\leq \lim_{n \to \infty}{\E[D_{[un]}]\over n} \leq& \lim_{n \to \infty}\exp(-u-u/n+1/n)
@@ -361,21 +361,45 @@
           \label{eq:minus_eps}
           \lim_{n\to\infty}{\E[D_{n\log n(1-\epsilon)}]\over n^{\epsilon}}=1.
         \end{equation}
-        Now 
-        \begin{eqnarray*}
-          \E[D_{n\log n(1+\epsilon)}] &=& \sum_{i=0}^n\P[D_{n\log n(1+\epsilon)}=i]i
-          \\ &\geq& \sum_{i=1}^n\P[D_{n\log n(1+\epsilon)}=i]
-          \\ &=& 1-\P[D_{n\log n(1+\epsilon)}=0],
-        \end{eqnarray*}
-        and so since~\eqref{eq:plus_eps} implies that $\E[D_{n\log n(1+\epsilon)}]$
-        goes to zero as $n$ goes to infinity, then $\P[D_{n\log n(1+\epsilon)}=0]$
-        goes to one. Hence with probability that approaches one, after
+        
+        Since~\eqref{eq:plus_eps} implies that $\E[D_{n\log n(1+\epsilon)}]$
+        goes to zero as $n$ goes to infinity, then by the Markov
+        inequality $\P[D_{n\log n(1+\epsilon)}\geq 1]$ also
+        goes to zero. Hence with probability that approaches one, after
         $n\log n(1+\epsilon)$ steps all the vertices are covered. In terms
         of $C_n$ this means that
         $\P[C_n/(n\log n)<1+\epsilon]\to 1$.
+
+        The probability $Q_k^n$ that two vertices, $x_0$ and $x_1$, were not 
+        visited until time $k$ is, by analysis similar to the one above for
+        $P_k^n$, equal to 
+        \begin{eqnarray*}
+          Q_k^n&=&{n-2\over n}\left({n-3\over n-1}\right)^k.
+          \\ &=& P_k^n{n-2\over n-1}\left({n-3\over n-2}\right)^k
+          \\ &=& P_k^nP_k^{n-1}
+        \end{eqnarray*}
+        We can use this to calculate the variance of $D_k^n$ 
+        ($=D_k$ for $n$ vertices):
+        \begin{eqnarray*}
+          \\Var[D_k^n]&=&\E[D_k^n^2]-\E[D_k^n]^2
+          \\ &=& \E\left[\sum_{x,y\in K_n}{\bf 1}_{x \not \in \{X_0,\ldots,X_k\}}{\bf 1}_{y \not \in \{X_0,\ldots,X_k\}}\right]-\E[D_k^n]^2
+          \\ &=& \E\left[\sum_{x\in K_n}{\bf 1}_{x \not \in \{X_0,\ldots,X_k\}}^2+\sum_{x\neq y\in K_n}{\bf 1}_{x \not \in \{X_0,\ldots,X_k\}}{\bf 1}_{y \not \in \{X_0,\ldots,X_k\}}\right]-\E[D_k^n]^2
+          \\ &=& \E[D_k^n]+2{n \choose 2}\P\left[{\bf 1}_{x_0 \not \in \{X_0,\ldots,X_k\}}{\bf 1}_{x_1 \not \in \{X_0,\ldots,X_k\}}\right]-\E[D_k^n]^2
+          \\ &=& \E[D_k^n]+n(n-1)P_k^nP_k^{n-1}-\E[D_k^n]^2
+          \\ &=& \E[D_k^n]\left(1+\E[D_k^{n-1}]-\E[D_k^n]\right)
+        \end{eqnarray*}
+        Now $\E[D_k^n]$ is clearly monotonically decreasing in $n$, and 
+        therefore $\Var[D_n^k]\leq \E[D_k^n]$.
         
-        By ~\
-        
+        By~\ref{minus_eps}, $\E[D_{n\log n(1-\epsilon)}]$ is larger than 
+        $0.9n^\epsilon$ for $n$ large enough. Hence by the Chebychev inequality
+        (for example), the probability that $D_{n\log n(1-\epsilon)}$ is zero
+        goes to zero as $n$ diverges. In terms of $C_n$ this means that
+        $\P[C_n/(n\log n)>1-\epsilon]\to 1$.
+
+        We have therefore shown that
+        $$\lim_{n\to\infty}\P\left[{C_n\over n\log n}\in (1-\epsilon,1+\epsilon)\right]=1$$
+        for any $\epsilon>0$.
     \end{enumerate}
 
 
