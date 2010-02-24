@@ -1,7 +1,7 @@
 \documentclass[11pt]{article} \usepackage{amssymb}
 \usepackage{amsfonts} \usepackage{amsmath} \usepackage{bm}
 \usepackage{latexsym} \usepackage{epsfig}
-
+ 
 \setlength{\textwidth}{6.5 in} \setlength{\textheight}{8.25in}
 \setlength{\oddsidemargin}{0in} \setlength{\topmargin}{0in}
 \addtolength{\textheight}{.8in} \addtolength{\voffset}{-.5in}
@@ -392,7 +392,7 @@
         We can use this to calculate the variance of $D_k^n$ 
         ($=D_k$ for $n$ vertices):
         \begin{eqnarray*}
-          \\Var[D_k^n]&=&\E[D_k^n^2]-\E[D_k^n]^2
+          \\Var[D_k^n]&=&\E[{D_k^n}^2]-\E[D_k^n]^2
           \\ &=& \E\left[\sum_{x,y\in K_n}{\bf 1}_{x \not \in \{X_0,\ldots,X_k\}}{\bf 1}_{y \not \in \{X_0,\ldots,X_k\}}\right]-\E[D_k^n]^2
           \\ &=& \E\left[\sum_{x\in K_n}{\bf 1}_{x \not \in \{X_0,\ldots,X_k\}}^2+\sum_{x\neq y\in K_n}{\bf 1}_{x \not \in \{X_0,\ldots,X_k\}}{\bf 1}_{y \not \in \{X_0,\ldots,X_k\}}\right]-\E[D_k^n]^2
           \\ &=& \E[D_k^n]+2{n \choose 2}\P\left[{\bf 1}_{x_0 \not \in \{X_0,\ldots,X_k\}}{\bf 1}_{x_1 \not \in \{X_0,\ldots,X_k\}}\right]-\E[D_k^n]^2
@@ -402,7 +402,7 @@
         Now $\E[D_k^n]$ is clearly monotonically decreasing in $n$, and 
         therefore $\Var[D_n^k]\leq \E[D_k^n]$.
         
-        By~\ref{minus_eps}, $\E[D_{n\log n(1-\epsilon)}]$ is larger than 
+        By~\eqref{eq:minus_eps}, $\E[D_{n\log n(1-\epsilon)}]$ is larger than 
         $0.9n^\epsilon$ for $n$ large enough. Hence by Chebychev's inequality
         (for example), the probability that $D_{n\log n(1-\epsilon)}$ is zero
         goes to zero as $n$ diverges. In terms of $C_n$ this means that
