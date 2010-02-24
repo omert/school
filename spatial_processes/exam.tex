@@ -210,8 +210,8 @@
 
       \begin{proof}
         Let the branching process contain an 8-ary infinite tree rooted at 
-        $B_{1,1}^0$.
-        Let $f_1:[0,1]\to [0,1]^2$ be a function with $f_1(0)=(0,y_0)$ and 
+        $B_{1,1}^0$. We define a series of function $f_n:[0,1]\to[0,1]^2$.
+        Let $f_1$ be a function with $f_1(0)=(0,y_0)$ and 
         $f_1(1)=(0,y_1)$ for some $y_0,y_1$, and $f_1$ only passes through
         $B_{i,j}^1$'s that are part of the 8-ary binary tree rooted at the root.
         Since there are at least eight such $B_{i,j}^1$'s, it is easy to see 
@@ -251,12 +251,23 @@
         We've shown that the image of $f_n$ is in $A_n$. Furthermore, 
         since all the distortions we performed are within boxes of dimensions
         $3^{-n}\times 3^{-n}$, then the $L_\infty$ distance between $f_{n-1}$ and
-        $f_n$ is bounded by $O(3^{-n})$. Hence this series of continuous functions
-        converges uniformly to a continuous function $f_\infty$ such that the 
-        image of $f_\infty$ is in
-        $A_\infty$ and both $f_\infty(0)\in\{0\}\times [0,1]$ and 
-        $f_\infty(1)\in\{1\}\times [0,1]$.
+        $f_n$ is bounded by $O(3^{-n})$, and the series $f_n$ converges uniformly. 
         
+        Let $f_\infty$ be the limit of $f_n$. Then we claim that $f_\infty$ is
+        a left to right crossing:
+        \begin{itemize}
+        \item Since $f_n$ is a series of continuous functions that converges
+          uniformly then $f_\infty$ is also continuous.
+        \item Since the image of $f_n\in A_n$, and since the $A_n$'s are closed
+          then the image of $f_\infty$ is in $A_n$ for all $n$. Hence the image
+          of $f_\infty$ is in $A_\infty$.
+        \item Since  $f_n(0)\in\{0\}\times [0,1]$ and 
+          $f_n(1)\in\{1\}\times [0,1]$ for all $n$ then this also holds for
+          $f_\infty$.
+        \end{itemize}
+        
+        We have thus shown that the existence of an 8-ary tree implies the
+        existence of a left-to-right crossing.
       \end{proof}
     \end{enumerate}
   \item
@@ -392,7 +403,7 @@
         therefore $\Var[D_n^k]\leq \E[D_k^n]$.
         
         By~\ref{minus_eps}, $\E[D_{n\log n(1-\epsilon)}]$ is larger than 
-        $0.9n^\epsilon$ for $n$ large enough. Hence by the Chebychev inequality
+        $0.9n^\epsilon$ for $n$ large enough. Hence by Chebychev's inequality
         (for example), the probability that $D_{n\log n(1-\epsilon)}$ is zero
         goes to zero as $n$ diverges. In terms of $C_n$ this means that
         $\P[C_n/(n\log n)>1-\epsilon]\to 1$.
