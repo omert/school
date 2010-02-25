@@ -161,7 +161,7 @@
     the {\em reducible} cubics, and infer that the rest are irreducible. 
     We restrict
     ourselves to monic polynomials with non-zero free coefficients, of which
-    there are $3 \cdot 3 \cdot 2=18$ --- one needs to choose coefficients 
+    there are $3 \cdot 3 \cdot 2=18$; one needs to choose coefficients 
     for $x^2$ and $x$ in $GF(3)$, and a free coefficient in $\{1,2\}$.
     
     Of the class of cubics described above, the ones reducible to linear
@@ -193,7 +193,7 @@
     \end{eqnarray*}
 
     We found ten reducible monic cubics (with a free coefficient), and so
-    there remain eight irreducible ones. They are:
+    there remain eight irreducible ones. They must then be:
     \begin{eqnarray*}
       x^3 + 2x + 1\\
       x^3 + 2x + 2\\
@@ -215,7 +215,7 @@
   \item
     All the elements of $GF(27)$ are roots of $x^{27}-x$: 0 is clearly a root,
     and the order of $g \in GF(27)^*$ divides 26, and so $g^{26}=1$ or
-    $g^{27}=g$. 
+    $g^{27}-g=0$. 
     Because a polynomial of degree 27 cannot have more than 27 distinct
     roots (and all are accounted for in $GF(27)$), then $GF(27)$ is precisely
     the set of roots of $x^{27}-x$.
@@ -344,8 +344,8 @@
   \end{enumerate}
   \item
 
-    The analysis that follows is based on a fact stated in class (but not
-    proved): two matrices over a field $F$ are similar iff they have the same
+    The analysis that follows is based on a fact stated in class: 
+    two matrices over a field $F$ are similar iff they have the same
     Jordan form over an algebraic closure of $F$. We occasionally 
     denote $G=GL(3,3)$.
     \begin{enumerate}
@@ -368,12 +368,11 @@
             0&0  &2 
           \end{pmatrix}.
         \end{equation*}
-        They are each in their own conjugacy class. Their orders are one
+        Each forms its own conjugacy class. Their orders are one
         and two, respectively. 
       \item
         The diagonalisable elements with characteristic polynomial $(x+2)^2(x+1)$
-        form a conjugacy class. A representative of this class (in Jordan
-        form) is
+        form a conjugacy class. A representative of this class  is
         \begin{equation*}
           X=
           \begin{pmatrix}
@@ -429,7 +428,7 @@
       \item
         Similarly, the diagonalisable elements with characteristic polynomial 
         $(x+1)^2(x+2)$ also form a conjugacy class. A representative of this 
-        class (again, and henceforth, in Jordan form) is
+        class is
         \begin{equation*}
           X=
           \begin{pmatrix}
@@ -438,7 +437,8 @@
             0&0  &2 
           \end{pmatrix},
         \end{equation*}
-        and therefore in this case the order of the element is two, too.
+        and therefore in the case of this conjugacy class the order of the 
+        elements is two, too.
         
         In this case the condition for $A=(a_{ij})$ to be an element of $C_G(X)$
         is
@@ -478,8 +478,8 @@
             2a_{31}&2a_{32}  &2a_{33} 
           \end{pmatrix}
         \end{eqnarray*}
-        or $a_{21}=a_{31}=a_{12}=a_{13}=0$. Hence by an identical counting argument
-        here too 
+        or $a_{21}=a_{31}=a_{12}=a_{13}=0$. Hence, by an identical counting 
+        argument, here too 
         $|C_G(x)|=96$ and $|cl(X)|=11232/96=117$. We have thus covered the diagonalisable
         elements of $GL(3,3)$, since no other combination of non-zero eigenvalues
         exists. 
@@ -496,7 +496,9 @@
           \end{pmatrix}.
         \end{equation*}
         Let $M=\begin{pmatrix}1&1\\0&1\end{pmatrix}$. Then 
-        $M^3=I\neq M^2$. Since $X=\begin{pmatrix}M&\\&2\end{pmatrix}$ then the order of $X$ is six, and this is
+        $M^3=I$ and the order of $M$ is three. 
+        Since $X=\begin{pmatrix}M&\\&2\end{pmatrix}$ then the order of $X$ is 
+        six, and this is
         also the order of the rest of the elements in this class.
         
         As above, let $A$ be an element of $C_G(X)$. Then:
@@ -767,7 +769,7 @@
           \end{pmatrix}.
         \end{equation*}
         As above, $Y=X+I$ and so order of $Y$ is six,
-        $C_G(X)=C_G(Y)$, and so $|cl(Y)|=|cl(X)|$.
+        $C_G(X)=C_G(Y)$, and  $|cl(Y)|=|cl(X)|=624$.
         
 
         We have thus concluded the analysis of all the
@@ -779,9 +781,10 @@
         Let $q(x)$ be one of $\{x^2+x+2,x^2+2x+2,x^2+1\}$ and let $b$ be a 
         root of
         $q(x)$. Then $q(x)$ is irreducible over $GF(3)$ and $b$ has order
-        eight or four (in the case of $x^2+1$ only), as we showed in class. 
+        eight or four (the latter in the case of $x^2+1$), as we showed in 
+        class. 
 
-        Let $p(x)$ be either $q(x)(x+w)$, where $w\in\{1,2\}$. 
+        Let $p(x)$ equal $q(x)(x+w)$, where $w\in\{1,2\}$. 
         Then $p(x)$ has three distinct roots, and elements of
         $GL(3,3)$ which have $p(x)$ as a characteristic polynomial have a
         unique Jordan form and belong to a single conjugacy class. 
@@ -865,7 +868,7 @@
             V &  c
           \end{pmatrix}
         \end{eqnarray*}
-        Hence $A$ commutes with $X_p$ iff:
+        Hence $A$ commutes with $X_p$ iff all of the following hold:
         \begin{itemize}
         \item $B$ commutes with $Y_p$. We mentioned in class that eight such
           elements of $GL(2,3)$ exist, for any choice of  $p(x)$.
@@ -913,8 +916,9 @@
         $|cl(X_p)|=432$, and the number of elements in all the classes sums
         up to 11232, the size of $GL(3,3)$. Since $|cl(X_p)|$ cannot be more
         than 432 (since $|C_G(X_p)| \geq 26$) then $|cl(X_p)|$ cannot be less
-        than 432 (or the elements of $GL(3,3)$ would not be covered by the
-        equivalence classes), and therefore 432 is the size of $cl(X_p)$
+        than 432 (even for some of the classes), or the elements of $GL(3,3)$ 
+        would not be covered by the
+        equivalence classes. Therefore 432 is the size of $cl(X_p)$
         for all $p(x)$. 
       \end{itemize}
       The information above is summarised in the following table:
@@ -1095,6 +1099,7 @@
           \end{pmatrix}$
           & $x^3+2x^2+2$ & 13 & 432&26\\
       \end{tabular}
+      \setcounter{enumii}{2}
     \item
     The size of $|GL(3,3)|$ is $3^3(3^3-1)(3^2-1)(3-1)=11232$. The prime
     factorisation of $11232$ is 
@@ -1104,10 +1109,9 @@
     
     A claim we use below is that the Sylow $p$-subgroups must include all
     elements of order $p^k$. This follows from the Sylow theorems: since
-    the Sylow $p$-subgroups include all the subgroups of order $p^k$ (up to 
-    the size of the Sylow $p$-subgroups) then
-    given an element of order $p^k$ they must include the group it generates,
-    and therefore also the element itself.
+    the Sylow $p$-subgroups include all the subgroups of order $p^k$
+    then given an element of order $p^k$ they must include the group it 
+    generates, and therefore also the element itself.
 
 
     \begin{itemize}
@@ -1121,6 +1125,18 @@
       the Sylow 3-subgroups would not include enough elements to cover all the
       728 elements of order three.
       
+      Let $L_{104}$ be the conjugacy class of 104 elements of order three. Let
+      $L_{624}$ be the conjugacy class of the 624 elements of order three. 
+
+      Assume by way of contradiction that $n_3=208$. Let $g$ be an element of
+      $L_{104}$, and let $k$ be the number of Sylow 3-subgroups that include
+      $g$. Likewise, for $h\in L_{624}$, let $l$ be the number of Sylow 
+      3-subgroups that include $h$. Since conjugation is an automorphism then
+      $k$ is the number of groups any element in $L_{104}$ is in, and likewise
+      for $l$. Hence the number of appearences of order three elements in all 
+      the 208 Sylow 3-subgroups, $26\cdot 208$, must equal $104k+624l$. Division
+      by 104 yields $k+6l=52$, and so $k$ must equal at least four.
+
       A Sylow 3-subgroup $P_3$ must have a group of size nine as a subgroup.
       We showed in class that such groups are Abelian. 
       
@@ -1143,7 +1159,8 @@
       also with 702 elements each. Since all the 4447 elements of orders
       two, four and eight must be covered, and since the number of elements 
       these groups cover
-      is at most $(32-1)n_2+1$ then $n_2$ must equal 351.
+      is at most $(32-1)n_2+1$ then $n_2$ must be more than 143 and hence 
+      equals 351.
     \end{itemize}
     \end{enumerate}
   \item
@@ -1171,7 +1188,7 @@
       of the orthogonal
       space to the row space of $C$. To find this matrix we first create a 
       simpler matrix $D$, whose rows span the same space as those of $C$. If $C$'s
-      rows are $c_1$, $c_2$ and $c_3$, then $D$'s rows are $d_1=c_2+c_3$, 
+      rows are $c_1$, $c_2$ and $c_3$, then let $D$'s rows be $d_1=c_2+c_3$, 
       $d_2=c_1+c_2$ and $d_3=c_1+c_2+c_3$. Clearly these rows are in the row 
       space of $C$. It is
       also easy to see that the rows of $C$ are in $D$'s row space:
@@ -1251,8 +1268,8 @@
       Call this group $Q$ and let $b$ be a generator.
       
       Consider the element $c=a^{-1}bab^{-1}=b^ab^{-1}=a^ba^{-1}$. Since
-      $b^a$ is of order $q$ then it must also be a member of $Q$, and then
-      so is $c$. By the same argument for $a^b$ we have that $c \in P$. Since
+      $b^a$ is of order $q$ then $c=b^ab^{-1}$ must also be a member of $Q$, 
+      By the same argument for $a^b$ we have that $c \in P$. Since
       the two groups have co-prime orders they intersect trivially and $c=1$. 
       Hence $a$ and $b$ commute, the $pq$ elements of the group can be written 
       as $a^ib^j$ for $0\leq i <p$ and $0\leq j < q$, and the group is Abelian.
@@ -1345,6 +1362,7 @@
       the only possibility is $C_2 \times C_2$. 
       
     \item {\bf 6}
+
       Were there to exist an Abelian subgroup of order six then it would have
       to be $C_6$ and have an element of order six. Since none exists then
       any subgroup of order six is not Abelian.
@@ -1361,6 +1379,7 @@
       than $(45)$) and so is isomorphic to $S_3$.
 
     \item {\bf 10}
+
       By the same argument as above, any Abelian subgroup of order ten would
       have an element of order ten, and since none exist then  
       any subgroup of order ten is not Abelian. Also as above, only one such
@@ -1390,7 +1409,7 @@
       of order three, and a Sylow $2$-subgroup, of order four. Since no 
       element of order four exists, then the Sylow $2$-subgroup must be 
       $C_2\times C_2$. $G$ cannot be Abelian, since it would have to have 
-      an element of order six.
+      an element of order six or twelve.
 
       The numbers of Sylow subgroups, $n_3$ and $n_4$, cannot therefore both
       be one. By the Sylow theorems, $n_3$ must equal $1\mod 3$ and divide
@@ -1412,11 +1431,12 @@
       pairs of transpositions: $(12)(34)$, $(13)(24)$ and $(14)(23)$. 
       
     \item {\bf 20}
+
       Let $G$ be a subgroup of order 20.
       As above, the Sylow $2$-subgroup would
       be $C_2\times C_2$. 
       Also as above, $G$  cannot be Abelian, since it would have
-      to have a element of order ten.
+      to have a element of order ten or twenty.
 
       The number of Sylow $5$-subgroups equals $1\mod 5$ and divides four,
       and so must equal one. Hence the number of Sylow $2$-subgroups cannot
@@ -1426,10 +1446,11 @@
       Hence no subgroup of order 20 exists.
 
     \item {\bf 30}
+
       Let $G$ be a subgroup of order 30. Then $G$ has a Sylow 
       $2$-subgroup, a Sylow $3$-subgroup and a Sylow $5$-subgroup. 
       It is impossible that two of them are normal, since their
-      Cartesian product would be an Abelian subgroup of $G$ with order 
+      product would be an Abelian subgroup of $G$ with order 
       greater than five, and again no element of such order exists.
 
       The number of Sylow $5$-subgroups, $n_5$, equals $1\mod 5$ and 
