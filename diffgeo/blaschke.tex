@@ -249,7 +249,75 @@ When in particular $d=1$ then areas are unchanged, the affinity is equiareal
 and it is easy to see that the equiareal affinities form a group --- another
 subgroup of the general affine group.
 
+{\em We will consider almost exclusively with those geometrical attributes of
+planar curves that are conserved by equiareal affinities, so by transformations
+of the form:}
+\begin{equation}
+  \label{eq:equiareal_affinities}
+  \begin{array}{ll}
+    \begin{array}{l}
+      x_1^*=c_{11}x_1+c_{12}x_2,\\
+      x_2^*=c_{21}x_1+c_{22}x_2,
+    \end{array}
+    & c_{11}c_{22}-c_{12}c_{21}=1.
+  \end{array}
+\end{equation}
 
+\section{Calculation Rules}
+It has proven to be advantageous to introduce some abbreviations, to shorten
+writing and calculations. Let $\myvec{x}$ and $\myvec{y}$ be two points with
+coordinates $x_1,x_2$ and $y_1,y_2$. Then $\myvec{x}+\myvec{y}$ shall denote
+the point with coordinates $x_1+y_1,x_2+y_2$. 
+
+Geometrically one may find $\myvec{x}+\myvec{y}$ by joining the segments from
+$\myvec{o}$ to $\myvec{x}$ and $\myvec{y}$, using the Parallelogram law. In
+accordance with this notation, we would like to occasionally say the
+``vector $\myvec{x}$'' rather than the ``point $\myvec{x}$'', and by that refer
+to the directed segment from the origin $\myvec{o}$ to $\myvec{x}$.
+
+The rigorous arithmetic definition of the term ``vector'' is the following:
+{\em a geometric construct $\myvec{x}'$ with the ``components'' $x_1'$ and
+$x_2'$ is a vector when an affinity~\ref{eq:affine_trans} transforms the
+components thus:}
+\begin{equation}
+  \label{eq:vector_def}
+  \begin{array}{rcl}
+    {x'_1}^* &=& c_{11}x'_1+c_{12}x'_2\\
+    {x'_2}^* &=& c_{21}x'_1+c_{22}x'_2.
+  \end{array}  
+\end{equation}
+
+We have already denoted by $(\myvec{x},\myvec{y})$ the deteminant
+\begin{equation}
+  \label{eq:det_redefined}
+  (\myvec{x},\myvec{y})=x_1y_2-x_2y_1.
+\end{equation}
+Then it holds that
+\begin{equation}
+  \label{eq:det_antisymmetric}
+  (\myvec{x},\myvec{y})=-(\myvec{y},\myvec{x})
+\end{equation}
+and if we denote by $k\myvec{x}$ the vector with coordinates $kx_1,kx_2$ then
+\begin{equation}
+  \label{eq:det_bilinear}
+  (k_1\myvec{x}_1+k_2\myvec{x}_2,\myvec{y})=k_1(\myvec{x}_1,\myvec{y})+k_2(\myvec{x}_2,\myvec{y}).
+\end{equation}
+
+We encounter the same assignment as for the position of the axes, so that
+\begin{equation}
+  (\myvec{x},\myvec{y}) > 0
+\end{equation}
+means that the vector $\myvec{y}$ is on the left of $\myvec{x}$ 
+(Fig.~\ref{fig:positive_orientation}).
+
+\begin{equation}
+  (\myvec{x},\myvec{y}) = 0
+\end{equation}
+is the condition for identical or directly opposed directions of the vectors.
+In this case one may speak of the {\em linear dependence} of the vectors
+$\myvec{x}$ and $\myvec{y}$, which may be expressed thus:
+{\em There exist two real numbers $a$ and $b$ such that 
+$a\myvec{x}+b\myvec{y}=0$ and $a$ and $b$ are not both zero.}
 \bibliographystyle{plain} \bibliography{blaschke}
 
 \end{document}
