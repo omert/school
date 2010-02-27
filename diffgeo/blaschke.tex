@@ -15,90 +15,7 @@
 \newtheorem{example}[theorem]{Example}
 \newenvironment{proof}{\noindent \textbf{Proof:}}{$\Box$}
 
-\newcommand{\ignore}[1]{}
-
-\newcommand{\enote}[1]{} \newcommand{\knote}[1]{}
-\newcommand{\rnote}[1]{}
-
-
-
-% \newcommand{\enote}[1]{{\bf [[Elchanan:} {\emph{#1}}{\bf ]]}}
-% \newcommand{\knote}[1]{{\bf [[Krzysztof:} {\emph{#1}}{\bf ]]}}
-% \newcommand{\rnote}[1]{{\bf [[Ryan:} {\emph{#1}}{\bf ]]}}
-
-
-
-\DeclareMathOperator{\Support}{Supp} \DeclareMathOperator{\Opt}{Opt}
-\DeclareMathOperator{\Ordo}{\mathcal{O}}
-\newcommand{\MaxkCSP}{\textsc{Max $k$-CSP}}
-\newcommand{\MaxkCSPq}{\textsc{Max $k$-CSP$_{q}$}}
-\newcommand{\MaxCSP}[1]{\textsc{Max CSP}(#1)} \renewcommand{\Pr}{{\bf
-    P}} \renewcommand{\P}{{\bf P}} \newcommand{\Px}{\mathop{\bf P\/}}
-\newcommand{\E}{{\bf E}} \newcommand{\Cov}{{\bf Cov}}
-\newcommand{\Var}{{\bf Var}} \newcommand{\Varx}{\mathop{\bf Var\/}}
-
-\newcommand{\bits}{\{-1,1\}}
-
-\newcommand{\nsmaja}{\textstyle{\frac{2}{\pi}} \arcsin \rho}
-
-\newcommand{\Inf}{\mathrm{Inf}} \newcommand{\I}{\mathrm{I}}
-\newcommand{\J}{\mathrm{J}}
-
-\newcommand{\eps}{\epsilon} \newcommand{\lam}{\lambda}
-
-% \newcommand{\trunc}{\ell_{2,[-1,1]}}
-\newcommand{\trunc}{\zeta} \newcommand{\truncprod}{\chi}
-
-\newcommand{\N}{\mathbb N} \newcommand{\R}{\mathbb R}
-\newcommand{\Z}{\mathbb Z} \newcommand{\CalE}{{\mathcal{E}}}
-\newcommand{\CalC}{{\mathcal{C}}} \newcommand{\CalM}{{\mathcal{M}}}
-\newcommand{\CalR}{{\mathcal{R}}} \newcommand{\CalS}{{\mathcal{S}}}
-\newcommand{\CalV}{{\mathcal{V}}}
-\newcommand{\CalX}{{\boldsymbol{\mathcal{X}}}}
-\newcommand{\CalG}{{\boldsymbol{\mathcal{G}}}}
-\newcommand{\CalH}{{\boldsymbol{\mathcal{H}}}}
-\newcommand{\CalY}{{\boldsymbol{\mathcal{Y}}}}
-\newcommand{\CalZ}{{\boldsymbol{\mathcal{Z}}}}
-\newcommand{\CalW}{{\boldsymbol{\mathcal{W}}}}
-\newcommand{\CalF}{{\mathcal{Z}}}
-% \newcommand{\boldG}{{\boldsymbol G}}
-% \newcommand{\boldQ}{{\boldsymbol Q}}
-% \newcommand{\boldP}{{\boldsymbol P}}
-% \newcommand{\boldR}{{\boldsymbol R}}
-% \newcommand{\boldS}{{\boldsymbol S}}
-% \newcommand{\boldX}{{\boldsymbol X}}
-% \newcommand{\boldB}{{\boldsymbol B}}
-% \newcommand{\boldY}{{\boldsymbol Y}}
-% \newcommand{\boldZ}{{\boldsymbol Z}}
-% \newcommand{\boldV}{{\boldsymbol V}}
-\newcommand{\boldi}{{\boldsymbol i}} \newcommand{\boldj}{{\boldsymbol
-    j}} \newcommand{\boldk}{{\boldsymbol k}}
-\newcommand{\boldr}{{\boldsymbol r}}
-\newcommand{\boldsigma}{{\boldsymbol \sigma}}
-\newcommand{\boldupsilon}{{\boldsymbol \upsilon}}
-\newcommand{\hone}{{\boldsymbol{H1}}}
-\newcommand{\htwo}{\boldsymbol{H2}}
-\newcommand{\hthree}{\boldsymbol{H3}}
-\newcommand{\hfour}{\boldsymbol{H4}}
-
-
-\newcommand{\sgn}{\mathrm{sgn}} \newcommand{\Maj}{\mathrm{Maj}}
-\newcommand{\Acyc}{\mathrm{Acyc}}
-\newcommand{\UniqMax}{\mathrm{UniqMax}}
-\newcommand{\Thr}{\mathrm{Thr}} \newcommand{\littlesum}{{\textstyle
-    \sum}}
-
-\newcommand{\half}{{\textstyle \frac12}}
-\newcommand{\third}{{\textstyle \frac13}}
-\newcommand{\fourth}{{\textstyle \frac14}}
-
-\newcommand{\Stab}{\mathbb{S}}
-\newcommand{\StabThr}[2]{\Gamma_{#1}(#2)}
-\newcommand{\StabThrmin}[2]{{\underline{\Gamma}}_{#1}(#2)}
-\newcommand{\StabThrmax}[2]{{\overline{\Gamma}}_{#1}(#2)}
-\newcommand{\TestFcn}{\Psi}
-
-\renewcommand{\phi}{\varphi}
+\newcommand{\myvec}[1]{\mathfrak{#1}}
 
 \begin{document}
 \title{Affine Differential Geometry}
@@ -106,13 +23,14 @@
  \author{Wilhelm Blaschke, Translated by Omer Tamuz}
 \maketitle
 
-\chapter{Introduction to Curves in the Plane}
+\chapter{Local Theory of Planar Curves}
 \section{Affine Mapping}
 We would like to start by recalling some well known facts of analytical 
 geometry.
 
 For our purposes, it will be useful to represent the points of a plane with
-a parallel coordinate system. We choose two intersecting (straight) lines 
+a parallel coordinate system. We choose two intersecting lines\footnote{We
+refer to straight lines simply as ``lines'' throughout the text}
 in the plane and mark on each some direction as positive. We call these lines
 the $x_1$ and $x_2$ axes. Through a remaining point of the plane we pass
 parallels to the axes, and assign the corresponding segments of the axes 
@@ -124,9 +42,9 @@ those points and lines that in the framework of projective geometry are
 considered ``proper'', as opposed to ``improper'' or infinitely remote elements.
 
 In place of the pair $x_1$, $x_2$ we use the shorter vector notation and 
-speak simply of the point ${\bf x}$.
+speak simply of the point $\myvec{x}$.
 
-There exists a mapping ${\bf x}\to {\bf x}^*$ between the points of plane,
+There exists a mapping $\myvec{x}\to \myvec{x}^*$ between the points of plane,
 which is given by a system of linear relations between their coordinates:
 \begin{equation}
   \label{eq:affine_trans}
@@ -143,8 +61,8 @@ This system of equations is solvable for $x$ when the determinant
     c_{21} & c_{22}
   \end{vmatrix}
 \end{equation}
-is different than zero ($\neq 0$). Then, to each ${\bf x}^*$ corresponds 
-one and only one ${\bf x}$. Following Euler \cite{Euler:1749} and 
+is different than zero ($\neq 0$). Then, to each $\myvec{x}^*$ corresponds 
+one and only one $\myvec{x}$. Following Euler \cite{Euler:1749} and 
 M\"obius \cite{Mobius:1827}, this kind of mapping
 is called an ``affine mapping'', ``affine transformation'' or just ``affinity''.
  
@@ -172,9 +90,9 @@ The determinant
 \end{equation}
 is different than zero and hence the inverse transformation is also affine.
 
-The points ${\bf x}$ of a line $\mathfrak{g}$ are mapped by an affine 
+The points $\myvec{x}$ of a line $\mathfrak{g}$ are mapped by an affine 
 transformation to
-the points ${\bf x}^*$ of a line $\mathfrak{g}^*$. In fact, a line 
+the points $\myvec{x}^*$ of a line $\mathfrak{g}^*$. In fact, a line 
 $\mathfrak{g}$ can be
 represented by a linear equation ($g_1$, $g_2$ not both zero):
 \begin{equation}
@@ -183,20 +101,54 @@ represented by a linear equation ($g_1$, $g_2$ not both zero):
 \end{equation}
 The substitution of~\ref{eq:inv_c} into this equation results, because of the
 invertibilty of the transformation, in an equation which is not trivially
-satisfied, and thus again the locus of ${\bf x}^*$ is a line.
+satisfied, and thus again the locus of $\myvec{x}^*$ is a line.
 
 It further follows from~\ref{eq:affine_trans} that affine transformations are
-continuous mappings. That is, as ${\bf x}$ tends to ${\bf x}_0$ the 
-corresponding ${\bf x}^*$ tends to ${\bf x}^*_0$.
+continuous mappings. That is, as $\myvec{x}$ tends to $\myvec{x}_0$ the 
+corresponding $\myvec{x}^*$ tends to $\myvec{x}^*_0$.
 
-With help from M\"obius nets ~\cite{Mobius:1827} one can show that the last
+Using M\"obius nets ~\cite{Mobius:1827} one can show that the last
 two properties, whose dependence or independence remain to be decided, are
 the definitive properties of affine transformations: {\em Affine mappings are
 the only coordianate transformations (in the plane) which are without
 exception bijective, continuous and map lines to lines.}
 
 Affine transformations preserve parallelism, since parallel lines on the plane
-are characterized by not having common points.
+are characterized by not having common points. Furthermore, given two 
+affinities $\myvec{x}\to\myvec{x}^*$ and $\myvec{x}^*\to\myvec{x}^{**}$ , their
+``product'' $\myvec{x}\to\myvec{x}^{**}$ is again an affinity, since all the
+characteristics of an affinity hold. Naturally, this can be derived 
+from~\eqref{eq:affine_trans}. Now a set of transformations that is closed under
+the transformation product is called a group. {\em Hence the 
+affinities~\eqref{eq:affine_trans} form a group.}
+
+An affinity~\eqref{eq:affine_trans} can be decomposed into a ``displacement''
+\begin{equation}
+  \label{eq:decompose_displacement}
+  \begin{array}{ll}
+    x_1^*=c_{10}+x_1,& x_2^*=c_{20}+x_2
+  \end{array}
+\end{equation}
+and a preceding ``homogenous affinity''
+\begin{equation}
+  \label{eq:decompose_homogenous}
+  \begin{array}{ll}
+    \begin{array}{l}
+      x_1^*=c_{11}x_1+c_{12}x_2,\\
+      x_2^*=c_{21}x_1+c_{22}x_2,
+    \end{array}
+    & c_{11}c_{22}-c_{12}c_{21}\neq 0.
+  \end{array}
+\end{equation}
+
+Evidently the displacements or ``translations'' alone, and likewise the 
+homogenuous affinities by themselves, constitute a group of transformations.
+We thus have two ``subgroups'' of the general affine group considered above.
+
+For our purposes an additional subgroup is particularly important: namely the
+so called ``equiareal affinities''.  
+
+
 \bibliographystyle{plain} \bibliography{blaschke}
 
 \end{document}
