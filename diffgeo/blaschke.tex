@@ -30,12 +30,12 @@
 
 \chapter{Local Theory of Planar Curves}
 \section{Affine Mapping}
-We would like to start by recalling some well known facts of analytical 
+We would like to commence by recalling some well known facts of analytical 
 geometry.
 
 For our purposes, it will be useful to represent the points of a plane with
 a parallel coordinate system. We choose two intersecting lines\footnote{We
-refer to straight lines simply as ``lines'' throughout the text}
+refer to straight lines simply as ``lines'' throughout the text (translator).}
 in the plane and mark on each some direction as positive. We call these lines
 the $x_1$ and $x_2$ axes. Through a remaining point of the plane we pass
 parallels to the axes, and assign the corresponding segments of the axes 
@@ -58,7 +58,7 @@ considered ``proper'', as opposed to ``improper'' or infinitely remote elements.
 In place of the pair $x_1$, $x_2$ we use the shorter vector notation and 
 speak simply of the point $\myvec{x}$.
 
-There exists a mapping $\myvec{x}\to \myvec{x}^*$ between the points of plane,
+Let $\myvec{x}\to \myvec{x}^*$ be a mapping between the points of plane,
 which is given by a system of linear relations between their coordinates:
 \begin{equation}
   \label{eq:affine_trans}
@@ -81,7 +81,7 @@ M\"obius \cite{Mobius:1827}, this kind of mapping
 is called an ``affine mapping'', ``affine transformation'' or just ``affinity''.
  
 The inverse transformation, which one can determine by 
-solving~\ref{eq:affine_trans}, has again the same form: 
+solving~\eqref{eq:affine_trans}, has again the same form: 
 \begin{equation}
   \label{eq:affine_trans_inv}
   \begin{array}{rcl}
@@ -113,25 +113,25 @@ represented by a linear equation ($g_1$, $g_2$ not both zero):
   \label{eq:line}
   g_0+g_1x_1+g_2x_2=0.
 \end{equation}
-The substitution of~\ref{eq:inv_c} into this equation results, because of the
+The substitution of~\eqref{eq:inv_c} into this equation results, because of the
 invertibilty of the transformation, in an equation which is not trivially
 satisfied, and thus again the locus of $\myvec{x}^*$ is a line.
 
-It further follows from~\ref{eq:affine_trans} that affine transformations are
+It further follows from~\eqref{eq:affine_trans} that affine transformations are
 continuous mappings. That is, as $\myvec{x}$ tends to $\myvec{x}_0$ the 
 corresponding $\myvec{x}^*$ tends to $\myvec{x}^*_0$.
 
 Using M\"obius nets ~\cite{Mobius:1827} one can show that the last
 two properties, whose dependence or independence remain to be decided, are
 the definitive properties of affine transformations: {\em Affine mappings are
-the only coordianate transformations (in the plane) which are without
+the only coordinate transformations (in the plane) which are without
 exception bijective, continuous and map lines to lines.}
 
 Affine transformations preserve parallelism, since parallel lines on the plane
 are characterized by not having common points. Furthermore, given two 
 affinities $\myvec{x}\to\myvec{x}^*$ and $\myvec{x}^*\to\myvec{x}^{**}$ , their
 ``product'' $\myvec{x}\to\myvec{x}^{**}$ is again an affinity, since all the
-characteristics of an affinity hold. Naturally, this can be derived 
+characteristics of an affinity hold. Naturally, this can also be derived 
 from~\eqref{eq:affine_trans}. Now a set of transformations that is closed under
 the transformation product is called a group. {\em Hence the 
 affinities~\eqref{eq:affine_trans} form a group.}
@@ -143,9 +143,9 @@ An affinity~\eqref{eq:affine_trans} can be decomposed into a ``displacement''
     x_1^*=c_{10}+x_1,& x_2^*=c_{20}+x_2
   \end{array}
 \end{equation}
-and a preceding ``homogenous affinity''
+and a preceding ``homogeneous affinity''
 \begin{equation}
-  \label{eq:decompose_homogenous}
+  \label{eq:decompose_homogeneous}
   \begin{array}{ll}
     \begin{array}{l}
       x_1^*=c_{11}x_1+c_{12}x_2,\\
@@ -156,12 +156,12 @@ and a preceding ``homogenous affinity''
 \end{equation}
 
 Evidently the displacements or ``translations'' alone, and likewise the 
-homogenuous affinities by themselves, constitute a group of transformations.
+homogeneous affinities by themselves, constitute a group of transformations.
 We thus have two ``subgroups'' of the general affine group considered above.
 
 For our purposes an additional subgroup is particularly important: namely the
-so called ``equiareal affinities''. Consider next the effect of the homogenuous
-affinity~\eqref{eq:decompose_homogenous} on the determinant
+so called ``equiareal affinities''. Consider then the effect of the homogeneous
+affinity~\eqref{eq:decompose_homogeneous} on the determinant
 \begin{equation}
   \label{eq:xy_determinant}
   (\myvec{x},\myvec{y})=\begin{vmatrix}x_1&x_2\\y_1&y_2\end{vmatrix}.
@@ -186,7 +186,7 @@ or in abbreviated notation
   (\myvec{x}^*,\myvec{y}^*)=(\myvec{x},\myvec{y})\cdot d.
 \end{equation}
 
-The geometric meaning of $(\myvec{x},\myvec{y})$ is well known. We explain:
+The geometric meaning of $(\myvec{x},\myvec{y})$ is well known. Explicitly:
 \begin{equation}
   \label{eq:triangle_area}
   {1\over 2}(\myvec{x},\myvec{y})=\mbox{area of the triangle $\myvec{o}$ $\myvec{x}$ $\myvec{y}$}
@@ -205,7 +205,7 @@ the left.
 {\bf (OT - Grenzuebergang?)}
 
 Since one can construct, through addition and translation, any arbitrary planar 
-figure using triangles with a corner at $\myvec{o}$, then a homogenous 
+figure using triangles with a corner at $\myvec{o}$, then a homogeneous 
 affinity with determinant $d$ multiplies areas by factor $d$.
 The area delimited by a closed directed curve $\mathfrak{C}$ is what the path
 integral
@@ -243,13 +243,13 @@ to a figure of area $F^*$ then
   F^*=F\cdot d.
 \end{equation}
 
-When $d>0$ then orientation is preserved and when $d<0$ then it is reversed.
+When $d>0$ then orientation is preserved and when $d<0$ it is reversed.
 
 When in particular $d=1$ then areas are unchanged, the affinity is equiareal
 and it is easy to see that the equiareal affinities form a group --- another
 subgroup of the general affine group.
 
-{\em We will consider almost exclusively with those geometrical attributes of
+{\em We will consider almost exclusively those geometrical attributes of
 planar curves that are conserved by equiareal affinities, so by transformations
 of the form:}
 \begin{equation}
@@ -264,7 +264,7 @@ of the form:}
 \end{equation}
 
 \section{Calculation Rules}
-It has proven to be advantageous to introduce some abbreviations, to shorten
+It has proven advantageous to introduce some abbreviations, to shorten
 writing and calculations. Let $\myvec{x}$ and $\myvec{y}$ be two points with
 coordinates $x_1,x_2$ and $y_1,y_2$. Then $\myvec{x}+\myvec{y}$ shall denote
 the point with coordinates $x_1+y_1,x_2+y_2$. 
@@ -277,7 +277,7 @@ to the directed segment from the origin $\myvec{o}$ to $\myvec{x}$.
 
 The rigorous arithmetic definition of the term ``vector'' is the following:
 {\em a geometric construct $\myvec{x}'$ with the ``components'' $x_1'$ and
-$x_2'$ is a vector when an affinity~\ref{eq:affine_trans} transforms the
+$x_2'$ is a vector when an affinity~\eqref{eq:affine_trans} transforms the
 components thus:}
 \begin{equation}
   \label{eq:vector_def}
@@ -287,7 +287,7 @@ components thus:}
   \end{array}  
 \end{equation}
 
-We have already denoted by $(\myvec{x},\myvec{y})$ the deteminant
+We have already denoted by $(\myvec{x},\myvec{y})$ the determinant
 \begin{equation}
   \label{eq:det_redefined}
   (\myvec{x},\myvec{y})=x_1y_2-x_2y_1.
@@ -303,7 +303,7 @@ and if we denote by $k\myvec{x}$ the vector with coordinates $kx_1,kx_2$ then
   (k_1\myvec{x}_1+k_2\myvec{x}_2,\myvec{y})=k_1(\myvec{x}_1,\myvec{y})+k_2(\myvec{x}_2,\myvec{y}).
 \end{equation}
 
-We encounter the same assignment as for the position of the axes, so that
+We encounter here the same assignment as for the position of the axes, so that
 \begin{equation}
   (\myvec{x},\myvec{y}) > 0
 \end{equation}
@@ -317,7 +317,7 @@ is the condition for identical or directly opposed directions of the vectors.
 In this case one may speak of the {\em linear dependence} of the vectors
 $\myvec{x}$ and $\myvec{y}$, which may be expressed thus:
 {\em There exist two real numbers $a$ and $b$ such that 
-$a\myvec{x}+b\myvec{y}=0$ and $a$ and $b$ are not both zero.}
+$a\myvec{x}+b\myvec{y}=\myvec{o}$ and $a$ and $b$ are not both zero.}
 \bibliographystyle{plain} \bibliography{blaschke}
 
 \end{document}
