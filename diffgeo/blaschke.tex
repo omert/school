@@ -1,7 +1,12 @@
 \documentclass[11pt]{book} \usepackage{amssymb}
 \usepackage{amsfonts} \usepackage{amsmath} \usepackage{bm}
 \usepackage{latexsym} \usepackage{epsfig}
+\usepackage{asymptote}
+\usepackage{ccaption}
+\usepackage{subfigure}
 
+\renewcommand{\figurename}{Fig.}
+\captiondelim{}
 
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{lemma}[theorem]{Lemma}
@@ -35,7 +40,16 @@ in the plane and mark on each some direction as positive. We call these lines
 the $x_1$ and $x_2$ axes. Through a remaining point of the plane we pass
 parallels to the axes, and assign the corresponding segments of the axes 
 the numbers $x_1$ and $x_2$. We have thus defined a bijection between 
-pairs of real number $x_1$ and $x_2$, to the points of the plane.
+pairs of real number $x_1$ and $x_2$, to the points of the plane 
+(Fig.~\ref{fig:axes}).
+
+\begin{figure}[htp]
+  \label{fig:axes}
+  \centering
+  \includegraphics{axes.pdf}
+  \caption{}
+\label{fig_embedded}
+\end{figure}
 
 We will thus deal with ``real'' points and lines, and in fact consider only
 those points and lines that in the framework of projective geometry are 
@@ -146,7 +160,94 @@ homogenuous affinities by themselves, constitute a group of transformations.
 We thus have two ``subgroups'' of the general affine group considered above.
 
 For our purposes an additional subgroup is particularly important: namely the
-so called ``equiareal affinities''.  
+so called ``equiareal affinities''. Consider next the effect of the homogenuous
+affinity~\eqref{eq:decompose_homogenous} on the determinant
+\begin{equation}
+  \label{eq:xy_determinant}
+  (\myvec{x},\myvec{y})=\begin{vmatrix}x_1&x_2\\y_1&y_2\end{vmatrix}.
+\end{equation}
+
+Given that
+\begin{equation}
+  \label{eq:xy_affinity}
+  \begin{array}{rclrcl}
+    x_1^* &=& c_{10}+c_{11}x_1+c_{12}x_2, &y_1^* &=& c_{10}+c_{11}y_1+c_{12}y_2\\
+    x_2^* &=& c_{20}+c_{21}x_1+c_{22}x_2, &y_2^* &=& c_{20}+c_{21}y_1+c_{22}y_2,
+  \end{array}  
+\end{equation}
+we can calculate the determinant $(\myvec{x}^*,\myvec{y}^*)$:
+\begin{equation}
+  \label{eq:xy_det_transformed}
+  \begin{vmatrix}x_1^*&x_2^*\\y_1^*&y_2^*\end{vmatrix}=\begin{vmatrix}c_{11}&c_{12}\\c_{21}&c_{22}\end{vmatrix}\cdot\begin{vmatrix}x_1&x_2\\y_1&y_2\end{vmatrix}
+\end{equation}
+or in abbreviated notation
+\begin{equation}
+  \label{eq:xy_det_transformed_short}
+  (\myvec{x}^*,\myvec{y}^*)=(\myvec{x},\myvec{y})\cdot d.
+\end{equation}
+
+The geometric meaning of $(\myvec{x},\myvec{y})$ is well known. We explain:
+\begin{equation}
+  \label{eq:triangle_area}
+  {1\over 2}(\myvec{x},\myvec{y})=\mbox{area of the triangle $\myvec{o}$ $\myvec{x}$ $\myvec{y}$}
+\end{equation}
+(i.e., the area of the triangle described by the origin $(0,0)$ and the 
+points $\myvec{x}$ and $\myvec{y}$, in that order). The triangle's area may
+be either positive or negative, depending on whether its orientation 
+along $\myvec{o}$ $\myvec{x}$ $\myvec{y}$ is
+positive (Fig.~\ref{fig:positive_orientation}) or negative 
+(Fig.~\ref{fig:negative_orientation}). These sign assignments depend on the
+choice of axes. We will always think of the positive $x_2$ axis as being,
+as in the figure, on the left of the positive $x_1$ axis, and so will consider 
+as positive that orientation for which a circumscribed triangle remains on 
+the left.
+
+{\bf (OT - Grenzuebergang?)}
+
+Since one can construct, through addition and translation, any arbitrary planar 
+figure using triangles with a corner at $\myvec{o}$, then a homogenous 
+affinity with determinant $d$ multiplies areas by factor $d$.
+The area delimited by a closed directed curve $\mathfrak{C}$ is what the path
+integral
+\begin{equation}
+  \label{eq:curve_area}
+  F={1\over 2}\oint_\mathfrak{C}x_1dx_2-x_2dx_1
+  ={1\over 2}\oint_\mathfrak{C}(\myvec{x},d\myvec{x})
+\end{equation}
+\begin{figure}[htp]
+  \begin{center}
+    \subfigure[]{
+      \label{fig:positive_orientation}
+      \includegraphics{positive_orientation.pdf}
+    }
+    \subfigure[]{
+      \label{fig:negative_orientation}
+      \includegraphics{negative_orientation.pdf}
+    }
+  \end{center}
+  \caption{}
+\end{figure}
+is interpreted to be. Thence follows
+\begin{equation}
+  \label{eq:area_transformation}
+  {1\over 2}\oint_\mathfrak{C}x^*_1dx^*_2-x^*_2dx^*_1
+  =d\cdot{1\over 2}\oint_\mathfrak{C}x_1dx_2-x_2dx_1
+\end{equation}
+and since displacements conserve area then one may conclude that:
+
+{\em An arbitrary affinity with determinant $d$ increases areas by factor $d$};
+i.e., if the mapping $\myvec{x}\to\myvec{x}^*$ transforms a figure of area $F$
+to a figure of area $F^*$ then
+\begin{equation}
+  \label{eq:area_transform2}
+  F^*=F\cdot d.
+\end{equation}
+
+When $d>0$ then orientation is preserved and when $d<0$ then it is reversed.
+
+When in particular $d=1$ then areas are unchanged, the affinity is equiareal
+and it is easy to see that the equiareal affinities form a group --- another
+subgroup of the general affine group.
 
 
 \bibliographystyle{plain} \bibliography{blaschke}
