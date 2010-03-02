@@ -910,7 +910,7 @@
         The order of $X_p$ is the order of $X_p'$, 
         since similar matrices have identical orders.
 
-        The centralizer of $X_p$ must include all its powers, as well as
+        The centraliser of $X_p$ must include all its powers, as well as
         $2I$ (which isn't a power when the order of $X_p$ is 13), and so its 
         order is a multiple of 26. If $|C_G(X_p)|=26$ for all $p(x)$ then
         $|cl(X_p)|=432$, and the number of elements in all the classes sums
@@ -926,7 +926,7 @@
       {\bf Conjugacy Classes of $GL(3,3)$}
 
       \begin{tabular}{l|l|l|l|l}
-        Representative& Characteristic Polynomial& Element Order& Class Size& Centralizer Size\\
+        Representative& Characteristic Polynomial& Element Order& Class Size& Centraliser Size\\
         \hline
           $\begin{pmatrix}
             1&0  &0 \\ 
@@ -1027,7 +1027,7 @@
           & $(x^2+2x+2)(x+1)$ & 8 & 702&16\\
         \end{tabular}
         \begin{tabular}{l|l|l|l|l}
-        Representative& Characteristic Polynomial& Element Order& Class Size& Centralizer Size\\
+        Representative& Characteristic Polynomial& Element Order& Class Size& Centraliser Size\\
         \hline
           $\begin{pmatrix}
             0&1  &0 \\ 
@@ -1125,20 +1125,18 @@
       the Sylow 3-subgroups would not include enough elements to cover all the
       728 elements of order three.
       
-      Let $L_{104}$ be the conjugacy class of 104 elements of order three. Let
-      $L_{624}$ be the conjugacy class of the 624 elements of order three. 
-
-      Assume by way of contradiction that $n_3=208$. Let $g$ be an element of
-      $L_{104}$, and let $k$ be the number of Sylow 3-subgroups that include
-      $g$. Likewise, for $h\in L_{624}$, let $l$ be the number of Sylow 
-      3-subgroups that include $h$. Since conjugation is an automorphism then
-      $k$ is the number of groups any element in $L_{104}$ is in, and likewise
-      for $l$. Hence the number of appearences of order three elements in all 
-      the 208 Sylow 3-subgroups, $26\cdot 208$, must equal $104k+624l$. Division
-      by 104 yields $k+6l=52$, and so $k$ must equal at least four.
-
-      A Sylow 3-subgroup $P_3$ must have a group of size nine as a subgroup.
-      We showed in class that such groups are Abelian. 
+      The elements of order three with conjugacy class of size 104 have
+      centralisers of size 108. Let $C$ be one such centraliser. Since 
+      $108=4\cdot 27$ then $C$'s Sylow 3-subgroup $P_3$ will be of size 27, 
+      and so
+      will also be $GL(3,3)$'s Sylow 3-subgroup. Now the number of Sylow
+      3-subgroups in $C$ equals $1\mod 3$ and divides four. It can therefore
+      be either one or four. If this number were to be four then the normaliser
+      of $P_3$ in $C$, $N_C(P_3)$, would be $P_3$ itself. This is impossible 
+      since $N_C(P_3)$ include $2I$ (since it commutes with all the elements of
+      $P_3$), and so $|N_C(P_3)| > 27$. Hence $P_3$ is normal in $C$, and so
+      the size of $C$'s normaliser in $GL(3,3)$, $|N_G(P_3)|$, is at least
+      108. Thus $n_3<11232/108=104$, and the only option left is $n_3=52$.
       
     \item {\bf Sylow 13-subgroups}
       
