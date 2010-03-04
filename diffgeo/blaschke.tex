@@ -1,7 +1,6 @@
 \documentclass[11pt]{book} \usepackage{amssymb}
 \usepackage{amsfonts} \usepackage{amsmath} \usepackage{bm}
 \usepackage{latexsym} \usepackage{epsfig}
-\usepackage{asymptote}
 \usepackage{ccaption}
 \usepackage{subfigure}
 
@@ -46,9 +45,8 @@ pairs of real number $x_1$ and $x_2$, to the points of the plane
 \begin{figure}[htp]
   \label{fig:axes}
   \centering
-  \includegraphics{axes.pdf}
+  \includegraphics{axes.pdf} 
   \caption{}
-\label{fig_embedded}
 \end{figure}
 
 We will thus deal with ``real'' points and lines, and in fact consider only
@@ -316,8 +314,52 @@ means that the vector $\myvec{y}$ is on the left of $\myvec{x}$
 is the condition for identical or directly opposed directions of the vectors.
 In this case one may speak of the {\em linear dependence} of the vectors
 $\myvec{x}$ and $\myvec{y}$, which may be expressed thus:
-{\em There exist two real numbers $a$ and $b$ such that 
-$a\myvec{x}+b\myvec{y}=\myvec{o}$ and $a$ and $b$ are not both zero.}
+There exist two real numbers $a$ and $b$ such that 
+$a\myvec{x}+b\myvec{y}=\myvec{o}$ and $a$ and $b$ are not both zero.
+
+The following example shows how the notation above can be used to perform
+calculations without explicit use of coordinates. Let $\myvec{x}$ and
+$\myvec{y}$ be two points, with lines crossing them, parallel to $\myvec{x}'$
+and $\myvec{y}'$. If $\myvec{z}$ is the point of intersection of these lines
+then we would like to calculate the area $f$ of the triangle $\myvec{x}$
+$\myvec{y}$ $\myvec{z}$ (Fig.~\ref{fig:triangle_area_example}).
+
+\begin{figure}[htp]
+  \label{fig:triangle_area_example}
+  \centering
+  \includegraphics{triangle_area.pdf}
+  \caption{}
+\end{figure}
+
+Since the vector from $\myvec{x}$ to $\myvec{z}$ has direction $\myvec{x}'$
+and the vector from $\myvec{y}$ to $\myvec{z}$ has direction $\myvec{y}'$ then
+\begin{equation}
+  \myvec{z}=\myvec{x}+\alpha \myvec{x}'=\myvec{y}+\beta \myvec{y}'
+\end{equation}
+or
+\begin{equation}
+  \label{eq:triangle_area_example1}
+  \myvec{z}-\myvec{x}=\alpha \myvec{x}'=(\myvec{y}-\myvec{x})+\beta \myvec{y}'.
+\end{equation}
+we can therefore claim that for the area we are interested in, it holds that 
+\begin{equation}
+  \label{eq:triangle_area_example2}
+  f={1\over 2}(\myvec{z}-\myvec{x},\myvec{y}-\myvec{x})
+  ={\alpha \over 2}(\myvec{x}',\myvec{y}-\myvec{x}).
+\end{equation}
+It follows from \eqref{eq:triangle_area_example1} that
+\begin{equation}
+  \alpha(\myvec{x}',\myvec{y}')=(\myvec{y}-\myvec{x},\myvec{y}')
+\end{equation}
+or
+\begin{equation}
+  \alpha={(\myvec{y}-\myvec{x},\myvec{y}')\over (\myvec{x}',\myvec{y}')}
+\end{equation}
+and this substituted into \eqref{eq:triangle_area_example2} yields the desired
+\begin{equation}
+  f={1\over 2}{(\myvec{x}',\myvec{y}-\myvec{x})(\myvec{y}-\myvec{x},\myvec{y}')
+    \over (\myvec{x}',\myvec{y}')}
+\end{equation}
 \bibliographystyle{plain} \bibliography{blaschke}
 
 \end{document}
