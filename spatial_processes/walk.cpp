@@ -76,7 +76,7 @@ main(int argc, char* argv[])
     srand(atoi(argv[2]));
     size_t n = atoi(argv[1]);
     size_t sumSteps = 0;
-    size_t iters = 2000;
+    size_t iters = 10000;
     map<size_t, size_t> hist;
     for (size_t i = 0; i < iters; ++i){
 	sumSteps += walkSim(n);
@@ -88,8 +88,7 @@ main(int argc, char* argv[])
 //    for(size_t j = 0; j < hist.size(); ++j)
 //	cout << j << ": " << 1.0 * hist[j] / iters  << endl;
     
-    cout << 1.0 * sumSteps / iters / n / n << " " 
-	 << (1.0 * n * (n - 1) / 2 - n / 2) / n / n<< endl;
+    cout << (1.0 * n * (n - 1) / 2 - 1.0 * sumSteps / iters) / n << endl;
 	
     return 0;
 }

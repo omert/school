@@ -271,50 +271,6 @@
       \end{proof}
     \end{enumerate}
   \item
-    \begin{enumerate}
-    \item 
-      Let $G(n,p)$ be a random E-R graph with $p={\log n-a_n\over n}$ as defined
-      in the question. Let $X=\sum_{v\in[n]}{\bf 1}_{C(v)=\{v\}}$, also as defined
-      in the question. Then the expectation of $X$ is:
-      \begin{eqnarray*}
-        \E[X] &=& \E\left[\sum_{v\in[n]}{\bf 1}_{C(v)=\{v\}}\right]
-        \\ &=& n\P[C(v_0)=\{v_0\}]
-        \\ &=& n\P[C(v_0)=\{v_0\}]
-        \\ &=& n(1-p)^{n-1}.
-        \\ &=& n\left(1-{\log n-a_n\over n}\right)^{n-1}.
-      \end{eqnarray*}
-      The limit of $\E[X]$ as $n$ tends to infinity is 
-      $n\exp(a_n-\log n)=\exp(a_n)=\infty$.
-      The expectation of $X^2$ is:
-      \begin{eqnarray*}
-        \E[X^2] &=& \E\left[\left(\sum_{v\in[n]}{\bf 1}_{C(v)=\{v\}}\right)^2\right]
-        \\ &=& \E\left[\sum_{u,v\in[n]}{\bf 1}_{C(v)=\{v\}}{\bf 1}_{C(u)=\{u\}}\right]
-        \\ &=& \sum_{u,v\in[n]}\P[C(v)=\{v\} \mbox{ and } C(u)=\{u\}]
-        \\ &=& \sum_{u\neq v\in[n]}\P[C(v)=\{v\} \mbox{ and } C(u)=\{u\}]+\sum_{v\in[n]}\P[C(v)=\{v\}]
-        \\ &=& n(n-1)\P[C(v)=\{v\} \mbox{ and } C(u)=\{u\}]+\E[X]
-        \\ &=& n(n-1)(1-p)^{2(n-1)-1}+\E[X]
-        \\ &=& {n-1\over n(1-p)}\E[X]^2+\E[X]
-      \end{eqnarray*}
-      Hence
-      \begin{eqnarray*}
-        \Var[X]&=&\E[X^2]-\E[X]^2
-        \\ &=& {n-1\over n(1-p)}\E[X]^2+\E[X] - \E[X]^2
-        \\ &=& {np-1\over n-np}\E[X]^2+\E[X] 
-      \end{eqnarray*}
-      We can now bound the probability that the graph is not connected:
-      \begin{eqnarray*}
-        \P[\mbox{graph not connected}] &\geq& 
-        \P[\mbox{there exists an isolated vertex}]
-        \\ &=& \P[X>0]
-        \\ &\geq& \P\left[|X-\E[X]| < \E[X]/2\right]
-        \\ &\geq& 1-{\Var[X] \over \E[X]^2/4}
-        \\ &=& 1-{4(np-1)\over n-np}+{4 \over \E[X]}
-        \\ &=& 1-{4(\log n-a_n-1)\over n-\log n + a_n}+{4 \over \E[X]}.
-      \end{eqnarray*}
-      Since $a_n$ is bounded by $\log n$ then the second term vanishes as
-      $n$ tends to infinity, as does the last term. Hence the probability
-      that the graph is connected tends to zero as $n$ tends to infinity.
-    \end{enumerate}
   \item
     \begin{enumerate}
     \item 
@@ -413,8 +369,110 @@
         for any $\epsilon>0$.
     \end{enumerate}
 
+\item
+  Interestingly, this process behave differently for even or odd $n$. For
+  odd $n$, the initial degrees of the verices are even. Hence, except for 
+  the initial vertex, every vertex that the process enters it can also leave.
+  Therefore the process gets stuck at the same vertex from which it started.
+  When $n$ is even, then by the same argument the process cannot end at the
+  same vertex at which it started, but gets stuck at some other vertex.
+  
+  The implication of the above is that when $n$ is odd there may be many
+  vertices with degree zero at the time that the process gets stuck. When $n$
+  is even there may be only one such vertex (the one at which the process
+  started).
+  
+  Unfortunately, we have no further rigorous results for this open problem. 
+  Some 
+  intuition can be found, however, in assuming that the process mixes quickly
+  up until it gets stuck. Whereas this approximation is clearly not very good
+  towards the end of the walk, it seems adequate at its beginning and 
+  conceivably also up until much later. 
+
+  Under this ``quick-mixing approximation'', 
+  the process is equivalent to picking and removing an edge at random at
+  each iteration. Let $t=n(n-1)/2$. Label the edges $e_1,\ldots,e_T$, 
+  and assume they are removed according to this order. 
+
+  Let $v_0$ be the vertex the process starts at. Consider the case of odd $n$, 
+  in which the process ends once $v_0$ has degree zero. Then the process ends
+  at time $S_n$ where $S_n=\max\{t|e_t\mbox{ belongs to } v_0\}$. The probability of a particular
+  edge to be labeled $e_s$ where $s\leq t$ is $t/T$. Given that one such edge was thus
+  labeled then the probability that another edges of $v_o$ is labeled $\leq t$
+  is $(t-1)/(T-1)$. Hence the probability
+  that all $n-1$ edges of $v_0$ are labeled $\leq t$, and so the process finishes
+  up to time $t$ is 
+  \begin{equation*}
+    \P[S_n\leq t] = \prod_{i=1}^{n-1}{t-i+1\over T-i + 1},
+  \end{equation*}
+  for $t\geq n-1$. Hence the expected value of $S_n$ is
+  \begin{eqnarray*}
+    \E[S_n]&=& \sum_{t=1}^T\left(1-\P[S_n\leq t]\right)
+    \\ &=&n-2+\sum_{t=n-1}^T\left(1-\prod_{i=1}^{n-1}{t-i+1\over T-i + 1}\right)
+    \\ &=& T - \sum_{t=n-1}^T\prod_{i=1}^{n-1}{t-i+1\over T-i + 1}
+  \end{eqnarray*}
+  We can bound $\E[S_n]$ by noting that $(t-i+1)/(T-i+1)<t/T$ for $i\geq 1$:
+  \begin{eqnarray*}
+    \E[S_n] &\geq&T - \sum_{t=n-1}^T\prod_{i=1}^{n-1}{t\over T}
+    \\ &=& T - \sum_{t=n-1}^T\left({t\over T}\right)^{n-1}
+    \\ &=& T - T^{-(n-1)}\sum_{t=n-1}^Tt^{n-1}
+    \\ &\geq& T - T^{-(n-1)}{T^n \over n}
+    \\ &=& T-{n-1\over 2}.
+  \end{eqnarray*}
+  
+  Therefore, according to this approximation, we expect $(n-1)/2$ edges to be 
+  left at the end of the process. 
+ 
+  Simulations seem to agree with the validity of these approximations. We ran
+  10,000 simulations of this process on a graph with 201 vertices. The average
+  number of vertices left was 95, whereas the analysis above predicts 100.
 
 \end{enumerate}
 \end{document}
 
 
+  \item
+    \begin{enumerate}
+    \item 
+      Let $G(n,p)$ be a random E-R graph with $p={\log n-a_n\over n}$ as defined
+      in the question. Let $X=\sum_{v\in[n]}{\bf 1}_{C(v)=\{v\}}$, also as defined
+      in the question. Then the expectation of $X$ is:
+      \begin{eqnarray*}
+        \E[X] &=& \E\left[\sum_{v\in[n]}{\bf 1}_{C(v)=\{v\}}\right]
+        \\ &=& n\P[C(v_0)=\{v_0\}]
+        \\ &=& n\P[C(v_0)=\{v_0\}]
+        \\ &=& n(1-p)^{n-1}.
+        \\ &=& n\left(1-{\log n-a_n\over n}\right)^{n-1}.
+      \end{eqnarray*}
+      The limit of $\E[X]$ as $n$ tends to infinity is 
+      $n\exp(a_n-\log n)=\exp(a_n)=\infty$.
+      The expectation of $X^2$ is:
+      \begin{eqnarray*}
+        \E[X^2] &=& \E\left[\left(\sum_{v\in[n]}{\bf 1}_{C(v)=\{v\}}\right)^2\right]
+        \\ &=& \E\left[\sum_{u,v\in[n]}{\bf 1}_{C(v)=\{v\}}{\bf 1}_{C(u)=\{u\}}\right]
+        \\ &=& \sum_{u,v\in[n]}\P[C(v)=\{v\} \mbox{ and } C(u)=\{u\}]
+        \\ &=& \sum_{u\neq v\in[n]}\P[C(v)=\{v\} \mbox{ and } C(u)=\{u\}]+\sum_{v\in[n]}\P[C(v)=\{v\}]
+        \\ &=& n(n-1)\P[C(v)=\{v\} \mbox{ and } C(u)=\{u\}]+\E[X]
+        \\ &=& n(n-1)(1-p)^{2(n-1)-1}+\E[X]
+        \\ &=& {n-1\over n(1-p)}\E[X]^2+\E[X]
+      \end{eqnarray*}
+      Hence
+      \begin{eqnarray*}
+        \Var[X]&=&\E[X^2]-\E[X]^2
+        \\ &=& {n-1\over n(1-p)}\E[X]^2+\E[X] - \E[X]^2
+        \\ &=& {np-1\over n-np}\E[X]^2+\E[X] 
+      \end{eqnarray*}
+      We can now bound the probability that the graph is not connected:
+      \begin{eqnarray*}
+        \P[\mbox{graph not connected}] &\geq& 
+        \P[\mbox{there exists an isolated vertex}]
+        \\ &=& \P[X>0]
+        \\ &\geq& \P\left[|X-\E[X]| < \E[X]/2\right]
+        \\ &\geq& 1-{\Var[X] \over \E[X]^2/4}
+        \\ &=& 1-{4(np-1)\over n-np}+{4 \over \E[X]}
+        \\ &=& 1-{4(\log n-a_n-1)\over n-\log n + a_n}+{4 \over \E[X]}.
+      \end{eqnarray*}
+      Since $a_n$ is bounded by $\log n$ then the second term vanishes as
+      $n$ tends to infinity, as does the last term. Hence the probability
+      that the graph is connected tends to zero as $n$ tends to infinity.
+    \end{enumerate}
