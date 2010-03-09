@@ -26,9 +26,9 @@ draw (circle((0, 0), R));
 real theta = pi/180*90;
 pointWithLine(1.0, 0.0, R, theta);
 draw((R,0.0)--(0.4,0.0),Arrow);
-label("$\mathfrak{x}$",(0, -0.11));
-label("$\mathfrak{x}'$",(0.4, -0.11));
-label("$\mathfrak{z}$",(1, -0.11));
+label("$\mathfrak{x}$",(0, -0.13));
+label("$\mathfrak{x}'$",(0.4, -0.13));
+label("$\mathfrak{z}$",(1, -0.13));
 
 pointWithLine(0.1, 0.8, R, theta);
 label("$\mathfrak{y}$",(0.0, 0.75));
