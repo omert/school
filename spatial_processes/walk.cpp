@@ -69,14 +69,14 @@ walkSim(size_t n)
 int
 main(int argc, char* argv[])
 {
-    if (argc < 3){
-	cout << "2 parameter needed" << endl;
+    if (argc < 4){
+	cout << "3 parameter needed" << endl;
 	exit(-1);
     }
     srand(atoi(argv[2]));
     size_t n = atoi(argv[1]);
+    size_t iters = atoi(argv[3]);
     size_t sumSteps = 0;
-    size_t iters = 10000;
     map<size_t, size_t> hist;
     for (size_t i = 0; i < iters; ++i){
 	sumSteps += walkSim(n);

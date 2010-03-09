@@ -116,7 +116,7 @@
   \item Let $G_X(\eta)=\E[\eta^X]$ where $X$ is distributed geometrically with
     parameter $p$. We showed in class that when $p \leq \half$ then the 
     extinction probability is one,
-    since the expcted number of offsprings is less than or equal to one.
+    since the expected number of offsprings is less than or equal to one.
     For $p>\half$ we showed that the extinction probability $\eta$ is
     the smallest solution of $\eta=G_X(\eta)$:
     \begin{eqnarray*}
@@ -135,8 +135,8 @@
     \end{eqnarray*}
     Since $p>\half$ then $\eta=1/p-1$.
   \item
-    In the paper refered to in the question it is shown that a branching
-    process's geneological tree contains an infinite binary tree with
+    In the paper referred to in the question it is shown that a branching
+    process's genealogical tree contains an infinite binary tree with
     probability $\pi$ where $1-\pi$ is the smallest root in $[0,1]$ of
     $$G_X(s)+(1-s)G'_X(s)=s.$$
     In our case $G_X(s)=(1-p)/(1-sp)$ and $G'_X(s)=p(1-p)/(1-sp)^2$ 
@@ -162,7 +162,7 @@
 
     When $p=1$ then $s_1=0$ and $\pi_p=1-s_0=1$.
   \item
-    Let $\theta_m$ be the probability that the geneological tree of a 
+    Let $\theta_m$ be the probability that the genealogical tree of a 
     branching process with Binomial($n,p$) offspring distribution 
     has an $(n-1)$-ary tree of depth $m$, rooted at the time 
     zero individual. This happens if this individual has $n-1$ or $n$
@@ -231,7 +231,8 @@
         edge).
         Since $f_{n-1}$ crosses from $C$ to $D$, then if necessary we distort $f_n$ so 
         that it will cross from
-        $C'$ to $D'$. We perfrom this distortion while keeping constant the $x$
+        $C'$ to $D'$. We perform this distortion on $f_n(x)$ while keeping 
+        constant the $x$
         in which the function crosses from $C$ to $D$.
         
         Having made sure that $f_n$ crosses from $C$ to $D$ in legal offsprings,
@@ -371,7 +372,7 @@
 
 \item
   Interestingly, this process behave differently for even or odd $n$. For
-  odd $n$, the initial degrees of the verices are even. Hence, except for 
+  odd $n$, the initial degrees of the vertices are even. Hence, except for 
   the initial vertex, every vertex that the process enters it can also leave.
   Therefore the process gets stuck at the same vertex from which it started.
   When $n$ is even, then by the same argument the process cannot end at the
@@ -391,7 +392,7 @@
 
   Under this ``quick-mixing approximation'', 
   the process is equivalent to picking and removing an edge at random at
-  each iteration. Let $t=n(n-1)/2$. Label the edges $e_1,\ldots,e_T$, 
+  each iteration. Let $T=n(n-1)/2$. Label the edges $e_1,\ldots,e_T$, 
   and assume they are removed according to this order. 
 
   Let $v_0$ be the vertex the process starts at. Consider the case of odd $n$, 
@@ -420,13 +421,14 @@
     \\ &=& T-{n-1\over 2}.
   \end{eqnarray*}
   
-  Therefore, according to this approximation, we expect $(n-1)/2$ edges to be 
-  left at the end of the process. 
+  Therefore, according to this approximation, we expect at most 
+  $(n-1)/2$ edges to be left at the end of the process. 
  
   Simulations seem to agree with the validity of these approximations. We ran
-  10,000 simulations of this process on a graph with 201 vertices. The average
-  number of vertices left was 95, whereas the analysis above predicts 100.
+  1,000 simulations of this process on a graph with 1001 vertices. The average
+  number of vertices left was 499.7, whereas the analysis above predicts 500.
 
+  
 \end{enumerate}
 \end{document}
 
