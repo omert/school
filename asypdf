@@ -1,0 +1,6 @@
+#!/bin/csh -f
+
+asy $1.asy
+epstopdf $1.eps
+rm $1.eps
+evince $1.pdf&
