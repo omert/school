@@ -325,10 +325,10 @@ then we would like to calculate the area $f$ of the triangle $\myvec{x}$
 $\myvec{y}$ $\myvec{z}$ (Fig.~\ref{fig:triangle_area_example}).
 
 \begin{figure}[htp]
-  \label{fig:triangle_area_example}
   \centering
   \includegraphics{triangle_area.pdf}
   \caption{}
+  \label{fig:triangle_area_example}
 \end{figure}
 
 Since the vector from $\myvec{x}$ to $\myvec{z}$ has direction $\myvec{x}'$
@@ -360,8 +360,68 @@ and this substituted into \eqref{eq:triangle_area_example2} yields the desired
   f={1\over 2}{(\myvec{x}',\myvec{y}-\myvec{x})(\myvec{y}-\myvec{x},\myvec{y}')
     \over (\myvec{x}',\myvec{y}')}
 \end{equation}
+
+\section{Affine Distance}
+
+We would like to return to the result of the exercise above, and understand it
+a somewhat differently. We saw that given two points $\myvec{x}$, $\myvec{y}$
+and two directions $\myvec{x}'$, $\myvec{y}'$, that is two ``line elements'', 
+we can assign each such a construct a number 
+$f(\myvec{x},\myvec{x}';\myvec{y},\myvec{y}')$ that is invariant under all
+equiareal affinities. This number is namely the area of the triangle 
+$\myvec{x}$ $\myvec{y}$ $\myvec{z}$ (Fig.~\ref{fig:triangle_area_example}).
+
+We now claim that $f(\myvec{x},\myvec{x}';\myvec{y},\myvec{y}')$ is in some
+sense the only operation that thus maps numbers to line elements. More 
+precisely: If $\phi(\myvec{x},\myvec{x}';\myvec{y},\myvec{y}')$ is invariant
+under an arbitrary equiareal affinity, where $\phi$ is a function that maps
+pairs of line elements to numbers, then
+$$ \phi(\myvec{x},\myvec{x}';\myvec{y},\myvec{y}') = \Phi\left[f(\myvec{x},\myvec{x}';\myvec{y},\myvec{y}')\right].$$
+
+This follows from the fact that my means of the transformations 
+\eqref{eq:equiareal_affinities} a triangle is mapped to an arbitrary triangle
+of the same area. Hence $\phi$ cannot depend on the specific values
+$\myvec{x},\myvec{x}';\myvec{y},\myvec{y}'$. By similar consideration one can
+show in motion geometry that the motion invariants of two points can be 
+expressed as functions of the distance between them.
+
+{\bf (OT: Bewegungsgeomerie = motion geometry?)}
+
+There is there a reason, however, to choose in particular the distance $r_{ik}$
+between the points $\myvec{x}_i$ and $\myvec{x}_k$ rather than any other
+invariant: namely the property of distance for points on a line, since
+$$r_{12}+r_{23}=r_{13},$$
+when $\myvec{x}_1$,  $\myvec{x}_2$ and $\myvec{x}_3$ lay on a line, in this 
+order. This brings us to the following consideration.
+ 
+The line elements $\myvec{x},\myvec{x}';\myvec{y},\myvec{y}'$ uniquely define
+a parabola: one that passes through  $\myvec{x}$ and $\myvec{y}$ and is there
+tangent to the directions $\myvec{x}'$ and $\myvec{y}'$ 
+(Fig~\ref{fig:triangle_parabola}). This holds since four lines --- two of
+which lie ``infinitely close'' --- determine a parabola. Let then
+\begin{equation}
+  \label{eq:parabola_def1}
+  x_i=x_{0i}+\dot{x}_{0i}t+{1\over 2!}\ddot{x}_{0i}t^2, \quad(i=1,2)
+\end{equation}
+or in vector notation
+\begin{equation}
+  \label{eq:parabola_def2}
+  \myvec{x}=\myvec{x}_0+\dot{\myvec{x}}_0t+{1\over 2!}\ddot{\myvec{x}}_0t^2
+\end{equation}
+be the parabola's equation in parameterized form, and
+\begin{equation}
+  \label{eq:parabola_initial_def}
+  \begin{array}{lrcl}
+    \myvec{x}_0=\myvec{x}(0)=\myvec{x},& \left({d\myvec{x}\over dt}\right)_{t=0}=\mbox{const}\cdot \myvec{x}',\\
+    \myvec{x}_1=\myvec{x}(t_1)=\myvec{y},& \left({d\myvec{x}\over dt}\right)_{t=t_1}=\mbox{const}\cdot \myvec{y}'.\\
+  \end{array}  
+\end{equation}
+
+
+
 \bibliographystyle{plain} \bibliography{blaschke}
 
 \end{document}
 
 
+ 
