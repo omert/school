@@ -20,6 +20,11 @@
 \newenvironment{proof}{\noindent \textbf{Proof:}}{$\Box$}
 
 \newcommand{\myvec}[1]{\mathfrak{#1}}
+\newcommand{\vecx}{\myvec{x}}
+\newcommand{\vecy}{\myvec{y}}
+\newcommand{\vecz}{\vecz}
+\newcommand{\vecderiv}[1]{\dot{\myvec{#1}}}
+\newcommand{\vecderivv}[1]{\ddot{\myvec{#1}}}
 
 \begin{document}
 \title{Affine Differential Geometry}
@@ -27,8 +32,8 @@
  \author{Wilhelm Blaschke, Translated by Omer Tamuz}
 \maketitle
 
-\chapter{Local Theory of Planar Curves}
-\section{Affine Mapping}
+\chapter{Local theory of planar curves}
+\section{Affine mapping}
 We would like to commence by recalling some well known facts of analytical 
 geometry.
 
@@ -54,9 +59,9 @@ those points and lines that in the framework of projective geometry are
 considered ``proper'', as opposed to ``improper'' or infinitely remote elements.
 
 In place of the pair $x_1$, $x_2$ we use the shorter vector notation and 
-speak simply of the point $\myvec{x}$.
+speak simply of the point $\vecx$.
 
-Let $\myvec{x}\to \myvec{x}^*$ be a mapping between the points of plane,
+Let $\vecx\to \vecx^*$ be a mapping between the points of plane,
 which is given by a system of linear relations between their coordinates:
 \begin{equation}
   \label{eq:affine_trans}
@@ -73,8 +78,8 @@ This system of equations is solvable for $x$ when the determinant
     c_{21} & c_{22}
   \end{vmatrix}
 \end{equation}
-is different than zero ($\neq 0$). Then, to each $\myvec{x}^*$ corresponds 
-one and only one $\myvec{x}$. Following Euler \cite{Euler:1749} and 
+is different than zero ($\neq 0$). Then, to each $\vecx^*$ corresponds 
+one and only one $\vecx$. Following Euler \cite{Euler:1749} and 
 M\"obius \cite{Mobius:1827}, this kind of mapping
 is called an ``affine mapping'', ``affine transformation'' or just ``affinity''.
  
@@ -102,9 +107,9 @@ The determinant
 \end{equation}
 is different than zero and hence the inverse transformation is also affine.
 
-The points $\myvec{x}$ of a line $\mathfrak{g}$ are mapped by an affine 
+The points $\vecx$ of a line $\mathfrak{g}$ are mapped by an affine 
 transformation to
-the points $\myvec{x}^*$ of a line $\mathfrak{g}^*$. In fact, a line 
+the points $\vecx^*$ of a line $\mathfrak{g}^*$. In fact, a line 
 $\mathfrak{g}$ can be
 represented by a linear equation ($g_1$, $g_2$ not both zero):
 \begin{equation}
@@ -113,11 +118,11 @@ represented by a linear equation ($g_1$, $g_2$ not both zero):
 \end{equation}
 The substitution of~\eqref{eq:inv_c} into this equation results, because of the
 invertibilty of the transformation, in an equation which is not trivially
-satisfied, and thus again the locus of $\myvec{x}^*$ is a line.
+satisfied, and thus again the locus of $\vecx^*$ is a line.
 
 It further follows from~\eqref{eq:affine_trans} that affine transformations are
-continuous mappings. That is, as $\myvec{x}$ tends to $\myvec{x}_0$ the 
-corresponding $\myvec{x}^*$ tends to $\myvec{x}^*_0$.
+continuous mappings. That is, as $\vecx$ tends to $\vecx_0$ the 
+corresponding $\vecx^*$ tends to $\vecx^*_0$.
 
 Using M\"obius nets ~\cite{Mobius:1827} one can show that the last
 two properties, whose dependence or independence remain to be decided, are
@@ -127,8 +132,8 @@ exception bijective, continuous and map lines to lines.}
 
 Affine transformations preserve parallelism, since parallel lines on the plane
 are characterized by not having common points. Furthermore, given two 
-affinities $\myvec{x}\to\myvec{x}^*$ and $\myvec{x}^*\to\myvec{x}^{**}$ , their
-``product'' $\myvec{x}\to\myvec{x}^{**}$ is again an affinity, since all the
+affinities $\vecx\to\vecx^*$ and $\vecx^*\to\vecx^{**}$ , their
+``product'' $\vecx\to\vecx^{**}$ is again an affinity, since all the
 characteristics of an affinity hold. Naturally, this can also be derived 
 from~\eqref{eq:affine_trans}. Now a set of transformations that is closed under
 the transformation product is called a group. {\em Hence the 
@@ -162,7 +167,7 @@ so called ``equiareal affinities''. Consider then the effect of the homogeneous
 affinity~\eqref{eq:decompose_homogeneous} on the determinant
 \begin{equation}
   \label{eq:xy_determinant}
-  (\myvec{x},\myvec{y})=\begin{vmatrix}x_1&x_2\\y_1&y_2\end{vmatrix}.
+  (\vecx,\vecy)=\begin{vmatrix}x_1&x_2\\y_1&y_2\end{vmatrix}.
 \end{equation}
 
 Given that
@@ -173,7 +178,7 @@ Given that
     x_2^* &=& c_{20}+c_{21}x_1+c_{22}x_2, &y_2^* &=& c_{20}+c_{21}y_1+c_{22}y_2,
   \end{array}  
 \end{equation}
-we can calculate the determinant $(\myvec{x}^*,\myvec{y}^*)$:
+we can calculate the determinant $(\vecx^*,\vecy^*)$:
 \begin{equation}
   \label{eq:xy_det_transformed}
   \begin{vmatrix}x_1^*&x_2^*\\y_1^*&y_2^*\end{vmatrix}=\begin{vmatrix}c_{11}&c_{12}\\c_{21}&c_{22}\end{vmatrix}\cdot\begin{vmatrix}x_1&x_2\\y_1&y_2\end{vmatrix}
@@ -181,18 +186,18 @@ we can calculate the determinant $(\myvec{x}^*,\myvec{y}^*)$:
 or in abbreviated notation
 \begin{equation}
   \label{eq:xy_det_transformed_short}
-  (\myvec{x}^*,\myvec{y}^*)=(\myvec{x},\myvec{y})\cdot d.
+  (\vecx^*,\vecy^*)=(\vecx,\vecy)\cdot d.
 \end{equation}
 
-The geometric meaning of $(\myvec{x},\myvec{y})$ is well known. Explicitly:
+The geometric meaning of $(\vecx,\vecy)$ is well known. Explicitly:
 \begin{equation}
   \label{eq:triangle_area}
-  {1\over 2}(\myvec{x},\myvec{y})=\mbox{area of the triangle $\myvec{o}$ $\myvec{x}$ $\myvec{y}$}
+  {1\over 2}(\vecx,\vecy)=\mbox{area of the triangle $\myvec{o}$ $\vecx$ $\vecy$}
 \end{equation}
 (i.e., the area of the triangle described by the origin $(0,0)$ and the 
-points $\myvec{x}$ and $\myvec{y}$, in that order). The triangle's area may
+points $\vecx$ and $\vecy$, in that order). The triangle's area may
 be either positive or negative, depending on whether its orientation 
-along $\myvec{o}$ $\myvec{x}$ $\myvec{y}$ is
+along $\myvec{o}$ $\vecx$ $\vecy$ is
 positive (Fig.~\ref{fig:positive_orientation}) or negative 
 (Fig.~\ref{fig:negative_orientation}). These sign assignments depend on the
 choice of axes. We will always think of the positive $x_2$ axis as being,
@@ -210,7 +215,7 @@ integral
 \begin{equation}
   \label{eq:curve_area}
   F={1\over 2}\oint_\mathfrak{C}x_1dx_2-x_2dx_1
-  ={1\over 2}\oint_\mathfrak{C}(\myvec{x},d\myvec{x})
+  ={1\over 2}\oint_\mathfrak{C}(\vecx,d\vecx)
 \end{equation}
 \begin{figure}[htp]
   \begin{center}
@@ -234,7 +239,7 @@ is interpreted to be. Thence follows
 and since displacements conserve area then one may conclude that:
 
 {\em An arbitrary affinity with determinant $d$ increases areas by factor $d$};
-i.e., if the mapping $\myvec{x}\to\myvec{x}^*$ transforms a figure of area $F$
+i.e., if the mapping $\vecx\to\vecx^*$ transforms a figure of area $F$
 to a figure of area $F^*$ then
 \begin{equation}
   \label{eq:area_transform2}
@@ -261,21 +266,21 @@ of the form:}
   \end{array}
 \end{equation}
 
-\section{Calculation Rules}
+\section{Calculation rules}
 \label{section:calculation_rules}
 It has proven advantageous to introduce some abbreviations, to shorten
-writing and calculations. Let $\myvec{x}$ and $\myvec{y}$ be two points with
-coordinates $x_1,x_2$ and $y_1,y_2$. Then $\myvec{x}+\myvec{y}$ shall denote
+writing and calculations. Let $\vecx$ and $\vecy$ be two points with
+coordinates $x_1,x_2$ and $y_1,y_2$. Then $\vecx+\vecy$ shall denote
 the point with coordinates $x_1+y_1,x_2+y_2$. 
 
-Geometrically one may find $\myvec{x}+\myvec{y}$ by joining the segments from
-$\myvec{o}$ to $\myvec{x}$ and $\myvec{y}$, using the Parallelogram law. In
+Geometrically one may find $\vecx+\vecy$ by joining the segments from
+$\myvec{o}$ to $\vecx$ and $\vecy$, using the Parallelogram law. In
 accordance with this notation, we would like to occasionally say the
-``vector $\myvec{x}$'' rather than the ``point $\myvec{x}$'', and by that refer
-to the directed segment from the origin $\myvec{o}$ to $\myvec{x}$.
+``vector $\vecx$'' rather than the ``point $\vecx$'', and by that refer
+to the directed segment from the origin $\myvec{o}$ to $\vecx$.
 
 The rigorous arithmetic definition of the term ``vector'' is the following:
-{\em a geometric construct $\myvec{x}'$ with the ``components'' $x_1'$ and
+{\em a geometric construct $\vecx'$ with the ``components'' $x_1'$ and
 $x_2'$ is a vector when an affinity~\eqref{eq:affine_trans} transforms the
 components thus:}
 \begin{equation}
@@ -286,44 +291,44 @@ components thus:}
   \end{array}  
 \end{equation}
 
-We have already denoted by $(\myvec{x},\myvec{y})$ the determinant
+We have already denoted by $(\vecx,\vecy)$ the determinant
 \begin{equation}
   \label{eq:det_redefined}
-  (\myvec{x},\myvec{y})=x_1y_2-x_2y_1.
+  (\vecx,\vecy)=x_1y_2-x_2y_1.
 \end{equation}
 Then it holds that
 \begin{equation}
   \label{eq:det_antisymmetric}
-  (\myvec{x},\myvec{y})=-(\myvec{y},\myvec{x})
+  (\vecx,\vecy)=-(\vecy,\vecx)
 \end{equation}
-and if we denote by $k\myvec{x}$ the vector with coordinates $kx_1,kx_2$ then
+and if we denote by $k\vecx$ the vector with coordinates $kx_1,kx_2$ then
 \begin{equation}
   \label{eq:det_bilinear}
-  (k_1\myvec{x}_1+k_2\myvec{x}_2,\myvec{y})=k_1(\myvec{x}_1,\myvec{y})+k_2(\myvec{x}_2,\myvec{y}).
+  (k_1\vecx_1+k_2\vecx_2,\vecy)=k_1(\vecx_1,\vecy)+k_2(\vecx_2,\vecy).
 \end{equation}
 
 We encounter here the same assignment as for the position of the axes, so that
 \begin{equation}
-  (\myvec{x},\myvec{y}) > 0
+  (\vecx,\vecy) > 0
 \end{equation}
-means that the vector $\myvec{y}$ is on the left of $\myvec{x}$ 
+means that the vector $\vecy$ is on the left of $\vecx$ 
 (Fig.~\ref{fig:positive_orientation}).
 
 \begin{equation}
-  (\myvec{x},\myvec{y}) = 0
+  (\vecx,\vecy) = 0
 \end{equation}
 is the condition for identical or directly opposed directions of the vectors.
 In this case one may speak of the {\em linear dependence} of the vectors
-$\myvec{x}$ and $\myvec{y}$, which may be expressed thus:
+$\vecx$ and $\vecy$, which may be expressed thus:
 There exist two real numbers $a$ and $b$ such that 
-$a\myvec{x}+b\myvec{y}=\myvec{o}$ and $a$ and $b$ are not both zero.
+$a\vecx+b\vecy=\myvec{o}$ and $a$ and $b$ are not both zero.
 
 The following example shows how the notation above can be used to perform
-calculations without explicit use of coordinates. Let $\myvec{x}$ and
-$\myvec{y}$ be two points, with lines crossing them, parallel to $\myvec{x}'$
-and $\myvec{y}'$. If $\myvec{z}$ is the point of intersection of these lines
-then we would like to calculate the area $f$ of the triangle $\myvec{x}$
-$\myvec{y}$ $\myvec{z}$ (Fig.~\ref{fig:triangle_area_example}).
+calculations without explicit use of coordinates. Let $\vecx$ and
+$\vecy$ be two points, with lines crossing them, parallel to $\vecx'$
+and $\vecy'$. If $\vecz$ is the point of intersection of these lines
+then we would like to calculate the area $f$ of the triangle $\vecx$
+$\vecy$ $\vecz$ (Fig.~\ref{fig:triangle_area_example}).
 
 \begin{figure}[htp]
   \centering
@@ -332,72 +337,72 @@ $\myvec{y}$ $\myvec{z}$ (Fig.~\ref{fig:triangle_area_example}).
   \label{fig:triangle_area_example}
 \end{figure}
 
-Since the vector from $\myvec{x}$ to $\myvec{z}$ has direction $\myvec{x}'$
-and the vector from $\myvec{y}$ to $\myvec{z}$ has direction $\myvec{y}'$ then
+Since the vector from $\vecx$ to $\vecz$ has direction $\vecx'$
+and the vector from $\vecy$ to $\vecz$ has direction $\vecy'$ then
 \begin{equation}
-  \myvec{z}=\myvec{x}+\alpha \myvec{x}'=\myvec{y}+\beta \myvec{y}'
+  \vecz=\vecx+\alpha \vecx'=\vecy+\beta \vecy'
 \end{equation}
 or
 \begin{equation}
   \label{eq:triangle_area_example1}
-  \myvec{z}-\myvec{x}=\alpha \myvec{x}'=(\myvec{y}-\myvec{x})+\beta \myvec{y}'.
+  \vecz-\vecx=\alpha \vecx'=(\vecy-\vecx)+\beta \vecy'.
 \end{equation}
 we can therefore claim that for the area we are interested in, it holds that 
 \begin{equation}
   \label{eq:triangle_area_example2}
-  f={1\over 2}(\myvec{z}-\myvec{x},\myvec{y}-\myvec{x})
-  ={\alpha \over 2}(\myvec{x}',\myvec{y}-\myvec{x}).
+  f={1\over 2}(\vecz-\vecx,\vecy-\vecx)
+  ={\alpha \over 2}(\vecx',\vecy-\vecx).
 \end{equation}
 It follows from \eqref{eq:triangle_area_example1} that
 \begin{equation}
-  \alpha(\myvec{x}',\myvec{y}')=(\myvec{y}-\myvec{x},\myvec{y}')
+  \alpha(\vecx',\vecy')=(\vecy-\vecx,\vecy')
 \end{equation}
 or
 \begin{equation}
-  \alpha={(\myvec{y}-\myvec{x},\myvec{y}')\over (\myvec{x}',\myvec{y}')}
+  \alpha={(\vecy-\vecx,\vecy')\over (\vecx',\vecy')}
 \end{equation}
 and this substituted into \eqref{eq:triangle_area_example2} yields the desired
 \begin{equation}
-  f={1\over 2}{(\myvec{x}',\myvec{y}-\myvec{x})(\myvec{y}-\myvec{x},\myvec{y}')
-    \over (\myvec{x}',\myvec{y}')}
+  f={1\over 2}{(\vecx',\vecy-\vecx)(\vecy-\vecx,\vecy')
+    \over (\vecx',\vecy')}
 \end{equation}
 
-\section{Affine Distance}
+\section{Affine distance}
 
 We would like to return to the result of the exercise above, and understand it
-a somewhat differently. We saw that given two points $\myvec{x}$, $\myvec{y}$
-and two directions $\myvec{x}'$, $\myvec{y}'$, that is two ``line elements'', 
+a somewhat differently. We saw that given two points $\vecx$, $\vecy$
+and two directions $\vecx'$, $\vecy'$, that is two ``line elements'', 
 we can assign each such a construct a number 
-$f(\myvec{x},\myvec{x}';\myvec{y},\myvec{y}')$ that is invariant under all
+$f(\vecx,\vecx';\vecy,\vecy')$ that is invariant under all
 equiareal affinities. This number is namely the area of the triangle 
-$\myvec{x}$ $\myvec{y}$ $\myvec{z}$ (Fig.~\ref{fig:triangle_area_example}).
+$\vecx$ $\vecy$ $\vecz$ (Fig.~\ref{fig:triangle_area_example}).
 
-We now claim that $f(\myvec{x},\myvec{x}';\myvec{y},\myvec{y}')$ is in some
+We now claim that $f(\vecx,\vecx';\vecy,\vecy')$ is in some
 sense the only operation that thus maps numbers to line elements. More 
-precisely: If $\phi(\myvec{x},\myvec{x}';\myvec{y},\myvec{y}')$ is invariant
+precisely: If $\phi(\vecx,\vecx';\vecy,\vecy')$ is invariant
 under an arbitrary equiareal affinity, where $\phi$ is a function that maps
 pairs of line elements to numbers, then
-$$ \phi(\myvec{x},\myvec{x}';\myvec{y},\myvec{y}') = \Phi\left[f(\myvec{x},\myvec{x}';\myvec{y},\myvec{y}')\right].$$
+$$ \phi(\vecx,\vecx';\vecy,\vecy') = \Phi\left[f(\vecx,\vecx';\vecy,\vecy')\right].$$
 
 This follows from the fact that my means of the transformations 
 \eqref{eq:equiareal_affinities} a triangle is mapped to an arbitrary triangle
 of the same area. Hence $\phi$ cannot depend on the specific values
-$\myvec{x},\myvec{x}';\myvec{y},\myvec{y}'$. By similar consideration one can
+$\vecx,\vecx';\vecy,\vecy'$. By similar consideration one can
 show in motion geometry that the motion invariants of two points can be 
 expressed as functions of the distance between them.
 
 {\bf (OT: Bewegungsgeomerie = motion geometry?)}
 
 There is there a reason, however, to choose in particular the distance $r_{ik}$
-between the points $\myvec{x}_i$ and $\myvec{x}_k$ rather than any other
+between the points $\vecx_i$ and $\vecx_k$ rather than any other
 invariant: namely the property of distance for points on a line, since
 $$r_{12}+r_{23}=r_{13},$$
-when $\myvec{x}_1$,  $\myvec{x}_2$ and $\myvec{x}_3$ lay on a line, in this 
+when $\vecx_1$,  $\vecx_2$ and $\vecx_3$ lay on a line, in this 
 order. This brings us to the following consideration.
  
-The line elements $\myvec{x},\myvec{x}';\myvec{y},\myvec{y}'$ uniquely define
-a parabola: one that passes through  $\myvec{x}$ and $\myvec{y}$ and is there
-tangent to the directions $\myvec{x}'$ and $\myvec{y}'$ 
+The line elements $\vecx,\vecx';\vecy,\vecy'$ uniquely define
+a parabola: one that passes through  $\vecx$ and $\vecy$ and is there
+tangent to the directions $\vecx'$ and $\vecy'$ 
 (Fig~\ref{fig:triangle_parabola}). This holds since four lines --- two of
 which lie ``infinitely close'' --- determine a parabola. Let then
 \begin{equation}
@@ -407,14 +412,14 @@ which lie ``infinitely close'' --- determine a parabola. Let then
 or in vector notation
 \begin{equation}
   \label{eq:parabola_def2}
-  \myvec{x}=\myvec{x}_0+\dot{\myvec{x}}_0t+{1\over 2!}\ddot{\myvec{x}}_0t^2
+  \vecx=\vecx_0+\vecderiv{x}_0t+{1\over 2!}\vecderivv{x}_0t^2
 \end{equation}
 be the parabola's equation in parameterized form, and
 \begin{equation}
   \label{eq:parabola_initial_def}
   \begin{array}{lrcl}
-    \myvec{x}_0=\myvec{x}(0)=\myvec{x},& \left({d\myvec{x}\over dt}\right)_{t=0}=\mbox{const}\cdot \myvec{x}',\\
-    \myvec{x}_1=\myvec{x}(t_1)=\myvec{y},& \left({d\myvec{x}\over dt}\right)_{t=t_1}=\mbox{const}\cdot \myvec{y}'.\\
+    \vecx_0=\vecx(0)=\vecx,& \left({d\vecx\over dt}\right)_{t=0}=\mbox{const}\cdot \vecx',\\
+    \vecx_1=\vecx(t_1)=\vecy,& \left({d\vecx\over dt}\right)_{t=t_1}=\mbox{const}\cdot \vecy'.\\
   \end{array}  
 \end{equation}
 
@@ -426,58 +431,58 @@ be the parabola's equation in parameterized form, and
 \end{figure}
 
 We calculate the area $f$ of the triangle that is defined by the line elements
-$\myvec{x},\myvec{x}';\myvec{y},\myvec{y}'$. We denote, as in 
+$\vecx,\vecx';\vecy,\vecy'$. We denote, as in 
 \eqref{eq:parabola_def2}, the derivative with respect to $t$ by dots,
 and so
 \begin{equation}
   \label{eq:triangle_area_vector}
-  f={1\over 2}{(\dot{\myvec{x}}_0,\myvec{x}_1-\myvec{x}_0)(\myvec{x}_1-\myvec{x}_0,\dot{\myvec{x}}_1)
-    \over (\dot{\myvec{x}}_0,\dot{\myvec{x}}_1)}.
+  f={1\over 2}{(\vecderiv{x}_0,\vecx_1-\vecx_0)(\vecx_1-\vecx_0,\vecderiv{x}_1)
+    \over (\vecderiv{x}_0,\vecderiv{x}_1)}.
 \end{equation}
 By substituting 
 \begin{equation*} 
-  \myvec{x}_1-\myvec{x}_0=\dot{\myvec{x}}_0t_1+\ddot{\myvec{x}}_0{t_1^2\over 2!},\quad \dot{\myvec{x}}_1=\dot{\myvec{x}}_0+t_1\ddot{\myvec{x}}_0,
+  \vecx_1-\vecx_0=\vecderiv{x}_0t_1+\vecderivv{x}_0{t_1^2\over 2!},\quad \vecderiv{x}_1=\vecderiv{x}_0+t_1\vecderivv{x}_0,
 \end{equation*}
 we find that
 \begin{equation*}
   \begin{array}{rcl}
-    (\dot{\myvec{x}}_0,\myvec{x}_1-\myvec{x}_0)&=&{t_1^2\over 2}(\dot{\myvec{x}}_0,\ddot{\myvec{x}}_0),\\
-    (\myvec{x}_1-\myvec{x}_0,\dot{\myvec{x}}_1)&=&{t_1^2\over 2}(\dot{\myvec{x}}_0,\ddot{\myvec{x}}_0),\\
-    (\dot{\myvec{x}}_0,\dot{\myvec{x}}_1)&=&t_1(\dot{\myvec{x}}_0,\ddot{\myvec{x}}_0)
+    (\vecderiv{x}_0,\vecx_1-\vecx_0)&=&{t_1^2\over 2}(\vecderiv{x}_0,\vecderivv{x}_0),\\
+    (\vecx_1-\vecx_0,\vecderiv{x}_1)&=&{t_1^2\over 2}(\vecderiv{x}_0,\vecderivv{x}_0),\\
+    (\vecderiv{x}_0,\vecderiv{x}_1)&=&t_1(\vecderiv{x}_0,\vecderivv{x}_0)
   \end{array}
 \end{equation*}
 and hence
 \begin{equation}
   \label{eq:triangle_area_parabola}
-  f={1\over 8}t_1^3(\dot{\myvec{x}}_0,\ddot{\myvec{x}}_0).
+  f={1\over 8}t_1^3(\vecderiv{x}_0,\vecderivv{x}_0).
 \end{equation}
 Accordingly, it is clear that through the points $t_1$ and $t_2$ the parabola
 defines a triangle of area
 \begin{equation}
   \label{eq:parabola_defines_area}
-  f(t_1,t_2)={1\over 8}(t_2-t_1)^3(\dot{\myvec{x}}_0,\ddot{\myvec{x}}_0).
+  f(t_1,t_2)={1\over 8}(t_2-t_1)^3(\vecderiv{x}_0,\vecderivv{x}_0).
 \end{equation}
 We have then (Fig.~\ref{fig:triangle_parabola})
 \begin{equation}
   \label{eq:affine_distance_additive}
-  f^{1/3}(t_1,t_2)+f^{1/3}(t_2,t_3)={1\over 2}(\dot{\myvec{x}}_0,\ddot{\myvec{x}}_0)^{1/3}\left[t_2-t_1+t_3-t_2\right]=f^{1/3}(t_1,t_3),
+  f^{1/3}(t_1,t_2)+f^{1/3}(t_2,t_3)={1\over 2}(\vecderiv{x}_0,\vecderivv{x}_0)^{1/3}\left[t_2-t_1+t_3-t_2\right]=f^{1/3}(t_1,t_3),
 \end{equation}
 where the third root is taken to be real. $f^{1/3}$ possesses then an 
 additivity theorem that is analogous to that of distance in motion geometry. we
 state then:
 
 {\em The affine distance $r$ of the line elements 
-$\myvec{x},\myvec{x}';\myvec{y},\myvec{y}'$ is 
+$\vecx,\vecx';\vecy,\vecy'$ is 
 $$r=2\cdot f^{1/3},$$
 where $f$ is the area of the triangle determined by 
-$\myvec{x},\myvec{x}';\myvec{y},\myvec{y}'$, and the third root is taken to be
+$\vecx,\vecx';\vecy,\vecy'$, and the third root is taken to be
 real.}
 
 We would like to reformulate this newly found property of parabolas. Instead of
 $t$ we introduce a new parameter $s$ by the condition
 \begin{equation}
   \label{eq:natural_parameter}
-  \left({d\myvec{x}\over ds},{d^2\myvec{x}\over ds^2}\right)=1.
+  \left({d\vecx\over ds},{d^2\vecx\over ds^2}\right)=1.
 \end{equation}
 This condition is invariant under equiareal affinities, as the following 
 observation shows.
@@ -498,16 +503,16 @@ homogeneous substitution
   \label{eq:deriv_transform}
   x_i^{(k)*}=c_{i1}x_1^{(k)}+c_{i2}x_2^{(k)}, \quad (i=1,2).
 \end{equation}
-By the definitions in Section ~\ref{section:calculation_rules}, $x_1^{(k)}$ and
-$x_2^{(k)}$ are the components of a vector $\myvec{x}^{(k)}$, and by 
+By the definitions in Section~\ref{section:calculation_rules}, $x_1^{(k)}$ and
+$x_2^{(k)}$ are the components of a vector $\vecx^{(k)}$, and by 
 \eqref{eq:xy_det_transformed_short} the determinants 
-$(\myvec{x}^{(k)},\myvec{x}^{(l)})$ are invariant under equiareal affinities.
+$(\vecx^{(k)},\vecx^{(l)})$ are invariant under equiareal affinities.
 
 The parameter $s$ for the parabola is therefore by \eqref{eq:natural_parameter}
 affinely invariant, and hence fixed, up to the choice of the point $s=0$. It
 is
 \begin{equation*}
-  s=(\dot{\myvec{x}}_0,\ddot{\myvec{x}}_0)^{1/3}t+\mbox{const}
+  s=(\vecderiv{x}_0,\vecderivv{x}_0)^{1/3}t+\mbox{const}
 \end{equation*}
 and therefore by \eqref{eq:parabola_defines_area}
 \begin{equation}
@@ -518,7 +523,7 @@ We have therefore proved the following theorem:
 
 {\em Given a parabola parameterized by parameter $s$ such that
   \begin{equation}
-    \left({d\myvec{x}\over ds},{d^2\myvec{x}\over ds^2}\right)=1.
+    \left({d\vecx\over ds},{d^2\vecx\over ds^2}\right)=1.
     \tag{\ref{eq:natural_parameter}}
   \end{equation}
   then the affine distance between line elements $s_1$ and $s_2$ is $s_2-s_1$.}
@@ -527,9 +532,96 @@ $s_1$ and $s_2$ has the affine length $s_2-s_1$.}
 
 The addition theorem \eqref{eq:affine_distance_additive} for areas 
 (Fig.~\ref{fig:triangle_parabola}) was already known to A.F. M\"obius.
+
+\section{Affine length of curve arcs}
+
+Following the reflections of the previous section, there emerge two options,
+under appropriate differentiability conditions, for the definition of the 
+affine length of a curve arc.
+
+We can proceed in a similar fashion to the parabola and define a parameter
+using affinely invariant normalization. Let $\vecx(t)$ be an arbitrary
+curve vector, twice differentiable. Then by the considerations above it 
+follows that
+$$\left({d\vecx\over dt},{d^2\vecx\over dt^2}\right)
+=(\vecderiv{x},\vecderivv{x})$$
+is invariant under equiareal affinities. Let 
+\begin{equation}
+  \label{eq:no_inflection}
+  (\vecderiv{x},\vecderivv{x})\neq 0
+\end{equation}
+for all points of our curve arc. What is the geometric meaning of this? Assume
+$(\vecderiv{x},\vecderivv{x}) > 0$. Then the curve, and the vector
+$\vecx(t+h)-\myvec(t)$, lie on the left of the (directed) tangent vector
+$\vecderiv{x}(t)$, in a neighborhood of a point $t$, for small enough $|h|$.
+
+To show this, we must (following Section~\ref{section:calculation_rules}) 
+only demonstrate that
+$$ D=(\vecderiv{x}, \vecx(t+h)-\vecx(t))$$
+is positive for small enough $|h|$. Let
+$$\Delta(t,\tau)=(\vecderiv{x}(t),\vecx(\tau)).$$
+Then by \eqref{eq:det_bilinear}
+$$D=\Delta(t,t+h)-\Delta(t,t),$$
+and if we denote derivatives with respect to $\tau$ by circles, then by 
+Taylor's Theorem
+\begin{equation}
+  \label{eq:distance_taylor}
+  \begin{array}{c}    
+    D=h\Delta^{\circ}(t,t)+{h^2\over 2}\Delta^{\circ\circ}(t,t+\vartheta h)
+    = {h^2\over 2}\Delta^{\circ\circ}(t,t+\vartheta h),\\
+    (0<\vartheta<1),
+  \end{array}      
+\end{equation}
+since $\Delta^\circ(t,t)=(\vecderiv{x},\vecderiv{x})=0$. Because of the 
+continuity of $\vecderiv{x}(t)$ then $\Delta^{\circ\circ}$ is also, for constant
+$\tau$, a continuous function of $t$. Therefore $D$ is arbitrarily close to
+\begin{equation}
+  \label{eq:d_approx}
+  {h^2\over 2}\Delta^{\circ\circ}(t+\vartheta h, t+ \vartheta h)>0
+\end{equation}
+and hence positive.
+
+We find then that curve arcs with $(\vecderiv{x},\vecderivv{x})\neq 0$ are 
+locally convex and have no inflection points. We will mostly limit ourselves
+to consider such curve arcs. Furthermore we assume that the integral
+\begin{equation}
+  \label{eq:affine_arc_length}
+  s_{12}=\int_{t_1}^{t_2}(\vecderiv{x},\vecderivv{x})^{1/3}dt
+\end{equation}
+exists. Then a parameter $s$ may be defined by the condition
+\begin{equation}
+  \label{eq:affine_natural_param}
+  \left({d\vecx\over ds},{d^2\vecx\over ds^2}\right)=
+  (\vecx',\vecx'')=1,
+\end{equation}
+and is unique up to the choice of the point $s=0$. Then:
+\begin{equation}
+  \label{eq:param_transform}
+  \vecx'=\vecderiv{x}{dt\over ds},\quad 
+  \vecx''=\vecderivv{x}\left({dt\over ds}\right)^2+\vecderiv{x}{d^2t\over ds^2}.
+\end{equation}
+From this follows
+\begin{equation}
+  \label{eq:affine_deriv_transform1}
+  (\vecx',\vecx'')=(\vecderiv{x},\vecderivv{x})\left({}dt\over ds\right)^2
+\end{equation}
+and then by \eqref{eq:affine_natural_param}
+\begin{equation}
+  \label{eq:affine_arc_length2}
+  s=\int(\vecderiv{x},\vecderivv{x})^{1/3}dt.
+\end{equation}
+By \eqref{eq:no_inflection} $s$ is a monotonous and invertible function of $t$.
+
+We hence understand the integral \eqref{eq:affine_arc_length} as the 
+{\em affine length} of an arc $\vecx(t)\:(t_1\leq t \leq t_2)$.
+
+But it would be equally natural to define affine length by a limit process, 
+as follows: Let (Fig.~\ref{fig:affine_length}) $\vecx_0\vecx^0$ be an
+arc with a certain tangent at every point $\vecx$.  
+
 \bibliographystyle{plain} \bibliography{blaschke}
 
 \end{document}
 
 
- 
+  
