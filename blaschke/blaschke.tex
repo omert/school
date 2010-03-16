@@ -262,6 +262,7 @@ of the form:}
 \end{equation}
 
 \section{Calculation Rules}
+\label{section:calculation_rules}
 It has proven advantageous to introduce some abbreviations, to shorten
 writing and calculations. Let $\myvec{x}$ and $\myvec{y}$ be two points with
 coordinates $x_1,x_2$ and $y_1,y_2$. Then $\myvec{x}+\myvec{y}$ shall denote
@@ -417,8 +418,115 @@ be the parabola's equation in parameterized form, and
   \end{array}  
 \end{equation}
 
+\begin{figure}[htp]
+  \centering
+  \includegraphics{triangle_parabola.pdf}
+  \caption{}
+  \label{fig:triangle_parabola}
+\end{figure}
 
+We calculate the area $f$ of the triangle that is defined by the line elements
+$\myvec{x},\myvec{x}';\myvec{y},\myvec{y}'$. We denote, as in 
+\eqref{eq:parabola_def2}, the derivative with respect to $t$ by dots,
+and so
+\begin{equation}
+  \label{eq:triangle_area_vector}
+  f={1\over 2}{(\dot{\myvec{x}}_0,\myvec{x}_1-\myvec{x}_0)(\myvec{x}_1-\myvec{x}_0,\dot{\myvec{x}}_1)
+    \over (\dot{\myvec{x}}_0,\dot{\myvec{x}}_1)}.
+\end{equation}
+By substituting 
+\begin{equation*} 
+  \myvec{x}_1-\myvec{x}_0=\dot{\myvec{x}}_0t_1+\ddot{\myvec{x}}_0{t_1^2\over 2!},\quad \dot{\myvec{x}}_1=\dot{\myvec{x}}_0+t_1\ddot{\myvec{x}}_0,
+\end{equation*}
+we find that
+\begin{equation*}
+  \begin{array}{rcl}
+    (\dot{\myvec{x}}_0,\myvec{x}_1-\myvec{x}_0)&=&{t_1^2\over 2}(\dot{\myvec{x}}_0,\ddot{\myvec{x}}_0),\\
+    (\myvec{x}_1-\myvec{x}_0,\dot{\myvec{x}}_1)&=&{t_1^2\over 2}(\dot{\myvec{x}}_0,\ddot{\myvec{x}}_0),\\
+    (\dot{\myvec{x}}_0,\dot{\myvec{x}}_1)&=&t_1(\dot{\myvec{x}}_0,\ddot{\myvec{x}}_0)
+  \end{array}
+\end{equation*}
+and hence
+\begin{equation}
+  \label{eq:triangle_area_parabola}
+  f={1\over 8}t_1^3(\dot{\myvec{x}}_0,\ddot{\myvec{x}}_0).
+\end{equation}
+Accordingly, it is clear that through the points $t_1$ and $t_2$ the parabola
+defines a triangle of area
+\begin{equation}
+  \label{eq:parabola_defines_area}
+  f(t_1,t_2)={1\over 8}(t_2-t_1)^3(\dot{\myvec{x}}_0,\ddot{\myvec{x}}_0).
+\end{equation}
+We have then (Fig.~\ref{fig:triangle_parabola})
+\begin{equation}
+  \label{eq:affine_distance_additive}
+  f^{1/3}(t_1,t_2)+f^{1/3}(t_2,t_3)={1\over 2}(\dot{\myvec{x}}_0,\ddot{\myvec{x}}_0)^{1/3}\left[t_2-t_1+t_3-t_2\right]=f^{1/3}(t_1,t_3),
+\end{equation}
+where the third root is taken to be real. $f^{1/3}$ possesses then an 
+additivity theorem that is analogous to that of distance in motion geometry. we
+state then:
 
+{\em The affine distance $r$ of the line elements 
+$\myvec{x},\myvec{x}';\myvec{y},\myvec{y}'$ is 
+$$r=2\cdot f^{1/3},$$
+where $f$ is the area of the triangle determined by 
+$\myvec{x},\myvec{x}';\myvec{y},\myvec{y}'$, and the third root is taken to be
+real.}
+
+We would like to reformulate this newly found property of parabolas. Instead of
+$t$ we introduce a new parameter $s$ by the condition
+\begin{equation}
+  \label{eq:natural_parameter}
+  \left({d\myvec{x}\over ds},{d^2\myvec{x}\over ds^2}\right)=1.
+\end{equation}
+This condition is invariant under equiareal affinities, as the following 
+observation shows.
+
+Consider a curve in parameterized form:
+\begin{equation}
+  \label{eq:parameterized_curve}
+  x_1=x_1(t),\quad x_2=x_2(t),
+\end{equation}
+and subject it to the transformation 
+\begin{equation*}
+  x_i^*=c_{i0}+c_{i1}x_1+c_{i2}x_2,\quad (i=1,2;\: c_{11}c_{22}-c_{12}c_{21}=1),
+  \tag{\ref{eq:equiareal_affinities}}
+\end{equation*}
+so that the $k$-th derivatives of the coordinates experience the appropriate
+homogeneous substitution
+\begin{equation}
+  \label{eq:deriv_transform}
+  x_i^{(k)*}=c_{i1}x_1^{(k)}+c_{i2}x_2^{(k)}, \quad (i=1,2).
+\end{equation}
+By the definitions in Section ~\ref{section:calculation_rules}, $x_1^{(k)}$ and
+$x_2^{(k)}$ are the components of a vector $\myvec{x}^{(k)}$, and by 
+\eqref{eq:xy_det_transformed_short} the determinants 
+$(\myvec{x}^{(k)},\myvec{x}^{(l)})$ are invariant under equiareal affinities.
+
+The parameter $s$ for the parabola is therefore by \eqref{eq:natural_parameter}
+affinely invariant, and hence fixed, up to the choice of the point $s=0$. It
+is
+\begin{equation*}
+  s=(\dot{\myvec{x}}_0,\ddot{\myvec{x}}_0)^{1/3}t+\mbox{const}
+\end{equation*}
+and therefore by \eqref{eq:parabola_defines_area}
+\begin{equation}
+  \label{eq:area_by_natural_param}
+  f(s_1,s_2)={1\over 8}(s_2-s_1)^3.
+\end{equation}
+We have therefore proved the following theorem:
+
+{\em Given a parabola parameterized by parameter $s$ such that
+  \begin{equation}
+    \left({d\myvec{x}\over ds},{d^2\myvec{x}\over ds^2}\right)=1.
+    \tag{\ref{eq:natural_parameter}}
+  \end{equation}
+  then the affine distance between line elements $s_1$ and $s_2$ is $s_2-s_1$.}
+Instead of this we would also like to say: {\em The parabola between the points
+$s_1$ and $s_2$ has the affine length $s_2-s_1$.}
+
+The addition theorem \eqref{eq:affine_distance_additive} for areas 
+(Fig.~\ref{fig:triangle_parabola}) was already known to A.F. M\"obius.
 \bibliographystyle{plain} \bibliography{blaschke}
 
 \end{document}
