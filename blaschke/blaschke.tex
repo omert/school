@@ -22,7 +22,7 @@
 \newcommand{\myvec}[1]{\mathfrak{#1}}
 \newcommand{\vecx}{\myvec{x}}
 \newcommand{\vecy}{\myvec{y}}
-\newcommand{\vecz}{\vecz}
+%\newcommand{\myvec{z}}{\myvec{z}}
 \newcommand{\vecderiv}[1]{\dot{\myvec{#1}}}
 \newcommand{\vecderivv}[1]{\ddot{\myvec{#1}}}
 
@@ -326,9 +326,9 @@ $a\vecx+b\vecy=\myvec{o}$ and $a$ and $b$ are not both zero.
 The following example shows how the notation above can be used to perform
 calculations without explicit use of coordinates. Let $\vecx$ and
 $\vecy$ be two points, with lines crossing them, parallel to $\vecx'$
-and $\vecy'$. If $\vecz$ is the point of intersection of these lines
+and $\vecy'$. If $\myvec{z}$ is the point of intersection of these lines
 then we would like to calculate the area $f$ of the triangle $\vecx$
-$\vecy$ $\vecz$ (Fig.~\ref{fig:triangle_area_example}).
+$\vecy$ $\myvec{z}$ (Fig.~\ref{fig:triangle_area_example}).
 
 \begin{figure}[htp]
   \centering
@@ -337,20 +337,20 @@ $\vecy$ $\vecz$ (Fig.~\ref{fig:triangle_area_example}).
   \label{fig:triangle_area_example}
 \end{figure}
 
-Since the vector from $\vecx$ to $\vecz$ has direction $\vecx'$
-and the vector from $\vecy$ to $\vecz$ has direction $\vecy'$ then
+Since the vector from $\vecx$ to $\myvec{z}$ has direction $\vecx'$
+and the vector from $\vecy$ to $\myvec{z}$ has direction $\vecy'$ then
 \begin{equation}
-  \vecz=\vecx+\alpha \vecx'=\vecy+\beta \vecy'
+  \myvec{z}=\vecx+\alpha \vecx'=\vecy+\beta \vecy'
 \end{equation}
 or
 \begin{equation}
   \label{eq:triangle_area_example1}
-  \vecz-\vecx=\alpha \vecx'=(\vecy-\vecx)+\beta \vecy'.
+  \myvec{z}-\vecx=\alpha \vecx'=(\vecy-\vecx)+\beta \vecy'.
 \end{equation}
 we can therefore claim that for the area we are interested in, it holds that 
 \begin{equation}
   \label{eq:triangle_area_example2}
-  f={1\over 2}(\vecz-\vecx,\vecy-\vecx)
+  f={1\over 2}(\myvec{z}-\vecx,\vecy-\vecx)
   ={\alpha \over 2}(\vecx',\vecy-\vecx).
 \end{equation}
 It follows from \eqref{eq:triangle_area_example1} that
@@ -375,7 +375,7 @@ and two directions $\vecx'$, $\vecy'$, that is two ``line elements'',
 we can assign each such a construct a number 
 $f(\vecx,\vecx';\vecy,\vecy')$ that is invariant under all
 equiareal affinities. This number is namely the area of the triangle 
-$\vecx$ $\vecy$ $\vecz$ (Fig.~\ref{fig:triangle_area_example}).
+$\vecx$ $\vecy$ $\myvec{z}$ (Fig.~\ref{fig:triangle_area_example}).
 
 We now claim that $f(\vecx,\vecx';\vecy,\vecy')$ is in some
 sense the only operation that thus maps numbers to line elements. More 
@@ -615,9 +615,101 @@ By \eqref{eq:no_inflection} $s$ is a monotonous and invertible function of $t$.
 We hence understand the integral \eqref{eq:affine_arc_length} as the 
 {\em affine length} of an arc $\vecx(t)\:(t_1\leq t \leq t_2)$.
 
-But it would be equally natural to define affine length by a limit process, 
+\begin{figure}[htp]
+  \centering
+  \includegraphics{affine_length.pdf}
+  \caption{}
+  \label{fig:affine_length}
+\end{figure}
+
+But it would be equally natural to define affine length by a limiting process, 
 as follows: Let (Fig.~\ref{fig:affine_length}) $\vecx_0\vecx^0$ be an
-arc with a certain tangent at every point $\vecx$.  
+arc with a certain tangent at every point $\vecx$; let 
+$(\vecx_0,\vecx_1,\vecx_2,\vecx_{n+1}=\vecx^0)$ be subsequent points of the
+curve, and $\overline{\vecx_k\vecx_{k+1}}$ the affine distance between the line
+elements $\vecx_k$ and $\vecx_{k+1}$. Now consider such divisions of the arc 
+that $\overline{\vecx_k\vecx_{k+1}}$ becomes arbitrarily small and
+\begin{equation}
+  \label{eq:affine_length_limit}
+  \sum_0^n\overline{\vecx_k\vecx_{k+1}}=S_n
+\end{equation}
+converges to some value $S$ for all such divisions. Then $S$ is the affine 
+length of the 
+arc $\vecx_0\vecx^0$.\footnote{G. Pick defined affine length similarly in 1915.}
+
+{\bf (OT: original phrasing not clear to me...)}
+
+It is remarkable that these two definitions essentially agree. It is easy to
+see that the second definition does not require the existence of a second
+derivative and is therefore somewhat more general. It remains to be shown that
+{\em when $(\vecderiv{x},\vecderivv{x})>0$ and the integral 
+  \eqref{eq:affine_arc_length} exists, then the above described limiting 
+  process leads to the same result, and $S_0^0=s_0^0$.}
+
+The arc $\vecx_0\vecx^0$ is given by $\vecx(t)\:(t_0\leq t \leq t^0)$. We let
+\begin{equation}
+  \label{eq:bound_curvature}
+  (\vecderiv{x},\vecderivv{x})>\alpha>0 \quad (t_0\leq t \leq t^0).
+\end{equation}
+Following \eqref{eq:triangle_area_vector},
+\begin{equation}
+  \label{eq:kth_segment_len}
+  f_k={1\over 8}\left(\overline{\vecx_k\vecx_{k+1}}\right)^3
+  = {1 \over 2}
+  { (\vecderiv{x}_k,\vecx_{k+1}-\vecx_k)
+    (\vecx_{k+1}-\vecx_k,\vecderiv{x}_{k+1})
+    \over
+    (\vecderiv{x}_k,\vecderiv{x}_{k+1})
+  }
+\end{equation}
+and if we again enlist
+\begin{equation}
+  \label{eq:delta}
+  \Delta(t,\tau)=(\vecderiv{x}(t),\vecx(\tau))
+\end{equation}
+then we arrive at relations similar to those of the beginning of this section:
+\begin{equation}
+  \label{eq:delta_relations}
+  \begin{array}{lcr}
+    (\vecderiv{x}_k,\vecx_{k+1}-\vecx_k)&=&{h_k^2\over 2}\Delta^{\circ\circ}(t_k,t_k+\vartheta_kh_k),\quad 0\leq \vartheta_k\leq 1;\\
+    (\vecderiv{x}_{k+1},\vecx_k-\vecx_{k+1})&=&{h_k^2\over 2}\Delta^{\circ\circ}(t_{k+1},t_k+\vartheta'_kh_k),\quad 0\leq \vartheta'_k\leq 1;\\
+    (\vecderiv{x}_{k+1},\vecderiv{x}_{k+1})&=&h_k\Delta^{\circ\circ}(t_k,t_k+\vartheta''_kh_k),\quad 0\leq \vartheta''_k\leq 1;
+  \end{array}
+\end{equation}
+The circles again denote derivatives with respect to $\tau$, and $h_k$ is
+defined to equal $t_{k+1}-t_l$.
+
+We now consider that $\Delta^{\circ\circ}(t,\tau)$ is continuous in $t$ when
+$\tau$ is held constant, and that $\Delta^{\circ\circ}(t,t) > a$ for 
+$t_o\leq t\leq t_1$. It is easy to see that for every $\delta$ there exists
+an $\epsilon$ such that
+\begin{equation}
+  \label{eq:delta_bound}
+  |\Delta^{\circ\circ}(t,t+h)-\Delta^{\circ\circ}(t+h,t+h)|
+  < \delta\Delta^{\circ\circ}(t+h,t+h)
+\end{equation}
+when $|h|<\epsilon$, and therefore, by \eqref{eq:kth_segment_len}, we can write
+\begin{equation}
+  \label{eq:kth_segment_len2}
+  f_k={h_k^3\over 8}
+  {\Delta^{\circ\circ}(t_k+\vartheta_kh_k, t_k+\vartheta_kh_k)
+    \cdot \Delta^{\circ\circ}(t_{k+1}+\vartheta'_kh_k, t_k+\vartheta'_kh_k)
+    \over 
+    \Delta^{\circ\circ}(t_k+\vartheta''_kh_k, t_k+\vartheta''_kh_k)
+  }\cdot \eta_k,
+\end{equation}
+where 
+\begin{equation}
+  \label{eq:eta_k_def}
+  \eta_k={(1=\xi_k)(1+\xi'_k)\over 1+\xi''_k}=(1+\xi'''_k)^3
+\end{equation}
+and for all $\xi_k$ hold bounds of the form
+\begin{equation}
+  \label{eq:xi_bounds}
+  |\xi_k|<\delta, \quad \mathrm{when} \quad |h_k|<\epsilon.
+\end{equation}
+
+
 
 \bibliographystyle{plain} \bibliography{blaschke}
 
