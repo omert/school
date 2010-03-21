@@ -205,18 +205,17 @@ as in the figure, on the left of the positive $x_1$ axis, and so will consider
 as positive that orientation for which a circumscribed triangle remains on 
 the left.
 
-{\bf (OT - Grenzuebergang?)}
-
-Since one can construct, through addition and translation, any arbitrary planar 
-figure using triangles with a corner at $\myvec{o}$, then a homogeneous 
-affinity with determinant $d$ multiplies areas by factor $d$.
-The area delimited by a closed directed curve $\mathfrak{C}$ is what the path
-integral
+One can construct, through addition and taking of limits, any arbitrary 
+planar figure using triangles with a corner at $\myvec{o}$. Therefore a 
+homogeneous affinity with determinant $d$ multiplies areas by factor $d$.
+The path integral
 \begin{equation}
   \label{eq:curve_area}
   F={1\over 2}\oint_\mathfrak{C}x_1dx_2-x_2dx_1
   ={1\over 2}\oint_\mathfrak{C}(\vecx,d\vecx)
 \end{equation}
+is intepreted to be the area delimited by a closed directed curve 
+$\mathfrak{C}$.
 \begin{figure}[htp]
   \begin{center}
     \subfigure[]{
@@ -230,7 +229,7 @@ integral
   \end{center}
   \caption{}
 \end{figure}
-is interpreted to be. Thence follows
+Thence follows
 \begin{equation}
   \label{eq:area_transformation}
   {1\over 2}\oint_\mathfrak{C}x^*_1dx^*_2-x^*_2dx^*_1
@@ -390,7 +389,7 @@ of the same area. Hence $\phi$ cannot depend on the specific values
 $\vecx,\vecx';\vecy,\vecy'$. By similar consideration one can
 show in Bewegungsgeometrie\footnote{``Bewegungsgeometrie'' may be 
 translated as
-``Motion geometry'', but no term of widespread usage exists in English (OT).} 
+``Motion geometry'', but no term of widespread usage exists in English (translator).} 
 that the motion invariants of two points can be 
 expressed as functions of the distance between them.
 
@@ -628,17 +627,15 @@ as follows: Let (Fig.~\ref{fig:affine_length}) $\vecx_0\vecx^0$ be an
 arc with a certain tangent at every point $\vecx$; let 
 $(\vecx_0,\vecx_1,\vecx_2,\vecx_{n+1}=\vecx^0)$ be subsequent points of the
 curve, and $\overline{\vecx_k\vecx_{k+1}}$ the affine distance between the line
-elements $\vecx_k$ and $\vecx_{k+1}$. Now consider such divisions of the arc 
-that $\overline{\vecx_k\vecx_{k+1}}$ becomes arbitrarily small and
+elements $\vecx_k$ and $\vecx_{k+1}$. Now if, for such divisions of the arc, 
+as $\overline{\vecx_k\vecx_{k+1}}$ becomes arbitrarily small then
 \begin{equation}
   \label{eq:affine_length_limit}
   \sum_0^n\overline{\vecx_k\vecx_{k+1}}=S_n
 \end{equation}
-converges to some value $S$ for all such divisions. Then $S$ is the affine 
+converges to some value $S$ for all such divisions, then $S$ is the affine 
 length of the 
 arc $\vecx_0\vecx^0$.\footnote{G. Pick defined affine length similarly in 1915.}
-
-{\bf (OT: original phrasing not clear to me...)}
 
 It is remarkable that these two definitions essentially agree. It is easy to
 see that the second definition does not require the existence of a second
