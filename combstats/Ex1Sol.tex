@@ -1,0 +1,199 @@
+\documentclass[11pt]{article} \usepackage{amssymb}
+\usepackage{amsfonts} \usepackage{amsmath} \usepackage{amsthm} \usepackage{bm}
+\usepackage{latexsym} \usepackage{epsfig}
+
+\setlength{\textwidth}{6.5 in} \setlength{\textheight}{8.25in}
+\setlength{\oddsidemargin}{0in} \setlength{\topmargin}{0in}
+\addtolength{\textheight}{.8in} \addtolength{\voffset}{-.5in}
+
+\newtheorem*{theorem*}{Theorem}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem*{proposition*}{Proposition}
+
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{example}[theorem]{Example}
+%\newenvironment{proof}{\noindent \textbf{Proof:}}{$\Box$}
+
+\newcommand{\ignore}[1]{}
+
+\newcommand{\enote}[1]{} \newcommand{\knote}[1]{}
+\newcommand{\rnote}[1]{}
+
+
+\DeclareMathOperator{\Support}{Supp} \DeclareMathOperator{\Opt}{Opt}
+\DeclareMathOperator{\Ordo}{\mathcal{O}}
+\newcommand{\MaxkCSP}{\textsc{Max $k$-CSP}}
+\newcommand{\MaxkCSPq}{\textsc{Max $k$-CSP$_{q}$}}
+\newcommand{\MaxCSP}[1]{\textsc{Max CSP}(#1)} \renewcommand{\Pr}{{\bf
+    P}} \renewcommand{\P}{{\bf P}} \newcommand{\Px}{\mathop{\bf P\/}}
+\newcommand{\E}{{\bf E}} \newcommand{\Cov}{{\bf Cov}}
+\newcommand{\Var}{{\bf Var}} \newcommand{\Varx}{\mathop{\bf Var\/}}
+
+\newcommand{\bits}{\{-1,1\}}
+
+\newcommand{\nsmaja}{\textstyle{\frac{2}{\pi}} \arcsin \rho}
+
+\newcommand{\Inf}{\mathrm{Inf}} \newcommand{\I}{\mathrm{I}}
+\newcommand{\J}{\mathrm{J}}
+
+\newcommand{\eps}{\epsilon} \newcommand{\lam}{\lambda}
+
+% \newcommand{\trunc}{\ell_{2,[-1,1]}}
+\newcommand{\trunc}{\zeta} \newcommand{\truncprod}{\chi}
+
+\newcommand{\N}{\mathbb N} \newcommand{\R}{\mathbb R}
+\newcommand{\Z}{\mathbb Z} \newcommand{\CalE}{{\mathcal{E}}}
+\newcommand{\CalC}{{\mathcal{C}}} \newcommand{\CalM}{{\mathcal{M}}}
+\newcommand{\CalR}{{\mathcal{R}}} \newcommand{\CalS}{{\mathcal{S}}}
+\newcommand{\CalV}{{\mathcal{V}}}
+\newcommand{\CalX}{{\boldsymbol{\mathcal{X}}}}
+\newcommand{\CalG}{{\boldsymbol{\mathcal{G}}}}
+\newcommand{\CalH}{{\boldsymbol{\mathcal{H}}}}
+\newcommand{\CalY}{{\boldsymbol{\mathcal{Y}}}}
+\newcommand{\CalZ}{{\boldsymbol{\mathcal{Z}}}}
+\newcommand{\CalW}{{\boldsymbol{\mathcal{W}}}}
+\newcommand{\CalF}{{\mathcal{Z}}}
+% \newcommand{\boldG}{{\boldsymbol G}}
+% \newcommand{\boldQ}{{\boldsymbol Q}}
+% \newcommand{\boldP}{{\boldsymbol P}}
+% \newcommand{\boldR}{{\boldsymbol R}}
+% \newcommand{\boldS}{{\boldsymbol S}}
+% \newcommand{\boldX}{{\boldsymbol X}}
+% \newcommand{\boldB}{{\boldsymbol B}}
+% \newcommand{\boldY}{{\boldsymbol Y}}
+% \newcommand{\boldZ}{{\boldsymbol Z}}
+% \newcommand{\boldV}{{\boldsymbol V}}
+\newcommand{\boldi}{{\boldsymbol i}} \newcommand{\boldj}{{\boldsymbol
+    j}} \newcommand{\boldk}{{\boldsymbol k}}
+\newcommand{\boldr}{{\boldsymbol r}}
+\newcommand{\boldsigma}{{\boldsymbol \sigma}}
+\newcommand{\boldupsilon}{{\boldsymbol \upsilon}}
+\newcommand{\hone}{{\boldsymbol{H1}}}
+\newcommand{\htwo}{\boldsymbol{H2}}
+\newcommand{\hthree}{\boldsymbol{H3}}
+\newcommand{\hfour}{\boldsymbol{H4}}
+
+
+\newcommand{\sgn}{\mathrm{sgn}} \newcommand{\Maj}{\mathrm{Maj}}
+\newcommand{\Acyc}{\mathrm{Acyc}}
+\newcommand{\UniqMax}{\mathrm{UniqMax}}
+\newcommand{\Thr}{\mathrm{Thr}} \newcommand{\littlesum}{{\textstyle
+    \sum}}
+
+\newcommand{\half}{{\textstyle \frac12}}
+\newcommand{\third}{{\textstyle \frac13}}
+\newcommand{\fourth}{{\textstyle \frac14}}
+\newcommand{\fifth}{{\textstyle \frac15}}
+
+\newcommand{\Stab}{\mathbb{S}}
+\newcommand{\StabThr}[2]{\Gamma_{#1}(#2)}
+\newcommand{\StabThrmin}[2]{{\underline{\Gamma}}_{#1}(#2)}
+\newcommand{\StabThrmax}[2]{{\overline{\Gamma}}_{#1}(#2)}
+\newcommand{\TestFcn}{\Psi}
+
+\renewcommand{\phi}{\varphi}
+
+\begin{document}
+\title{Combinatorial Statistics - Homework Set Solution}
+
+\date{\today}
+\maketitle
+\subsection{Reconstruction}
+\begin{itemize}
+\item
+{\em Find an estimation procedure which is guaranteed to estimate $s$ with probability at least $1-\delta$ using at most 
+$C_1 \log n + C_2 \log (1/\delta)$ samples. What are the values of $C_1$ and $C_2$?  }
+
+Given $k$ samples, the probability that the majority of  the $X_1(j)$'s are 
+different than $s_1$
+is lower than $2\exp(-2k/16)$, by the large deviation result above. 
+The probability of an error in at least one of the $s_i$'s is then at most
+$p=1-(1-2\exp(-2k/16))^n<2n\exp(-2k/16)$. Hence if 
+$p<\delta$ then $2n\exp(-2k/16)<\delta$, or $k>8\log n+8\log(1/\delta)+8\log 2$.
+
+\item
+{\em Show that there exist constants $C_3$ and $C_4$ such that for all $n$ and $\delta < 1/4$ and for all estimation algorithms 
+which estimate $s$ with probability at least $1-\delta$ it holds that $k \geq C_3 \log n + C_4 \log (1/\delta)$. 
+What are the values of $C_3$ and $C_4$ you have obtained? }
+
+Let $A$ be an estimation algorithm. Assume $A$'s estimate for $s_i$ depends
+only on the $X_i(j)$'s, otherwise $A$ is certainly suboptimal. Now when
+$s_1=1$, there must exist a set $X_1(j)$ such that $A$'s 
+estimate of $s_1$ is wrong (otherwise $A$ would never estimate $s_1$ 
+correctly when $s_1=0$). This probability for this outcome is at most $4^{-k}$,
+and the same holds for the rest of the $s_i$'s. Hence the probability of an
+error in at least one of the $s_i$'s is 
+$1-\left(1-4^{-k}\right)^n<n4^{-k}$. For this to be smaller than $\delta$ we must have
+$k>4\log n+4\log(1/\delta)$.
+
+\end{itemize}
+
+\subsection{Group Testing}
+\begin{itemize}
+\item
+{\em Can you isolate at most $0.1\%$ of the population that contains all the carriers with probability of error at most $10^{-7}$ 
+and cost at most $5 \times 10^{7}\$$?}
+
+Let $m(t)$ be the size of the population that is suspect of being infected,
+at time $t$, so that $m(0)=n$. At time $t$, divide the population into 200 groups
+of equal sizes at random, and test each one twice. Remove from the population
+any groups which twice 
+
+choose at random a group of size
+$c \cdot m(t)$, and test it twice for infection. If it is not infected both 
+times then remove
+it from other population, so that $m(t+1)=m(t)-cm(t)$. Otherwise $m(t+1)=m(t)$.
+The process stops when $m(t)=n/1000$, or when the budget runs out (in which
+case one could, for example, declare the whole population as not infected,
+making a mistake knowingly).
+
+Let $b_t$ be the event that at time $t$ the group tested was found to be 
+infected. Then by the Poisson approximation the probability that $b_t=1$
+is at least $\exp(-100c)$. 
+
+The probability that a group of size $cm(t)$ is not infected is at least
+$\exp(-100c)$, by the poisson approximation. Hence 
+$\E[\log m(t)-\log m(t+1)] = -\log (1-c)\exp(-100c)$, and 
+$\E[\log n / m(t)]=-t\log (1-c)\exp(-100c)$. 
+
+
+Let $f(c)=-\log(1-c)\exp(-100c)$. Then 
+$${df\over dc}={\exp(-100c)\over 1-c}+100\log(1-c)\exp(-100c)$$
+and the minimum is achieved when $100\log(1-c)=1/(1-c)$. The solution 
+\item
+{\em Can you find all of the infected individuals with probability of error 
+$10^{-7}$
+and cost at most $2 \times 10^{8}\$$?}
+
+\end{itemize}
+
+
+
+
+
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
