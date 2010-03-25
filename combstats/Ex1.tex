@@ -100,16 +100,16 @@
 \renewcommand{\phi}{\varphi}
 
 \begin{document}
-\title{Combinatorial Statistics - Homework set 1}
+\title{Combinatorial Statistics - Homework Set 1}
 
 \date{\today}
 \maketitle
 \begin{abstract}
-The goal of this homework set is to practice the use of concentration results and show the example of "group testing".
+The goal of this homework set is to practice the use of concentration results and show examples of "group testing".
 \end{abstract}
 
 \subsubsection{Reminder: Concentration}
-Recall the following "Large Deviations" result (Cram\'{e}r).
+Recall the following "Large Deviations" result (Cram\'{e}r):
 \begin{theorem}
 Let $X_1,\ldots,X_n$ be i.i.d. where $\P[X_i = 1] = p_i$. Let $p = Avg(p_i)$. Then
 \[
@@ -119,30 +119,30 @@ P[|Avg(X_i) - Avg(p_i)| > a] \leq 2 \exp(-2n a^2).
 
 \subsection{Reconstruction}
 Let $s \in \{0,1\}^n$ and let $X_i(j)$ be independent and $0,1$ valued with $\P[X_i(j) = 1] = 1/4 + 1/2 s_j$. 
-Consider the following statistical task of estimating $s$ given vectors $X_1,\ldots,X_k$ with probability of error at most $\delta$.
+Consider the statistical task of estimating $s$, given vectors $X_1,\ldots,X_k$, with probability of error at most $\delta$.
 \begin{itemize}
 \item
 Find an estimation procedure which is guaranteed to estimate $s$ with probability at least $1-\delta$ using at most 
 $C_1 \log n + C_2 \log (1/\delta)$ samples. What are the values of $C_1$ and $C_2$?  
 \item
-Show that there exist constant $C_3$ and $C_4$ such that for all $n$ and $\delta < 1/4$ and for all estimation algorithms 
+Show that there exist constants $C_3$ and $C_4$ such that for all $n$ and $\delta < 1/4$ and for all estimation algorithms 
 which estimate $s$ with probability at least $1-\delta$ it holds that $k \geq C_3 \log n + C_4 \log (1/\delta)$. 
 What are the values of $C_3$ and $C_4$ you have obtained? 
 \end{itemize}
 
 \subsection{Group Testing}
-Suppose that the population of the US $n=10^8$ need to be tests for a rare virus which infected between $1$ and $100$ people. 
-Samples are drawn from all of the population. It is possible to test for each set $S$ of people if at least one of them 
-is a carrier of the virus. The cost of each such test is $10^4\$$. The probability of each such test of having either a false positive of a false negative is $10^{-6}$. 
+Suppose that the population of the US, $n=10^8$, need to be tested for a rare virus which infected between $1$ and $100$ people. 
+Samples are drawn from all of the population. It is possible to test, for any set $S$ of people, whether at least one of them 
+is a carrier of the virus. The cost of each such test is $\$10^4$. The probability of such a test having either a false positive or a false negative is $10^{-6}$. 
 
 \begin{itemize}
 \item
 Can you isolate at most $0.1\%$ of the population that contains all the carriers with probability of error at most $10^{-7}$ 
-and cost at most $5 \times 10^{7}\$$?
+and cost at most $\$5 \times 10^{7}$?
 \item
 Can you find all of the infected individuals with probability of error 
 $10^{-7}$
-and cost at most $2 \times 10^{8}\$$?
+and cost at most $\$2 \times 10^{8}$?
 \end{itemize}
 
 
