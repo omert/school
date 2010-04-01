@@ -104,7 +104,7 @@
 \renewcommand{\phi}{\varphi}
 
 \begin{document}
-\title{Complexity - Exercise 2}
+\title{Complexity - Exercise 1}
 
  \author{Omer Tamuz, 035696574}
 \maketitle
@@ -165,9 +165,12 @@
     This function {\em is } a weak one way function. If it were not then there
     would be an algorithm $A$ that inverts $g_1$ with probability of error 
     less than $1/p(n)$ for some polynomial $n$. Let $A'(x)$ be the algorithm
-    that returns $A(1x)$ minus the initial one. Then $A'$ inverts $f$ with
-    error probability that is less then (say) $1/2$ and $f$ would not be a
-    strong one-way function.
+    that returns $A(1x)$ minus the initial one. Then, even if the instances for
+    which $A$ is wrong are all of the $1x$ form, $A'$ would err at most 
+    $2/p(n)$ of the time, since the inputs of the form $1x$ comprise half the 
+    space of inputs. Thus $A'$ inverts $f$ with
+    error probability that is less then $2/p(n)$ (less than constant would 
+    already do) and $f$ is not a strong one-way function - contradiction.
 
   \item {\bf $g_2(x_1,x_2) = x_1 f(x_2)$ where $|x_1|=|x_2|$}
 
