@@ -1,0 +1,196 @@
+\documentclass[11pt]{article} \usepackage{amssymb}
+\usepackage{amsfonts} \usepackage{amsmath} \usepackage{bm}
+\usepackage{latexsym} \usepackage{epsfig}
+
+\setlength{\textwidth}{6.5 in} \setlength{\textheight}{8.25in}
+\setlength{\oddsidemargin}{0in} \setlength{\topmargin}{0in}
+\addtolength{\textheight}{.8in} \addtolength{\voffset}{-.5in}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{example}[theorem]{Example}
+\newenvironment{proof}{\noindent \textbf{Proof:}}{$\Box$}
+
+\newcommand{\ignore}[1]{}
+
+\newcommand{\enote}[1]{} \newcommand{\knote}[1]{}
+\newcommand{\rnote}[1]{}
+
+
+
+% \newcommand{\enote}[1]{{\bf [[Elchanan:} {\emph{#1}}{\bf ]]}}
+% \newcommand{\knote}[1]{{\bf [[Krzysztof:} {\emph{#1}}{\bf ]]}}
+% \newcommand{\rnote}[1]{{\bf [[Ryan:} {\emph{#1}}{\bf ]]}}
+
+
+
+\DeclareMathOperator{\Support}{Supp} \DeclareMathOperator{\Opt}{Opt}
+\DeclareMathOperator{\Ordo}{\mathcal{O}}
+\newcommand{\MaxkCSP}{\textsc{Max $k$-CSP}}
+\newcommand{\MaxkCSPq}{\textsc{Max $k$-CSP$_{q}$}}
+\newcommand{\MaxCSP}[1]{\textsc{Max CSP}(#1)} \renewcommand{\Pr}{{\bf
+    P}} \renewcommand{\P}{{\bf P}} \newcommand{\Px}{\mathop{\bf P\/}}
+\newcommand{\E}{{\bf E}} \newcommand{\Cov}{{\bf Cov}}
+\newcommand{\Var}{{\bf Var}} \newcommand{\Varx}{\mathop{\bf Var\/}}
+
+\newcommand{\bits}{\{-1,1\}}
+
+\newcommand{\nsmaja}{\textstyle{\frac{2}{\pi}} \arcsin \rho}
+
+\newcommand{\Inf}{\mathrm{Inf}} \newcommand{\I}{\mathrm{I}}
+\newcommand{\J}{\mathrm{J}}
+
+\newcommand{\eps}{\epsilon} \newcommand{\lam}{\lambda}
+
+% \newcommand{\trunc}{\ell_{2,[-1,1]}}
+\newcommand{\trunc}{\zeta} \newcommand{\truncprod}{\chi}
+
+\newcommand{\N}{\mathbb N} \newcommand{\R}{\mathbb R}
+\newcommand{\Z}{\mathbb Z} \newcommand{\CalE}{{\mathcal{E}}}
+\newcommand{\CalC}{{\mathcal{C}}} \newcommand{\CalM}{{\mathcal{M}}}
+\newcommand{\CalR}{{\mathcal{R}}} \newcommand{\CalS}{{\mathcal{S}}}
+\newcommand{\CalV}{{\mathcal{V}}}
+\newcommand{\CalX}{{\boldsymbol{\mathcal{X}}}}
+\newcommand{\CalG}{{\boldsymbol{\mathcal{G}}}}
+\newcommand{\CalH}{{\boldsymbol{\mathcal{H}}}}
+\newcommand{\CalY}{{\boldsymbol{\mathcal{Y}}}}
+\newcommand{\CalZ}{{\boldsymbol{\mathcal{Z}}}}
+\newcommand{\CalW}{{\boldsymbol{\mathcal{W}}}}
+\newcommand{\CalF}{{\mathcal{Z}}}
+% \newcommand{\boldG}{{\boldsymbol G}}
+% \newcommand{\boldQ}{{\boldsymbol Q}}
+% \newcommand{\boldP}{{\boldsymbol P}}
+% \newcommand{\boldR}{{\boldsymbol R}}
+% \newcommand{\boldS}{{\boldsymbol S}}
+% \newcommand{\boldX}{{\boldsymbol X}}
+% \newcommand{\boldB}{{\boldsymbol B}}
+% \newcommand{\boldY}{{\boldsymbol Y}}
+% \newcommand{\boldZ}{{\boldsymbol Z}}
+% \newcommand{\boldV}{{\boldsymbol V}}
+\newcommand{\boldi}{{\boldsymbol i}} \newcommand{\boldj}{{\boldsymbol
+    j}} \newcommand{\boldk}{{\boldsymbol k}}
+\newcommand{\boldr}{{\boldsymbol r}}
+\newcommand{\boldsigma}{{\boldsymbol \sigma}}
+\newcommand{\boldupsilon}{{\boldsymbol \upsilon}}
+\newcommand{\hone}{{\boldsymbol{H1}}}
+\newcommand{\htwo}{\boldsymbol{H2}}
+\newcommand{\hthree}{\boldsymbol{H3}}
+\newcommand{\hfour}{\boldsymbol{H4}}
+
+
+\newcommand{\sgn}{\mathrm{sgn}} \newcommand{\Maj}{\mathrm{Maj}}
+\newcommand{\Acyc}{\mathrm{Acyc}}
+\newcommand{\UniqMax}{\mathrm{UniqMax}}
+\newcommand{\Thr}{\mathrm{Thr}} \newcommand{\littlesum}{{\textstyle
+    \sum}}
+
+\newcommand{\half}{{\textstyle \frac12}}
+\newcommand{\third}{{\textstyle \frac13}}
+\newcommand{\fourth}{{\textstyle \frac14}}
+
+\newcommand{\Stab}{\mathbb{S}}
+\newcommand{\StabThr}[2]{\Gamma_{#1}(#2)}
+\newcommand{\StabThrmin}[2]{{\underline{\Gamma}}_{#1}(#2)}
+\newcommand{\StabThrmax}[2]{{\overline{\Gamma}}_{#1}(#2)}
+\newcommand{\TestFcn}{\Psi}
+
+\renewcommand{\phi}{\varphi}
+
+\begin{document}
+\title{Complexity - Exercise 2}
+
+ \author{Omer Tamuz, 035696574}
+\maketitle
+
+%EXER 1: Prove that the existence of one-way functions
+%implies the existence of a generator of hard instances
+%(along with solutions) for an NP-relation (i.e., a relation in PC).
+%Recall that I sketched the other direction in class.
+
+%EXER 2: Suppose that $f$ is a strong one-way function (OWF).
+%For each of the following functions $g_i$,
+%indicate whether $g_i$ a strong OWF or only a weak OWF or neither?
+%* $g_1(0x) = 0x$ and $g_1(1x) = 1f(x)$ (i.e., the example from class)
+%* $g_2(x_1,x_2) = x_1 f(x_2)$ where $|x_1|=|x_2|$.
+%* $g_3(x_1,x_2) = x_1 f(x_2)$ where $|x_2|=\log(|x_1|)$.
+%Justify your hardness claims by sketcing a reducibility argumnent
+%and your easiness claims by outlining an efficient algorithm.
+
+\begin{enumerate}
+\item Let $f:\{0,1\}^n\to\{0,1\}^n$ be a (WLOG length preserving) 
+  one-way function. Let $R$ be the relation
+  $\{(y,x)|\:y=f(x)\}$. Let $G$ be a generator that, given $1^n$, picks a random
+  $x$ from the uniform distribution over $\{0,1\}^n$ and returns the pair
+  $(G_1(n),G_2(n))=(f(x),x)$.
+  
+  \begin{claim}
+    $R$ is in $NP$.
+  \end{claim}
+  \begin{proof}
+    Since $f(x)$, by definition, can be calculated efficiently then given a pair
+    $(y,x)$ it is possible to check in polynomial times whether $y=f(x)$ and so 
+    decide if the pair is in $R$.
+  \end{proof}
+  \begin{claim}
+    $G$ is a generator of hard instances of $R$.
+  \end{claim}
+  \begin{proof}
+    $G$ runs in polynomial time, by the definition of one-way functions. We 
+    must then show that it generates hard instances of $R$.
+    
+    Assume by way of contradiction that $G$ is {\em not} a generator of hard
+    instances in $R$. Then there exists a PPT $A$ and a polynomial $p(n)$ such
+    that for infinitely many values of $n$ it holds that
+    $$\P[(G_1(1^n), A(G_1(1^n)))\in R]>1/p(n).$$
+    This, by the definition of $G$, is equivalent to:
+    $$\P_{x\in_R\{0,1\}^n}[A(f(x))\in f^{-1}(f(x))]>1/p(n),$$
+    which is a direct contradiction of the definition of $f$ as a one-way 
+    function.
+  \end{proof}
+  
+\item
+  \begin{itemize}
+  \item {\bf $g_1(0x) = 0x$ and $g_1(1x) = 1f(x)$}
+
+    This function {\em is not} a strong one way function, since the algorithm
+    $A(x)=x$ is correct with probability one half. 
+
+    This function {\em is } a weak one way function. If it were not then there
+    would be an algorithm $A$ that inverts $g_1$ with probability of error 
+    less than $1/p(n)$ for some polynomial $n$. Let $A'(x)$ be the algorithm
+    that returns $A(1x)$ minus the initial one. Then $A'$ inverts $f$ with
+    error probability that is less then (say) $1/2$ and $f$ would not be a
+    strong one-way function.
+
+  \item {\bf $g_2(x_1,x_2) = x_1 f(x_2)$ where $|x_1|=|x_2|$}
+
+    This function is a strong one-way function. Assume it is not. Then there
+    exists an algorithm $A$ that inverts it for infinitely many values of $n$,
+    with non-negligible probability. Let $A'(x)$ be the algorithm that runs
+    $A$ on $xx$ and returns the lower $n/2$ bits. Then $A'$ inverts $f$ for
+    infinitely many values of $n$ with non-negligible probability - 
+    contradiction.
+
+    \item {\bf $g_3(x_1,x_2) = x_1 f(x_2)$ where $|x_2|=\log(|x_1|)$}
+
+      I assume here that $f$ is length preserving.
+
+      Let $A$ be the algorithm, that given $y_1y_2$ with $|y_1|=\log|y_2|$, 
+      calculates $f(x)$ for all $x$ s.t. $|x|=|y_2|$, and returns $y_1,x$, 
+      where $x$ is such that $f(x)=y_2$. Since the calculation of $f$ 
+      is efficient, and since there are only polynomially many instances to
+      calculate (in the length of the input) then $A$ runs in polynomial
+      time and inverts $f$ with probability one. Hence $g_3$ is not one-way - 
+      neither strongly nor weakly.
+  \end{itemize}
+\end{enumerate}
+\end{document}
+
+
