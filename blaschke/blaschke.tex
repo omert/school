@@ -8,6 +8,7 @@
 \captiondelim{}
 \renewcommand{\theequation}{\arabic{equation}}
 \renewcommand{\thefigure}{\arabic{figure}}
+\renewcommand{\thesection}{\S\ \arabic{figure}}
 
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{lemma}[theorem]{Lemma}
@@ -369,7 +370,7 @@ and this substituted into \eqref{eq:triangle_area_example2} yields the desired
 \end{equation}
 
 \section{Affine distance}
-
+\label{sec:affine_distance}
 We would like to return to the result of the exercise above, and understand it
 somewhat differently. We saw that given two points $\vecx$, $\vecy$
 and two directions $\vecx'$, $\vecy'$, that is two ``line elements'', 
@@ -505,7 +506,7 @@ homogeneous substitution
   \label{eq:deriv_transform}
   x_i^{(k)*}=c_{i1}x_1^{(k)}+c_{i2}x_2^{(k)}, \quad (i=1,2).
 \end{equation}
-By the definitions in Section~\ref{section:calculation_rules}, $x_1^{(k)}$ and
+By the definitions in \ref{section:calculation_rules}, $x_1^{(k)}$ and
 $x_2^{(k)}$ are the components of a vector $\vecx^{(k)}$, and by 
 \eqref{eq:xy_det_transformed_short} the determinants 
 $(\vecx^{(k)},\vecx^{(l)})$ are invariant under equiareal affinities.
@@ -557,7 +558,7 @@ $(\vecderiv{x},\vecderivv{x}) > 0$. Then the curve, and the vector
 $\vecx(t+h)-\myvec(t)$, lie on the left of the (directed) tangent vector
 $\vecderiv{x}(t)$, in a neighborhood of a point $t$, for small enough $|h|$.
 
-To show this, we must (following Section~\ref{section:calculation_rules}) 
+To show this, we must (following \ref{section:calculation_rules}) 
 only demonstrate that
 $$ D=(\vecderiv{x}, \vecx(t+h)-\vecx(t))$$
 is positive for small enough $|h|$. Let
@@ -722,7 +723,15 @@ and if we again denote $s_{k+1}-s_k$ by $h_k$ then
 \end{equation}
 From this follows
 \begin{equation}
-  \left|2\sum f_k^{1/3}-s_0^0\right|\leq \delta s_0^0.
+  \left|2\sum f_k^{1/3}-s_0^0\right|\leq \delta s_0^0
+\end{equation}
+and since
+\begin{equation}
+\sum h_k=\sum (s_{k+1}-s_k)=s_0^0
+\end{equation}
+then
+\begin{equation}
+  \left|2\sum f_k^{1/3}-s_0^0\right| \leq \delta s_0^0.
 \end{equation}
 Thus the proof of the equivalence of the two definitions is complete.
 
@@ -776,7 +785,34 @@ Zeitschrift f\"ur Mathematik und Physik {\bf 4}, 163-166.}.
 \section{Affine curvature}
 Let $\myvec{x}(t)$ be a curve with a given parameter $t$ - with imprinted 
 $t$-scale. $\myvec{x}^{(k)}=\left\{x_1^{(k)},x_2^{(k)}\right\}$ are the vectors
-of the $k$-th derivatives with respect to $t$.
+of the $k$-th derivatives with respect to $t$. Then by 
+\eqref{eq:xy_det_transformed_short} and by the considerations in 
+\ref{sec:affine_distance} the determinants
+\begin{equation}
+  \label{eq:derive_det}
+  (\myvec{x}^{(k)}, \myvec{x}^{(l)})
+\end{equation}
+are invariant under equiareal affinities. They are not, however, in any way
+affine invariants of the curve $\myvec{x}(t)$, that is, the curve without 
+the $t$-scale, since they would change their values if we were to substitute
+for $t$ another parameter $\tau$.
+
+But after successfully defining an invariant parameter $s$, it is easy to
+produce invariants that depend on the curve alone. By differentiation with
+respect to $s$ we obtain the derivative vectors
+\begin{equation}
+  \myvec{x}',\myvec{x}'',\myvec{x}''',\ldots,
+\end{equation}
+that are invariants of the curve. That is, if we transform $\myvec{x}$ using
+\eqref{eq:equiareal_affinities} into $\myvec{x}^*$, $\myvec{x}'$ into 
+$\myvec{x}'^*$ etc., then for the derivatives 
+of the transformed vectors, with respect to affine length, it holds that
+\begin{equation}
+  {\myvec{x}^*}'=\myvec{x}'^*,\quad , {\myvec{x}^*}''=\myvec{x}''^*,\ldots.
+\end{equation}
+This follows from the invariance of $s$.
+
+\section{Geometric interpretation of the affine normal}
 
 \chapter{Global theory of planar curves}
 
