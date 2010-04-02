@@ -6,6 +6,8 @@
 
 \renewcommand{\figurename}{Fig.}
 \captiondelim{}
+\renewcommand{\theequation}{\arabic{equation}}
+\renewcommand{\thefigure}{\arabic{figure}}
 
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{lemma}[theorem]{Lemma}
@@ -248,7 +250,7 @@ to a figure of area $F^*$ then
 When $d>0$ then orientation is preserved and when $d<0$ it is reversed.
 
 When in particular $d=1$ then areas are unchanged, the affinity is equiareal
-and it is easy to see that the equiareal affinities form a group --- another
+and it is easy to see that the equiareal affinities form a group - another
 subgroup of the general affine group.
 
 {\em We will consider almost exclusively those geometrical attributes of
@@ -369,9 +371,9 @@ and this substituted into \eqref{eq:triangle_area_example2} yields the desired
 \section{Affine distance}
 
 We would like to return to the result of the exercise above, and understand it
-a somewhat differently. We saw that given two points $\vecx$, $\vecy$
+somewhat differently. We saw that given two points $\vecx$, $\vecy$
 and two directions $\vecx'$, $\vecy'$, that is two ``line elements'', 
-we can assign each such a construct a number 
+we can assign each such construct a number 
 $f(\vecx,\vecx';\vecy,\vecy')$ that is invariant under all
 equiareal affinities. This number is namely the area of the triangle 
 $\vecx$ $\vecy$ $\myvec{z}$ (Fig.~\ref{fig:triangle_area_example}).
@@ -383,7 +385,7 @@ under an arbitrary equiareal affinity, where $\phi$ is a function that maps
 pairs of line elements to numbers, then
 $$ \phi(\vecx,\vecx';\vecy,\vecy') = \Phi\left[f(\vecx,\vecx';\vecy,\vecy')\right].$$
 
-This follows from the fact that my means of the transformations 
+This follows from the fact that by means of the transformations 
 \eqref{eq:equiareal_affinities} a triangle is mapped to an arbitrary triangle
 of the same area. Hence $\phi$ cannot depend on the specific values
 $\vecx,\vecx';\vecy,\vecy'$. By similar consideration one can
@@ -403,8 +405,8 @@ order. This brings us to the following consideration.
 The line elements $\vecx,\vecx';\vecy,\vecy'$ uniquely define
 a parabola: one that passes through  $\vecx$ and $\vecy$ and is there
 tangent to the directions $\vecx'$ and $\vecy'$ 
-(Fig~\ref{fig:triangle_parabola}). This holds since four lines --- two of
-which lie ``infinitely close'' --- determine a parabola. Let then
+(Fig~\ref{fig:triangle_parabola}). This holds since four lines - two of
+which lie ``infinitely close'' - determine a parabola. Let then
 \begin{equation}
   \label{eq:parabola_def1}
   x_i=x_{0i}+\dot{x}_{0i}t+{1\over 2!}\ddot{x}_{0i}t^2, \quad(i=1,2)
@@ -468,7 +470,7 @@ We have then (Fig.~\ref{fig:triangle_parabola})
   f^{1/3}(t_1,t_2)+f^{1/3}(t_2,t_3)={1\over 2}(\vecderiv{x}_0,\vecderivv{x}_0)^{1/3}\left[t_2-t_1+t_3-t_2\right]=f^{1/3}(t_1,t_3),
 \end{equation}
 where the third root is taken to be real. $f^{1/3}$ possesses then an 
-additivity theorem that is analogous to that of distance in Bewegungsgeometrie. 
+additive property that is analogous to that of distance in Bewegungsgeometrie. 
 we state then:
 
 {\em The affine distance $r$ of the line elements 
@@ -509,7 +511,7 @@ $x_2^{(k)}$ are the components of a vector $\vecx^{(k)}$, and by
 $(\vecx^{(k)},\vecx^{(l)})$ are invariant under equiareal affinities.
 
 The parameter $s$ for the parabola is therefore by \eqref{eq:natural_parameter}
-affinely invariant, and hence fixed, up to the choice of the point $s=0$. It
+affinely invariant, and hence unique, up to the choice of the point $s=0$. It
 is
 \begin{equation*}
   s=(\vecderiv{x}_0,\vecderivv{x}_0)^{1/3}t+\mbox{const}
@@ -647,7 +649,7 @@ derivative and is therefore somewhat more general. It remains to be shown that
 The arc $\vecx_0\vecx^0$ is given by $\vecx(t)\:(t_0\leq t \leq t^0)$. We let
 \begin{equation}
   \label{eq:bound_curvature}
-  (\vecderiv{x},\vecderivv{x})>\alpha>0 \quad (t_0\leq t \leq t^0).
+  (\vecderiv{x},\vecderivv{x})>a>0 \quad (t_0\leq t \leq t^0).
 \end{equation}
 Following \eqref{eq:triangle_area_vector},
 \begin{equation}
@@ -701,13 +703,82 @@ where
   \label{eq:eta_k_def}
   \eta_k={(1=\xi_k)(1+\xi'_k)\over 1+\xi''_k}=(1+\xi'''_k)^3
 \end{equation}
-and for all $\xi_k$ hold bounds of the form
+and for all $\xi_k$ there hold bounds of the form
 \begin{equation}
   \label{eq:xi_bounds}
   |\xi_k|<\delta, \quad \mathrm{when} \quad |h_k|<\epsilon.
 \end{equation}
+Introduce again the parameter $s$ - our conditions for $\myvec{x}(t)$ allow this
+- then by \eqref{eq:affine_natural_param}
 
+{\bf OT: original meaning of above sentence unclear to me}
+\begin{equation}
+  \Delta^{\circ\circ}(s,s)=1
+\end{equation}
+and if we again denote $s_{k+1}-s_k$ by $h_k$ then 
+\begin{equation}
+  \label{eq:f_k_by_h_k}
+  f_k={h_k^3\over 8}(1+\xi_k''')^3.
+\end{equation}
+From this follows
+\begin{equation}
+  \left|2\sum f_k^{1/3}-s_0^0\right|\leq \delta s_0^0.
+\end{equation}
+Thus the proof of the equivalence of the two definitions is complete.
 
+\begin{figure}[htp]
+  \centering
+  \includegraphics{segment_sequence.pdf}
+  \caption{}
+  \label{fig:segment_sequence}
+\end{figure}
+
+Another observation! Consider instead of a chain of triangles the
+sequence of figures encompassed by the chords $\myvec{x}_k\myvec{x}_{k+1}$ and
+our curve (\ref{fig:segment_sequence}). If $g_k$ is the area of such a figure,
+then in a curve whose curvature has unchanging orientation it holds that
+\begin{equation}
+  \label{eq:g_over_f_limit}
+  \lim_{h_k\to 0}{g_k\over f_k}={2\over 3}
+\end{equation}
+and
+\begin{equation}
+  \label{eq:s_int_limit}
+  \int ds=2\left({2\over 3}\right)^{1/3}\lim_{n\to\infty}\sum g_k^{1/3}.
+\end{equation}
+To prove \eqref{eq:g_over_f_limit} and \eqref{eq:s_int_limit} we follow
+\eqref{eq:curve_area} to calculate
+\begin{equation}
+  \label{eq:g_k_def}
+  g_k={1\over 2}\int_{s_k}^{s_{k+1}}(\myvec{x}-\myvec{x}_k,\myvec{x}')ds.
+\end{equation}
+ If we make the simplifying assumption that $\myvec{x}$ is analytical then
+ 
+ {\bf OT: original meaning not clear}
+ 
+ \begin{equation}
+   \begin{array}{c}
+     g_k={1\over 2}\int_{s_k}^{S_{k+1}}
+     \left(
+       (s-s_k)\myvec{x}_k'+{(s-s_k)^2\over 2!}+\ldots+\myvec{x}_k'+(s-s_k)\myvec{x}_k''+\ldots
+     \right)ds
+     \\
+     ={h_k^3\over 12}+\ldots
+   \end{array}
+ \end{equation}
+ From this, together with \eqref{eq:f_k_by_h_k}, follows the truth of
+both propositions\footnote{Relation \eqref{eq:g_k_def} holds for arbitrary
+curves at any point in which the curvature does not vanish 
+($(\vecderiv{x},\vecderivv{x})\neq 0$). The proof appears in {\em V\"oller},
+Archiv der Mathematik {\bf 31} (1858), 449-453, and {\em O. Schl\"omilch}, 
+Zeitschrift f\"ur Mathematik und Physik {\bf 4}, 163-166.}.
+
+\section{Affine curvature}
+Let $\myvec{x}(t)$ be a curve with a given parameter $t$ - with imprinted 
+$t$-scale. $\myvec{x}^{(k)}=\left\{x_1^{(k)},x_2^{(k)}\right\}$ are the vectors
+of the $k$-th derivatives with respect to $t$.
+
+\chapter{Global theory of planar curves}
 
 \bibliographystyle{plain} \bibliography{blaschke}
 
