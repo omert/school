@@ -157,6 +157,7 @@
   
 \item
   \begin{itemize}
+    I assume here that the OWF's are length preserving.
   \item {\bf $g_1(0x) = 0x$ and $g_1(1x) = 1f(x)$}
 
     This function {\em is not} a strong one way function, since the algorithm
@@ -177,21 +178,20 @@
     This function is a strong one-way function. Assume it is not. Then there
     exists an algorithm $A$ that inverts it for infinitely many values of $n$,
     with non-negligible probability. Let $A'(x)$ be the algorithm that runs
-    $A$ on $xx$ and returns the lower $n/2$ bits. Then $A'$ inverts $f$ for
+    $A$ on $yx$ with random $y$ and returns the lower $n/2$ bits. 
+    Then $A'$ inverts $f$ for
     infinitely many values of $n$ with non-negligible probability - 
     contradiction.
-
-    \item {\bf $g_3(x_1,x_2) = x_1 f(x_2)$ where $|x_2|=\log(|x_1|)$}
-
-      I assume here that $f$ is length preserving.
-
-      Let $A$ be the algorithm, that given $y_1y_2$ with $|y_1|=\log|y_2|$, 
-      calculates $f(x)$ for all $x$ s.t. $|x|=|y_2|$, and returns $y_1,x$, 
-      where $x$ is such that $f(x)=y_2$. Since the calculation of $f$ 
-      is efficient, and since there are only polynomially many instances to
-      calculate (in the length of the input) then $A$ runs in polynomial
-      time and inverts $f$ with probability one. Hence $g_3$ is not one-way - 
-      neither strongly nor weakly.
+    
+  \item {\bf $g_3(x_1,x_2) = x_1 f(x_2)$ where $|x_2|=\log(|x_1|)$}
+    
+    Let $A$ be the algorithm, that given $y_1y_2$ with $|y_1|=\log|y_2|$, 
+    calculates $f(x)$ for all $x$ s.t. $|x|=|y_2|$, and returns $y_1,x$, 
+    where $x$ is such that $f(x)=y_2$. Since the calculation of $f$ 
+    is efficient, and since there are only polynomially many instances to
+    calculate (in the length of the input) then $A$ runs in polynomial
+    time and inverts $f$ with probability one. Hence $g_3$ is not one-way - 
+    neither strongly nor weakly.
   \end{itemize}
 \end{enumerate}
 \end{document}
