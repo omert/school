@@ -1,0 +1,174 @@
+\documentclass[11pt]{article} \usepackage{amssymb}
+\usepackage{amsfonts} \usepackage{amsmath} \usepackage{bm}
+\usepackage{latexsym} \usepackage{epsfig}
+
+\setlength{\textwidth}{6.5 in} \setlength{\textheight}{8.25in}
+\setlength{\oddsidemargin}{0in} \setlength{\topmargin}{0in}
+\addtolength{\textheight}{.8in} \addtolength{\voffset}{-.5in}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{example}[theorem]{Example}
+\newenvironment{proof}{\noindent \textbf{Proof:}}{$\Box$}
+
+\newcommand{\ignore}[1]{}
+
+\newcommand{\enote}[1]{} \newcommand{\knote}[1]{}
+\newcommand{\rnote}[1]{}
+
+
+
+% \newcommand{\enote}[1]{{\bf [[Elchanan:} {\emph{#1}}{\bf ]]}}
+% \newcommand{\knote}[1]{{\bf [[Krzysztof:} {\emph{#1}}{\bf ]]}}
+% \newcommand{\rnote}[1]{{\bf [[Ryan:} {\emph{#1}}{\bf ]]}}
+
+
+
+\DeclareMathOperator{\Support}{Supp} \DeclareMathOperator{\Opt}{Opt}
+\DeclareMathOperator{\Ordo}{\mathcal{O}}
+\newcommand{\MaxkCSP}{\textsc{Max $k$-CSP}}
+\newcommand{\MaxkCSPq}{\textsc{Max $k$-CSP$_{q}$}}
+\newcommand{\MaxCSP}[1]{\textsc{Max CSP}(#1)} \renewcommand{\Pr}{{\bf
+    P}} \renewcommand{\P}{{\bf P}} \newcommand{\Px}{\mathop{\bf P\/}}
+\newcommand{\E}{{\bf E}} \newcommand{\Cov}{{\bf Cov}}
+\newcommand{\Var}{{\bf Var}} \newcommand{\Varx}{\mathop{\bf Var\/}}
+
+\newcommand{\bits}{\{-1,1\}}
+
+\newcommand{\nsmaja}{\textstyle{\frac{2}{\pi}} \arcsin \rho}
+
+\newcommand{\Inf}{\mathrm{Inf}} \newcommand{\I}{\mathrm{I}}
+\newcommand{\J}{\mathrm{J}}
+
+\newcommand{\eps}{\epsilon} \newcommand{\lam}{\lambda}
+
+% \newcommand{\trunc}{\ell_{2,[-1,1]}}
+\newcommand{\trunc}{\zeta} \newcommand{\truncprod}{\chi}
+
+\newcommand{\N}{\mathbb N} \newcommand{\R}{\mathbb R}
+\newcommand{\Z}{\mathbb Z} \newcommand{\CalE}{{\mathcal{E}}}
+\newcommand{\CalC}{{\mathcal{C}}} \newcommand{\CalM}{{\mathcal{M}}}
+\newcommand{\CalR}{{\mathcal{R}}} \newcommand{\CalS}{{\mathcal{S}}}
+\newcommand{\CalV}{{\mathcal{V}}}
+\newcommand{\CalX}{{\boldsymbol{\mathcal{X}}}}
+\newcommand{\CalG}{{\boldsymbol{\mathcal{G}}}}
+\newcommand{\CalH}{{\boldsymbol{\mathcal{H}}}}
+\newcommand{\CalY}{{\boldsymbol{\mathcal{Y}}}}
+\newcommand{\CalZ}{{\boldsymbol{\mathcal{Z}}}}
+\newcommand{\CalW}{{\boldsymbol{\mathcal{W}}}}
+\newcommand{\CalF}{{\mathcal{Z}}}
+% \newcommand{\boldG}{{\boldsymbol G}}
+% \newcommand{\boldQ}{{\boldsymbol Q}}
+% \newcommand{\boldP}{{\boldsymbol P}}
+% \newcommand{\boldR}{{\boldsymbol R}}
+% \newcommand{\boldS}{{\boldsymbol S}}
+% \newcommand{\boldX}{{\boldsymbol X}}
+% \newcommand{\boldB}{{\boldsymbol B}}
+% \newcommand{\boldY}{{\boldsymbol Y}}
+% \newcommand{\boldZ}{{\boldsymbol Z}}
+% \newcommand{\boldV}{{\boldsymbol V}}
+\newcommand{\boldi}{{\boldsymbol i}} \newcommand{\boldj}{{\boldsymbol
+    j}} \newcommand{\boldk}{{\boldsymbol k}}
+\newcommand{\boldr}{{\boldsymbol r}}
+\newcommand{\boldsigma}{{\boldsymbol \sigma}}
+\newcommand{\boldupsilon}{{\boldsymbol \upsilon}}
+\newcommand{\hone}{{\boldsymbol{H1}}}
+\newcommand{\htwo}{\boldsymbol{H2}}
+\newcommand{\hthree}{\boldsymbol{H3}}
+\newcommand{\hfour}{\boldsymbol{H4}}
+
+
+\newcommand{\sgn}{\mathrm{sgn}} \newcommand{\Maj}{\mathrm{Maj}}
+\newcommand{\Acyc}{\mathrm{Acyc}}
+\newcommand{\UniqMax}{\mathrm{UniqMax}}
+\newcommand{\Thr}{\mathrm{Thr}} \newcommand{\littlesum}{{\textstyle
+    \sum}}
+
+\newcommand{\half}{{\textstyle \frac12}}
+\newcommand{\third}{{\textstyle \frac13}}
+\newcommand{\fourth}{{\textstyle \frac14}}
+
+\newcommand{\Stab}{\mathbb{S}}
+\newcommand{\StabThr}[2]{\Gamma_{#1}(#2)}
+\newcommand{\StabThrmin}[2]{{\underline{\Gamma}}_{#1}(#2)}
+\newcommand{\StabThrmax}[2]{{\overline{\Gamma}}_{#1}(#2)}
+\newcommand{\TestFcn}{\Psi}
+
+\renewcommand{\phi}{\varphi}
+
+\begin{document}
+\title{Sublinear Algorithms - Exercises 1 and 2}
+
+ \author{Omer Tamuz, 035696574}
+\maketitle
+
+\section{Exercise 1}
+\begin{enumerate}
+  \item 
+    The algorithm is the following: We randomly sample the vector 
+    $k(\epsilon)$ times from the uniform distribution, 
+    and output the fraction of non-zero coordinates in 
+    our sample.
+
+    By the Chernoff-Hoeffding bound, the probability that the result is wrong
+    by more than $\epsilon$ is at most $2e^{-2k(\epsilon)\epsilon^2}$. 
+    Hence, to achieve 2/3 success probability we must have:
+    \begin{eqnarray*}
+      2e^{-2k(\epsilon)\epsilon^2} &\leq& 1/3
+      \\ k(\epsilon) &\geq& {1\over 2\epsilon^2}\log{6}
+    \end{eqnarray*}
+
+    \item 
+
+      The algorithm here is essentially identical to the one from the previous
+      question: we choose at random, from the uniform distribution, 
+      $k(\epsilon)$ pairs $i,j$ such that $i\neq j$. We then output the fraction
+      that are inverted. By the same analysis as above we get with probability
+      2/3 a result within $\epsilon$ when 
+      $k(\epsilon)={1\over 2\epsilon^2}\log 6$.
+\end{enumerate}
+\section{Exercise 2}
+\begin{enumerate}
+  \item 
+
+    In Kruskal's algorithm we order the edges by ascending weight, consider
+    each one in turn and add it to the tree if it does not form a cycle.
+
+    Each time we add an edge to the forest we reduce the number of 
+    connected components by one. Therefore the number of edges of weight
+    $i$ that were added to the tree is precisely $c_{i-1}-c_i$, with $c_0=n$ and
+    $c_W=1$ (since the graph is connected).
+    The weight of the tree is then:
+    \begin{eqnarray*}
+      \mbox{MST}(G)&=&\sum_{i=1}^Wi(c_{i-1}-c_i)
+      \\ &=& \sum_{i=1}^Wic_{i-1}-\sum_{i=1}^Wic_i
+      \\ &=& c_0+\sum_{i=1}^{W-1}(i+1)c_i-\sum_{i=1}^{W-1}ic_i+Wc_W
+      \\ &=& n-W+\sum_{i=1}^{W-1}c_i
+    \end{eqnarray*}
+  \item
+    Let $M$ be a maximum matching and $L$ be a matching such that
+    $|L|<\half|M|$. Let $V_L$ be the set of vertices that the edges of $L$
+    are adjacent to. Then because $L$ is a matching $|V_L|=2|L|$ and
+    $|V_L|<|M|$. Hence it is impossible that each edge of $M$ is adjacent
+    to some vertex in $V_L$, since there are more edges in $M$ than vertices
+    in $V_L$, and each vertex is adjacent to at most one edge. 
+    Therefore there 
+    exists an edge $e$ in $M\setminus L$ such that $L\cup \{e\}$ is a matching,
+    and so $L$ is not maximal. 
+
+    We have shown that if $L$ is of size less than
+    half the size of a maximum matching then it is not maximal. Hence if it is 
+    maximal then its size is at least half the size of a maximal matching.
+
+
+\end{enumerate}
+\end{document}
+
+
