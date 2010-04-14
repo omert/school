@@ -140,37 +140,42 @@ $k>4\log n+4\log(1/\delta)$.
 {\em Can you isolate at most $0.1\%$ of the population that contains all the carriers with probability of error at most $10^{-7}$ 
 and cost at most $5 \times 10^{7}\$$?}
 
-Let $m(t)$ be the size of the population that is suspect of being infected,
-at time $t$, so that $m(0)=n$. At time $t$, divide the population into 200 groups
-of equal sizes at random, and test each one twice. Remove from the population
-any groups which twice 
+Whenever testing a group of people, apply the following procedure: test twice,
+and if both tests have the same result, return that. If not, test a third time
+and return the majority result.
 
-choose at random a group of size
-$c \cdot m(t)$, and test it twice for infection. If it is not infected both 
-times then remove
-it from other population, so that $m(t+1)=m(t)-cm(t)$. Otherwise $m(t+1)=m(t)$.
-The process stops when $m(t)=n/1000$, or when the budget runs out (in which
-case one could, for example, declare the whole population as not infected,
-making a mistake knowingly).
+Now divide the population into 200 groups of equal size, and test each group 
+using the procedure above. Remove from the population any group that tested 
+negative for infection. Apply repeatedly to the remaining population, until 
+$10^5$ (=$0.1\%$) are left.
 
-Let $b_t$ be the event that at time $t$ the group tested was found to be 
-infected. Then by the Poisson approximation the probability that $b_t=1$
-is at least $\exp(-100c)$. 
+Assume first that no group is incorrectly identified. Then at least 100 groups 
+are recognized as healthy at each iteration, and hence the size of the 
+potentially infected population decreases by a factor of at least two at each
+iteration. The number of iterations required is therefore at most
+$\lceil\log_21000\rceil=10$. At each iteration $2\cdot200$ tests are performed,
+and so the total cost is at most $10\cdot400\cdot\$10^4=\$4\cdot10^7$.
 
-The probability that a group of size $cm(t)$ is not infected is at least
-$\exp(-100c)$, by the poisson approximation. Hence 
-$\E[\log m(t)-\log m(t+1)] = -\log (1-c)\exp(-100c)$, and 
-$\E[\log n / m(t)]=-t\log (1-c)\exp(-100c)$. 
+The probability that a group is falsely removed (i.e. its members are marked
+as uninfected even though they are infected) is $10^{-2\cdot6}=10^{-12}$. 
+Therefore, by union bound, the probability that no group (of the 2000) tested
+is falsely removed is at most $2000\cdot 10^{-12}<10^{-7}$.
+
+{\bf Note.} A more cost efficient procedure exists: repeatedly choose a group of
+size one hundredth of the population and remove it if it twice tests to be
+not infected. This procedure is, however, slightly more difficult to analyze.
 
 
-Let $f(c)=-\log(1-c)\exp(-100c)$. Then 
-$${df\over dc}={\exp(-100c)\over 1-c}+100\log(1-c)\exp(-100c)$$
-and the minimum is achieved when $100\log(1-c)=1/(1-c)$. The solution 
 \item
 {\em Can you find all of the infected individuals with probability of error 
 $10^{-7}$
 and cost at most $2 \times 10^{8}\$$?}
 
+Use the procedure above, until the remainning population is of size 100. The
+number of iterations needed is $\lceil\log_21,000,000\rceil=20$, and so the cost will be
+at most $20\cdot 400 \cdot \$10^4=\$8\cdot 10^7$.
+
+The probability of error is at most $4000\cdot 10^{-12}<10^{-7}$.
 \end{itemize}
 
 
