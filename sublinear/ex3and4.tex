@@ -139,17 +139,37 @@
     Therefore $f$ is certainly, again by 
     the claims we proved in class,  $1/100$-far from  being a homomorphism.
   \end{enumerate}
-\item The algorithm needs to simply sample $O(\sqrt{n}/\epsilon)$ 
+\item For some $\phi$, the algorithm needs to simply sample $O(\sqrt{n/\epsilon})$ 
   of the function
-  values and reject iff it finds repetitions. This can be done in
-  $O(\sqrt{n}/\epsilon\log \sqrt{n}/\epsilon)$ by sorting the sample.
+  values and reject iff it finds repetitions. Finding repetitions can be done in
+  $O(\sqrt{n/\epsilon}\log \sqrt{n/\epsilon})$ by sorting the sample. Sampling can be done with repetitions,
+  but the algorithm rejects iff it finds $i\neq j$ such that $f(i)=f(j)$.
 
   Clearly if the function is a bijection then the algorithm will accept.
   Assume the function is $\epsilon$-far from being a bijection. Then there exist
-  at least $\epsilon n/2$ disjoint pairs of values $i,j$ such that $f(i)=f(j)$. Each of these
-  pairs appears in the sample with probability at least 
-  ${C\sqrt{n}\over \epsilon n^2}$, where $C\sqrt{n}/\epsilon$ is the sample
-  size. Since 
+  at least $\epsilon n/2$ disjoint pairs of values $i,j$ such that
+  $f(i)=f(j)$. 
+
+  Let $C\sqrt{n/\epsilon}$ be the sample size.
+  Consider the moment at which the $k+1$-th element of the sample was picked.
+  The probability that $i_{k+1}$ is in one of the $\epsilon n/2$ pairs is 
+  $\epsilon$. Conditioned on this, the probability that its pair has been
+  previosuly picked is $k/n$. Hence the probability of finding a repetition 
+  at this point is $\epsilon k/n$. 
+  
+  Conditining this on the event that no pair
+  was picked up to this point only increases its probability, and so the 
+  probability that no pair
+  is picked in the whole sample (and so the algorithm wrongfully accepts) is
+  \begin{eqnarray*}
+  \P &=& \prod_{k=1}^{C\sqrt{n/\epsilon}}1-\P[\mbox{$\exists j<k, i_j\neq i_k$ s.t. $f(i_k)=f(i_j)$}|\mbox{no matching pair picked so far}]
+  \\ &\leq& \prod_{k=1}^{C\sqrt{n/\epsilon}}1-\P[\mbox{$\exists j<k, i_j\neq i_k$ s.t. $f(i_k)=f(i_j)$}]
+  \\ &=&\prod_{k=1}^{C\sqrt{n/\epsilon}}\left(1-{\epsilon k\over n}\right)  
+  \\ &\leq& \prod_{k=1}^{C\sqrt{n/\epsilon}}\left(1-{\epsilon C\sqrt{n/\epsilon}\over n}\right)  
+  \\ &\leq& \left(1-{C\over \sqrt{n/\epsilon}}\right)^{C\sqrt{n/\epsilon}}  
+  \\ &\leq& e^{-C}
+  \end{eqnarray*}
+
 \end{enumerate}
 \section{Exercise 4}
 \begin{enumerate}
