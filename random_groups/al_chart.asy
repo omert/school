@@ -30,15 +30,18 @@ addLable(K141, "$141K$", "$141K^2$", Sx, Sy);
 addLable(K240, "$240K$", "$240K^2$", Sx, Sy);
 addLable(K20000, "$20,000K$", "$20,000K^2$", Sx, Sy);
 
-real margin = 0.02 * Sx;
+real margin = 0.015 * Sx;
 filldraw(currentpicture,(margin, K05 * Sy)--(K100 * Sx - margin, K05 * Sy)..(K141 * Sx - margin, K * Sy)..(K240y * Sx - margin, K240 * Sy)--(margin, K240 * Sy)--cycle, pattern("hatch"));
 
 draw((0,0) -- (K20000 * Sx, K20000 * Sy));
-label("$A(w)=l(w)$",(K100 * Sx - 0.15 * Sx, K100 * Sy - 0.04 * Sy));
+draw((K240 * Sx - 0.05 * Sx, K240 * Sy) -- (K20000 * Sx - 0.05 * Sx, K20000 * Sy));
+label("$A(w)=Kl(w)$",(K100 * Sx - 0.15 * Sx, K100 * Sy - 0.04 * Sy));
 label("$A(w)={l(w)^2\over 20,000}$",(K20000 * Sx + 0.07 * Sx, K20000 * Sy - 0.1 * Sy));
 draw((0,0)..(K100 * Sx, K05 * Sy)..(K141 * Sx, K * Sy)..(K240y * Sx, K240 * Sy)..(K20000 * Sx, K20000 * Sy));
 
-pair w = (K20000 * Sx - 0.1 * Sx, K20000 * Sy - 0.05 * Sy);
-label("$w$", w, SE);
+pair w = (K20000 * Sx - 0.07 * Sx, K20000 * Sy - 0.05 * Sy);
+label("$w$", w, SW);
 draw(circle(w, 0.001* Sx));
 label("FORBIDDEN ZONE", (K * Sx, K141* Sy));
+
+draw((K100 * Sx, 0) -- (K100 * Sx, K100 * Sy));
