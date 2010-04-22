@@ -1,0 +1,14 @@
+git cat-file -p $(git ls-tree master "$1.tex" | cut -d " " -f 3 | cut -f 1) > gldifftemp1.tex
+latexdiff gldifftemp1.tex "$1.tex" > gldifftemp2.tex 
+latex gldifftemp2
+bibtex gldifftemp2
+latex gldifftemp2
+latex gldifftemp2
+latex gldifftemp2
+latex gldifftemp2
+dvips -t letter gldifftemp2 -o
+ps2pdf gldifftemp2.ps
+evince gldifftemp2.pdf  
+rm gldifftemp*
+
+
