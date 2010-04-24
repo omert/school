@@ -113,16 +113,89 @@
 \begin{enumerate}
 \item
 Given $f$ as described, let $f(x)_i$ be the $i$'th bit of $f(x)$. 
-Let $f'(x,y)$, for $|x|=|y|$ be defined by
-$$f'(x,y)=\bigoplus_i f(x)_i\cdot y_i,$$
-that is, $f'$ returns the XOR of the bits of $f(x)$.
+Let $f'(x,i)$ with $1\leq i \leq l(x)$ be defined by
+$$f'(x,i)=f(x)_i$$
+that is, $f'$ returns the $i$'th bit of $f(x)$.
+
+Clearly, $f'$ can be calculated by an exponential time Turing machine, given
+a machine that calculates $f$ in this time.
 
 \begin{claim}
-  $f'$ can be calculated by an exponential time Turing machine. 
+  For every polynomial size family of circuits $\{C'_{n'}\}_{n'\in \N}$ 
+  it holds for large enough $n$ that
+$$\P_{x,i}[C'_{n'}(x,i)\neq f'(x,i)]\geq \delta(n')/\l(n'),$$
+where $x$ is distributed uniformly over strings of length $n$ so that
+$n+\log l(n)=n'$, and $i$ is
+distributed uniformly over the integers between $1$ and $\l(n)$.
 \end{claim}
 \begin{proof}
-  
+Assume to the contrary that there exists a family of polynomial circuits
+$\{C'_{n'}\}$ that 
+calculates $f'$ with failure probability lower than $\delta(n')/l(n')$ for infinitely many
+values of $n'$. 
+For $n$ such that  $n'=n+\log l(n)$, let 
+$C_{n}(x):=C'_{n'}(x,1)C'_{n'}(x,2)\cdots C'_{n'}(x,l(n))$. Clearly, if all the calls to $C'$ succeed then
+$C_n(x)=f(x)$. The probability that $C_n(x)$ fails
+is equal to the probability that at least one of the calls to $C'$ fails. 
+The worst case would be the one in which for every $x$ at most one of the calls
+failed - this would maximize the proportion of $x$'s for which $C$ fails.
+In this case, since the proportion of failing $(x,i)$'s is at most
+$\delta(n')/l(n')$, and since for every $x$ there are $l(n)$ possible
+values of $i$, then $C$ fails with probability at most $\delta(n')l(n)/l(n')$.
+
+For any $\epsilon>0$, it holds that for large enough $n$, $n'$ is between $n$ 
+and $(1+\epsilon)n$. Hence, since $l$ is a polynomial, we have that
+$\lim_{n\to\infty}l(n)/l(n')=1$. Since $\delta(n')$ is less than $\delta(n)$
+then we have that
+\begin{equation*}
+  \P[C_n(x)\neq f(x)] \leq \delta(n),
+\end{equation*}
+which is a contradiction, and the proof is concluded.
 \end{proof}
+
+\item
+  Given a binary vector $r$ of length $t(n)$, let 
+  $I_r=\{i\mbox{ s.t. } r_i=1\}$. Note that
+  \begin{eqnarray*}
+    H(x,r)&=& b\left(F\left(x^1,\ldots,x^{t(n)}\right),r\right)
+    \\ &=& \bigoplus_{i\in I_r}f(x^i).
+  \end{eqnarray*}
+  Let $x,r,y$ be such that for $z$, as defined in the hint, it holds that
+  $C(z)=G(z)$. Then 
+  \begin{eqnarray*}
+    C(z)\bigoplus_{i\not\in I_r}f(y^i) &=& G(z)\bigoplus_{i\not\in I_r}f(y^i)
+    \\ &=& \bigoplus_{i\in[1,t(n)]}f(z^i)\bigoplus_{i\not\in I_r}f(y^i)
+    \\ &=& \bigoplus_{i\in I_r}f(x^i)\bigoplus_{i\not\in I_r}f(y^i)\bigoplus_{i\not\in I_r}f(y^i)
+    \\ &=& \bigoplus_{i\in I_r}f(x^i)
+  \end{eqnarray*}
+  and so if $C(z)=G(z)$ then the ``circuit
+  with a magic box'' $C'$ succeeds and $C'(x,r)=H(x,r)$. 
+  This implies that the probability
+  that $C'(x,r)= H(x,r)$ is greater than or equal to the probability that
+  $C(z)= G(z)$, since the latter event is contained in the former.
+  
+  The probability that  $C'$ will succeed for a random input $(x,r)$ with
+  $|r|=n$ is thus
+  \begin{eqnarray*}
+    \P[\mbox{success}] &=& \P_{(x,r)}\left[\P_y[C'(x,r)= H(x,r)|(x,r)]\right]
+    \\ &\geq& \P_{(x,r)}\left[\P_y\left[C(z)= G(z)|(x,r)\right]\right].
+  \end{eqnarray*}
+  Now, the distribution of $z$, when taken over random $x$ (and $r$), is clearly
+  uniform too. Hence
+  \begin{eqnarray*}
+    \P[\mbox{success}] &\geq & \P_z\left[C(z)= G(z)|(x,r)\right],
+  \end{eqnarray*}
+  and therefore if there exists a family of circuits that violates Yao's 
+  Lemma then there exists a family of ``magic circuits'' that violates the 
+  Selective XOR Lemma.
+
+  To arrive at a family of non-magical circuits with the same property, we
+  use the averaging argument used in class. Instead of averaging over $(x,r)$
+  and then over $y$, we average first over $y$ and then over $x,y$. Since
+  then the average (over $y$) probability of success is high, there must exist 
+  a single $y$ for which the probability is high. We then hard-wire this
+  $y$ and the corresponding $f(y)$ into the circuit, and preserving the
+  probability of success, but without the use of magic.
 \end{enumerate}
 \end{document}
 
