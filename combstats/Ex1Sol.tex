@@ -107,75 +107,103 @@
 \subsection{Reconstruction}
 \begin{itemize}
 \item
-{\em Find an estimation procedure which is guaranteed to estimate $s$ with probability at least $1-\delta$ using at most 
-$C_1 \log n + C_2 \log (1/\delta)$ samples. What are the values of $C_1$ and $C_2$?  }
+{\em Find an estimation procedure which is guaranteed to estimate $s$ with probability at least $1-\delta$ using at most
+$C (\log n + \log (1/\delta))$ samples. What value of $C$ have you have obtained?
+}
 
-Given $k$ samples, the probability that the majority of  the $X_1(j)$'s are 
-different than $s_1$
-is lower than $2\exp(-2k/16)$, by the large deviation result above. 
-The probability of an error in at least one of the $s_i$'s is then at most
-$p=1-(1-2\exp(-2k/16))^n<2n\exp(-2k/16)$. Hence if 
-$p<\delta$ then $2n\exp(-2k/16)<\delta$, or $k>8\log n+8\log(1/\delta)+8\log 2$.
+Given $k$ samples, the probability that the majority of  the $X_i(1)$'s are 
+different than $s_1$ is equal to the probability that their average is more than
+$1/4$ away from their expectation, and so
+is lower than $2\exp(-2k/4^2)$, by the given large deviation result. 
+The probability of an error in at least one of the $s_j$'s is then at most
+$p=1-(1-2\exp(-k/8))^n<2n\exp(-k/8)$. Hence if 
+$p<\delta$ then $2n\exp(-k/8)<\delta$, or $k>8\left(\log n+\log(1/\delta)\right)+8\log 2$.
 
 \item
-{\em Show that there exist constants $C_3$ and $C_4$ such that for all $n$ and $\delta < 1/4$ and for all estimation algorithms 
-which estimate $s$ with probability at least $1-\delta$ it holds that $k \geq C_3 \log n + C_4 \log (1/\delta)$. 
-What are the values of $C_3$ and $C_4$ you have obtained? }
+{\em Show that there exist a constant $C'$ such that for all $n$ and $\delta < 1/4$ and for all estimation algorithms of $s$ with
+probability of success at least $1-\delta$ it holds that $k \geq C'( \log n + \log (1/\delta))$.
+What value of $C'$ have you obtained?
+ }
 
-Let $A$ be an estimation algorithm. Assume $A$'s estimate for $s_i$ depends
-only on the $X_i(j)$'s, otherwise $A$ is certainly suboptimal. Now when
-$s_1=1$, there must exist a set $X_1(j)$ such that $A$'s 
-estimate of $s_1$ is wrong (otherwise $A$ would never estimate $s_1$ 
-correctly when $s_1=0$). This probability for this outcome is at most $4^{-k}$,
-and the same holds for the rest of the $s_i$'s. Hence the probability of an
+Let $k(n,\delta)$ be such that for any algorithm $A$ that estimates $s$, there
+exists a distribution over the possible values $s$ such that $A$ requires
+$k(n,\delta)$ samples to estimate $s$ with probability $1-\delta$. Then in particular any 
+algorithm requires $k(n,\delta)$ samples when $S$ is distributed by the uniform 
+distribution. We will show that the majority algoritm $M$, with a given number
+of samples, succeeds with higher probability then any other algorithm,
+when $S$ is distributed
+uniformly. Then, since $M$ {\bf has equal probability of success for any 
+distribution over $S$}, we'll conclude that the number of samples $M$ requires
+is a lower bound of the number of samples required by any algorithm. {\em
+Note: This point was not made in any of the solutions.}
+
+Let $A$ be an algorithm that differs from $M$ for at least one set of values of
+the $X_i(j)$'s. Call this set $z=\{z_i(j)\}$, and assume WLOG that $A(z)_1\neq M(z)_1$. 
+Define an algorithm $B$ by 
+$B(x)=A(x)$ for $x\neq z$,  $B(z)_1=M(z)=1- A(z)_1$ and for $j>1$ again 
+$B(z)_j=A(z)_j$. Then, assuming $S$ is distributed uniformly:
+\begin{eqnarray*}
+\P[\mbox{B succeeds}]-\P[\mbox{A succeeds}] &=& 
+\P[s=B]-\P[s=A] 
+\\ &=& \sum_x\P[x]\P[s=B(x)|x]-\sum_x\P[x]\P[s=A(x)|x]
+\\ &=& P[z]\P[s=B(z)|z]-\P[z]\P[s=A(z)|z]
+\end{eqnarray*}
+Since the different $s_j$'s are independent we can write:
+\begin{eqnarray*}
+ &=& \P[z]\left(\prod_j\P[s_j=B(z)_j|z(j)]-\prod_j\P[s_j=A(z)_j|z(j)]\right)
+\\ &=& \P[z]\prod_{j>1}\P[s_j=B(z)_j|z(j)]\cdot\left(\P[s_1=M(z)_1|z(1)]-\P[s_1=1-M(z)_1|z(1)]\right)  
+\end{eqnarray*}
+Now, because both $S$ and $X$ are distributed uniformly then
+ $\P[s_1=M(z)_1|z(1)]=\P[z(1)|s_1=M(z)_1]$. Since by the defintion of $\P[z|s]$ it
+is easy to see that $\P[z(1)|s_1=M(z)_1]>\P[z(1)|s_1=1-M(z)_1]$, then
+the probability that $B$ succeeds is greater than that of $A$, and $M$ is
+the optimal algorithm.
+
+To lower bound the sample size $M$ needs, we note that when $s_j=1$, $M$ 
+is certainly wrong when $x_i(j)=0$ for all $i$.
+This probability for this outcome is $4^{-k}$,
+and so the probability of an
 error in at least one of the $s_i$'s is 
 $1-\left(1-4^{-k}\right)^n<n4^{-k}$. For this to be smaller than $\delta$ we must have
-$k>4\log n+4\log(1/\delta)$.
-
+$k>4\left(\log n+\log(1/\delta)\right)$.
 \end{itemize}
 
 \subsection{Group Testing}
+Whenever testing a group of people, apply the following procedure: test five
+times,
+and return the majority result. Call this the ``quintuple test''. The
+probability that the quintuple test fails is less than $10^{-16}$.
+
 \begin{itemize}
 \item
-{\em Can you isolate at most $0.1\%$ of the population that contains all the carriers with probability of error at most $10^{-7}$ 
-and cost at most $5 \times 10^{7}\$$?}
-
-Whenever testing a group of people, apply the following procedure: test twice,
-and if both tests have the same result, return that. If not, test a third time
-and return the majority result.
+{\em Devise a procedure which would result in a division of the population to two sets of size $5 \times 10^7$ where all the infected individuals belong to the second set and further: 1) the probability of error of the
+procedure is at most $10^{-6}$? 2) the cost of the test is at most $\$  10^7 $ ?
+}
 
 Now divide the population into 200 groups of equal size, and test each group 
-using the procedure above. Remove from the population any group that tested 
-negative for infection. Apply repeatedly to the remaining population, until 
-$10^5$ (=$0.1\%$) are left.
-
-Assume first that no group is incorrectly identified. Then at least 100 groups 
-are recognized as healthy at each iteration, and hence the size of the 
-potentially infected population decreases by a factor of at least two at each
-iteration. The number of iterations required is therefore at most
-$\lceil\log_21000\rceil=10$. At each iteration $2\cdot200$ tests are performed,
-and so the total cost is at most $10\cdot400\cdot\$10^4=\$4\cdot10^7$.
-
-The probability that a group is falsely removed (i.e. its members are marked
-as uninfected even though they are infected) is $10^{-2\cdot6}=10^{-12}$. 
-Therefore, by union bound, the probability that no group (of the 2000) tested
-is falsely removed is at most $2000\cdot 10^{-12}<10^{-7}$.
-
-{\bf Note.} A more cost efficient procedure exists: repeatedly choose a group of
-size one hundredth of the population and remove it if it twice tests to be
-not infected. This procedure is, however, slightly more difficult to analyze.
-
+using the procedure above. Assuming each quintuple test succeeds, we have at
+most 100 groups with infected individuals and the population is divided 
+appropriately. The probability that all tests succeed is more than 
+$1-10^{13}$, and the cost was $10^7$.
 
 \item
-{\em Can you find all of the infected individuals with probability of error 
+{\em Can you isolate at most $0.1\%$ of the population that contains all the carriers with probability of error at most $10^{-6}$
+and cost at most $\$ 10^{8}$?
+}
+
+Apply the above procedure repeatedly to the part of the population that includes
+infected individuals. After ten iterations the desired division will be
+achieved, at cost $10^8$ and probability of success higher than $1-10^{-11}$.
+
+\item
+{\em Can you find all of the infected individuals with probability of error
 $10^{-7}$
-and cost at most $2 \times 10^{8}\$$?}
+and cost at most $\$2 \times 10^{8}$?
+}
 
-Use the procedure above, until the remainning population is of size 100. The
-number of iterations needed is $\lceil\log_21,000,000\rceil=20$, and so the cost will be
-at most $20\cdot 400 \cdot \$10^4=\$8\cdot 10^7$.
+As above, apply the procedure 20 times. The cost is $2\cdot 10^8$ and 
+the probability of success is at least $1-10^9$.
 
-The probability of error is at most $4000\cdot 10^{-12}<10^{-7}$.
 \end{itemize}
 
 
