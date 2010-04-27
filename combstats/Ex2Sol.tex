@@ -1,0 +1,209 @@
+\documentclass[11pt]{article} \usepackage{amssymb}
+\usepackage{amsfonts} \usepackage{amsmath} \usepackage{amsthm} \usepackage{bm}
+\usepackage{latexsym} \usepackage{epsfig}
+
+\setlength{\textwidth}{6.5 in} \setlength{\textheight}{8.25in}
+\setlength{\oddsidemargin}{0in} \setlength{\topmargin}{0in}
+\addtolength{\textheight}{.8in} \addtolength{\voffset}{-.5in}
+
+\newtheorem*{theorem*}{Theorem}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem*{proposition*}{Proposition}
+
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{example}[theorem]{Example}
+%\newenvironment{proof}{\noindent \textbf{Proof:}}{$\Box$}
+
+\newcommand{\ignore}[1]{}
+
+\newcommand{\enote}[1]{} \newcommand{\knote}[1]{}
+\newcommand{\rnote}[1]{}
+
+
+\DeclareMathOperator{\Support}{Supp} \DeclareMathOperator{\Opt}{Opt}
+\DeclareMathOperator{\Ordo}{\mathcal{O}}
+\newcommand{\MaxkCSP}{\textsc{Max $k$-CSP}}
+\newcommand{\MaxkCSPq}{\textsc{Max $k$-CSP$_{q}$}}
+\newcommand{\MaxCSP}[1]{\textsc{Max CSP}(#1)} \renewcommand{\Pr}{{\bf
+    P}} \renewcommand{\P}{{\bf P}} \newcommand{\Px}{\mathop{\bf P\/}}
+\newcommand{\E}{{\bf E}} \newcommand{\Cov}{{\bf Cov}}
+\newcommand{\Var}{{\bf Var}} \newcommand{\Varx}{\mathop{\bf Var\/}}
+
+\newcommand{\bits}{\{-1,1\}}
+
+\newcommand{\nsmaja}{\textstyle{\frac{2}{\pi}} \arcsin \rho}
+
+\newcommand{\Inf}{\mathrm{Inf}} \newcommand{\I}{\mathrm{I}}
+\newcommand{\J}{\mathrm{J}}
+
+\newcommand{\eps}{\epsilon} \newcommand{\lam}{\lambda}
+
+% \newcommand{\trunc}{\ell_{2,[-1,1]}}
+\newcommand{\trunc}{\zeta} \newcommand{\truncprod}{\chi}
+
+\newcommand{\N}{\mathbb N} \newcommand{\R}{\mathbb R}
+\newcommand{\Z}{\mathbb Z} \newcommand{\CalE}{{\mathcal{E}}}
+\newcommand{\CalC}{{\mathcal{C}}} \newcommand{\CalM}{{\mathcal{M}}}
+\newcommand{\CalR}{{\mathcal{R}}} \newcommand{\CalS}{{\mathcal{S}}}
+\newcommand{\CalV}{{\mathcal{V}}}
+\newcommand{\CalX}{{\boldsymbol{\mathcal{X}}}}
+\newcommand{\CalG}{{\boldsymbol{\mathcal{G}}}}
+\newcommand{\CalH}{{\boldsymbol{\mathcal{H}}}}
+\newcommand{\CalY}{{\boldsymbol{\mathcal{Y}}}}
+\newcommand{\CalZ}{{\boldsymbol{\mathcal{Z}}}}
+\newcommand{\CalW}{{\boldsymbol{\mathcal{W}}}}
+\newcommand{\CalF}{{\mathcal{Z}}}
+% \newcommand{\boldG}{{\boldsymbol G}}
+% \newcommand{\boldQ}{{\boldsymbol Q}}
+% \newcommand{\boldP}{{\boldsymbol P}}
+% \newcommand{\boldR}{{\boldsymbol R}}
+% \newcommand{\boldS}{{\boldsymbol S}}
+% \newcommand{\boldX}{{\boldsymbol X}}
+% \newcommand{\boldB}{{\boldsymbol B}}
+% \newcommand{\boldY}{{\boldsymbol Y}}
+% \newcommand{\boldZ}{{\boldsymbol Z}}
+% \newcommand{\boldV}{{\boldsymbol V}}
+\newcommand{\boldi}{{\boldsymbol i}} \newcommand{\boldj}{{\boldsymbol
+    j}} \newcommand{\boldk}{{\boldsymbol k}}
+\newcommand{\boldr}{{\boldsymbol r}}
+\newcommand{\boldsigma}{{\boldsymbol \sigma}}
+\newcommand{\boldupsilon}{{\boldsymbol \upsilon}}
+\newcommand{\hone}{{\boldsymbol{H1}}}
+\newcommand{\htwo}{\boldsymbol{H2}}
+\newcommand{\hthree}{\boldsymbol{H3}}
+\newcommand{\hfour}{\boldsymbol{H4}}
+
+
+\newcommand{\sgn}{\mathrm{sgn}} \newcommand{\Maj}{\mathrm{Maj}}
+\newcommand{\Acyc}{\mathrm{Acyc}}
+\newcommand{\UniqMax}{\mathrm{UniqMax}}
+\newcommand{\Thr}{\mathrm{Thr}} \newcommand{\littlesum}{{\textstyle
+    \sum}}
+
+\newcommand{\half}{{\textstyle \frac12}}
+\newcommand{\third}{{\textstyle \frac13}}
+\newcommand{\fourth}{{\textstyle \frac14}}
+\newcommand{\fifth}{{\textstyle \frac15}}
+
+\newcommand{\Stab}{\mathbb{S}}
+\newcommand{\StabThr}[2]{\Gamma_{#1}(#2)}
+\newcommand{\StabThrmin}[2]{{\underline{\Gamma}}_{#1}(#2)}
+\newcommand{\StabThrmax}[2]{{\overline{\Gamma}}_{#1}(#2)}
+\newcommand{\TestFcn}{\Psi}
+
+\renewcommand{\phi}{\varphi}
+
+\begin{document}
+\title{Combinatorial Statistics - Homework Set 2 Solution}
+
+\date{\today}
+\maketitle
+\subsection{Markov Random Fields}
+{\bf The Markov Property}
+
+Assume the graph is connected. If not, clearly each connected component is
+independent and apply the proof below to each component.
+Given $A_0$, $B_0$ and $S$ be such that $S$ separates $A_0$ and $B_0$,
+we ``grow'' $A_0$ by repeatedly adding to it any vertex the neighbors it
+and is not in $S$ or $A_0$. We name it $A$ in its ``adult'' state. We do
+the same for $B_0$, creating $B$. It is easy to
+convince oneself that $S$ separates $A$ and $B$, and that the complement of the 
+union of $A$, $B$ and $S$ does not neighbor $A$ or $B$. We call this complement
+$R$.
+
+Given some $x_S$, we denote by $f_C$ the function $\psi_C$ restricted
+to $\sigma_S=x_S$. Note that $f_C$ is constant when $C\subseteq S$. Let the notation $C\sim A$ 
+signify the same as $C\cap A\neq\emptyset$. Then one and only one of $C\sim A$, $C\sim B$,
+$C\sim R$, $C\subseteq S$  holds for a given clique $C$.
+
+Now,
+\begin{eqnarray*}
+  \lefteqn{\P[\sigma_S=x_S]}
+\\ &=& Z^{-1}\sum_{y_{A\cup B\cup R}}\prod_Cf_C(y_{A\cup B})
+\\ &=& Z^{-1}\sum_{y_{A\cup B\cup R}}\prod_{C\subseteq S}f_C\prod_{C\sim A}f_C(y_A)\prod_{C\sim B}f_C(y_B)\prod_{C\sim R}f_C(y_R)
+\\ &=& Z^{-1}\prod_{C\subseteq S}f_C\sum_{y_A}\prod_{C\sim A}f_C(y_A)\sum_{z_B}\prod_{C\sim B}f_C(z_B)\sum_{w_R}\prod_{C\sim R}f_C(w_R)
+\end{eqnarray*}
+Likewise
+\begin{eqnarray*}
+  \lefteqn{\P[\sigma_A=x_A,\sigma_S=x_S]}
+\\ &=& Z^{-1}\prod_{C\subseteq S}f_C\prod_{C\sim A}f_C(x_A)\sum_{z_B}\prod_{C\sim B}f_C(z_B)\sum_{w_R}\prod_{C\sim R}f_C(w_R)
+\end{eqnarray*}
+and
+\begin{eqnarray*}
+  \lefteqn{\P[\sigma_B=x_B,\sigma_S=x_S]}
+\\ &=& Z^{-1}\prod_{C\subseteq S}f_C\prod_{C\sim B}f_C(x_B)\sum_{z_A}\prod_{C\sim A}f_C(z_A)\sum_{w_R}\prod_{C\sim R}f_C(w_R)
+\end{eqnarray*}
+Finally,
+\begin{eqnarray*}
+  \lefteqn{\P[\sigma_A=x_A,\sigma_B=x_B,\sigma_S=x_S]}
+\\ &=& Z^{-1}\prod_{C\subseteq S}f_C\prod_{C\sim A}f_C(x_A)\prod_{C\sim B}f_C(x_B)\sum_{w_R}\prod_{C\sim R}f_C(w_R)
+\end{eqnarray*}
+Hence
+
+\begin{eqnarray*}
+\lefteqn{\P[\sigma_{A\cup B}=x_{A\cup B}|\sigma_S=x_S]\over  
+    \P[\sigma_A=x_A|\sigma_S=x_S]\P[\sigma_B=x_B|\sigma_S=x_S]}
+\\  &=&   {\P[\sigma_{A\cup B}=x_{A\cup B},\sigma_S=x_S]\P[\sigma_S=x_S]\over  
+    \P[\sigma_A=x_A,\sigma_S=x_S]\P[\sigma_B=x_B,\sigma_S=x_S]}
+\\ &=& 
+1
+\end{eqnarray*}
+
+{\bf Max-Cuts}
+Let max-cuts of $G$ have crossing edges. Then, if $\tau$ is a particular
+max-cut, then
+\begin{eqnarray*}
+  \P[\tau]&=&Z^{-1}\exp\left(100nk-100n(|E|-k)\right)
+  \\ &=& Z^{-1}\exp\left(200nk-100n|E|\right)
+\end{eqnarray*}
+The probability of a cut $\sigma$ that is not maximal is at most
+\begin{eqnarray*}
+  \P[\sigma]&=&Z^{-1}\exp\left(100n(k-1)-100n(|E|-(k-1))\right)
+  \\ &=& \P[\tau]\exp\left(-200n\right)
+\end{eqnarray*}
+Since there are less than $2^n=\exp(n\log 2)$ cuts that are not maximal, then
+\begin{eqnarray*}
+  \P[\sigma\mbox{ is not a MAX-CUT of $G$}] &\leq& \P[\tau]\exp\left(-n(200-\log 2)\right)
+\\ &\leq& \exp(-n(200-\log 2)) 
+\\ &\leq& \exp(-199) 
+\end{eqnarray*}
+
+\subsection{The Transportation Distance and Total Variation}
+{\bf Transportation Distance}
+\begin{itemize}
+\item To prove this we need to prove the triangle inequality and that
+  $d_D(P_1,P_2)=0 \leftrightarrow P_1=P_2$.
+  \begin{enumerate}
+  \item If $P_1=P_2$ then by the trivial coupling ($X$ and $Y$ are identical)
+    we have $\E(D(X,Y))=0$. 
+
+    Assume $d_D(P_1,P_2)=0$. Then there exists a coupling $P$ such that  
+    $X\sim P_1$, $Y\sim P_2$ and $\E_P(D(X,Y))=0$. Hence $\P[X\neq Y]=0$ and
+    $\P[X=\omega]=P[Y=\omega]$ and $X$ and $Y$ are distributed identically.
+  \end{enumerate}
+\end{itemize}
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
