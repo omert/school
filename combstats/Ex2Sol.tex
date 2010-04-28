@@ -163,8 +163,10 @@ on $\sigma_S$. This implies that the same holds for $A_0$ and $B_0$:
 \\ &=& \P[\sigma_{A_0}=x_{A_0}|\sigma_S=x_S]\P[\sigma_{B_0}=x_{B_0}|\sigma_S=x_S]
 \end{eqnarray*}
 
+
 {\bf Max-Cuts}
-Let max-cuts of $G$ have crossing edges. Then, if $\tau$ is a particular
+
+Let max-cuts of $G$ have $k$ edges crossing the cut. Then, if $\tau$ is a particular
 max-cut, then
 \begin{eqnarray*}
   \P[\tau]&=&Z^{-1}\exp\left(100nk-100n(|E|-k)\right)
@@ -188,7 +190,28 @@ Since there are less than $2^n=\exp(n\log 2)$ cuts that are not maximal, then
 \item To show this we need to prove the triangle inequality and that
   $d_D(P_1,P_2)=0 \leftrightarrow P_1=P_2$.
   \begin{enumerate}
-  \item
+  \item Given $X\sim P_X$, $Y\sim P_Y$ and $Z\sim P_Z$, let $P_{XY}$ be
+    a coupling that minimizes $\E(D(X,Y))$ and $P_{YZ}$ a coupling that
+    minimizes $\E(D(Y,Z))$. Define $P_{XZ}$ by:
+    $$\P_{XZ}[X=x,Z=z]=\sum_y{\P_{XY}[X=x,Y=y]\P_{YZ}[Y=y,Z=z]\over \P_Y[Y=y]}.$$ 
+    Now 
+    \begin{eqnarray*}
+      \P_{XZ}[X=x]&=&\sum_z\P_{XZ}[X=x,Z=z]
+      \\ &=& \sum_{y,z}{\P_{XY}[X=x,Y=y]\P_{YZ}[Y=y,Z=z]\over \P_Y[Y=y]}
+      \\ &=& \sum_{y}{\P_{XY}[X=x,Y=y]\P_{Y}[Y=y]\over \P_Y[Y=y]}
+      \\ &=& \sum_{y}\P_{XY}[X=x,Y=y]
+      \\ &=& \P_X[X=x]
+    \end{eqnarray*}
+    and likewise $\P_{XYZ}[Z=z]=\P_Z[Z=z]$. By corollary, $P_{XZ}$ is a
+    distribution, and a coupling between $X$ and $Z$. Hence 
+    \begin{eqnarray*}
+      d_D(P_X,P_Z)&\leq& \E_{P_{XZ}}(D(X,Z)) 
+      \\ &=& \sum_{x,z}\P_{XZ}[X=x,Z=z]D(X,Z)
+      \\ &=& \sum_{x,y,z}{\P_{XY}[X=x,Y=y]\P_{YZ}[Y=y,Z=z]\over \P_Y[Y=y]}D(X,Z)
+      \\ &\leq&\sum_{x,y,z}{\P_{XY}[X=x,Y=y]\P_{YZ}[Y=y,Z=z]\over \P_Y[Y=y]}(D(X,Y)+D(X,Z))
+      \\ &=&\sum_{x,y}\P_{XY}[X=x,Y=y]D(X,Y)+\sum_{y,z}\P_{YZ}[Y=y,Z=z]D(X,Z)
+      \\ &=&d_D(P_X,P_Y)+d_D(P_Y,P_Z)
+    \end{eqnarray*}
     
   \item If $P_1=P_2$ then by the trivial coupling ($X$ and $Y$ are identical)
     we have $\E(D(X,Y))=0$. 
@@ -198,6 +221,13 @@ Since there are less than $2^n=\exp(n\log 2)$ cuts that are not maximal, then
     $X\sim P_1$, $Y\sim P_2$ and $\E_P(D(X,Y))=0$. Hence $\P[X\neq Y]=0$ and
     $\P[X=\omega]=P[Y=\omega]$ and $X$ and $Y$ are distributed identically.
   \end{enumerate}
+  \item 
+    Let $P_{13}$ and $P_{23}$ be couplings that minimize $\E(D(X,Y))$ and
+    $\E(D(X,Z))$ 
+
+    \begin{eqnarray*}
+      d_D(\alpha P_1 +(1-\alpha)P_2,P_3)
+    \end{eqnarray*}
 \end{itemize}
 \end{document}
 
