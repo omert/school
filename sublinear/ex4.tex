@@ -120,7 +120,7 @@ indexed by $k$-tuples of indices into $s$. For each
 such tuple $(i_1,\ldots,i_k)$, the table holds (again sorted) the set of $n$ possible 
 shifted subsequences of $s$, so that 
 $T(i_1,\ldots,i_k)=\bigcup_{j\in[0,n-1]}\{s_{i_1+j}s_{i_2+j}\cdots s_{i_k+j}\}$. 
-This table is of size at most $\epsilon^{-1}n\log n\cdotn^{\epsilon^{-1}\log n}$. Given a tuple of indices
+This table is of size at most $\epsilon^{-1}n\log n\cdot n^{\epsilon^{-1}\log n}$. Given a tuple of indices
 $(i_1,\ldots,i_k)$ and the matching subsequence of $x$, 
 $x_{i_1}x_{i_2}\cdots x_{i_k}$, it is possible to search through this table
 and determine in time $O(\epsilon^{-1}\log^2n)$ if this subsequence can be 
