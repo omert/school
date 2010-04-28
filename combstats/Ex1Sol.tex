@@ -111,13 +111,14 @@
 $C (\log n + \log (1/\delta))$ samples. What value of $C$ have you have obtained?
 }
 
-Given $k$ samples, the probability that the majority of  the $X_i(1)$'s are 
-different than $s_1$ is equal to the probability that their average is more than
+Given $k$ samples, the probability that the majority of  the $X_i(1)$'s are
+different than $s_1$ is bounded by the probability that their average is more than
 $1/4$ away from their expectation, and so
-is lower than $2\exp(-2k/4^2)$, by the given large deviation result. 
+is lower than $2\exp(-2k/4^2)$, by the given large deviation result.
 The probability of an error in at least one of the $s_j$'s is then at most
-$p=1-(1-2\exp(-k/8))^n<2n\exp(-k/8)$. Hence if 
-$p<\delta$ then $2n\exp(-k/8)<\delta$, or $k>8\left(\log n+\log(1/\delta)\right)+8\log 2$.
+%$p=1-(1-2\exp(-k/8))^n<
+$2n\exp(-k/8)$ by the union bound. Hence to obtain 
+$p<\delta$, we'll take $2n\exp(-k/8)<\delta$, or $k>8\left(\log n+\log(1/\delta)\right)+8\log 2$.
 
 \item
 {\em Show that there exist a constant $C'$ such that for all $n$ and $\delta < 1/4$ and for all estimation algorithms of $s$ with
@@ -125,32 +126,34 @@ probability of success at least $1-\delta$ it holds that $k \geq C'( \log n + \l
 What value of $C'$ have you obtained?
  }
 
-Let $k(n,\delta)$ be such that for any algorithm $A$ that estimates $s$, there
+Let $k(n,\delta)$ be 
+such that for any algorithm $A$ that estimates $s$, there
 exists a distribution over the possible values $s$ such that $A$ requires
-$k(n,\delta)$ samples to estimate $s$ with probability $1-\delta$. Then in particular any 
-algorithm requires $k(n,\delta)$ samples when $S$ is distributed by the uniform 
-distribution. We will show that the majority algoritm $M$, with a given number
+$k(n,\delta)$ samples to estimate $s$ with probability $1-\delta$. 
+In order to prove a lower bound on $k(n,\delta)$ is suffices to provide a lower bound 
+on the number of samples when  $S$ is distributed uniformly. 
+We will show that the majority algorithm $M$, with a given number
 of samples, succeeds with higher probability then any other algorithm,
 when $S$ is distributed
 uniformly. Hence the number of samples $M$ requires for the uniform distribution
 is a lower bound of the number of samples required by any algorithm for its
-worst case. 
+worst case.
 
 Let $A$ be an algorithm that differs from $M$ for at least one set of values of
-the $X_i(j)$'s. Call this set $z=\{z_i(j)\}$, and assume WLOG that $A(z)_1\neq M(z)_1$. 
-Define an algorithm $B$ by 
-$B(x)=A(x)$ for $x\neq z$,  $B(z)_1=M(z)=1- A(z)_1$ and for $j>1$ again 
+the $X_i(j)$'s. Call this set $z=\{z_i(j)\}$, and assume WLOG that $A(z)_1\neq M(z)_1$.
+Define an algorithm $B$ by
+$B(x)=A(x)$ for $x\neq z$,  $B(z)_1=M(z)=1- A(z)_1$ and for $j>1$ again
 $B(z)_j=A(z)_j$. Then, assuming $S$ is distributed uniformly:
 \begin{eqnarray*}
-\P[\mbox{B succeeds}]-\P[\mbox{A succeeds}] &=& 
-\P[s=B]-\P[s=A] 
+\P[\mbox{B succeeds}]-\P[\mbox{A succeeds}] &=&
+\P[s=B]-\P[s=A]
 \\ &=& \sum_x\P[x]\P[s=B(x)|x]-\sum_x\P[x]\P[s=A(x)|x]
 \\ &=& P[z]\P[s=B(z)|z]-\P[z]\P[s=A(z)|z]
 \end{eqnarray*}
 Since the different $s_j$'s are independent we can write:
 \begin{eqnarray*}
  &=& \P[z]\left(\prod_j\P[s_j=B(z)_j|z(j)]-\prod_j\P[s_j=A(z)_j|z(j)]\right)
-\\ &=& \P[z]\prod_{j>1}\P[s_j=B(z)_j|z(j)]\cdot\left(\P[s_1=M(z)_1|z(1)]-\P[s_1=1-M(z)_1|z(1)]\right)  
+\\ &=& \P[z]\prod_{j>1}\P[s_j=B(z)_j|z(j)]\cdot\left(\P[s_1=M(z)_1|z(1)]-\P[s_1=1-M(z)_1|z(1)]\right)
 \end{eqnarray*}
 Now, because both $S$ and $X$ are distributed uniformly then
  $\P[s_1=M(z)_1|z(1)]=\P[z(1)|s_1=M(z)_1]$. Since by the defintion of $\P[z|s]$ it
@@ -158,11 +161,11 @@ is easy to see that $\P[z(1)|s_1=M(z)_1]>\P[z(1)|s_1=1-M(z)_1]$, then
 the probability that $B$ succeeds is greater than that of $A$, and $M$ is
 the optimal algorithm.
 
-To lower bound the sample size $M$ needs, we note that when $s_j=1$, $M$ 
+To lower bound the sample size $M$ needs, we note that when $s_j=1$, $M$
 is certainly wrong when $x_i(j)=0$ for all $i$.
 This probability for this outcome is $4^{-k}$,
 and so the probability of an
-error in at least one of the $s_i$'s is 
+error in at least one of the $s_i$'s is
 $1-\left(1-4^{-k}\right)^n<n4^{-k}$. For this to be smaller than $\delta$ we must have
 $k>4\left(\log n+\log(1/\delta)\right)$.
 \end{itemize}
@@ -179,10 +182,10 @@ probability that the quintuple test fails is less than $10^{-16}$.
 procedure is at most $10^{-6}$? 2) the cost of the test is at most $\$  10^7 $ ?
 }
 
-Now divide the population into 200 groups of equal size, and test each group 
+Now divide the population into 200 groups of equal size, and test each group
 using the procedure above. Assuming each quintuple test succeeds, we have at
-most 100 groups with infected individuals and the population is divided 
-appropriately. The probability that all tests succeed is more than 
+most 100 groups with infected individuals and the population is divided
+appropriately. The probability that all tests succeed is more than
 $1-10^{13}$, and the cost was $10^7$.
 
 \item
@@ -200,7 +203,7 @@ $10^{-7}$
 and cost at most $\$2 \times 10^{8}$?
 }
 
-As above, apply the procedure 20 times. The cost is $2\cdot 10^8$ and 
+As above, apply the procedure 20 times. The cost is $2\cdot 10^8$ and
 the probability of success is at least $1-10^9$.
 
 \end{itemize}
