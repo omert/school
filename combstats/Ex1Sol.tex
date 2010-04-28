@@ -140,8 +140,10 @@ is a lower bound of the number of samples required by any algorithm for its
 worst case.
 
 Let $A$ be an algorithm that differs from $M$ for at least one set of values of
-the $X_i(j)$'s. Call this set $z=\{z_i(j)\}$, and assume WLOG that $A(z)_1\neq M(z)_1$.
-Define an algorithm $B$ by
+the $X_i(j)$'s. Call this set $z=\{z_i(j)\}$, and assume WLOG that $A(z)_1\neq M(z)_1$. We
+will show that $A$ is suboptimal for the uniform distribution on $s$ by 
+constructing an algorithm $B$ that has a higher probability of success.
+Define then an algorithm $B$ by
 $B(x)=A(x)$ for $x\neq z$,  $B(z)_1=M(z)=1- A(z)_1$ and for $j>1$ again
 $B(z)_j=A(z)_j$. Then, assuming $S$ is distributed uniformly:
 \begin{eqnarray*}
@@ -149,25 +151,58 @@ $B(z)_j=A(z)_j$. Then, assuming $S$ is distributed uniformly:
 \P[s=B]-\P[s=A]
 \\ &=& \sum_x\P[x]\P[s=B(x)|x]-\sum_x\P[x]\P[s=A(x)|x]
 \\ &=& P[z]\P[s=B(z)|z]-\P[z]\P[s=A(z)|z]
+\\ &=& P[z]\left(\P[s=B(z)|z]-\P[s=A(z)|z]\right)
 \end{eqnarray*}
-Since the different $s_j$'s are independent we can write:
+Since $S$ is distributed uniformly, the different $S_j$'s are independent. This
+is still true when conditioning on $X$: the event that $s_1=1$ is independent 
+of the event that $s_2=1$, given a certain outcome $x$.
+Hence we can write:
 \begin{eqnarray*}
  &=& \P[z]\left(\prod_j\P[s_j=B(z)_j|z(j)]-\prod_j\P[s_j=A(z)_j|z(j)]\right)
 \\ &=& \P[z]\prod_{j>1}\P[s_j=B(z)_j|z(j)]\cdot\left(\P[s_1=M(z)_1|z(1)]-\P[s_1=1-M(z)_1|z(1)]\right)
 \end{eqnarray*}
-Now, because both $S$ and $X$ are distributed uniformly then
- $\P[s_1=M(z)_1|z(1)]=\P[z(1)|s_1=M(z)_1]$. Since by the defintion of $\P[z|s]$ it
-is easy to see that $\P[z(1)|s_1=M(z)_1]>\P[z(1)|s_1=1-M(z)_1]$, then
-the probability that $B$ succeeds is greater than that of $A$, and $M$ is
-the optimal algorithm.
+Now, because $S$ is distributed uniformly then
+\begin{eqnarray*}
+  \P[s_1=M(z)_1|z(1)] = {\P[z(1)|s_1=M(z)_1]\P[s_1=M(z)_1]\over \P[z(1)]}
+  = {\P[z(1)|s_1=M(z)_1]\over 2\P[z(1)]}
+\end{eqnarray*}
+and we can write
+\begin{eqnarray*}
+P[\mbox{B succeeds}]-\P[\mbox{A succeeds}]
+ &=&  
+C\left(\P[z(1)|s_1=M(z)_1]-\P[z(1)|s_1=1-M(z)_1]\right)
+\end{eqnarray*}
+where $C$ is positive. 
+
+Let $m$ be the number of bits in $z(1)$ equal to $M(z)_1$, so that $m > k/2$. Then
+\begin{eqnarray*}
+  {\P[z(1)|s_1=M(z)_1] \over \P[z(1)|s_1=1-M(z)_1]} =
+{\left({1\over 4}\right)^{k-m}\left({3\over 4}\right)^{m}
+  \over 
+\left({3\over 4}\right)^{k-m}\left({1\over 4}\right)^{m}
+}
+= 3^{2m-k}
+>1.
+\end{eqnarray*}
+
+ Hence $\P[z(1)|s_1=M(z)_1] > \P[z(1)|s_1=1-M(z)_1]$ and 
+$P[\mbox{B succeeds}] > \P[\mbox{A succeeds}]$. Thus $A$ is suboptimal and $M$ is optimal.
 
 To lower bound the sample size $M$ needs, we note that when $s_j=1$, $M$
 is certainly wrong when $x_i(j)=0$ for all $i$.
 This probability for this outcome is $4^{-k}$,
 and so the probability of an
 error in at least one of the $s_i$'s is
-$1-\left(1-4^{-k}\right)^n<n4^{-k}$. For this to be smaller than $\delta$ we must have
-$k>4\left(\log n+\log(1/\delta)\right)$.
+$1-\left(1-4^{-k}\right)^n$. This is then a lower bound on the probability of error $\delta$. We
+can then calculate a lower bound on the sample size:
+\begin{eqnarray*}
+  \delta &\geq& 1-\left(1-4^{-k}\right)^n
+\\ n\log\left(1-4^{-k}\right) &\geq& \log(1-\delta)
+\\ -n4^{-k} &\geq& \log(1-\delta)\quad\quad\quad (\log(1-x)\leq 1 -x)
+\\ -n4^{-k} &\geq& 2/\delta  \quad\quad\quad\quad\quad (\mbox{for $0<\delta<3/4$})
+\\ k &\geq& {1\over \log 4}\left(\log n+\log(1/\delta)+\log 2\right)
+\end{eqnarray*}
+
 \end{itemize}
 
 \subsection{Group Testing}

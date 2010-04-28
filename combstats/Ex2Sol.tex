@@ -177,13 +177,16 @@ Since there are less than $2^n=\exp(n\log 2)$ cuts that are not maximal, then
 \subsection{The Transportation Distance and Total Variation}
 {\bf Transportation Distance}
 \begin{itemize}
-\item To prove this we need to prove the triangle inequality and that
+\item To show this we need to prove the triangle inequality and that
   $d_D(P_1,P_2)=0 \leftrightarrow P_1=P_2$.
   \begin{enumerate}
+  \item
+    
   \item If $P_1=P_2$ then by the trivial coupling ($X$ and $Y$ are identical)
     we have $\E(D(X,Y))=0$. 
 
     Assume $d_D(P_1,P_2)=0$. Then there exists a coupling $P$ such that  
+    $(X,Y)\sim P$,
     $X\sim P_1$, $Y\sim P_2$ and $\E_P(D(X,Y))=0$. Hence $\P[X\neq Y]=0$ and
     $\P[X=\omega]=P[Y=\omega]$ and $X$ and $Y$ are distributed identically.
   \end{enumerate}
