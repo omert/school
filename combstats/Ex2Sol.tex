@@ -186,6 +186,7 @@ Since there are less than $2^n=\exp(n\log 2)$ cuts that are not maximal, then
 
 \subsection{The Transportation Distance and Total Variation}
 {\bf Transportation Distance}
+
 \begin{itemize}
 \item To show this we need to prove the triangle inequality and that
   $d_D(P_1,P_2)=0 \leftrightarrow P_1=P_2$.
@@ -222,12 +223,76 @@ Since there are less than $2^n=\exp(n\log 2)$ cuts that are not maximal, then
     $\P[X=\omega]=P[Y=\omega]$ and $X$ and $Y$ are distributed identically.
   \end{enumerate}
   \item 
-    Let $P_{13}$ and $P_{23}$ be couplings that minimize $\E(D(X,Y))$ and
-    $\E(D(X,Z))$ 
-
+    For  $X\sim P_1$, $Y\sim P_2$ and $Z\sim P_3$, let $P_{13}$ and $P_{23}$ 
+    be couplings that minimize $\E(D(X,Z))$ and
+    $\E(D(Y,Z))$.
+    
+    Define $W$ to equal $X$ with probability $\alpha$ and $Y$ with probability
+    $1-\alpha$, so that $W$'s set of possible outcomes is the union of those of
+    $X$ and $Y$. Then $W\sim P_\alpha$ with  $P_\alpha=\alpha P_1 +(1-\alpha)P_2$. We can likewise define a 
+    coupling between $W$ and $Z$: with probability $\alpha$ couple $Z$ with
+    $X$ using $P_{13}$, and with probability $1-\alpha$ couple $Z$ with $Y$
+    using $P_{23}$. The joint coupled probability distirbution of $W$ and $Z$
+    is hence $P_{\alpha 3}=\alpha P_{13} +(1-\alpha)P_{23}$. Then
     \begin{eqnarray*}
-      d_D(\alpha P_1 +(1-\alpha)P_2,P_3)
+      \P_{\alpha 3}[W=w]&=&\alpha \P_{13}[W=w] +(1-\alpha)\P_{23}[W=w]
+      \\ &=& \alpha \P_1[W=w]+(1-\alpha)\P_2[W=w]
+      \\ &=& \P_\alpha[W=w]
     \end{eqnarray*}
+    and
+    \begin{eqnarray*}
+      \P_{\alpha 3}[Z=z]&=&\alpha \P_{13}[Z=z] +(1-\alpha)\P_{23}[Z=z]
+      \\ &=& \alpha \P_3[Z=z]+(1-\alpha)\P_3[Z=z]
+      \\ &=& \P_3[Z=z]
+    \end{eqnarray*}
+    and so $P_{\alpha 3}$ is indeed a coupling of $P_\alpha$ and $P_3$. Finally
+    \begin{eqnarray*}
+      \lefteqn{d_D(\alpha P_1+(1-\alpha)P_2,P_3)}
+      \\ &=& d_D(P_\alpha,P_3)
+      \\ &\leq&  \E_{P_{\alpha 3}}D(W,Z)
+      \\ &=&  \sum_{w,z}\P_{\alpha 3}[W=w,Z=z]D(W,Z)
+      \\ &=& \sum_{w,z}\left(\alpha \P_{13}[W=w,Z=z] +(1-\alpha)\P_{23}[W=w,Z=z]\right)D(W,Z)
+      \\ &=& \alpha \sum_{x,z}\P_{13}[W=x,Z=z]D(W,Z) +(1-\alpha)\sum_{y,z}\P_{23}[W=y,Z=z]D(W,Z)
+      \\ &=& \alpha d_D(P_1,P_3)+(1-\alpha)d_D(P_2,P_3)
+    \end{eqnarray*}
+    \item They imply that the total variation distance is a convex metric? 
+\end{itemize}
+
+{\bf Total Variation}
+
+Again let $X\sim P_1$ and $Y\sim P_2$. Denote $D(x,y)=1_{x\neq y}$. Then:
+
+\begin{eqnarray*}
+  d_{TV}&=&\min_{P, P_{|1}=P_1, P_{|2}=P_2}\E_P[D(X,Y)]
+  \\ &=& \min_{P, P_{|1}=P_1, P_{|2}=P_2}\sum_{x,y}\P[X=x,Y=y]D(x,y)
+  \\ &=& \min_{P, P_{|1}=P_1, P_{|2}=P_2}\sum_{x,y}\P[X=x,Y=y]1_{x\neq y}
+  \\ &=& \min_{P, P_{|1}=P_1, P_{|2}=P_2}\P[x\neq y]
+\end{eqnarray*}
+
+{\bf An Example}
+
+The best coupling possible between $X\sim P_q^n$ and $Y\sim P_p^n$ can be 
+thought of as picking $n$ reals $\{r_i\}$ from the uniform distribution on 
+$[0,1]$, and then setting $X_i=1$ iff $r_i>q$ and $Y_i=1$ iff $r_i>p$ 
+(shown in class for $n=1$ and the Hamming distance, but also true 
+for both Hamming and total variation distances with $n\geq 1$). 
+The probability that $X_i= Y_i$ for some $i$ is $q-p$. 
+\begin{itemize}
+\item We use here the last result on total variation distance:
+\begin{eqnarray*}
+  d_{TV}(P_q^n,P_p^n) = \P[X\neq Y]=1-\prod_{i=1}^n\P[X_i= Y_i]=1-(q-p)^n.
+\end{eqnarray*}
+\item
+This calculation can be easily done in the case of Hamming distance, be virtue
+of the additivity of expectation, matched with the additivity of the Hamming 
+distance: $D_H(x,y)=\sum_iD_H(x_i,y_i)$:
+\begin{eqnarray*}
+  d_H(P_q^n,P_p^n) &=& \E_p[\mbox{\# of bits by which $x$ and $y$ differ}]
+  \\ &=& \sum_i\E_p[\mbox{\# of bits by which $x_i$ and $y_i$ differ}]
+  \\ &=& \sum_i1-(q-p)
+  \\ &=& n(1-(q-p))
+\end{eqnarray*}
+
 \end{itemize}
 \end{document}
 
