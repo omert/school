@@ -145,14 +145,22 @@ Finally,
 \\ &=& Z^{-1}\prod_{C\subseteq S}f_C\prod_{C\sim A}f_C(x_A)\prod_{C\sim B}f_C(x_B)\sum_{w_R}\prod_{C\sim R}f_C(w_R)
 \end{eqnarray*}
 Hence
-
 \begin{eqnarray*}
 \lefteqn{\P[\sigma_{A\cup B}=x_{A\cup B}|\sigma_S=x_S]\over  
     \P[\sigma_A=x_A|\sigma_S=x_S]\P[\sigma_B=x_B|\sigma_S=x_S]}
 \\  &=&   {\P[\sigma_{A\cup B}=x_{A\cup B},\sigma_S=x_S]\P[\sigma_S=x_S]\over  
     \P[\sigma_A=x_A,\sigma_S=x_S]\P[\sigma_B=x_B,\sigma_S=x_S]}
+\end{eqnarray*}
+We have show that $\sigma_A$ and $\sigma_B$ are independent when conditioned
+on $\sigma_S$. This implies that the same holds for $A_0$ and $B_0$:
+\begin{eqnarray*}
+\lefteqn{\P[\sigma_{A_0\cup B_0}=x_{A_0\cup B_0}|\sigma_S=x_S]}
 \\ &=& 
-1
+\sum_{x_{A\setminus A_0}}\sum_{x_{B\setminus B_0}}\P[\sigma_{A_0\cup B_0}=x_{A_0\cup B_0},\sigma_{A\setminus A_0}=x_{A\setminus A_0},\sigma_{B\setminus B_0}=x_{B\setminus B_0}|\sigma_S=x_S]
+\\ &=& \sum_{x_{A\setminus A_0}}\sum_{x_{B\setminus B_0}}\P[\sigma_{A\cup B}=x_{A\cup B}|\sigma_S=x_S]
+\\ &=& \sum_{x_{A\setminus A_0}}\sum_{x_{B\setminus B_0}}\P[\sigma_A=x_A|\sigma_S=x_S]\P[\sigma_B=x_B|\sigma_S=x_S]
+\\ &=& \sum_{x_{A\setminus A_0}}\P[\sigma_A=x_A|\sigma_S=x_S]\sum_{x_{B\setminus B_0}}\P[\sigma_B=x_B|\sigma_S=x_S]
+\\ &=& \P[\sigma_{A_0}=x_{A_0}|\sigma_S=x_S]\P[\sigma_{B_0}=x_{B_0}|\sigma_S=x_S]
 \end{eqnarray*}
 
 {\bf Max-Cuts}
