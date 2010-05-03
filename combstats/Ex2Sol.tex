@@ -109,8 +109,8 @@
 
 Assume the graph is connected. If not, clearly each connected component is
 independent and apply the proof below to each component.
-Given $A_0$, $B_0$ and $S$ be such that $S$ separates $A_0$ and $B_0$,
-we ``grow'' $A_0$ by repeatedly adding to it any vertex the neighbors it
+Given disjoint $A_0$, $B_0$ and $S$ such that $S$ separates $A_0$ and $B_0$,
+we ``grow'' $A_0$ by repeatedly adding to it any vertex that neighbors it
 and is not in $S$ or $A_0$. We name it $A$ in its ``adult'' state. We do
 the same for $B_0$, creating $B$. It is easy to
 convince oneself that $S$ separates $A$ and $B$, and that the complement of the 
@@ -151,7 +151,7 @@ Hence
 \\  &=&   {\P[\sigma_{A\cup B}=x_{A\cup B},\sigma_S=x_S]\P[\sigma_S=x_S]\over  
     \P[\sigma_A=x_A,\sigma_S=x_S]\P[\sigma_B=x_B,\sigma_S=x_S]}
 \end{eqnarray*}
-We have show that $\sigma_A$ and $\sigma_B$ are independent when conditioned
+We have shown that $\sigma_A$ and $\sigma_B$ are independent when conditioned
 on $\sigma_S$. This implies that the same holds for $A_0$ and $B_0$:
 \begin{eqnarray*}
 \lefteqn{\P[\sigma_{A_0\cup B_0}=x_{A_0\cup B_0}|\sigma_S=x_S]}
@@ -189,7 +189,8 @@ Since there are less than $2^n=\exp(n\log 2)$ cuts that are not maximal, then
 
 \begin{itemize}
 \item To show this we need to prove the triangle inequality and that
-  $d_D(P_1,P_2)=0 \leftrightarrow P_1=P_2$.
+  $d_D(P_1,P_2)=0 \leftrightarrow P_1=P_2$; positivity and symmetry follow immediately from
+  the positivity and symmetry of $D$.
   \begin{enumerate}
   \item Given $X\sim P_X$, $Y\sim P_Y$ and $Z\sim P_Z$, let $P_{XY}$ be
     a coupling that minimizes $\E(D(X,Y))$ and $P_{YZ}$ a coupling that
@@ -209,8 +210,8 @@ Since there are less than $2^n=\exp(n\log 2)$ cuts that are not maximal, then
       d_D(P_X,P_Z)&\leq& \E_{P_{XZ}}(D(X,Z)) 
       \\ &=& \sum_{x,z}\P_{XZ}[X=x,Z=z]D(X,Z)
       \\ &=& \sum_{x,y,z}{\P_{XY}[X=x,Y=y]\P_{YZ}[Y=y,Z=z]\over \P_Y[Y=y]}D(X,Z)
-      \\ &\leq&\sum_{x,y,z}{\P_{XY}[X=x,Y=y]\P_{YZ}[Y=y,Z=z]\over \P_Y[Y=y]}(D(X,Y)+D(X,Z))
-      \\ &=&\sum_{x,y}\P_{XY}[X=x,Y=y]D(X,Y)+\sum_{y,z}\P_{YZ}[Y=y,Z=z]D(X,Z)
+      \\ &\leq&\sum_{x,y,z}{\P_{XY}[X=x,Y=y]\P_{YZ}[Y=y,Z=z]\over \P_Y[Y=y]}(D(X,Y)+D(Y,Z))
+      \\ &=&\sum_{x,y}\P_{XY}[X=x,Y=y]D(X,Y)+\sum_{y,z}\P_{YZ}[Y=y,Z=z]D(Y,Z)
       \\ &=&d_D(P_X,P_Y)+d_D(P_Y,P_Z)
     \end{eqnarray*}
     
@@ -232,7 +233,7 @@ Since there are less than $2^n=\exp(n\log 2)$ cuts that are not maximal, then
     $X$ and $Y$. Then $W\sim P_\alpha$ with  $P_\alpha=\alpha P_1 +(1-\alpha)P_2$. We can likewise define a 
     coupling between $W$ and $Z$: with probability $\alpha$ couple $Z$ with
     $X$ using $P_{13}$, and with probability $1-\alpha$ couple $Z$ with $Y$
-    using $P_{23}$. The joint coupled probability distirbution of $W$ and $Z$
+    using $P_{23}$. The joint coupled probability distribution of $W$ and $Z$
     is hence $P_{\alpha 3}=\alpha P_{13} +(1-\alpha)P_{23}$. Then
     \begin{eqnarray*}
       \P_{\alpha 3}[W=w]&=&\alpha \P_{13}[W=w] +(1-\alpha)\P_{23}[W=w]
@@ -255,45 +256,100 @@ Since there are less than $2^n=\exp(n\log 2)$ cuts that are not maximal, then
       \\ &=& \alpha \sum_{x,z}\P_{13}[W=x,Z=z]D(W,Z) +(1-\alpha)\sum_{y,z}\P_{23}[W=y,Z=z]D(W,Z)
       \\ &=& \alpha d_D(P_1,P_3)+(1-\alpha)d_D(P_2,P_3)
     \end{eqnarray*}
-    \item They imply that the total variation distance is a convex metric? 
+    \item The previous two items imply that the total variation distance is a 
+      convex metric.
 \end{itemize}
 
 {\bf Total Variation}
 
-Again let $X\sim P_1$ and $Y\sim P_2$. Denote $D(x,y)=1_{x\neq y}$. Then:
+Again let $X\sim P_1$ and $Y\sim P_2$ over distribution space $\Omega$. 
+It was demonstrated in class that $d_{TV}(P_1,P_2)\geq \min_P P[X\neq Y]$, where $P$ is any
+coupling between $P_1$ and $P_2$. 
+We need then only
+show that $d_{TV}(P_1,P_2)\leq \min_P P[X\neq Y]$. Let $\Omega_1 \subseteq \Omega$ be those
+values of $\omega$ for which $\P_1(\omega)\geq P_2(\omega)$, and define 
+$\Omega_2$ to be its complement. Then:
+\begin{eqnarray*}
+  d_{TV}(P_1,P_2)&=&{1\over 2}\sum_{\omega \in \Omega}|P_1(\omega)-P_2(\omega)|
+  \\ &=& {1\over 2}\sum_{\omega \in \Omega}\max\{P_1(\omega),P_2(\omega)\}
+  - \min\{P_1(\omega),P_2(\omega)\}
+  \\ &=& {1\over 2}\left(\sum_{\omega\in\Omega_1}P_1(\omega)
+  + \sum_{\omega\in\Omega_2}P_2(\omega)\right)
+  - {1\over 2}\sum_{\omega \in \Omega}\min\{P_1(\omega),P_2(\omega)\}
+  \\ &=& {1\over 2}\left(2-\sum_{\omega\in\Omega_2}P_1(\omega)
+  - \sum_{\omega\in\Omega_1}P_2(\omega)\right)
+  - {1\over 2}\sum_{\omega \in \Omega}\min\{P_1(\omega),P_2(\omega)\}
+  \\ &=& {1\over 2}\left(2-
+    \sum_{\omega \in \Omega}\min\{P_1(\omega),P_2(\omega)\}  \right)
+  - {1\over 2}\sum_{\omega \in \Omega}\min\{P_1(\omega),P_2(\omega)\}
+  \\ &=& 1- \sum_{\omega \in \Omega}\min\{P_1(\omega),P_2(\omega)\}.
+\end{eqnarray*}
+Now let $P$ be a coupling between $P_1$ and $P_2$. Then for any $x,y$ it holds
+that $P(x,y)\leq P_1(x)$, since $P_1(x)=\sum_yP(x,y)$. 
+Likewise, $P(x,y)\leq P_2(y)$, and so $P(x,y)\leq \min\{P_1(x,x),P_2(y,y)\}$. Hence:
 
 \begin{eqnarray*}
-  d_{TV}&=&\min_{P, P_{|1}=P_1, P_{|2}=P_2}\E_P[D(X,Y)]
-  \\ &=& \min_{P, P_{|1}=P_1, P_{|2}=P_2}\sum_{x,y}\P[X=x,Y=y]D(x,y)
-  \\ &=& \min_{P, P_{|1}=P_1, P_{|2}=P_2}\sum_{x,y}\P[X=x,Y=y]1_{x\neq y}
-  \\ &=& \min_{P, P_{|1}=P_1, P_{|2}=P_2}\P[x\neq y]
+\P[X\neq Y]&=&1-\P[X=Y]
+\\ &=& 1-\sum_x P(x,x)  
+\\ &\geq&1-\sum_x \min\{P_1(x),P_2(x)\}
+\\ &=& d_{TV}(P_1,P_2).
 \end{eqnarray*}
+We have shown that  $d_{TV}(P_1,P_2)\leq \P[X\neq Y]$ for any coupling $P$,
+and so $d_{TV}(P_1,P_2)\leq \min_P\P[X\neq Y]$
+
 
 {\bf An Example}
 
-The best coupling possible between $X\sim P_q^n$ and $Y\sim P_p^n$ can be 
-thought of as picking $n$ reals $\{r_i\}$ from the uniform distribution on 
-$[0,1]$, and then setting $X_i=1$ iff $r_i>q$ and $Y_i=1$ iff $r_i>p$ 
-(shown in class for $n=1$ and the Hamming distance, but also true 
-for both Hamming and total variation distances with $n\geq 1$). 
-The probability that $X_i= Y_i$ for some $i$ is $q-p$. 
+Denote by $x$ a vector of $n$ bits: $x=\{x_i\}=(x_1,\ldots,x_n)$. For a
+random variable $X$ taking values of type $x$, denote by
+$X_i$ the $i$'th bit of $X$.
+
+We'll solve for general $p$ and $q$, assuming only that $q>p$.
 \begin{itemize}
-\item We use here the last result on total variation distance:
+\item {\bf Total Variation}
+For $P_q^1$ and $P_q^1$ the calculation is straightforward:
 \begin{eqnarray*}
-  d_{TV}(P_q^n,P_p^n) = \P[X\neq Y]=1-\prod_{i=1}^n\P[X_i= Y_i]=1-(q-p)^n.
+  d_{TV}(P_q^1,P_p^1)&=&{1\over 2}((q-p)+((1-p)-(1-q)))
+  \\ &=& q-p
 \end{eqnarray*}
-\item
-This calculation can be easily done in the case of Hamming distance, be virtue
-of the additivity of expectation, matched with the additivity of the Hamming 
-distance: $D_H(x,y)=\sum_iD_H(x_i,y_i)$:
+For $P_q^3$ and $P_p^3$ we note that since $q$ is greater than $p$ then
+$P_q^3(x)>P_p^3(x)$ whenever $x$ has more ones than zeros. Hence:
+
 \begin{eqnarray*}
-  d_H(P_q^n,P_p^n) &=& \E_p[\mbox{\# of bits by which $x$ and $y$ differ}]
-  \\ &=& \sum_i\E_p[\mbox{\# of bits by which $x_i$ and $y_i$ differ}]
-  \\ &=& \sum_i1-(q-p)
-  \\ &=& n(1-(q-p))
+  d_{TV}(P_q^3,P_p^3)&=&1-\sum_{x}\min\left\{P_q^3(x),P_p^3(x)\right\}
+\\ &=& 1-\sum_{\sum_ix_i>1}P_p^3(x)-\sum_{\sum_ix_i\leq 1}P_q^3(x)
+\\ &=& 1-p^3-3p^2(1-p)-(1-q)^3-3(1-q)^2q
+\\ &=& 1-p^2(3-2p)-(1-q)^2(1+2q)
+\\ &=& 2(p^3-q^3)+3(q^2-p^2)
 \end{eqnarray*}
 
+For $q=0.8$ and $p=0.3$ this equals 0.68.
+
+\item {\bf Hamming}
+Let $X\sim P_q^n$ and $Y\sim P_p^n$.
+\begin{eqnarray*}
+  d_H(P_q^n,P_q^n)&=&\min_P\E_P[D_H(X,Y)]
+  \\   &=& \min_P\sum_{x,y}\P[X=x,Y=y]D_H(x,y)
+  \\ &=& \min_P\sum_{x,y}\P[X=x,Y=y]\sum_{i=1}^nD_H(x_i,y_i)
+  \\ &=& \min_P\sum_{i=1}^n\sum_{x,y}\P[X=x,Y=y]D_H(x_i,y_i)
+  \\ &=& \min_P\sum_{i=1}^n\sum_{x_i,y_i}\P[X_i=x_i,Y_i=y_i]D_H(x_i,y_i)
+  \\ &=& \min_P\sum_{i=1}^n\E_P[D_H(X_i,Y_i)].
+\end{eqnarray*}
+Now, for a single bit the Hamming distance and the total variation distance
+coincide, so that $D_H(X_i,Y_i)=D_{TV}(X_i,Y_i)$. Therefore
+\begin{eqnarray*}
+  d_H(P_1,P_2)=\min_P\sum_{i=1}^n\E_P[D_{TV}(X_i,Y_i)].
+\end{eqnarray*}
+By the previous question, each summand can be minimized to $q-p$, and so a
+lower bound is $n(q-p)$. This bound may indeed be achieved, since $P$ can
+be constructed as the product of independent distributions, one for each of the
+$n$ bits, where the distribution on each bit is precisely the distribution that
+minimizes the expected total variation distance between $P_q^1$ and $P_p^1$.
+Hence
+$d_H(P_q^n,P_q^n)=n(q-p)$.
+
 \end{itemize}
+
 \end{document}
 
 
