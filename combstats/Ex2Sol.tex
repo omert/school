@@ -107,42 +107,39 @@
 \subsection{Markov Random Fields}
 {\bf The Markov Property}
 
-Assume the graph is connected. If not, clearly each connected component is
-independent and apply the proof below to each component.
 Given disjoint $A_0$, $B_0$ and $S$ such that $S$ separates $A_0$ and $B_0$,
 we ``grow'' $A_0$ by repeatedly adding to it any vertex that neighbors it
-and is not in $S$ or $A_0$. We name it $A$ in its ``adult'' state. We do
-the same for $B_0$, creating $B$. It is easy to
-convince oneself that $S$ separates $A$ and $B$, and that the complement of the 
-union of $A$, $B$ and $S$ does not neighbor $A$ or $B$. We call this complement
-$R$.
+and is not in $S$ or $A_0$. We name it $A$ in its ``adult'' state. We add the
+remaining vertices not in $A$ or $S$ to $B_0$, creating $B$. Note that 
+$V=A\cup B\cup S$. 
+It is easy to convince oneself that $S$ separates $A$ and $B$.
 
 Given some $x_S$, we denote by $f_C$ the function $\psi_C$ restricted
-to $\sigma_S=x_S$. Note that $f_C$ is constant when $C\subseteq S$. Let the notation $C\sim A$ 
+to $\sigma_S=x_S$. Let the notation $C\sim A$ 
 signify the same as $C\cap A\neq\emptyset$. Then one and only one of $C\sim A$, $C\sim B$,
-$C\sim R$, $C\subseteq S$  holds for a given clique $C$.
+$C\subseteq S$  holds for a given clique $C$.
 
 Now,
 \begin{eqnarray*}
   \lefteqn{\P[\sigma_S=x_S]}
 \\ &=& Z^{-1}\sum_{y_{A\cup B\cup R}}\prod_Cf_C(y_{A\cup B})
-\\ &=& Z^{-1}\sum_{y_{A\cup B\cup R}}\prod_{C\subseteq S}f_C\prod_{C\sim A}f_C(y_A)\prod_{C\sim B}f_C(y_B)\prod_{C\sim R}f_C(y_R)
-\\ &=& Z^{-1}\prod_{C\subseteq S}f_C\sum_{y_A}\prod_{C\sim A}f_C(y_A)\sum_{z_B}\prod_{C\sim B}f_C(z_B)\sum_{w_R}\prod_{C\sim R}f_C(w_R)
+\\ &=& Z^{-1}\sum_{y_{A\cup B\cup R}}\prod_{C\subseteq S}f_C(x_S)\prod_{C\sim A}f_C(y_A)\prod_{C\sim B}f_C(y_B)
+\\ &=& Z^{-1}\prod_{C\subseteq S}f_C(x_S)\sum_{y_A}\prod_{C\sim A}f_C(y_A)\sum_{z_B}\prod_{C\sim B}f_C(z_B)
 \end{eqnarray*}
-Likewise
+with the last equality holding because $A$ and $B$ are separate. Likewise
 \begin{eqnarray*}
   \lefteqn{\P[\sigma_A=x_A,\sigma_S=x_S]}
-\\ &=& Z^{-1}\prod_{C\subseteq S}f_C\prod_{C\sim A}f_C(x_A)\sum_{z_B}\prod_{C\sim B}f_C(z_B)\sum_{w_R}\prod_{C\sim R}f_C(w_R)
+\\ &=& Z^{-1}\prod_{C\subseteq S}f_C(x_S)\prod_{C\sim A}f_C(x_A)\sum_{z_B}\prod_{C\sim B}f_C(z_B)
 \end{eqnarray*}
 and
 \begin{eqnarray*}
   \lefteqn{\P[\sigma_B=x_B,\sigma_S=x_S]}
-\\ &=& Z^{-1}\prod_{C\subseteq S}f_C\prod_{C\sim B}f_C(x_B)\sum_{z_A}\prod_{C\sim A}f_C(z_A)\sum_{w_R}\prod_{C\sim R}f_C(w_R)
+\\ &=& Z^{-1}\prod_{C\subseteq S}f_C(x_S)\prod_{C\sim B}f_C(x_B)\sum_{z_A}\prod_{C\sim A}f_C(z_A)
 \end{eqnarray*}
 Finally,
 \begin{eqnarray*}
   \lefteqn{\P[\sigma_A=x_A,\sigma_B=x_B,\sigma_S=x_S]}
-\\ &=& Z^{-1}\prod_{C\subseteq S}f_C\prod_{C\sim A}f_C(x_A)\prod_{C\sim B}f_C(x_B)\sum_{w_R}\prod_{C\sim R}f_C(w_R)
+\\ &=& Z^{-1}\prod_{C\subseteq S}f_C(x_S)\prod_{C\sim A}f_C(x_A)\prod_{C\sim B}f_C(x_B)
 \end{eqnarray*}
 Hence
 \begin{eqnarray*}
@@ -150,6 +147,12 @@ Hence
     \P[\sigma_A=x_A|\sigma_S=x_S]\P[\sigma_B=x_B|\sigma_S=x_S]}
 \\  &=&   {\P[\sigma_{A\cup B}=x_{A\cup B},\sigma_S=x_S]\P[\sigma_S=x_S]\over  
     \P[\sigma_A=x_A,\sigma_S=x_S]\P[\sigma_B=x_B,\sigma_S=x_S]}
+\\ &=& {
+\prod_{C\subseteq S}f_C(x_S)\prod_{C\sim A}f_C(x_A)\prod_{C\sim B}f_C(x_B) \prod_{C\subseteq S}f_C(x_S)\sum_{y_A}\prod_{C\sim A}f_C(y_A)\sum_{z_B}\prod_{C\sim B}f_C(z_B)
+  \over
+\prod_{C\subseteq S}f_C(x_S)\prod_{C\sim A}f_C(x_A)\sum_{z_B}\prod_{C\sim B}f_C(z_B)\prod_{C\subseteq S}f_C(x_S)\prod_{C\sim B}f_C(x_B)\sum_{z_A}\prod_{C\sim A}f_C(z_A)
+  }
+\\ &=& 1.
 \end{eqnarray*}
 We have shown that $\sigma_A$ and $\sigma_B$ are independent when conditioned
 on $\sigma_S$. This implies that the same holds for $A_0$ and $B_0$:
@@ -204,7 +207,7 @@ Since there are less than $2^n=\exp(n\log 2)$ cuts that are not maximal, then
       \\ &=& \sum_{y}\P_{XY}[X=x,Y=y]
       \\ &=& \P_X[X=x]
     \end{eqnarray*}
-    and likewise $\P_{XYZ}[Z=z]=\P_Z[Z=z]$. By corollary, $P_{XZ}$ is a
+    and likewise $\P_{XZ}[Z=z]=\P_Z[Z=z]$. It follows that, $P_{XZ}$ is a
     distribution, and a coupling between $X$ and $Z$. Hence 
     \begin{eqnarray*}
       d_D(P_X,P_Z)&\leq& \E_{P_{XZ}}(D(X,Z)) 
