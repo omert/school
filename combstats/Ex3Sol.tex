@@ -1,0 +1,191 @@
+\documentclass[11pt]{article} \usepackage{amssymb}
+\usepackage{amsfonts} \usepackage{amsmath} \usepackage{amsthm} \usepackage{bm}
+\usepackage{latexsym} \usepackage{epsfig}
+
+\setlength{\textwidth}{6.5 in} \setlength{\textheight}{8.25in}
+\setlength{\oddsidemargin}{0in} \setlength{\topmargin}{0in}
+\addtolength{\textheight}{.8in} \addtolength{\voffset}{-.5in}
+
+\newtheorem*{theorem*}{Theorem}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem*{proposition*}{Proposition}
+
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{example}[theorem]{Example}
+%\newenvironment{proof}{\noindent \textbf{Proof:}}{$\Box$}
+
+\newcommand{\ignore}[1]{}
+
+\newcommand{\enote}[1]{} \newcommand{\knote}[1]{}
+\newcommand{\rnote}[1]{}
+
+
+\DeclareMathOperator{\Support}{Supp} \DeclareMathOperator{\Opt}{Opt}
+\DeclareMathOperator{\Ordo}{\mathcal{O}}
+\newcommand{\MaxkCSP}{\textsc{Max $k$-CSP}}
+\newcommand{\MaxkCSPq}{\textsc{Max $k$-CSP$_{q}$}}
+\newcommand{\MaxCSP}[1]{\textsc{Max CSP}(#1)} \renewcommand{\Pr}{{\bf
+    P}} \renewcommand{\P}{{\bf P}} \newcommand{\Px}{\mathop{\bf P\/}}
+\newcommand{\E}{{\bf E}} \newcommand{\Cov}{{\bf Cov}}
+\newcommand{\Var}{{\bf Var}} \newcommand{\Varx}{\mathop{\bf Var\/}}
+
+\newcommand{\bits}{\{-1,1\}}
+
+\newcommand{\nsmaja}{\textstyle{\frac{2}{\pi}} \arcsin \rho}
+
+\newcommand{\Inf}{\mathrm{Inf}} \newcommand{\I}{\mathrm{I}}
+\newcommand{\J}{\mathrm{J}}
+
+\newcommand{\eps}{\epsilon} \newcommand{\lam}{\lambda}
+
+% \newcommand{\trunc}{\ell_{2,[-1,1]}}
+\newcommand{\trunc}{\zeta} \newcommand{\truncprod}{\chi}
+
+\newcommand{\N}{\mathbb N} \newcommand{\R}{\mathbb R}
+\newcommand{\Z}{\mathbb Z} \newcommand{\CalE}{{\mathcal{E}}}
+\newcommand{\CalC}{{\mathcal{C}}} \newcommand{\CalM}{{\mathcal{M}}}
+\newcommand{\CalR}{{\mathcal{R}}} \newcommand{\CalS}{{\mathcal{S}}}
+\newcommand{\CalV}{{\mathcal{V}}}
+\newcommand{\CalX}{{\boldsymbol{\mathcal{X}}}}
+\newcommand{\CalG}{{\boldsymbol{\mathcal{G}}}}
+\newcommand{\CalH}{{\boldsymbol{\mathcal{H}}}}
+\newcommand{\CalY}{{\boldsymbol{\mathcal{Y}}}}
+\newcommand{\CalZ}{{\boldsymbol{\mathcal{Z}}}}
+\newcommand{\CalW}{{\boldsymbol{\mathcal{W}}}}
+\newcommand{\CalF}{{\mathcal{Z}}}
+% \newcommand{\boldG}{{\boldsymbol G}}
+% \newcommand{\boldQ}{{\boldsymbol Q}}
+% \newcommand{\boldP}{{\boldsymbol P}}
+% \newcommand{\boldR}{{\boldsymbol R}}
+% \newcommand{\boldS}{{\boldsymbol S}}
+% \newcommand{\boldX}{{\boldsymbol X}}
+% \newcommand{\boldB}{{\boldsymbol B}}
+% \newcommand{\boldY}{{\boldsymbol Y}}
+% \newcommand{\boldZ}{{\boldsymbol Z}}
+% \newcommand{\boldV}{{\boldsymbol V}}
+\newcommand{\boldi}{{\boldsymbol i}} \newcommand{\boldj}{{\boldsymbol
+    j}} \newcommand{\boldk}{{\boldsymbol k}}
+\newcommand{\boldr}{{\boldsymbol r}}
+\newcommand{\boldsigma}{{\boldsymbol \sigma}}
+\newcommand{\boldupsilon}{{\boldsymbol \upsilon}}
+\newcommand{\hone}{{\boldsymbol{H1}}}
+\newcommand{\htwo}{\boldsymbol{H2}}
+\newcommand{\hthree}{\boldsymbol{H3}}
+\newcommand{\hfour}{\boldsymbol{H4}}
+
+
+\newcommand{\sgn}{\mathrm{sgn}} \newcommand{\Maj}{\mathrm{Maj}}
+\newcommand{\Acyc}{\mathrm{Acyc}}
+\newcommand{\UniqMax}{\mathrm{UniqMax}}
+\newcommand{\Thr}{\mathrm{Thr}} \newcommand{\littlesum}{{\textstyle
+    \sum}}
+
+\newcommand{\half}{{\textstyle \frac12}}
+\newcommand{\third}{{\textstyle \frac13}}
+\newcommand{\fourth}{{\textstyle \frac14}}
+\newcommand{\fifth}{{\textstyle \frac15}}
+
+\newcommand{\Stab}{\mathbb{S}}
+\newcommand{\StabThr}[2]{\Gamma_{#1}(#2)}
+\newcommand{\StabThrmin}[2]{{\underline{\Gamma}}_{#1}(#2)}
+\newcommand{\StabThrmax}[2]{{\overline{\Gamma}}_{#1}(#2)}
+\newcommand{\TestFcn}{\Psi}
+
+\renewcommand{\phi}{\varphi}
+
+\begin{document}
+\title{Combinatorial Statistics - Homework Set 3 Solution}
+
+\date{\today}
+\maketitle
+\subsection{Sampling Uniform Colorings}
+\begin{itemize}
+\item Arbitrarily order the vertices $v_1,\ldots,v_n$. Iterating over $i$,
+assign to $v_i$ a color not assigned to any of its neighbors $v_j$ such that
+$j<i$. Since the degree of $v_i$ is at most $d$, it has at most $d$ such
+neighbors, and so one of the $q\geq d+1$ colors will be available.
+
+\item Let $\sigma_0$ and $\tau_0$ be legal colorings that differ in exactly
+one vertex. 
+Let $X_0,Y_0$ be the distributions over the legal colorings for which  
+$\P_{X_0}[\sigma_0]=1$ and $\P_{Y_0}[\tau_0]=1$. Let  $X_1,Y_1$ be the distributions resulting from the
+application of the Gibbs sampler to $X_0$ and $Y_0$, respectively. The Gibbs
+sampler here, as expected, picks a vertex $v$ uniformly at random and then 
+picks, again uniformly at random, a legal color for $v$.
+
+Define a metric $H$ on legal colorings by  
+$H(\sigma_0,\tau_0)=|\{v\in V :\:\sigma_0(v)\neq \tau_0(v)\}|$. This is a generalization of the Hamming 
+distance to multi-valued vectors. We would like to show the following:
+\begin{proposition*}
+  $d_H(X_1,X_2)\leq 1-{1\over n(d+1)}$.
+\end{proposition*}
+Note that by a proof identical to the one shown in class for the binary Hamming
+distance, this would imply that indeed this sampler runs in
+$O(dn(\log n - \log \epsilon))$.
+ 
+\begin{proof}
+  Let $Q$ be the coupling between $X_1$ and $Y_1$ used for the Ising model, 
+  realized by applying the Gibbs sampler to $\sigma_0$ and $\tau_0$, arriving at 
+  $\sigma_1$ and $\tau_1$, as follows:
+  \begin{enumerate}
+  \item Pick a vertex $v$ uniformly at random. For $u\neq v$, let 
+    $\sigma_1(u)=\sigma_0(u)=\tau_0(u)=\tau_1(u)$.
+  \item Let $w$ be the vertex in which $\sigma_0$ and $\tau_0$ differ. Let 
+    $C_\sigma$ be the legal colors for $v$ under $\sigma_0$, and define
+    $C_\tau$ similarly.
+    \begin{enumerate}
+    \item If $v=w$ or $v \not \in N(w)$ then $C_\sigma=C_\tau=C$. Pick for $v$ a legal 
+      color $c$ from $C$ uniformly at random and set $\sigma_1(v)=\tau_1(v)=c$.
+    \item If $v \in N(w)$ then assume WLOG that $|C_\sigma|\geq |C_\tau|$.
+      Then either $C_\tau=C_\sigma$,  $C_\tau=C_\sigma\setminus \{\tau_0(w)\}$ or
+      $C_\tau=C_\sigma\setminus \{\tau_0(w)\}\cup \{\sigma_0(w)\}$.
+      Pick uniformly at random
+      a color $c\in C_\sigma$, and set $\sigma_1(v)=c$. If $c\in C_\tau$ then
+      set $\tau_1(v)=c$ too. Otherwise $c=\tau_0(w)$; in this case, if  
+      $C_\tau=C_\sigma\setminus \{\tau_0(w)\}$ 
+      then pick $\tau_1(v)$ uniformly at random from $C_\tau$, and if 
+      $C_\tau=C_\sigma\setminus \{\tau_0(w)\}\cup \{\sigma_0(w)\}$ then
+      set $\tau_1(v)=\sigma_0(w)$. Note that $|C_\sigma|\geq q-d \geq 2d+1-d =d+1$, and
+      so the probability that $c=\tau_0(w)$ and hence 
+      $\tau_1(w)\neq  \sigma_1(w)$ is at most
+      $1/(d+1)$.
+    \end{enumerate}
+  \end{enumerate}
+  It's easy to convince oneself that the resulting marginal distributions 
+  of $\sigma_1$ and $\tau_1$ are indeed $X_1$ and $Y_1$, respectively. Furthermore:
+  \begin{align*}
+    \E_Q[H(X_1,Y_1)] &= \P_Q[v=w]\cdot 0+\P_Q[v\not \in \{w\}\cup N(w)]\cdot 1
+    \\ & \quad\quad + \P_Q[v\in N(w)](\P_Q[\sigma_1(v)=\tau_1(v)]\cdot 1 + \P_Q[\sigma_1(v)\neq\tau_1(v)]\cdot 2)
+    \\  &= 1-{1\over n}-{d(w)\over n}+{d(w)\over n}((1-\P_Q[\sigma_1(v)\neq\tau_1(v)]) +2\P_Q[\sigma_1(v)\neq\tau_1(v)])
+    \\  &= 1-{1\over n}-{d(w)\over n}+{d(w)\over n}(1+\P_Q[\sigma_1(v)\neq\tau_1(v)])
+    \\  &\leq 1-{1\over n}-{d(w)\over n}+{d(w)\over n}\left(1+{1\over d(w)+1}\right)
+    \\  &= 1-{1\over n}\cdot{1\over d(w)+1}
+    \\  &\leq 1-{1\over n(d+1)}
+  \end{align*}
+\end{proof}
+\end{itemize}
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
