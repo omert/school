@@ -238,7 +238,7 @@ we must have
   is $X_0$. Then $p\leq X_0(S) = s/(s+m)$, since this transition is 
   possible only from $S$. Now, as long as the sampler stays in $S\cup A$,
   the distribution of its state remains $X_0$, since it is a stationary
-  distribution on these sets. The probability that this indeed happens in the
+  distribution. The probability that this indeed happens in the
   first $t$ steps is hence $(1-p)^t$, which is at least $1-pt$, which in turn
   is at least $1-st/(s+m)$.
   Therefore the probability that it ever reaches $B$ at time $t$ is at most
@@ -246,17 +246,26 @@ we must have
   Hence $d_{TV}(X_t,Q)\geq Q(B)-X_t(B)\geq Q(B)-st/(s+m) \geq m-st/(s+m)$.
 
 \item
+
   Suppose $d_{TV}(X_t,Y_t)\leq u < 1$ for all starting points $X_0$, $Y_0$. Denote
   by $X_t^\omega$ the distribution achieved $t$ steps after starting at 
-  $\omega$.
+  $\omega$. Then between every $X_t^\omega$ and $Y_t^\mu$ there exists a coupling 
+  $P_{\omega\mu}$ such that $\P_{\omega\mu}[x\neq y] < u$.
 
-  Assume the conjecture is true for $r-1$. Then:
-  \begin{align*}
-    d_{TV}(X_{rt},Y_{rt}) &= {1\over 2}\sum_\omega |X_{rt}(\omega)-Y_{rt}(\omega)|
-    \\ &= {1\over 2}\sum_\omega \left|\sum_{\omega'}X_{(r-1)t}(\omega')X_t^{\omega'}(\omega)-\sum_{\omega'}Y_{(r-1)t}(\omega')Y_t^{\omega'}(\omega)\right|
-    \\ &\leq {1\over 2}\sum_\omega \sum_{\omega'}\left|X_{(r-1)t}(\omega')X_t^{\omega'}(\omega)-Y_{(r-1)t}(\omega')Y_t^{\omega'}(\omega)\right|
-    \\ &\leq {1\over 2}\sum_{\omega'} \left(\sum_\omega\left|X_{(r-1)t}(\omega')X_t^{\omega'}(\omega)-Y_{(r-1)t}(\omega')Y_t^{\omega'}(\omega)\right|\right)
-  \end{align*}
+  We prove the proposition by induction. The base ($r=1$) is given. Assume then
+  that there exists a coupling $P_r$ 
+  between $X_{rt}$ and $Y_{rt}$ such that $\P_r[x\neq y] < u^r$.
+  Define a coupling $P_{r+1}$ for  $X_{(r+1)t}$ and $Y_{(r+1)t}$ as follows: for the
+  first $rt$ steps, couple by $P_r$. Denote the states arrived at by $X_{rt}$ and
+  $Y_{rt}$ as $\omega$ and $\mu$, respectively. If $\omega=\mu$, then
+  continue the process for $t$ more steps identically. Otherwise, 
+  couple by $P_{\omega\mu}$ for the next $t$ steps.
+
+  With probability at least $1-u^r$ we'll have $\omega=\mu$, and then also 
+  after $(r+1)t$ steps the states will be identical.
+  With probability at most $u^r$ we'll have $\omega\neq\mu$. In this case the final states
+  will be different with conditional probability at most $u$. Therefore
+  $\P_{r+1}[x\neq y]\leq u^{r+1}$, and the proposition follows.
 \end{itemize}
 
 
