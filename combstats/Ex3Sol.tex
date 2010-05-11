@@ -200,10 +200,11 @@ Therefore:
   \\ &\leq {1\over 2}\sum_x\left|\P_X[x]-\P_Q[x]\right|
   \\ &\leq \epsilon
 \end{align*}
-Now, for $N$ iterations run the Markov chain $t(\epsilon)$ times from a random
-starting point. Denote the final states of the iterations by
-$x_1,\ldots,x_N$. Then the $x_i$ are independent and distributed according
-to $X$, and hence also $f(x_i)$ are independent, with expectation $\E_X[f]$. Our
+Now, run the sampler for $Nt(\epsilon)$ iterations. 
+Denote the states of the sampler at times 
+$1\cdot t(\epsilon),2\cdot t(\epsilon),\ldots N\cdot t(\epsilon)$ by
+$x_1,\ldots,x_N$. Then the $x_i$ are all distributed according
+to $X$, and hence also $f(x_i)$ are with expectation $\E_X[f]$. Our
 algorithm $A$ returns the average of $f(x_i)$, $(1/N)\sum_i f(x_i)$.
 
 Since $0 \leq f(x_i) \leq 1$, we can use the Hoeffding inequality:
