@@ -182,49 +182,57 @@ any amount of time.
 
 \end{itemize}
 \subsection{Other Statistical Quantities}
-After running the Markov chain for $t(\epsilon)$ iterations we get a state
-$x \sim X$ such that $d_{TV}(X,Q)<\epsilon$. 
+Starting the sampler from a state $\sigma$, after $t(\epsilon)$ iterations
+let the distribution of the sampler's state be $X_\sigma$. Then for any 
+$\sigma$ we have that $d_{TV}(X_\sigma,Q)<\epsilon$. In particular, if we
+then run the sampler for another $t(\epsilon)$ iterations, its conditional
+distribution (conditioned on its state after the first $t(\epsilon)$ steps)
+will also satisfy the same bound on the total variation distance from $Q$. 
 
-Now
-\begin{align*}
-  \E_X[f-1/2]-E_Q[f-1/2] &=\E_X[f]-\E_X[1/2]-E_Q[f]+E_Q[1/2]
-  \\ &= \E_X[f]-1/2-E_Q[f]+1/2
-  \\ &= \E_X[f]-E_Q[f].
-\end{align*}
-Therefore:
-\begin{align*}
-  |\E_X[f]-E_Q[f]| &= |\E_X[f-1/2]-E_Q[f-1/2]|
-  \\ &= \left|\sum_x\P_X[x](f(x)-1/2)-\sum_x\P_Q[x](f(x)-1/2)\right|
-  \\ &= \left|\sum_x(\P_X[x]-\P_Q[x])(f(x)-1/2)\right|
-  \\ &\leq \sum_x\left|\P_X[x]-\P_Q[x]\right| |f(x)-1/2|
-  \\ &\leq {1\over 2}\sum_x\left|\P_X[x]-\P_Q[x]\right|
-  \\ &\leq \epsilon
-\end{align*}
-Now, run the sampler for $Nt(\epsilon)$ iterations. 
-Denote the states of the sampler at times 
+Suppose now that we run the sampler for $Nt(\epsilon)$ iterations, and
+denote the states of the sampler at times 
 $1\cdot t(\epsilon),2\cdot t(\epsilon),\ldots N\cdot t(\epsilon)$ by
-$x_1,\ldots,x_N$. Then the $x_i$ are all distributed according
-to $X$, and hence also $f(x_i)$ are with expectation $\E_X[f]$. Our
-algorithm $A$ returns the average of $f(x_i)$, $(1/N)\sum_i f(x_i)$.
+$x_1,\ldots,x_N$. Let our algorithm be defined by $A=(1/N)\sum_ix_i$. 
+Let $q_1,\ldots,q_N$ be i.i.d.\ random variables, each with
+distribution $Q$. Then we can couple $x_i$ to $q_i$ so that 
+$\P[x_i\neq q_i]<\epsilon$, by coupling  $x_i$ conditioned on $x_{i-1}$ 
+ to $q_i$, using the coupling whose existence is guaranteed by $d_{TV}(X_{x_{i-1}},Q)<\epsilon$. 
 
-Since $0 \leq f(x_i) \leq 1$, we can use the Hoeffding inequality:
+Using this coupling, we have that $\P[x_i\neq q_i|x_{i-1}]<\epsilon$, for any
+value of $x_{i-1}$; in particular, $\P[x_i\neq q_i]<\epsilon$ regardless of
+whether $x_{i-1}=q_{i-1}$ or not. We can therefore use Cram\'er's concentration result:
+let $D_i$ be the indicator function of the event that $x_i\neq q_i$. Then
 \begin{align*}
-  \P\left[\left|\sum_if(x_i)-N\E_X[f]\right|\geq N\epsilon\right] &\leq 
-    2\exp\left(-{2N^2\epsilon^2\over N}\right)
-\\   \P\left[\left|A-\E_X[f]\right|\geq \epsilon\right] &\leq 
-    2\exp\left(-2N\epsilon^2\right)
+  \P\left[\sum_i D_i-N\epsilon>\half N\epsilon\right] \leq 2\exp(-N\epsilon^2/2).
 \end{align*}
-Since $|\E_X[f]-E_Q[f]|<\epsilon|$, then this means that
+Since
 \begin{align*}
-   \P\left[\left|A-\E_Q[f]\right|\geq 2\epsilon\right] &\leq 
-    2\exp\left(-2N\epsilon^2\right)
+  \left|\sum_if(x_i)-\sum_if(q_i)\right| & \leq \sum_i D_i
 \end{align*}
-and so to achieve $\P\left[\left|A-\E_Q[f]\right| < 2\epsilon\right]>1-\delta$
+then
+\begin{align*}
+  \P\left[\left|A-{1\over N}\sum_if(q_i)\right|>{2\over 3}\epsilon\right] \leq 2\exp(-N\epsilon^2/2).
+\end{align*}
+
+By the Hoeffding bound, we have that
+\begin{align*}
+\\  \P\left[\left|\sum_if(q_i)-N\E_Q[f]\right|\geq {1\over 2}N\epsilon\right] &\leq 
+    2\exp\left(-{N^2\epsilon^2\over 2N}\right)
+\\  \P\left[\left|{1\over N}\sum_if(q_i)-\E_Q[f]\right|\geq {1\over 2}\epsilon\right] &\leq 
+    2\exp\left(-N\epsilon^2/2\right)
+\end{align*}
+and so
+\begin{align*}
+ \P\left[\left|A-\E_Q[f]\right|\geq 2\epsilon\right] &\leq 
+    4\exp\left(-N\epsilon^2/2\right).
+\end{align*}
+
+To achieve $\P\left[\left|A-\E_Q[f]\right| < 2\epsilon\right]>1-\delta$
 we must have
 \begin{align*}
-  2\exp(-2N\epsilon^2)&<\delta
-  \\ -2N\epsilon^2&<\log\delta-\log 2
-  \\ N &> {\log 1/\delta+\log 2\over \epsilon^2}.
+  4\exp(-N\epsilon^2/2)+N\epsilon&<\delta
+  \\ -N\epsilon^2/2&<\log\delta-\log 4
+  \\ N &> 2{\log 1/\delta+\log 4\over \epsilon^2}.
 \end{align*}
 \subsection{Bottlenecks and Mixing Times}
 \begin{itemize}
