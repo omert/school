@@ -199,9 +199,13 @@ $\P[x_i\neq q_i]<\epsilon$, by coupling  $x_i$ conditioned on $x_{i-1}$
  to $q_i$, using the coupling whose existence is guaranteed by $d_{TV}(X_{x_{i-1}},Q)<\epsilon$. 
 
 Using this coupling, we have that $\P[x_i\neq q_i|x_{i-1}]<\epsilon$, for any
-value of $x_{i-1}$; in particular, $\P[x_i\neq q_i]<\epsilon$ regardless of
-whether $x_{i-1}=q_{i-1}$ or not. We can therefore use Cram\'er's concentration result:
-let $D_i$ be the indicator function of the event that $x_i\neq q_i$. Then
+value of $x_{i-1}$; in particular, this holds regardless of
+whether $x_{i-1}=q_{i-1}$ or not. 
+Let $D_i$ be the indicator function of the event that $x_i\neq q_i$.
+If we assume the worst case, i.e., 
+ $\P[x_i\neq q_i|x_{i-1}]=\epsilon$ for all $x_{i-1}$, 
+then the $D_i$ are independent, and we 
+can use Cram\'er's concentration result:
 \begin{align*}
   \P\left[\sum_i D_i-N\epsilon>\half N\epsilon\right] \leq 2\exp(-N\epsilon^2/2).
 \end{align*}
