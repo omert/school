@@ -1,0 +1,198 @@
+\documentclass[11pt]{article} \usepackage{amssymb}
+\usepackage{amsfonts} \usepackage{amsmath} \usepackage{bm}
+\usepackage{latexsym} \usepackage{epsfig}
+
+\setlength{\textwidth}{6.5 in} \setlength{\textheight}{8.25in}
+\setlength{\oddsidemargin}{0in} \setlength{\topmargin}{0in}
+\addtolength{\textheight}{.8in} \addtolength{\voffset}{-.5in}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{example}[theorem]{Example}
+\newenvironment{proof}{\noindent \textbf{Proof:}}{$\Box$}
+
+\newcommand{\ignore}[1]{}
+
+\newcommand{\enote}[1]{} \newcommand{\knote}[1]{}
+\newcommand{\rnote}[1]{}
+
+
+
+% \newcommand{\enote}[1]{{\bf [[Elchanan:} {\emph{#1}}{\bf ]]}}
+% \newcommand{\knote}[1]{{\bf [[Krzysztof:} {\emph{#1}}{\bf ]]}}
+% \newcommand{\rnote}[1]{{\bf [[Ryan:} {\emph{#1}}{\bf ]]}}
+
+
+
+\DeclareMathOperator{\Support}{Supp} \DeclareMathOperator{\Opt}{Opt}
+\DeclareMathOperator{\Ordo}{\mathcal{O}}
+\newcommand{\MaxkCSP}{\textsc{Max $k$-CSP}}
+\newcommand{\MaxkCSPq}{\textsc{Max $k$-CSP$_{q}$}}
+\newcommand{\MaxCSP}[1]{\textsc{Max CSP}(#1)} \renewcommand{\Pr}{{\bf
+    P}} \renewcommand{\P}{{\bf P}} \newcommand{\Px}{\mathop{\bf P\/}}
+\newcommand{\E}{{\bf E}} \newcommand{\Cov}{{\bf Cov}}
+\newcommand{\Var}{{\bf Var}} \newcommand{\Varx}{\mathop{\bf Var\/}}
+
+\newcommand{\bits}{\{-1,1\}}
+
+\newcommand{\nsmaja}{\textstyle{\frac{2}{\pi}} \arcsin \rho}
+
+\newcommand{\Inf}{\mathrm{Inf}} \newcommand{\I}{\mathrm{I}}
+\newcommand{\J}{\mathrm{J}}
+
+\newcommand{\eps}{\epsilon} \newcommand{\lam}{\lambda}
+
+% \newcommand{\trunc}{\ell_{2,[-1,1]}}
+\newcommand{\trunc}{\zeta} \newcommand{\truncprod}{\chi}
+
+\newcommand{\N}{\mathbb N} \newcommand{\R}{\mathbb R}
+\newcommand{\Z}{\mathbb Z} \newcommand{\CalE}{{\mathcal{E}}}
+\newcommand{\CalC}{{\mathcal{C}}} \newcommand{\CalM}{{\mathcal{M}}}
+\newcommand{\CalR}{{\mathcal{R}}} \newcommand{\CalS}{{\mathcal{S}}}
+\newcommand{\CalV}{{\mathcal{V}}}
+\newcommand{\CalX}{{\boldsymbol{\mathcal{X}}}}
+\newcommand{\CalG}{{\boldsymbol{\mathcal{G}}}}
+\newcommand{\CalH}{{\boldsymbol{\mathcal{H}}}}
+\newcommand{\CalY}{{\boldsymbol{\mathcal{Y}}}}
+\newcommand{\CalZ}{{\boldsymbol{\mathcal{Z}}}}
+\newcommand{\CalW}{{\boldsymbol{\mathcal{W}}}}
+\newcommand{\CalF}{{\mathcal{Z}}}
+% \newcommand{\boldG}{{\boldsymbol G}}
+% \newcommand{\boldQ}{{\boldsymbol Q}}
+% \newcommand{\boldP}{{\boldsymbol P}}
+% \newcommand{\boldR}{{\boldsymbol R}}
+% \newcommand{\boldS}{{\boldsymbol S}}
+% \newcommand{\boldX}{{\boldsymbol X}}
+% \newcommand{\boldB}{{\boldsymbol B}}
+% \newcommand{\boldY}{{\boldsymbol Y}}
+% \newcommand{\boldZ}{{\boldsymbol Z}}
+% \newcommand{\boldV}{{\boldsymbol V}}
+\newcommand{\boldi}{{\boldsymbol i}} \newcommand{\boldj}{{\boldsymbol
+    j}} \newcommand{\boldk}{{\boldsymbol k}}
+\newcommand{\boldr}{{\boldsymbol r}}
+\newcommand{\boldsigma}{{\boldsymbol \sigma}}
+\newcommand{\boldupsilon}{{\boldsymbol \upsilon}}
+\newcommand{\hone}{{\boldsymbol{H1}}}
+\newcommand{\htwo}{\boldsymbol{H2}}
+\newcommand{\hthree}{\boldsymbol{H3}}
+\newcommand{\hfour}{\boldsymbol{H4}}
+
+
+\newcommand{\sgn}{\mathrm{sgn}} \newcommand{\Maj}{\mathrm{Maj}}
+\newcommand{\Acyc}{\mathrm{Acyc}}
+\newcommand{\UniqMax}{\mathrm{UniqMax}}
+\newcommand{\Thr}{\mathrm{Thr}} \newcommand{\littlesum}{{\textstyle
+    \sum}}
+
+\newcommand{\half}{{\textstyle \frac12}}
+\newcommand{\third}{{\textstyle \frac13}}
+\newcommand{\fourth}{{\textstyle \frac14}}
+
+\newcommand{\Stab}{\mathbb{S}}
+\newcommand{\StabThr}[2]{\Gamma_{#1}(#2)}
+\newcommand{\StabThrmin}[2]{{\underline{\Gamma}}_{#1}(#2)}
+\newcommand{\StabThrmax}[2]{{\overline{\Gamma}}_{#1}(#2)}
+\newcommand{\TestFcn}{\Psi}
+
+\renewcommand{\phi}{\varphi}
+
+\begin{document}
+\title{Sublinear Algorithms - Exercise 5}
+
+ \author{Omer Tamuz, 035696574}
+\maketitle
+\begin{enumerate}
+\item 
+Let $E^1$ be the uniform distribution over functions from $\{0,1\}^n$ to
+$\{0,1\}$ that depend only on the first $k$ bits. These functions are all
+clearly $k$-juntas. Define $E^0$ by the following sampling procedure: 
+pick a function $f$
+from $E^1$, pick uniformly a set $S$ of
+$100\epsilon 2^{n-1}$ strings $x$ such that $x_{k+1}=1$ and define $g$ by
+$g(x)=f(x)$ for $x\in S$ and 
+$g(x)=1-f(x)$ otherwise.
+$E^0$ is defined to be the distribution of $g$. 
+
+We showed in class that the function $f$ (as defined in the procedure above)
+is $1/8$-far from being a $k-1$-junta, 
+with probability at least $0.99$. Given an $\epsilon$, 
+consider a function $g$ picked from $E^0$: 
+since $100\epsilon$ of the $k+1$-pairs have different function values with 
+probability one half, then using a Gaussian approximation to the binomial
+distribution we can claim that for high enough $n$ we have that 
+$\epsilon$ of the $k+1$-pairs are different with probability as close to one
+as we wish. Hence it follows that a function $g$ picked from $E^0$ is 
+$\epsilon$-far from begin a $k$-junta, with probability at least (say) $0.98$.
+
+Let $A$ be an algorithm that tests for $\epsilon$-proximity to 
+$k$-junta, using $q$ queries. Fix the algorithm's
+randomness to $\mathcal{R}$, 
+and let the algorithm's queries be $x_1,\ldots,x_q$. Now, as 
+opposed to the case in the proof we saw in class, the algorithm must not
+only pick a $k+1$-pair to realize the difference between $E^0$ and $E^1$, 
+but must also pick a pair whose element for which $x_{k+1}=1$ is in $S$. 
+Now, $S$ includes a $100\epsilon$ fraction of strings with $x_{k+1}=1$, and so, even
+if the algorithm chose $q/2$ $k+1$-pairs, the probability that one of them
+intersects $S$ is, by union bound, at most $50q\epsilon$. For this 
+probability not to go to zero with $n$ (e.g., equal at least two thirds) 
+we must have $q$ be $\Omega(1/\epsilon)$. Finally, as in class, average over $\mathcal{R}$
+to show that for $A$ to be different on $E^1$ and $E^0$ with probability that
+does not go to zero with $\epsilon$, we must have $q$ in $\Omega(1/\epsilon)$.
+
+\item
+Let $A'$ be an algorithm that does {\bf not} reject whenever a query on
+$i < j$ returns that $x_i > x_j$. Then $A'$ is clearly suboptimal (in running
+time and/or correctness): the algorithm $A$ that does the same up to that point
+and then rejects is clearly as correct and faster. Hence algorithm $A$ 
+runs until the first time that it has a witness to non-monotonicity and cannot
+be adaptive in a meaningful way, since all the queries have predictable 
+results, up until the last one.
+
+Let then $i_1,\ldots,i_q$ and $j_1,\ldots,j_q$  ($i_k<j_k$) be the elements that $A$
+compares, after fixing its randomness to $\mathcal{R}$. We prove a lower bound given 
+$\mathcal{R}$, and then the proof follows from the standard averaging over 
+$\mathcal{R}$ argument.
+
+Let $D^0$ be the distribution that picks a monotonous vector with probability
+one. Let $D^1$ be the distribution of vectors sampled by the following 
+procedure: pick a random $l$ uniformly from 
+$\{1,\ldots,\log 2\epsilon n \}$ 
+(I assume for simplicity that $2\epsilon n$ is an integer).
+Pick at random $\epsilon n/2^l$ contiguous and disjoint blocks of length 
+$2^{l+1}$, so that all together $2\epsilon n$ elements are picked. Finally, in
+each block swap the bottom half with the top half. It is clear that with
+probability one a vector picked from $D^0$ is $\epsilon$-far from being
+monotonous. 
+
+Note that only a query in which both $i$ is in the bottom half of a block 
+and $j$ is in the same block's top half returns a witness to non-monotonicity.
+The probability that a particular $i$ is in the lower half of one of the blocks
+is $\epsilon$. Given an $i$ in a block-lower-half $[i-m,i-m+2^l]$, the 
+distribution of $m$ is uniform in $[0,2^l-1]$. 
+Given this $i$'s matching $j$, the probability that
+$j$ is in the upper half of the same block is zero if $j-i>2\epsilon n$, or 
+otherwise:
+\begin{align*}
+  \P[j\in [i-m+2^l,i-m+2^{l+1}]] &= \sum_l \P_m[j\in [i-m+2^l,i-m+2^{l+1}]]\P[l]
+\\ &= (1/\log 2\epsilon n)\sum_l \P_m[j\in [i-m+2^l,i-m+2^{l+1}]]
+\\ &= (1/\log 2\epsilon n)\sum_l \sum_{m=2^l-j+i}^{2^{l+1}-j+i}1_{0\leq m < 2^l}2^{-l}
+\\ &\leq (1/\log 2\epsilon n)\sum_{l=\log j-i}^{\log2\epsilon n} (j-i)2^{-l}
+\\ &\leq (1/\log 2\epsilon n)(j-i)\sum_{l=\log j-i}^{\log2\epsilon n}2^{-l}
+\\ &\leq (1/\log 2\epsilon n)(j-i)2\cdot2^{-\log j-i}
+\\ &\leq 2/\log 2\epsilon n
+\end{align*}
+Hence the probability that a given pair $i$ and $j$ are a witness to 
+non-monotonicity is $\epsilon/\log 2\epsilon n$, and so the number of queries required is
+$\Omega \left({\log \epsilon n\over \epsilon}\right)$.
+
+\end{enumerate}
+\end{document}
+
+
