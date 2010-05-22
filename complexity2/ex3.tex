@@ -1,0 +1,192 @@
+\documentclass[11pt]{article} \usepackage{amssymb}
+\usepackage{amsfonts} \usepackage{amsmath} \usepackage{bm}
+\usepackage{latexsym} \usepackage{epsfig}
+
+\setlength{\textwidth}{6.5 in} \setlength{\textheight}{8.25in}
+\setlength{\oddsidemargin}{0in} \setlength{\topmargin}{0in}
+\addtolength{\textheight}{.8in} \addtolength{\voffset}{-.5in}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{example}[theorem]{Example}
+\newenvironment{proof}{\noindent \textbf{Proof:}}{$\Box$}
+
+\newcommand{\ignore}[1]{}
+
+\newcommand{\enote}[1]{} \newcommand{\knote}[1]{}
+\newcommand{\rnote}[1]{}
+
+
+
+% \newcommand{\enote}[1]{{\bf [[Elchanan:} {\emph{#1}}{\bf ]]}}
+% \newcommand{\knote}[1]{{\bf [[Krzysztof:} {\emph{#1}}{\bf ]]}}
+% \newcommand{\rnote}[1]{{\bf [[Ryan:} {\emph{#1}}{\bf ]]}}
+
+
+
+\DeclareMathOperator{\Support}{Supp} \DeclareMathOperator{\Opt}{Opt}
+\DeclareMathOperator{\Ordo}{\mathcal{O}}
+\newcommand{\MaxkCSP}{\textsc{Max $k$-CSP}}
+\newcommand{\MaxkCSPq}{\textsc{Max $k$-CSP$_{q}$}}
+\newcommand{\MaxCSP}[1]{\textsc{Max CSP}(#1)} \renewcommand{\Pr}{{\bf
+    P}} \renewcommand{\P}{{\bf P}} \newcommand{\Px}{\mathop{\bf P\/}}
+\newcommand{\E}{{\bf E}} \newcommand{\Cov}{{\bf Cov}}
+\newcommand{\Var}{{\bf Var}} \newcommand{\Varx}{\mathop{\bf Var\/}}
+
+\newcommand{\bits}{\{-1,1\}}
+
+\newcommand{\nsmaja}{\textstyle{\frac{2}{\pi}} \arcsin \rho}
+
+\newcommand{\Inf}{\mathrm{Inf}} \newcommand{\I}{\mathrm{I}}
+\newcommand{\J}{\mathrm{J}}
+
+\newcommand{\eps}{\epsilon} \newcommand{\lam}{\lambda}
+
+% \newcommand{\trunc}{\ell_{2,[-1,1]}}
+\newcommand{\trunc}{\zeta} \newcommand{\truncprod}{\chi}
+
+\newcommand{\N}{\mathbb N} \newcommand{\R}{\mathbb R}
+\newcommand{\Z}{\mathbb Z} \newcommand{\CalE}{{\mathcal{E}}}
+\newcommand{\CalC}{{\mathcal{C}}} \newcommand{\CalM}{{\mathcal{M}}}
+\newcommand{\CalR}{{\mathcal{R}}} \newcommand{\CalS}{{\mathcal{S}}}
+\newcommand{\CalV}{{\mathcal{V}}}
+\newcommand{\CalX}{{\boldsymbol{\mathcal{X}}}}
+\newcommand{\CalG}{{\boldsymbol{\mathcal{G}}}}
+\newcommand{\CalH}{{\boldsymbol{\mathcal{H}}}}
+\newcommand{\CalY}{{\boldsymbol{\mathcal{Y}}}}
+\newcommand{\CalZ}{{\boldsymbol{\mathcal{Z}}}}
+\newcommand{\CalW}{{\boldsymbol{\mathcal{W}}}}
+\newcommand{\CalF}{{\mathcal{Z}}}
+% \newcommand{\boldG}{{\boldsymbol G}}
+% \newcommand{\boldQ}{{\boldsymbol Q}}
+% \newcommand{\boldP}{{\boldsymbol P}}
+% \newcommand{\boldR}{{\boldsymbol R}}
+% \newcommand{\boldS}{{\boldsymbol S}}
+% \newcommand{\boldX}{{\boldsymbol X}}
+% \newcommand{\boldB}{{\boldsymbol B}}
+% \newcommand{\boldY}{{\boldsymbol Y}}
+% \newcommand{\boldZ}{{\boldsymbol Z}}
+% \newcommand{\boldV}{{\boldsymbol V}}
+\newcommand{\boldi}{{\boldsymbol i}} \newcommand{\boldj}{{\boldsymbol
+    j}} \newcommand{\boldk}{{\boldsymbol k}}
+\newcommand{\boldr}{{\boldsymbol r}}
+\newcommand{\boldsigma}{{\boldsymbol \sigma}}
+\newcommand{\boldupsilon}{{\boldsymbol \upsilon}}
+\newcommand{\hone}{{\boldsymbol{H1}}}
+\newcommand{\htwo}{\boldsymbol{H2}}
+\newcommand{\hthree}{\boldsymbol{H3}}
+\newcommand{\hfour}{\boldsymbol{H4}}
+
+
+\newcommand{\sgn}{\mathrm{sgn}} \newcommand{\Maj}{\mathrm{Maj}}
+\newcommand{\Acyc}{\mathrm{Acyc}}
+\newcommand{\UniqMax}{\mathrm{UniqMax}}
+\newcommand{\Thr}{\mathrm{Thr}} \newcommand{\littlesum}{{\textstyle
+    \sum}}
+
+\newcommand{\half}{{\textstyle \frac12}}
+\newcommand{\third}{{\textstyle \frac13}}
+\newcommand{\fourth}{{\textstyle \frac14}}
+
+\newcommand{\Stab}{\mathbb{S}}
+\newcommand{\StabThr}[2]{\Gamma_{#1}(#2)}
+\newcommand{\StabThrmin}[2]{{\underline{\Gamma}}_{#1}(#2)}
+\newcommand{\StabThrmax}[2]{{\overline{\Gamma}}_{#1}(#2)}
+\newcommand{\TestFcn}{\Psi}
+
+\renewcommand{\phi}{\varphi}
+
+\begin{document}
+\title{Complexity - Exercise 3}
+
+ \author{Omer Tamuz, 035696574}
+\maketitle
+
+
+\begin{enumerate}
+\item
+\item
+
+As suggested in the guideline, let $\gamma$ be less than one. Otherwise the
+construction is trivial, as condition two always holds for any two sets that
+fulfil the first requirement. Less following the guideline, set 
+$m(k)=\gamma k/2$ and $l(k)=2^{\gamma^2 m(k)/6}$. 
+
+Given $k$, we select the sets $S_1,\ldots,S_{l(k)}$ one
+after the other, by finding each time, through exhaustive search, a set
+that fulfils the first condition, and the second condition with respect to the 
+sets already chosen. We prove that such a set always exists, and that
+this process can be executed in time that is exponential in $k$. This shows
+the required construction.
+
+\begin{claim}
+At iteration $i$, there exists a set $S_i$ such that
+\begin{itemize}
+\item $S_i\in [k]$ and $|S_i|=m(k)$.
+\item For all $j<i$, it holds that $|S_i\cap S_j|\leq \gamma m(k)$.
+\end{itemize}
+\end{claim}
+\begin{proof}
+  We'll prove the claim by showing that a randomly picked set satisfies both
+conditions with positive probability.
+
+  Pick $S_i=\{x_1,\ldots,x_k\}$ uniformly at random from the subsets of size 
+$m(k)$ of $[k]$.
+Then with probability one the first condition holds. 
+
+For a particular $j$ (less than $i$) the probability that some $x\in S_i$ is also
+in $S_j$ is $|S_j|/k=\gamma /2$. Now, the events $x_p\in S_j$ and $x_q\in S_j$ are 
+not independent, since $x_p\neq x_q$ when $p \neq q$. However, the conditional 
+probability 
+$\P[x_{q+1}\in S_j|x_1,\ldots,x_q]$ is {\bf at most} 
+$|S_j|/(k-q)\leq m(k)/(k-q)=\gamma /(2-2q/k)$. Hence we can assume that the
+events $x_q\in S_j$ are independent, each with expectation $\gamma /(2-2q/k)$.
+Then the expectation of the size of the intersection is
+\begin{align*}
+  \E[|S_i \cap S_j| &\leq \sum_{q=1}^{m(k)} \E[1_{x_q\in S_j}]
+\\  &=\sum_{q=1}^{m(k)}{\gamma \over 2 - 2q/k}
+\\  &\gamma/2=\sum_{q=1}^{m(k)}{1 \over 1 - q/k}
+\\  &\leq \gamma/2\sum_{q=1}^{m(k)/2}{1 \over 1 - m(k)/2/k}+\sum_{q=m(k)/2}^{m(k)}{1 \over 1 - m(k)/k}
+\\  &\leq \gamma/2\sum_{q=1}^{m(k)/2}{1 \over 1 - \gamma/4}+\sum_{q=m(k)/2}^{m(k)}{1 \over 1 - \gamma/2}
+\\  &\leq \gamma/2\sum_{q=1}^{m(k)/2}{4 \over 3}+\sum_{q=m(k)/2}^{m(k)}2
+\\  &\leq {5\over 6}\gamma m(k).
+\end{align*}
+We can now use the Hoeffding inequality:
+\begin{align*}
+  \P[|S_i\cap S_j|>\gamma m(k)] &= \P[|S_i\cap S_j|- 5\gamma m(k)/6>\gamma m(k)/6]
+  \\ &\leq e^{-2\gamma^2 m(k)/6^2}
+  \\ &\leq 2^{-\gamma^2 m(k)/6}.
+\end{align*}
+By union bound, this means that $S_i$ will not intersect any of the previous
+$s_j$'s since these are fewer (by at least one) than 
+$l(k)=2^{\gamma^2 m(k)/6}$. 
+\end{proof}
+
+\begin{claim}
+Each set $S_i$ can be found in time that is exponential in $k$.  
+\end{claim}
+Since the number of sets $S_i$ is exponential, this would prove that the entire 
+process takes exponential time, since the set of exponential functions is 
+closed under composition.
+
+\begin{proof}
+  We test each subset of  $[k]$ of size $m(k)$. The number of such sets is less 
+than $2^k$ (the total number of subsets of $[k]$). For each subset we consider
+the size of its intersection with at most $l(k)$ sets, where each such 
+comparison takes polynomial time $p(k)$. Hence to total time is less than 
+$2^kl(k)p(k)$, which is certainly exponential in $k$.
+\end{proof}
+
+
+
+\end{enumerate}
+\end{document}
+
+
