@@ -112,78 +112,137 @@
 
 \begin{enumerate}
 \item
+  {\bf Note}: I'm assuming here that $|Z_k|$ is a polynomial time calculable 
+  function of $k$, and vice versa.
+  \begin{itemize}
+  \item 
+    
+    Assume $\{Z_k\}_{k\in \N}$ is predictable. Then there exists a 
+    probabilistic polynomial time algorithm $A$ such
+    that $\P_i[A(1_k, F_i(Z_k)) = B_{i+1} (Z_k )]-1/2$ is larger than 
+    $1/p(|Z_k|)$ for
+    some polynomial $p$ and infinitely many values of $k$.
+    
+    Let $M$ be the following algorithm: Given a string $X$ of length 
+    $|Z_k|$, it runs $A$ on $1_k$ and $F_i(X)$ for $i$ picked uniformly in $[|Z_k|-1]$ 
+    and accepts if and only if $A$ returned $B_{i+1}(X)$.
+
+    Let $U_k$ be a string picked from the uniform distribution over 
+    $\{0,1\}^{|Z_k|}$.
+    Then $\P[M(U_k)=1]$ is clearly one half. On the other hand, 
+    $\P[M(Z_k)=1]$ is equal to $\P_i[A(1_k,F_i(Z_k))]=B_{i+1}(Z_k)$.
+    Hence $\P[M(Z_k)=1]-\P[M(U_k)=1]>1/p(|Z_k|)$ for infinitely many values of 
+    $k$. Since $M$ is clearly polynomial time, this means that $\{Z_k\}$ is not
+    pseudorandom.
+  \item
+    Assume $\{Z_k\}_{k\in \N}$ is unpredictable. Then for every probabilistic 
+    polynomial time algorithm $A$ and polynomial $p$ it holds that
+    $\P_i[A(1_k, F_i(Z_k)) = B_{i+1} (Z_k )]-1/2$ is less than 
+    $1/p(|Z_k|)$ for $k$ large enough.
+
+    Assume by way of contradiction that $\{Z_k\}_{k\in \N}$ is not 
+    pseudorandom. Then there exists a probabilistic polynomial time algorithm 
+    $M$ and a polynomial $q$ such that  $|\P[M(Z_k)=1]-\P[M(U_k)=1]|>1/q(|Z_k|)$
+    infinitely many times. Assume WLOG that $\P[M(Z_k)=1]-\P[M(U_k)=1]>1/q(|Z_k|)$
+    infinitely many times (otherwise take $N=1-M$). 
+
+    Given a string $X$ of length $|Z_k|$, let $M^i(X)$ be the result of 
+    running $M$ on string consisting of the first $i$ bits of $X$ concatenated
+    with $|Z_k|-i$ random bits. Then $M^0(X)=M(U_k)$ and $M^{|Z_k|}(X)=M(X)$.
+
+    Let $A$ be the following algorithm: on input $1_k$ and $X$,
+    $A$ runs $M$ on $X$ concatenated with a string $R$ of
+    $|Z_k|-|X|$ random bits. $A$ returns $R_0$ (the first bit of $R$) if 
+    $M$ returns one, and a random bit otherwise. Then:
+    \begin{align*}
+      \lefteqn{\P_i[A(1_k,F_i(Z_k)]=B_{i+1}(Z_k)]} 
+      \\ &= \P_{i,R}[M(F_i(Z_k)R)=1|R_0=B_{i+1}(Z_k)]\P[R_0=B_{i+1}(Z_k)] + \half\P_{i,R}[M(F_i(Z_k)R)=0]
+      \\ &= \half\P_{i,R}[M(F_i(Z_k)R)=1|R_0=B_{i+1}(Z_k)] + \half\P_{i,R}[M(F_i(Z_k)R)=0]
+      \\ &= \half\P_{i,R}[M^{i+1}(Z_k)] + \half(1-\P_{i,R}[M(F_i(Z_k)R)=1])
+      \\ &= \half\P_{i,R}[M^{i+1}(Z_k)] + \half(1-\P_{i,R}[M^i(Z_k)])
+      \\ &= \half \left(1+ \P_{i,R}[M^{i+1}(Z_k)] -\P_{i,R}[M^i(Z_k)]\right)
+      \\ &= \half \left(1+ {1\over |Z_k|}\sum_i\P_{R}[M^{i+1}(Z_k)] -\P_{i,R}[M^i(Z_k)]\right)
+      \\ &= \half \left(1+ {1\over |Z_k|}\left(\P[M(Z_k)] -\P[M(U_k)]\right)\right)
+    \end{align*}
+    This is greater than $\half+\half{1\over |Z_k|q(|Z_k|)}$ for infinitely
+    many values of $k$, in contradiction to the hypothesis that 
+    $\{Z_k\}_{k\in\N}$ is pseudorandom.
+   
+    
+  \end{itemize}
+
 \item
-
-As suggested in the guideline, let $\gamma$ be less than one. Otherwise the
-construction is trivial, as condition two always holds for any two sets that
-fulfil the first requirement. Less following the guideline, set 
-$m(k)=\gamma k/2$ and $l(k)=2^{\gamma^2 m(k)/6}$. 
-
-Given $k$, we select the sets $S_1,\ldots,S_{l(k)}$ one
-after the other, by finding each time, through exhaustive search, a set
-that fulfils the first condition, and the second condition with respect to the 
-sets already chosen. We prove that such a set always exists, and that
-this process can be executed in time that is exponential in $k$. This shows
-the required construction.
-
-\begin{claim}
-At iteration $i$, there exists a set $S_i$ such that
-\begin{itemize}
-\item $S_i\in [k]$ and $|S_i|=m(k)$.
-\item For all $j<i$, it holds that $|S_i\cap S_j|\leq \gamma m(k)$.
-\end{itemize}
-\end{claim}
-\begin{proof}
-  We'll prove the claim by showing that a randomly picked set satisfies both
-conditions with positive probability.
-
-  Pick $S_i=\{x_1,\ldots,x_k\}$ uniformly at random from the subsets of size 
-$m(k)$ of $[k]$.
-Then with probability one the first condition holds. 
-
-For a particular $j$ (less than $i$) the probability that some $x\in S_i$ is also
-in $S_j$ is $|S_j|/k=\gamma /2$. Now, the events $x_p\in S_j$ and $x_q\in S_j$ are 
-not independent, since $x_p\neq x_q$ when $p \neq q$. However, the conditional 
-probability 
-$\P[x_{q+1}\in S_j|x_1,\ldots,x_q]$ is {\bf at most} 
-$|S_j|/(k-q)\leq m(k)/(k-q)=\gamma /(2-2q/k)$. Hence we can assume that the
-events $x_q\in S_j$ are independent, each with expectation $\gamma /(2-2q/k)$.
-Then the expectation of the size of the intersection is
-\begin{align*}
-  \E[|S_i \cap S_j| &\leq \sum_{q=1}^{m(k)} \E[1_{x_q\in S_j}]
-\\  &=\sum_{q=1}^{m(k)}{\gamma \over 2 - 2q/k}
-\\  &\gamma/2=\sum_{q=1}^{m(k)}{1 \over 1 - q/k}
-\\  &\leq \gamma/2\sum_{q=1}^{m(k)/2}{1 \over 1 - m(k)/2/k}+\sum_{q=m(k)/2}^{m(k)}{1 \over 1 - m(k)/k}
-\\  &\leq \gamma/2\sum_{q=1}^{m(k)/2}{1 \over 1 - \gamma/4}+\sum_{q=m(k)/2}^{m(k)}{1 \over 1 - \gamma/2}
-\\  &\leq \gamma/2\sum_{q=1}^{m(k)/2}{4 \over 3}+\sum_{q=m(k)/2}^{m(k)}2
-\\  &\leq {5\over 6}\gamma m(k).
-\end{align*}
-We can now use the Hoeffding inequality:
-\begin{align*}
-  \P[|S_i\cap S_j|>\gamma m(k)] &= \P[|S_i\cap S_j|- 5\gamma m(k)/6>\gamma m(k)/6]
-  \\ &\leq e^{-2\gamma^2 m(k)/6^2}
-  \\ &\leq 2^{-\gamma^2 m(k)/6}.
-\end{align*}
-By union bound, this means that $S_i$ will not intersect any of the previous
-$s_j$'s since these are fewer (by at least one) than 
-$l(k)=2^{\gamma^2 m(k)/6}$. 
-\end{proof}
-
-\begin{claim}
-Each set $S_i$ can be found in time that is exponential in $k$.  
-\end{claim}
-Since the number of sets $S_i$ is exponential, this would prove that the entire 
-process takes exponential time, since the set of exponential functions is 
-closed under composition.
-
-\begin{proof}
-  We test each subset of  $[k]$ of size $m(k)$. The number of such sets is less 
-than $2^k$ (the total number of subsets of $[k]$). For each subset we consider
-the size of its intersection with at most $l(k)$ sets, where each such 
-comparison takes polynomial time $p(k)$. Hence to total time is less than 
-$2^kl(k)p(k)$, which is certainly exponential in $k$.
-\end{proof}
-
+  
+  As suggested in the guideline, let $\gamma$ be less than one. Otherwise the
+  construction is trivial, as condition two always holds for any two sets that
+  fulfil the first requirement. Less following the guideline, set 
+  $m(k)=\gamma k/2$ and $l(k)=2^{\gamma^2 m(k)/6}$. 
+  
+  Given $k$, we select the sets $S_1,\ldots,S_{l(k)}$ one
+  after the other, by finding each time, through exhaustive search, a set
+  that fulfils the first condition, and the second condition with respect to the 
+  sets already chosen. We prove that such a set always exists, and that
+  this process can be executed in time that is exponential in $k$. This shows
+  the required construction.
+  
+  \begin{claim}
+    At iteration $i$, there exists a set $S_i$ such that
+    \begin{itemize}
+    \item $S_i\in [k]$ and $|S_i|=m(k)$.
+    \item For all $j<i$, it holds that $|S_i\cap S_j|\leq \gamma m(k)$.
+    \end{itemize}
+  \end{claim}
+  \begin{proof}
+    We'll prove the claim by showing that a randomly picked set satisfies both
+    conditions with positive probability.
+    
+    Pick $S_i=\{x_1,\ldots,x_k\}$ uniformly at random from the subsets of size 
+    $m(k)$ of $[k]$.
+    Then with probability one the first condition holds. 
+    
+    For a particular $j$ (less than $i$) the probability that some $x\in S_i$ is also
+    in $S_j$ is $|S_j|/k=\gamma /2$. Now, the events $x_p\in S_j$ and $x_q\in S_j$ are 
+    not independent, since $x_p\neq x_q$ when $p \neq q$. However, the conditional 
+    probability 
+    $\P[x_{q+1}\in S_j|x_1,\ldots,x_q]$ is {\bf at most} 
+    $|S_j|/(k-q)\leq m(k)/(k-q)=\gamma /(2-2q/k)$. Hence we can assume that the
+    events $x_q\in S_j$ are independent, each with expectation $\gamma /(2-2q/k)$.
+    Then the expectation of the size of the intersection is
+    \begin{align*}
+      \E[|S_i \cap S_j| &\leq \sum_{q=1}^{m(k)} \E[1_{x_q\in S_j}]
+      \\  &=\sum_{q=1}^{m(k)}{\gamma \over 2 - 2q/k}
+      \\  &\gamma/2=\sum_{q=1}^{m(k)}{1 \over 1 - q/k}
+      \\  &\leq \gamma/2\sum_{q=1}^{m(k)/2}{1 \over 1 - m(k)/2/k}+\sum_{q=m(k)/2}^{m(k)}{1 \over 1 - m(k)/k}
+      \\  &\leq \gamma/2\sum_{q=1}^{m(k)/2}{1 \over 1 - \gamma/4}+\sum_{q=m(k)/2}^{m(k)}{1 \over 1 - \gamma/2}
+      \\  &\leq \gamma/2\sum_{q=1}^{m(k)/2}{4 \over 3}+\sum_{q=m(k)/2}^{m(k)}2
+      \\  &\leq {5\over 6}\gamma m(k).
+    \end{align*}
+    We can now use the Hoeffding inequality:
+    \begin{align*}
+      \P[|S_i\cap S_j|>\gamma m(k)] &= \P[|S_i\cap S_j|- 5\gamma m(k)/6>\gamma m(k)/6]
+      \\ &\leq e^{-2\gamma^2 m(k)/6^2}
+      \\ &\leq 2^{-\gamma^2 m(k)/6}.
+    \end{align*}
+    By union bound, this means that $S_i$ will not intersect any of the previous
+    $s_j$'s since these are fewer (by at least one) than 
+    $l(k)=2^{\gamma^2 m(k)/6}$. 
+  \end{proof}
+  
+  \begin{claim}
+    Each set $S_i$ can be found in time that is exponential in $k$.  
+  \end{claim}
+  Since the number of sets $S_i$ is exponential, this would prove that the entire 
+  process takes exponential time, since the set of exponential functions is 
+  closed under composition.
+  
+  \begin{proof}
+    We test each subset of  $[k]$ of size $m(k)$. The number of such sets is less 
+    than $2^k$ (the total number of subsets of $[k]$). For each subset we consider
+    the size of its intersection with at most $l(k)$ sets, where each such 
+    comparison takes polynomial time $p(k)$. Hence to total time is less than 
+    $2^kl(k)p(k)$, which is certainly exponential in $k$.
+  \end{proof}
+  
 
 
 \end{enumerate}
