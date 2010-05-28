@@ -1,0 +1,208 @@
+\documentclass[11pt]{article} \usepackage{amssymb}
+\usepackage{amsfonts} \usepackage{amsmath} \usepackage{amsthm} \usepackage{bm}
+\usepackage{latexsym} \usepackage{epsfig}
+\usepackage{algorithmic}
+
+\setlength{\textwidth}{6.5 in} \setlength{\textheight}{8.25in}
+\setlength{\oddsidemargin}{0in} \setlength{\topmargin}{0in}
+\addtolength{\textheight}{.8in} \addtolength{\voffset}{-.5in}
+
+\newtheorem*{theorem*}{Theorem}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem*{proposition*}{Proposition}
+
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{example}[theorem]{Example}
+%\newenvironment{proof}{\noindent \textbf{Proof:}}{$\Box$}
+
+\newcommand{\ignore}[1]{}
+
+\newcommand{\enote}[1]{} \newcommand{\knote}[1]{}
+\newcommand{\rnote}[1]{}
+
+
+\DeclareMathOperator{\Support}{Supp} \DeclareMathOperator{\Opt}{Opt}
+\DeclareMathOperator{\Ordo}{\mathcal{O}}
+\newcommand{\MaxkCSP}{\textsc{Max $k$-CSP}}
+\newcommand{\MaxkCSPq}{\textsc{Max $k$-CSP$_{q}$}}
+\newcommand{\MaxCSP}[1]{\textsc{Max CSP}(#1)} \renewcommand{\Pr}{{\bf
+    P}} \renewcommand{\P}{{\bf P}} \newcommand{\Px}{\mathop{\bf P\/}}
+\newcommand{\E}{{\bf E}} \newcommand{\Cov}{{\bf Cov}}
+\newcommand{\Var}{{\bf Var}} \newcommand{\Varx}{\mathop{\bf Var\/}}
+
+\newcommand{\bits}{\{-1,1\}}
+
+\newcommand{\nsmaja}{\textstyle{\frac{2}{\pi}} \arcsin \rho}
+
+\newcommand{\Inf}{\mathrm{Inf}} \newcommand{\I}{\mathrm{I}}
+\newcommand{\J}{\mathrm{J}}
+
+\newcommand{\eps}{\epsilon} \newcommand{\lam}{\lambda}
+
+% \newcommand{\trunc}{\ell_{2,[-1,1]}}
+\newcommand{\trunc}{\zeta} \newcommand{\truncprod}{\chi}
+
+\newcommand{\N}{\mathbb N} \newcommand{\R}{\mathbb R}
+\newcommand{\Z}{\mathbb Z} \newcommand{\CalE}{{\mathcal{E}}}
+\newcommand{\CalC}{{\mathcal{C}}} \newcommand{\CalM}{{\mathcal{M}}}
+\newcommand{\CalR}{{\mathcal{R}}} \newcommand{\CalS}{{\mathcal{S}}}
+\newcommand{\CalV}{{\mathcal{V}}}
+\newcommand{\CalX}{{\boldsymbol{\mathcal{X}}}}
+\newcommand{\CalG}{{\boldsymbol{\mathcal{G}}}}
+\newcommand{\CalH}{{\boldsymbol{\mathcal{H}}}}
+\newcommand{\CalY}{{\boldsymbol{\mathcal{Y}}}}
+\newcommand{\CalZ}{{\boldsymbol{\mathcal{Z}}}}
+\newcommand{\CalW}{{\boldsymbol{\mathcal{W}}}}
+\newcommand{\CalF}{{\mathcal{Z}}}
+% \newcommand{\boldG}{{\boldsymbol G}}
+% \newcommand{\boldQ}{{\boldsymbol Q}}
+% \newcommand{\boldP}{{\boldsymbol P}}
+% \newcommand{\boldR}{{\boldsymbol R}}
+% \newcommand{\boldS}{{\boldsymbol S}}
+% \newcommand{\boldX}{{\boldsymbol X}}
+% \newcommand{\boldB}{{\boldsymbol B}}
+% \newcommand{\boldY}{{\boldsymbol Y}}
+% \newcommand{\boldZ}{{\boldsymbol Z}}
+% \newcommand{\boldV}{{\boldsymbol V}}
+\newcommand{\boldi}{{\boldsymbol i}} \newcommand{\boldj}{{\boldsymbol
+    j}} \newcommand{\boldk}{{\boldsymbol k}}
+\newcommand{\boldr}{{\boldsymbol r}}
+\newcommand{\boldsigma}{{\boldsymbol \sigma}}
+\newcommand{\boldupsilon}{{\boldsymbol \upsilon}}
+\newcommand{\hone}{{\boldsymbol{H1}}}
+\newcommand{\htwo}{\boldsymbol{H2}}
+\newcommand{\hthree}{\boldsymbol{H3}}
+\newcommand{\hfour}{\boldsymbol{H4}}
+
+
+\newcommand{\sgn}{\mathrm{sgn}} \newcommand{\Maj}{\mathrm{Maj}}
+\newcommand{\Acyc}{\mathrm{Acyc}}
+\newcommand{\UniqMax}{\mathrm{UniqMax}}
+\newcommand{\Thr}{\mathrm{Thr}} \newcommand{\littlesum}{{\textstyle
+    \sum}}
+
+\newcommand{\half}{{\textstyle \frac12}}
+\newcommand{\third}{{\textstyle \frac13}}
+\newcommand{\fourth}{{\textstyle \frac14}}
+\newcommand{\fifth}{{\textstyle \frac15}}
+
+\newcommand{\Stab}{\mathbb{S}}
+\newcommand{\StabThr}[2]{\Gamma_{#1}(#2)}
+\newcommand{\StabThrmin}[2]{{\underline{\Gamma}}_{#1}(#2)}
+\newcommand{\StabThrmax}[2]{{\overline{\Gamma}}_{#1}(#2)}
+\newcommand{\TestFcn}{\Psi}
+
+\renewcommand{\phi}{\varphi}
+
+\begin{document}
+\title{Combinatorial Statistics - HW 5 (E. Mossel) - due June 15}
+\maketitle
+
+\subsection{Clustering (10 points)}
+Let $V_1,\ldots,V_k$ be a partition of $[n]$ such that 
+$|V_i| \geq \alpha n$ for all $i$, some fixed $\alpha > 0$ and fixed $k$. 
+Consider the following random graph model on the vertex set $[n]$, where $v \in V_i$ and $w \in V_j$ are independently connected with probability 
+$P(i,j)$ where $P$ is a $k \times k$ symmetric matrix $P$ all of whose entries belong to $[0,1]$. 
+Let $G=([n],E)$ be a single sample from this distribution. Find an efficient algorithm  
+to recover the partition $V_1,\ldots,V_k$ from the graph:
+\begin{itemize}
+\item (4 pts)
+Assuming that for all $i \neq i'$ it holds that $\left| n^{-1} \sum_{j} |V_j| P_{i,j} - n^{-1} \sum_{j} |V_j| P_{i',j} \right| > \eps$, find an algorithm whose running time is linear in the size of $G$ and returns the correct partition, except with probability exponentially small in $n$.
+\item (6 pts)
+Assuming that for all $i \neq i'$ it holds that $|\sum_{j} (P_{i,j} - P_{i',j})^2| > \eps$, find an algorithm whose running time is linear in the size of $G$ and that return the correct partition, except with probability exponentially small in $n$.
+\end{itemize}
+
+\subsection{Message Passing Algorithms for Erasure Codes (6 points)}
+Consider a linear code $F$ over $\{0,1\}^n$ given by a set of linear
+equations $L_1,\ldots,L_m$ where each $L_i$ is of the form $x_{i(1)}
+\oplus \ldots \oplus x_{i(k)} = 0$.  Let $S \subset [n]$ and let $y$
+be obtained from some $x \in F$ by erasing all of the coordinates $S$
+and letting $y_i = x_i$ for all $i \in [n] \setminus S$. Write $y_i =
+*$ to indicate that coordinates $i$ of $y$ is erased.
+
+Consider the following algorithm for decoding $x$ given $y$:
+\begin{algorithmic}[htb]
+  \WHILE {there exists $L_i$ of the form $x_{i(1)} \oplus \ldots
+    \oplus x_{i(k)} = 0$ {\em and} a $1 \leq j \leq k$ such that
+    $y_{i(j)} = *$ {\em and} for all $j' \neq j$ it holds that
+    $y_{i(j')} \in \{0,1\}$} \STATE update the value of $y_{i(j)}$ so
+  that the equation $L_i$ is satisfied
+  \ENDWHILE
+\end{algorithmic}
+
+\begin{itemize}
+\item (1 pts) Explain why is the algorithm "correct"? In other words,
+  show that if the algorithm terminates with $y_i \neq *$ for all $i$
+  then $y=x$.
+\item (1 pt) In what sense this algorithm is an instance of the Belief
+  Propagation algorithm?
+\item (2 pts) We say that the code has $\delta$-unique neighbor
+  expansion if for all $|S| \leq \delta n$ there exists a $i \in S$
+  and an $L_j$ such that $x_i$ appears in $L_j$ and all other
+  variables $x_k$ appearing in $L_j$ have $k \notin S$.  Show that if
+  the code has $\delta$-unique neighbor expansion then the algorithm
+  is guaranteed to recover $x$ from $y$ as long as the number of
+  erasures is at most $\delta n$.
+\item (1 pts) Give an example of a code of size at least $2$ codewords
+  where the algorithm always recovers $x$ from $y$ when this is
+  possible.
+\item (1 pts) Give an example of a code where for some $y$ the
+  algorithm does not recover $x$ from $y$. However, it is possible to
+  recover $x$ from $y$.
+\end{itemize}
+
+
+\subsection{Metrics on Trees (10 points)}
+Consider the Ising model $\exp(\sum_{u,v} \beta_{u,v} \sigma_u \sigma_v)$ taking values on $\{-1,1\}^n$ on a tree $T=(V,E)$.
+\begin{itemize}
+\item (1 point)
+Show if $T$ is a single edge $(u,v)$ then
+\[
+\E[\sigma_u \sigma_v] = \tanh(\beta).
+\]
+\item (3 points)
+Show that for general trees and all $u,v$ it holds that:
+\[
+\E[\sigma_u \sigma_v] = \prod_{e \in \mbox{path}(u,v)} \tanh(\beta_{u,v}).
+\]
+\item (1 point)
+Deduce that $-\log \E[\sigma_u \sigma_v]$ defines a metric on the tree $T$ if $\beta_{u,v} > 0$ for all $u,v$.
+\item (2 points)
+Explain how can you reconstruct the tree given unbounded number of samples of $\sigma$ at the leaves of the tree assuming $\beta_{u,v} > 0$ for all $u,v$. 
+\item  (3 points)
+Assuming $10^{-6} < \beta_{u,v} < 10^6$ for all $u,v$ explain how can you reconstruct the tree given $k$ samples of $\sigma$ at the leaves of the tree, where $k$ is polynomial in the size of $T$ and the error probability is inverse-polynomial in the size of the tree. 
+\end{itemize}
+
+
+
+
+
+
+
+
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
