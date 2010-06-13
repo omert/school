@@ -178,6 +178,18 @@
   it follows that  $\beta_{uv}\sigma_u\sigma_v=\beta_{uv}$ in this
   case, too.
 
+
+\subsection{The Complexity of BP and Small Tree Width Graphs}
+\begin{itemize}
+\item We omit the answer to this question, as it is straightforward
+  and everyone seems to have gotten it right.
+\item Briefly: We consider each set $D_i$ as a clique and run BP on
+  this representation of the MRF. Running time will be exponential in
+  the maximum size of a set $D_i$. 
+\item We run the algorithm above, where each column is a set
+  $D_i$. Since the size of the sets is $n$, the running time is $2^{O(n)}$.
+\end{itemize}
+
 \end{itemize}
 \end{document}
 
