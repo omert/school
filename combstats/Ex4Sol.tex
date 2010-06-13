@@ -108,18 +108,23 @@
 \begin{itemize}
 \item This problem can be solved with a variant of the Belief
   Propagation algorithm shown in class. We will describe the solution
-  but not prove it in full. Note that this solution is essentially
-  equivalent to (but perhaps not as efficient as) a Dynamic
-  Programming solution which finds the maximum likelihood assignment
-  from the leaves up.
+  but not prove its correctness. Note that this solution is
+  essentially equivalent to (but perhaps not as efficient as) a
+  Dynamic Programming solution which finds the maximum likelihood
+  assignment from the leaves up.
    
   In analogy with the definitions of BP that were shown in class, we
-  define the message from $v$ to $C$, $\mu_{v\to C}(x)$, as the
-  maximum likelihood of any assignment such that $\sigma_v=x$, in the
-  MRF where $C$ is removed. We define the message from $C$ to $v$,
-  $\mu_{C\to v}$, as the maximum likelihood of any assignment in which
-  $\sigma_v=x$ in the MRF where all cliques containing $v$ but $C$ are
-  removed. Then one can prove that
+  make the following definitions:
+  \begin{enumerate}
+  \item The message from $v$ to $C$, $\mu_{v\to C}(x)$, is defined to
+    be the maximum likelihood of any assignment such that
+    $\sigma_v=x$, in the MRF where $C$ is removed.
+  \item The message from $C$ to $v$, $\mu_{C\to v}$, is defined to be
+    the maximum likelihood of any assignment in which $\sigma_v=x$, in
+    the MRF where all cliques containing $v$ but $C$ are removed.
+  \end{enumerate}
+  Following a line of reasoning analogous to the one demonstrated in
+  class for BP, one can prove that
   \begin{equation}
     \label{eq:bp1}
     \mu_{v\to C}(x) \equiv
@@ -132,11 +137,11 @@
     \max_{\sigma_C:\sigma_v=x}
     \left\{
       \psi_C(\sigma_C)
-      \prod_{\substack{w\in C\\ q\neq v}}\mu_{w\to C}(\sigma_w).
-    \right\}
+      \prod_{\substack{w\in C\\ q\neq v}}\mu_{w\to C}(\sigma_w)
+    \right\}.
   \end{equation}
   One can now calculate $\mu_{v\to C}$ and $\mu_{C\to v}$ in time
-  equivalent that of the BP calculation.  Then $\sigma_v$, the maximum
+  equal to that of the BP calculation.  Then $\sigma_v$, the maximum
   likelihood assignment to a vertex $v$ is
   \begin{equation}
     \label{eq:bp3}
@@ -175,8 +180,9 @@
   \end{align*}
   Now, the numerator is positive by the stipulation on the graph's
   cycles, and the denominator is positive by our assignments, and so
-  it follows that  $\beta_{uv}\sigma_u\sigma_v=\beta_{uv}$ in this
+  it follows that  $\beta_{uv}\sigma_u\sigma_v$ is positive in this
   case, too.
+\end{itemize}
 
 
 \subsection{The Complexity of BP and Small Tree Width Graphs}
@@ -190,7 +196,6 @@
   $D_i$. Since the size of the sets is $n$, the running time is $2^{O(n)}$.
 \end{itemize}
 
-\end{itemize}
 \end{document}
 
 
