@@ -1,0 +1,200 @@
+\documentclass[11pt]{article} \usepackage{amssymb}
+\usepackage{amsfonts} \usepackage{amsmath} \usepackage{amsthm} \usepackage{bm}
+\usepackage{latexsym} \usepackage{epsfig}
+
+\setlength{\textwidth}{6.5 in} \setlength{\textheight}{8.25in}
+\setlength{\oddsidemargin}{0in} \setlength{\topmargin}{0in}
+\addtolength{\textheight}{.8in} \addtolength{\voffset}{-.5in}
+
+\newtheorem*{theorem*}{Theorem}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem*{proposition*}{Proposition}
+
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{example}[theorem]{Example}
+%\newenvironment{proof}{\noindent \textbf{Proof:}}{$\Box$}
+
+\newcommand{\ignore}[1]{}
+
+\newcommand{\enote}[1]{} \newcommand{\knote}[1]{}
+\newcommand{\rnote}[1]{}
+
+
+\DeclareMathOperator{\Support}{Supp} \DeclareMathOperator{\Opt}{Opt}
+\DeclareMathOperator{\Ordo}{\mathcal{O}}
+\newcommand{\MaxkCSP}{\textsc{Max $k$-CSP}}
+\newcommand{\MaxkCSPq}{\textsc{Max $k$-CSP$_{q}$}}
+\newcommand{\MaxCSP}[1]{\textsc{Max CSP}(#1)} \renewcommand{\Pr}{{\bf
+    P}} \renewcommand{\P}{{\bf P}} \newcommand{\Px}{\mathop{\bf P\/}}
+\newcommand{\E}{{\bf E}} \newcommand{\Cov}{{\bf Cov}}
+\newcommand{\Var}{{\bf Var}} \newcommand{\Varx}{\mathop{\bf Var\/}}
+
+\newcommand{\bits}{\{-1,1\}}
+
+\newcommand{\nsmaja}{\textstyle{\frac{2}{\pi}} \arcsin \rho}
+
+\newcommand{\Inf}{\mathrm{Inf}} \newcommand{\I}{\mathrm{I}}
+\newcommand{\J}{\mathrm{J}}
+
+\newcommand{\eps}{\epsilon} \newcommand{\lam}{\lambda}
+
+% \newcommand{\trunc}{\ell_{2,[-1,1]}}
+\newcommand{\trunc}{\zeta} \newcommand{\truncprod}{\chi}
+
+\newcommand{\N}{\mathbb N} \newcommand{\R}{\mathbb R}
+\newcommand{\Z}{\mathbb Z} \newcommand{\CalE}{{\mathcal{E}}}
+\newcommand{\CalC}{{\mathcal{C}}} \newcommand{\CalM}{{\mathcal{M}}}
+\newcommand{\CalR}{{\mathcal{R}}} \newcommand{\CalS}{{\mathcal{S}}}
+\newcommand{\CalV}{{\mathcal{V}}}
+\newcommand{\CalX}{{\boldsymbol{\mathcal{X}}}}
+\newcommand{\CalG}{{\boldsymbol{\mathcal{G}}}}
+\newcommand{\CalH}{{\boldsymbol{\mathcal{H}}}}
+\newcommand{\CalY}{{\boldsymbol{\mathcal{Y}}}}
+\newcommand{\CalZ}{{\boldsymbol{\mathcal{Z}}}}
+\newcommand{\CalW}{{\boldsymbol{\mathcal{W}}}}
+\newcommand{\CalF}{{\mathcal{Z}}}
+% \newcommand{\boldG}{{\boldsymbol G}}
+% \newcommand{\boldQ}{{\boldsymbol Q}}
+% \newcommand{\boldP}{{\boldsymbol P}}
+% \newcommand{\boldR}{{\boldsymbol R}}
+% \newcommand{\boldS}{{\boldsymbol S}}
+% \newcommand{\boldX}{{\boldsymbol X}}
+% \newcommand{\boldB}{{\boldsymbol B}}
+% \newcommand{\boldY}{{\boldsymbol Y}}
+% \newcommand{\boldZ}{{\boldsymbol Z}}
+% \newcommand{\boldV}{{\boldsymbol V}}
+\newcommand{\boldi}{{\boldsymbol i}} \newcommand{\boldj}{{\boldsymbol
+    j}} \newcommand{\boldk}{{\boldsymbol k}}
+\newcommand{\boldr}{{\boldsymbol r}}
+\newcommand{\boldsigma}{{\boldsymbol \sigma}}
+\newcommand{\boldupsilon}{{\boldsymbol \upsilon}}
+\newcommand{\hone}{{\boldsymbol{H1}}}
+\newcommand{\htwo}{\boldsymbol{H2}}
+\newcommand{\hthree}{\boldsymbol{H3}}
+\newcommand{\hfour}{\boldsymbol{H4}}
+
+
+\newcommand{\sgn}{\mathrm{sgn}} \newcommand{\Maj}{\mathrm{Maj}}
+\newcommand{\Acyc}{\mathrm{Acyc}}
+\newcommand{\UniqMax}{\mathrm{UniqMax}}
+\newcommand{\Thr}{\mathrm{Thr}} \newcommand{\littlesum}{{\textstyle
+    \sum}}
+
+\newcommand{\half}{{\textstyle \frac12}}
+\newcommand{\third}{{\textstyle \frac13}}
+\newcommand{\fourth}{{\textstyle \frac14}}
+\newcommand{\fifth}{{\textstyle \frac15}}
+
+\newcommand{\Stab}{\mathbb{S}}
+\newcommand{\StabThr}[2]{\Gamma_{#1}(#2)}
+\newcommand{\StabThrmin}[2]{{\underline{\Gamma}}_{#1}(#2)}
+\newcommand{\StabThrmax}[2]{{\overline{\Gamma}}_{#1}(#2)}
+\newcommand{\TestFcn}{\Psi}
+
+\renewcommand{\phi}{\varphi}
+
+\begin{document}
+\title{Combinatorial Statistics - Homework Set 4 Solution}
+
+\date{\today}
+\maketitle
+\subsection{Maximum Likelihood on Tree Markov Random Fields}
+\begin{itemize}
+\item This problem can be solved with a variant of the Belief
+  Propagation algorithm shown in class. We will describe the solution
+  but not prove it in full. Note that this solution is essentially
+  equivalent to (but perhaps not as efficient as) a Dynamic
+  Programming solution which finds the maximum likelihood assignment
+  from the leaves up.
+   
+  In analogy with the definitions of BP that were shown in class, we
+  define the message from $v$ to $C$, $\mu_{v\to C}(x)$, as the
+  maximum likelihood of any assignment such that $\sigma_v=x$, in the
+  MRF where $C$ is removed. We define the message from $C$ to $v$,
+  $\mu_{C\to v}$, as the maximum likelihood of any assignment in which
+  $\sigma_v=x$ in the MRF where all cliques containing $v$ but $C$ are
+  removed. Then one can prove that
+  \begin{equation}
+    \label{eq:bp1}
+    \mu_{v\to C}(x) \equiv
+    \prod_{\substack{C'\neq C\\ v\in C'}}\mu_{C'\to v}(x)
+  \end{equation}
+  and
+  \begin{equation}
+    \label{eq:bp2}
+    \mu_{C\to v}(x) \equiv
+    \max_{\sigma_C:\sigma_v=x}
+    \left\{
+      \psi_C(\sigma_C)
+      \prod_{\substack{w\in C\\ q\neq v}}\mu_{w\to C}(\sigma_w).
+    \right\}
+  \end{equation}
+  One can now calculate $\mu_{v\to C}$ and $\mu_{C\to v}$ in time
+  equivalent that of the BP calculation.  Then $\sigma_v$, the maximum
+  likelihood assignment to a vertex $v$ is
+  \begin{equation}
+    \label{eq:bp3}
+    \sigma_v=\max_{x}\prod_{C:v\in C}\mu_{C\to v}(x).
+  \end{equation}
+  
+\item By the symmetry of the model, we may assign 1 to some vertex
+  $r$. Iterating until all vertices are assigned, we choose the sign
+  of a yet-to-be-assigned vertex $v$, neighboring an assigned vertex
+  $u$, to be such that $\beta_{uv}\sigma_u\sigma_v$ is positive, thus
+  maximizing that edge's $(u,v)$ contribution to the
+  likelihood. Finally, since each edge's contribution is maximal, then
+  the entire assignment is maximal.
+
+\item We choose some spanning tree $T$ on the graph, and run the same
+  algorithm as above. Let $e=(u,v)$ be some edge of the graph. If $e$
+  is in $T$ then $\beta_{uv}\sigma_u\sigma_v$ is positive and its
+  contribution is maximal. Otherwise consider the cycle containing $e=e(1)$
+  and the path from $u$ to $v$ in $T$, $e(2),\ldots,e(k)$. Then 
+  \begin{align*}
+    \beta_{uv}\sigma_u\sigma_v &=
+    {\prod_{i=1}^k\beta_{e(i)}\sigma_{u_i}\sigma_{v_i}
+      \over
+      \prod_{i=2}^k\beta_{e(i)}\sigma_{u_i}\sigma_{v_i}
+    }
+    \\ &= 
+    {\prod_{i=1}^k\beta_{e(i)}\prod_{i=1}^k\sigma_{u_i}^2
+      \over
+      \prod_{i=2}^k\beta_{e(i)}\sigma_{u_i}\sigma_{v_i}
+    }
+    \\ &= 
+    {\prod_{i=1}^k\beta_{e(i)}
+      \over
+      \prod_{i=2}^k\beta_{e(i)}\sigma_{u_i}\sigma_{v_i}
+    }.
+  \end{align*}
+  Now, the numerator is positive by the stipulation on the graph's
+  cycles, and the denominator is positive by our assignments, and so
+  it follows that  $\beta_{uv}\sigma_u\sigma_v=\beta_{uv}$ in this
+  case, too.
+
+\end{itemize}
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
