@@ -141,11 +141,11 @@
     \right\}.
   \end{equation}
   One can now calculate $\mu_{v\to C}$ and $\mu_{C\to v}$ in time
-  equal to that of the BP calculation.  Then $\sigma_v$, the maximum
-  likelihood assignment to a vertex $v$ is
-  \begin{equation}
-    \label{eq:bp3}
-    \sigma_v=\max_{x}\prod_{C:v\in C}\mu_{C\to v}(x).
+  equal to that of the BP calculation.  Then any assignment $x$ for
+  $v$ that maximizes $\prod_{C:v\in C}\mu_{C\to v}(x)$ is part of a
+  maximum likelihood assignment. We can then pick some vertex $v$,
+  assign it such an assignment $x$, and repeat the calculation above
+  for an MRF for which $v$ is fixed to $x$.
   \end{equation}
   
 \item By the symmetry of the model, we may assign 1 to some vertex
