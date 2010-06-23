@@ -146,7 +146,6 @@
   maximum likelihood assignment. We can then pick some vertex $v$,
   assign it such an assignment $x$, and repeat the calculation above
   for an MRF for which $v$ is fixed to $x$.
-  \end{equation}
   
 \item By the symmetry of the model, we may assign 1 to some vertex
   $r$. Iterating until all vertices are assigned, we choose the sign
@@ -194,6 +193,39 @@
   the maximum size of a set $D_i$. 
 \item We run the algorithm above, where each column is a set
   $D_i$. Since the size of the sets is $n$, the running time is $2^{O(n)}$.
+\end{itemize}
+
+\subsection{Examples}
+\begin{itemize}
+\item We showed in class that BP, on the Ising model on a regular
+  graph with constant $\beta$, may converge to the wrong result when
+  $(d-1)\tanh \beta>1$. Hence, BP doesn't converge on $K_4$ (with
+  $d=3$) for $\beta$ large enough.
+\item Consider the Ising model on the complete bipartite graph on six
+  vertices, $K_{3,3}$, with $\beta=-\beta_0$. Let $\beta_0$ be the
+  ``high enough $\beta$'' from the previous question: high enough to
+  make BP on $K_4$ converge to the wrong answer. Now, initialize
+  $\mu_{v\to C}$ so that vertices on the right have state 
+  $+1$ w.h.p and vertices on the left have state $-1$ w.h.p.
+
+  To prove that BP on this setup converges to the wrong result, we
+  compare the calculations for $\mu_{v\to C}$ and $\mu_{C\to v}$ to
+  the ones done in the previous question, i.e. in $K_4$ with
+  $\beta=\beta_0$, with the initial messages set to all $+1$s w.h.p.
+  We note that both $K_4$ and $K_{3,3}$ are 3-regular, and so the
+  number of cliques each vertex belongs to (edges, in this case) is
+  the same in both cases. Now, the terms $\psi_C(\sigma_C)$ that
+  appear in the expression for $\mu_{C\to v}$ will have the same
+  values in the two cases: although they will be
+  $\beta_0\sigma_v\sigma_u$ in $K_4$, and $-\beta_0\sigma_v\sigma_u$
+  in $K_{3,3}$, $\sigma_u$ (assuming it is on the right) will also be
+  of opposite sign. Hence the results for the calculation for
+  $\mu_{C\to v}$ will be the same, which implies that also the results
+  for $\mu_{v\to C}$ will be identical.
+
+  Therefore, in this case convergence will follow the same pattern as
+  in the previous, and will not result in the desired uniform
+  marginal.
 \end{itemize}
 
 \end{document}
