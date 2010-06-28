@@ -1,3 +1,4 @@
+%&latex
 \documentclass{beamer}
 
 \usepackage{beamerthemesplit}
@@ -92,6 +93,7 @@
 \date{\today}
 
 \begin{document}
+
 %\newcounter{realtotalframenumber}{\value{totalframenumber}}
 \frame{\titlepage}
 \section{Introduction}
@@ -446,9 +448,9 @@ The behavior is unspecified when $\pi_a^b(p)=\phi$.
     of whose frequencies are at most $\frac{1}{500k}$. Let $\lambda^+$
     and $\lambda^-$ be their Poisson moments for sample size $k$. If
     it is the case that
-    \begin{equation}
+    \begin{equation*}
       \sum_a\frac{|\lambda^+_a-\lambda^-_a|}{\sqrt{1+\max\{\lambda^+_a,\lambda^-_a\}}}<\frac{1}{25}
-    \end{equation}
+    \end{equation*}
     then it is impossible to test any symmetric property that is true
     for $p^+$ and false for $p^-$ in $k$ samples.
   \end{block}
@@ -501,7 +503,9 @@ The behavior is unspecified when $\pi_a^b(p)=\phi$.
   \item Hence, by additivity of expectations (and variances), the
     expectation (and variance) of $f_a$ is $\sum_i\mbox{poi}_{k_i}(a)$
     which equals $\lambda_a$.
-  \end{itemize}
+
+\item However, we still don't know that $f_a$ is independent, and certainly  not that it is distributed Poisson on the vector $\lambda$. 
+ \end{itemize}
   
 \end{frame}
 
@@ -509,29 +513,80 @@ The behavior is unspecified when $\pi_a^b(p)=\phi$.
 \begin{frame}
   \frametitle{Wishful Thinking Theorem} \framesubtitle{Generalized
     Multinomial Distribution}
+\begin{block}{Defining $M^\rho$, the generalized multinomial distribution($\rho$)}
   
+  \begin{itemize}
+  \item Define a matrix $\rho$ with $n$ rows, such that row $\rho_i$ represents some distribution..
+\item From each such row, draw one column according to the distribution. 
+\item Return a row vector recording the total number of samples falling into each column (the histogram of the samples).
+\end{itemize}
+\end{block}
+
+\begin{block}{Lemma}
+The distribution of fingerprints of $\mbox{poi}(k)$ samples from $p$ (the distribution of $f_a$ after Poissonization) is the generalized multinomial distribution, $M^\rho$, when using $\rho_i(a)=\mbox{poi}_{k_i}(a)$ to define the rows $\rho_i$.
+\end{block}
 \end{frame}
 
 \begin{frame}
   \frametitle{Wishful Thinking Theorem} \framesubtitle{Roos's Theorem}
-  
-\end{frame}
+  \begin{block}{Roos's theorem}
+  Given a matrix $\rho$, letting $\lambda_a=\sum_i\rho_i(a)$ be the vector of column sums, we have
+$$ |M^\rho-\mbox{poi}(\lambda)|\le 8.8\sum_a\frac{\sum_i\rho_i(a)^2}{\sum_i \rho_i(a)}.$$\end{block}
+So, the multivariate Poisson distribution is a good approximation for the fingerprints, if $\rho$ is small enough.
+\begin{block}{Bounding $\rho$ using the low-frequencies}
+Suppose that for some $0<\eps\le\frac{1}{2}$ it holds that $p_i\le \frac{\eps}{k}$. Then
+$\rho_i(a)=\mbox{poi}_{k_i}(a)=\frac{e^{-k_i}k_i^a}{a!}=\frac{e^{-k\cdot p_i}(k\cdot p_i)^a}{a!}\le (k\cdot p_i)
+^a\le \eps^a$. 
 
+Thus: 
 
-\begin{frame}
-  \frametitle{Wishful Thinking Theorem} \framesubtitle{Bounding $\rho$}
-  
+$$\sum_a\frac{\sum_i\rho_i(a)^2}{\sum_i \rho_i(a)}\le \sum_a\max_i \rho_i(a)\le \sum_a \eps^a\le 2\eps. $$
+  \end{block}
 \end{frame}
 
 
 \begin{frame}
   \frametitle{Wishful Thinking Theorem} \framesubtitle{Multivariate
     Poisson Statistical Distance}  
+    \begin{block}{Bounding the statistical distance between $\lambda^+$ and $\lambda^-$}
+ The statistical distance between two multivariate Poisson distributions with parameters $\lambda^+, \lambda^-$ is bounded as
+$$|\mbox{Poi}(\lambda^+)-\mbox{Poi}(\lambda^-)|\le 2\sum_a\frac{|\lambda^+_a-\lambda^-_a|}{\sqrt{1+\max\{\lambda^+_a,\lambda_a^-\}}}.$$
+    \end{block}
 \end{frame}
+
+\begin{frame}
+  \frametitle{Wishful Thinking Theorem} \framesubtitle{(reminder)}
+
+  \begin{block}{Wishful Thinking Theorem}
+    Given an integer $k>0$ and two distributions $p^+$ and $p^-$, all
+    of whose frequencies are at most $\frac{1}{500k}$. Let $\lambda^+$
+    and $\lambda^-$ be their Poisson moments for sample size $k$. If
+    it is the case that
+    \begin{equation*}
+      \sum_a\frac{|\lambda^+_a-\lambda^-_a|}{\sqrt{1+\max\{\lambda^+_a,\lambda^-_a\}}}<\frac{1}{25}
+    \end{equation*}
+    then it is impossible to test any symmetric property that is true
+    for $p^+$ and false for $p^-$ in $k$ samples.
+  \end{block}
+
+\end{frame}
+
 
 \begin{frame}
   \frametitle{Wishful Thinking Theorem} \framesubtitle{Proof of
     Wishful Thinking Theorem}  
+    
+    \begin{proof}
+    \begin{itemize}
+    \item The fingerprint $f_a$ is distributed like $M^\rho$.
+\item Combining Roos's theorem with the bound on $\rho$, and assuming that $p_i\le\frac{1}{500k}$, we get that $|M^\rho$ - $\mbox{Poi}(\lambda)|\le \frac{2\cdot 8.8}{500}<\frac{1}{25}$.
+\item We also bounded $|\mbox{poi}(\lambda^+)-\mbox{poi}(\lambda^-)|\le\frac{2}{25}$ using the thorem's assumption.
+\item Using the triangle inequality, we get that the fingerprints of $\mbox{Poi}(k)$ samples from $p^+$ versus $p^-$ is at most $\frac{4}{25}<\frac{1}{6}$.
+\item If a $k$-Poissonized tester existed, so would a $k$-tester.
+\item A $k$-tester must have a gap$>\frac{1}{6}$ (distinguish between $\frac{7}{12}$ and $\frac{5}{12}$), in contradiction to the statistical distance proved above.
+\end{itemize}
+$\Rightarrow $ it is impossible to test any symmetric property that is true for $p^+$ and false for $p^-$ in $k$ samples.
+    \end{proof}
 \end{frame}
 
 
