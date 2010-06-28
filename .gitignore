@@ -9,3 +9,8 @@ _region*
 *.fmt
 t
 *.bbl
+*.nav
+*.toc
+*.snm
+*.out
+auto
