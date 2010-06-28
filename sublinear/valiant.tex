@@ -104,23 +104,23 @@
   \frametitle{Definitions}
   \framesubtitle{Properties}
 
-\begin{block}{A property $\pi$} A property of a distribution (on $[n]$ ) is a
-  function $\pi:D_n\rightarrow \mathbb{R}$, where $D_n$ is the set of
-  probability distributions on $[n]$.
-\end{block}
+  \begin{block}<1->{A property $\pi$} A property of a distribution is a
+    function $\pi:D_n\rightarrow \mathbb{R}$, where $D_n$ is the set
+    of probability distributions on $[n]$.
+  \end{block}
 
-\begin{block}{A binary property $\pi_a^b$}
-  Any property $\pi$ and pair of real numbers $a<b$ induce a binary
-  property $\pi_a^b$ defined as:
-  \begin{equation*}
-    \pi_a^b(p)=
-    \left\{\begin{matrix}
-       "yes" & \mbox{if }\pi(p)>b \\ 
-       "no" & \mbox{if }\pi(p)<a\\ 
-       \varnothing  & \mbox{otherwise} 
-      \end{matrix}\right.
-  \end{equation*}
-\end{block}
+  \begin{block}<2->{A binary property $\pi_a^b$} A property $\pi$ and
+    pair of real numbers $a<b$ induce a binary property
+    $\pi_a^b:D_n\to\{"yes","no",\varnothing\}$ defined by:
+    \begin{equation*}
+      \pi_a^b(p)=
+      \left\{\begin{matrix}
+          "yes" & \mbox{if }\pi(p)>b \\ 
+          "no" & \mbox{if }\pi(p)<a\\ 
+          \varnothing  & \mbox{otherwise} 
+        \end{matrix}\right.
+    \end{equation*}
+  \end{block}
 \end{frame}
 
 
@@ -134,27 +134,29 @@
       complexity $k(\cdot)$''} if, given a sample of size $k(n)$ from
     a distribution $p \in D_n$, algorithm $T$ will:
     \begin{itemize}
-    \item accept with probability greater than $\frac{2}{3}$ if
+    \item<1-> accept with probability greater than $\frac{2}{3}$ if
       $\pi_a^b(p)="yes"$, and
-    \item accept with probability less than $\frac{1}{3}$ if
+    \item<2-> accept with probability less than $\frac{1}{3}$ if
       $\pi_a^b(p)="no"$.
     \end{itemize}
-\end{block}
-The behavior is unspecified when $\pi_a^b(p)=\phi$.
+  \end{block}
+  \begin{block}<3->{} The tester's behavior is unspecified when
+    $\pi_a^b(p)=\phi$, i.e. when $a\leq\pi(p)\leq b$.
+  \end{block}
 
  
 \end{frame}
  
 \begin{frame}
   \frametitle{Definitions}
-  \framesubtitle{ symmetry, ($\epsilon,\delta)-$weak continuity}
+  \framesubtitle{Symmetry, ($\epsilon,\delta)-$weak continuity}
 
-  \begin{block}{A Symmetric Property}A property $\pi$ is symmetric if
+  \begin{block}<1->{A Symmetric Property}A property $\pi$ is symmetric if
     for all distributions $p$ and all permutations $\sigma$ we have
     $\pi(p)=\pi(p\circ\sigma)$.
   \end{block}
 
-  \begin{block}{An ($\epsilon, \delta$)-weakly continuous property}
+  \begin{block}<2->{An ($\epsilon, \delta$)-weakly continuous property}
     A property $\pi$ is $(\epsilon,\delta)$-weakly continuous if for
     all distributions $p^+,p^-$ satisfying $|p^+-p^-|\le\delta$ we
     have $|\pi(p^+)-\pi(p^-)|\le \epsilon$.
@@ -170,12 +172,32 @@ The behavior is unspecified when $\pi_a^b(p)=\phi$.
     $(\delta, \delta)$-weakly continuous property.
   \end{theorem}
   \begin{proof}
-    
+    \begin{itemize}
+    \item<1-> Let $U_n$ be the uniform distribution on $[n]$.
+    \item<2-> Let $\pi(p)=|U_n-p|$ for $p\in D_n$.
+    \item<3-> Let $p^+,p^-\in D_n$ be such that $|p^+-p^-|<\delta$.
+    \item<4-> Assume WLOG that $\pi(p^+) \geq \pi(p^-)$.
+    \end{itemize}
+    \onslide<5->{
+      \begin{align*}
+        |\pi(p^+)-\pi(p^-)|&=|U_n-p^+|-|U_n-p^-|
+        \\ &\leq |U_n-p^-|+|p^+-p^-|-|U_n-p^-|
+        \\ &= |p^+-p^-| \leq \delta
+      \end{align*}
+    }
   \end{proof}
-  \begin{theorem}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Example} \framesubtitle{Entropy}
+  \begin{theorem}<1->
+
     The entropy is a symmetric and $\left(1,{1\over 2\log
         n}\right)$-weakly continuous property.
   \end{theorem}
+  \begin{proof}<2->
+    Simple.
+  \end{proof}
 \end{frame}
 
 
@@ -193,18 +215,18 @@ The behavior is unspecified when $\pi_a^b(p)=\phi$.
     $T^\theta$ for $\pi_a^b$}
   \begin{block}{The Canonical Tester($\theta$)}
     \begin{enumerate}
-    \item For each $i$ such that $s(i)>\theta$ insert the constraint
+    \item<1-> For each $i$ such that $s(i)>\theta$ insert the constraint
       $p(i)=\frac{s(i)}{k}$. Otherwise insert the constraint $p(i)\in
       [0,\frac{\theta}{k}]$.
-    \item Insert the constraint $\sum_ip(i)=1$.
-    \item Let $P$ be the set of solutions to these constraints.
-    \item If the set $\pi_a^b(P)$ (the image of elements of $P$ under
+    \item<2-> Insert the constraint $\sum_ip(i)=1$.
+    \item<3-> Let $P$ be the set of solutions to these constraints.
+    \item<4-> If the set $\pi_a^b(P)$ (the image of elements of $P$ under
       $\pi_a^b$) contains only $"yes"$, return $"yes"$. If it contains
       only $"no"$ return $"no"$. Otherwise answer arbitrarily.
     \end{enumerate}
-  \end{block}  
-  It seems plausible that the canonical tester behaves correctly for
-  the high frequency elements.
+  \end{block}
+  \onslide<5->{ It seems plausible that the canonical tester behaves
+    correctly for the high frequency elements.  }
 \end{frame}
 \begin{frame}
   \frametitle{The Canonical Tester} \framesubtitle{Canonical Tester
@@ -230,7 +252,7 @@ The behavior is unspecified when $\pi_a^b(p)=\phi$.
 \begin{frame}
   \frametitle{The Canonical Testing Theorem We Wish For}
   \framesubtitle{}
-  \begin{block}{Not True Theorem}
+  \begin{block}<1->{Not True Theorem}
     Given a symmetric $(\epsilon,\delta)$-weakly continuous property
     $\pi:D_n\rightarrow \mathbb{R}$ and two thresholds $a<b$, such
     that the Canonical Tester $T^\theta$ for $\theta=600\log
@@ -238,7 +260,7 @@ The behavior is unspecified when $\pi_a^b(p)=\phi$.
     $\pi<a$ in $k$ samples, then no tester can distinguish between
     $\pi>b$ and $\pi<a$ in $k$ samples.
   \end{block}
-  Sadly, this is not true.
+  \onslide<2->{ Sadly, this is not true. }
 \end{frame}
 \begin{frame}
   \frametitle{Canonical Testing Theorem}
@@ -253,17 +275,19 @@ The behavior is unspecified when $\pi_a^b(p)=\phi$.
     $\pi<a-\epsilon$ in $k\cdot \frac{\delta^3}{n^{o(1)}}$ samples.
   \end{theorem}
   Essentially, the Canonical Tester is optimal up to small additive
-  constants, and a small $(n^{o(1)})$ factor in the number of samples
+  constants and a small $(n^{o(1)})$ factor in the number of samples
   $k$.
 \end{frame}
 
 
 \begin{frame}
   \frametitle{Low Frequency Blindness} \framesubtitle{}
-  The crux is to prove that the canonical tester does the ``right
-  thing'' (i.e., nothing!) for the low frequency elements.
+
+  \onslide<1->{ The crux is to prove that the canonical tester does
+    the ``right thing'' (i.e., nothing!) for the low frequency
+    elements.  }
   
-  \begin{theorem}
+  \begin{block}<2->{Low Frequency Blindness Theorem}
     Let $\pi$ be a symmetric property on distributions on $[n]$ that
     is $(\epsilon,\delta)$-weakly continuous.
 
@@ -274,9 +298,12 @@ The behavior is unspecified when $\pi_a^b(p)=\phi$.
     If $\pi(p^+)>b$ and $\pi(p^-)<a$ , then no tester can distinguish
     between $\pi>b-\epsilon$ and $\pi<a+\epsilon$ in $k\cdot
     \frac{\delta^3}{n^{o(1)}}$ samples.
-  \end{theorem}
+  \end{block}
 
-
+  \onslide<3->{ If we could show that such $p^+$ and $p^-$ exist
+    whenever the canonical tester fails than this would imply the
+    canonical testing theorem.}
+  
 \end{frame}
 
 
@@ -284,16 +311,16 @@ The behavior is unspecified when $\pi_a^b(p)=\phi$.
 \begin{frame}
   \frametitle{Low Frequency Blindness $\Rightarrow$ Canonical Testing
     Theorem} \framesubtitle{}
-  \begin{lemma}
+  \begin{lemma}<1->
     Given a distribution $p$ and a parameter $\theta$, if we draw $k$
     random samples from $p$ then with probability at least
     $1-\frac{4}{n}$ the set $P$ constructed by the Canonical Tester
     will include a distribution $\hat{p}$ such that $|p-\hat p
     |\le 24\sqrt{\frac{\log n}{\theta}}$.
   \end{lemma}
-  If $\theta = 600\log n / \delta^2$ then this reads $|p-\hat p
-    |\le \delta$
-  \begin{proof}
+  \onslide<2->{ If $\theta = 600\log n / \delta^2$ then this reads
+    $|p-\hat p |\le \delta$.}
+  \begin{proof}<3->
     ``The proof is elementary: use Chernoff bounds on each index $i$
     and then apply the union bound to combine the bounds.''
   \end{proof}
@@ -304,37 +331,44 @@ The behavior is unspecified when $\pi_a^b(p)=\phi$.
   \frametitle{Low Frequency Blindness $\Rightarrow$ Canonical Testing
     Theorem} \framesubtitle{}
 
-  Reminder for the canonical testing theorem: if the canonical tester
-  fails with $k$ samples then any slightly weaker tester also fails.
+  \onslide<1->{ {\bf Reminder:} the canonical testing theorem states
+    that if the canonical tester fails with $k$ samples then any
+    slightly weaker tester also fails.  }
   
   \begin{block}{Proof: Canonical Testing Theorem}
     \begin{itemize}
-    \item Assume canonical tester says ``no'' with probability $1/3$
+    \item<2-> Assume canonical tester says ``no'' with probability $1/3$
       to some $p$ for which $\pi(p)>b+\epsilon$ (so it should have
       said yes).
-    \item $\Rightarrow$ with probability $1/3$ there exists $p^-\ in
+    \item<3-> $\Rightarrow$ with probability $1/3$ there exists $p^-\ \in
       P$ such that $\pi(p^-)<a$.
-    \item By the lemma, $P$ contains some $p^+$ such that
-      $|p-p^+|<\delta$ with probability $1-4/n$. $\pi(p^+)$
-    \item $\Rightarrow$ there exists a single $P$ with both of these
+    \item<4-> By the lemma, $P$ contains some $p^+$ such that
+      $|p-p^+|<\delta$ with probability $1-4/n$. $\pi(p^+)>b$ by continuity.
+    \item<5-> $\Rightarrow$ there exists a single $P$ with both of these
       properties.
-    \item $\Rightarrow$ there exist such $p^-$ and $p^+$ with the same
-      $\theta$-high-frequency elements.
-    \item $\Rightarrow$ the theorem follows by application of low
+    \item<6-> $\Rightarrow$ there exist $p^-$ and $p^+$ with the same
+      $\theta$-high-frequency elements such that $\pi(p^-)<a$ and $\pi(p^+)>b$.
+    \item<7-> $\Rightarrow$ the theorem follows by application of low
       frequency blindness.
     \end{itemize}
   \end{block}
 \end{frame}
 
-
+\begin{frame}
+  \frametitle{Coffee Break}
+  \framesubtitle{Coffee Break}
+  \begin{block}{Coffee Break}
+    Coffee Break
+  \end{block}
+\end{frame}
 \begin{frame}
   \frametitle{Fingerprints} \framesubtitle{Definition}
 
-  \begin{block}{Histogram}
+  \begin{block}<1->{Histogram}
     The histogram $h$ of a vector $v=(v_1,\ldots,v_k)$ is a vector such
     that $h_i$ is the number of components of $v$ with value $i$.
   \end{block}
-  \begin{block}{Fingerprint}
+  \begin{block}<2->{Fingerprint}
     A fingerprint $f$ of a vector $v$ is the histogram of the
     histogram of $v$.
   \end{block}
@@ -346,14 +380,14 @@ The behavior is unspecified when $\pi_a^b(p)=\phi$.
   \begin{block}{Example}
     Let $v=(3,1,2,2,5,1,2)$. Then:
     \begin{itemize}
-    \item Its histogram is $h=(2,3,1,0,1)$.
-    \item Its fingerprint is $f=(2,1,1)$.
-    \item We omit the zero component of $f$.
+    \item<1-> Its histogram is $h=(2,3,1,0,1)$.
+    \item<2-> Its fingerprint is $f=(2,1,1)$.
+    \item<3-> We omit the zero component of $f$.
     \end{itemize}
   \end{block}
-  \begin{block}{}
-    A tester for a symmetric distribution $\pi$ may consider only the
-    fingerprint of the sample and discard the rest of the information.
+  \begin{block}<4->{} A tester for a symmetric distribution $\pi$ may
+    consider just the fingerprint of the sample and discard the rest
+    of the information.
   \end{block}
 \end{frame}
 
@@ -376,23 +410,45 @@ The behavior is unspecified when $\pi_a^b(p)=\phi$.
 
 
 \begin{frame}
+  \frametitle{Low Frequency Blindness} \framesubtitle{(simplified)}
+  \onslide<1->{ We'll limit our analysis to distributions with low
+    frequencies.  Suppose {\bf all} elements have probability
+    $<\frac{\theta}{k}$ where $\theta=\frac{600\log n}{\delta^2}$.  }
+  \begin{theorem}<2->
+    Let $\pi$ be a symmetric property on distributions on $[n]$ that
+    is $(\epsilon,\delta)$-weakly continuous.
+
+    Let $p^+,p^-$ be two distributions for which all indices occur
+    with probability at most $\frac{\theta}{k}$ in, where
+    $\theta=\frac{600\log n}{\delta^2}$.
+
+    If $\pi(p^+)>b$ and $\pi(p^-)<a$ , then no tester can distinguish
+    between $\pi>b-\epsilon$ and $\pi<a+\epsilon$ in $k\cdot
+    \frac{\delta^3}{n^{o(1)}}$ samples.
+  \end{theorem}
+\end{frame}
+
+
+\begin{frame}
   \frametitle{Proof Sketch} \framesubtitle{}
 
-  Let's limit our analysis to distributions with low frequencies.
-  Suppose all elements have probability $<\frac{\theta}{k}$ where
-  $\theta=\frac{600\log n}{\delta^2}$.
   \begin{itemize}
-  \item Let $p^+$ and $p^-$ be such that $\pi(p^+)>b$ and
-    $\pi(p^-)<a$.
-  \item We construct $\hat{p}^+$ and $\hat{p}^-$ such that
-    $\pi(\hat{p}^+)>b-\epsilon$ and $\pi(\hat{p}^-)<a+\epsilon$. Also,
-    $\hat{p}^+$ and $\hat{p}^-$ have similar {\bf Poisson moments} for
-    sample size $\hat{k}=k\frac{\delta^3}{n^{o(1)}}$.
-  \item For any sample size for which two distributions have similar
-    Poisson moments, they also have similar {\bf fingerprints}.
-  \item We have two distributions with similar fingerprints; one has
-    the property and the other doesn't. It is therefore impossible to
-    test for $\pi_a^b$ with $\hat{k}$ samples.
+  \item<1-> Let $p^+$ and $p^-$ be {\bf low frequency distributions}
+    such that $\pi(p^+)>b$ and $\pi(p^-)<a$.
+  \item<2-> We construct $\hat{p}^+$ and $\hat{p}^-$ such that
+    \begin{itemize}
+    \item<3-> $|\hat{p}^\pm-p^\pm|<\delta$, and therefore
+      $\pi(\hat{p}^+)>b-\epsilon$ and
+      $\pi(\hat{p}^-)<a+\epsilon$.
+    \item<4->$\hat{p}^+$ and $\hat{p}^-$ have similar {\bf Poisson
+        moments} for sample size $\hat{k}=k\frac{\delta^3}{n^{o(1)}}$.
+    \end{itemize}
+  \item<5-> For any sample size for which two distributions have similar
+    Poisson moments, they also have similar {\bf fingerprints}. This
+    is the {\bf ``Wishful Thinking Theorem''}.
+  \item<6-> We now have two distributions with similar fingerprints;
+    one has the property and the other doesn't. It is therefore
+    impossible to test for $\pi_a^b$ with $\hat{k}$ samples.
   \end{itemize}
 
 \end{frame}
@@ -402,16 +458,22 @@ The behavior is unspecified when $\pi_a^b(p)=\phi$.
   \frametitle{Wishful Thinking Theorem} \framesubtitle{Poisson
     Moments}
 
-  \begin{itemize}
-  \item Let $p$ be a distribution on $[n]$.
-  \item For sample size $k$, the expectation of the number of
-    appearances of $i$ in the sample is $k_i:=kp_i$.
-  \item Let $\mbox{poi}_x(y)$ be the probability for $y$ in the
-    Poisson distribution with parameter $x$.
-  \item  Then $\lambda_a:=\sum_i\mbox{poi}_{k_i}(a)$ are the
-    Poisson moments of $p$ for sample size $k$.
-  \end{itemize}
-  $\lambda_a$ is a good approximation to the expected value of $f_a$.
+  \begin{block}{}
+    
+    \begin{itemize}
+    \item<1-> Let $p$ be a distribution on $[n]$.
+    \item<2-> For sample size $k$, the expectation of the number of
+      appearances of $i$ in the sample (=$h_i$) is $k_i:=kp_i$.
+    \item<3-> Let $\mbox{poi}_x(y)$ be the probability for $y$ drawn
+      from the Poisson distribution with parameter $x$.
+    \end{itemize}
+  \end{block}
+  \begin{block}<4->{Definition}
+    $\lambda_a:=\sum_i\mbox{poi}_{k_i}(a)$ are the {\bf Poisson
+      moments of $p$ for sample size $k$}.
+  \end{block}
+  \onslide<5->{ $\lambda_a$ is a good approximation to the expected
+    value of $f_a$.}
 \end{frame}
 
 
@@ -421,19 +483,19 @@ The behavior is unspecified when $\pi_a^b(p)=\phi$.
 
   \begin{block}{}
     \begin{itemize}
-    \item Each component of the fingerprint is a sum of many
+    \item<1-> Each component of the fingerprint is a sum of many
       indicators. For example, $f_3$ is the sum of the indicators of
       the events $h_i=3$.
-    \item These indicators are only weakly dependent when the
+    \item<2-> These indicators are only weakly dependent when the
       frequencies are low, so let's ignore these dependencies
       altogether.
-    \item Assume $f_a$ is distributed Poisson (independently) with mean
+    \item<3-> Assume $f_a$ is distributed Poisson (independently) with mean
       (and variance) $\lambda_a$.
-    \item If for $p^+$ and $p^-$ and each $a$ we have that
-      $|\lambda^-_a-\lambda^+_a|$ is much smaller than
-      $\sqrt{\lambda^+_a}$ then we expect the distributions'
-      fingerprints to be indistinguishable.
-    \item If $\pi(p^+)>b$ and $\pi(p^-)<a$ then no tester can test
+    \item<4-> If for $p^+$ and $p^-$ and each $a$ we have that
+      $|\lambda^-_a-\lambda^+_a|$ is smaller than $\sqrt{\lambda^+_a}$
+      then we expect the distributions' fingerprints to be
+      indistinguishable.
+    \item<5-> If $\pi(p^+)>b$ and $\pi(p^-)<a$ then no tester can test
       $\pi_a^b$.
     \end{itemize}
   \end{block}
@@ -444,10 +506,10 @@ The behavior is unspecified when $\pi_a^b(p)=\phi$.
   \frametitle{Wishful Thinking Theorem} \framesubtitle{Statement}
 
   \begin{block}{Wishful Thinking Theorem}
-    Given an integer $k>0$ and two distributions $p^+$ and $p^-$, all
-    of whose frequencies are at most $\frac{1}{500k}$. Let $\lambda^+$
-    and $\lambda^-$ be their Poisson moments for sample size $k$. If
-    it is the case that
+    Given an integer $k>0$, let $p^+$ and $p^-$ be two distributions,
+    all of whose frequencies are at most $\frac{1}{500k}$. Let
+    $\lambda^+$ and $\lambda^-$ be their Poisson moments for sample
+    size $k$. If it is the case that
     \begin{equation*}
       \sum_a\frac{|\lambda^+_a-\lambda^-_a|}{\sqrt{1+\max\{\lambda^+_a,\lambda^-_a\}}}<\frac{1}{25}
     \end{equation*}
@@ -461,14 +523,19 @@ The behavior is unspecified when $\pi_a^b(p)=\phi$.
   \frametitle{Wishful Thinking Theorem} \framesubtitle{Overview}
 
   \begin{itemize}
-  \item We would like to approximate the distribution of a fingerprint
-    $f_a$ by an independent Poisson distribution with parameter
-    $\lambda_a$. I.e., $f$ is distributed similarly to the
-    multivariate Poisson distribution $\mbox{Poi}(\lambda)$.
-  \item We can then use a convenient statistical lemma that bounds the
-    distance between multivariate Poisson distributions.
-  \item Finally, using the triangle inequality we can bound the
-    distance between fingerprints' distributions.
+  \item<1-> Given two distributions $p^+$ and $p^-$, we approximate
+    each of their fingerprint distributions $f_a$ by an independent
+    Poisson distribution with parameter $\lambda_a$. I.e., $f$ is
+    distributed similarly to the multivariate Poisson distribution
+    $\mbox{Poi}(\lambda)$.
+  \item<2-> We can then use a bound for the distance between multivariate
+    Poisson distributions to show that the approximate distributions
+    are close.
+  \item<3-> We deduce a bound on the distance between the
+    actual fingerprints' distributions.
+  \item<4-> Finally, we conclude that since the fingerprints are
+    indistinguishable (even though the distributions might not be),
+    then the property can't be tested.
   \end{itemize}
 
 \end{frame}
@@ -481,12 +548,12 @@ The behavior is unspecified when $\pi_a^b(p)=\phi$.
     classifies a property on a distribution $p$ with probability
     $7/12$ on input samples generated in the following way:
     \begin{itemize}
-    \item Draw $k'\leftarrow \mbox{poi}_k$.
-    \item Return $k'$ samples from $p$.
+    \item<2-> Draw $k'\leftarrow \mbox{poi}_k$.
+    \item<3-> Return $k'$ samples from $p$.
     \end{itemize}
   \end{block}
 
-  \begin{block}{Lemma}
+  \begin{block}<4->{Lemma}
     If there exists a $k$-sample tester $T$ for a property $\pi_a^b$
     then there exists a $k$-Poissonized tester $T'$ for $\pi_a^b$.
   \end{block}
@@ -498,13 +565,13 @@ The behavior is unspecified when $\pi_a^b(p)=\phi$.
 
   
   \begin{itemize}
-  \item After this Poissonization, the histogram component $h_i$ is
+  \item<1-> After Poissonization, the histogram component $h_i$ is
     distributed $\mbox{poi}_{k_i}$, and the different $h_i$s are independent.
-  \item Hence, by additivity of expectations (and variances), the
+  \item<2-> Hence, by additivity of expectations (and variances), the
     expectation (and variance) of $f_a$ is $\sum_i\mbox{poi}_{k_i}(a)$
     which equals $\lambda_a$.
 
-\item However, we still don't know that $f_a$ is independent, and certainly  not that it is distributed Poisson on the vector $\lambda$. 
+  \item<3-> However, the different $f_a$s aren't independent.
  \end{itemize}
   
 \end{frame}
@@ -513,34 +580,60 @@ The behavior is unspecified when $\pi_a^b(p)=\phi$.
 \begin{frame}
   \frametitle{Wishful Thinking Theorem} \framesubtitle{Generalized
     Multinomial Distribution}
-\begin{block}{Defining $M^\rho$, the generalized multinomial distribution($\rho$)}
+  \begin{block}{Definition: $M^\rho$, the generalized multinomial
+      distribution($\rho$)}
   
-  \begin{itemize}
-  \item Define a matrix $\rho$ with $n$ rows, such that row $\rho_i$ represents some distribution..
-\item From each such row, draw one column according to the distribution. 
-\item Return a row vector recording the total number of samples falling into each column (the histogram of the samples).
-\end{itemize}
-\end{block}
+    \begin{itemize}
+    \item<1-> Let $\rho$ be a matrix with $n$ rows, such that row
+      $\rho_i$ represents a distribution.
+    \item<2-> From each such row, draw one column according to the
+      distribution.
+    \item<3-> Return a row vector recording the total number of
+      samples falling into each column (the histogram of the samples).
+    \end{itemize}
+  \end{block}
 
-\begin{block}{Lemma}
-The distribution of fingerprints of $\mbox{poi}(k)$ samples from $p$ (the distribution of $f_a$ after Poissonization) is the generalized multinomial distribution, $M^\rho$, when using $\rho_i(a)=\mbox{poi}_{k_i}(a)$ to define the rows $\rho_i$.
-\end{block}
+  \begin{block}<4->{Lemma} The distribution of fingerprints of
+    $\mbox{poi}(k)$ samples from $p$ (the distribution of $f_a$ after
+    Poissonization) is the generalized multinomial distribution,
+    $M^\rho$, when using $\rho_i(a)=\mbox{poi}_{k_i}(a)$ to define the
+    rows $\rho_i$.
+  \end{block}
 \end{frame}
 
 \begin{frame}
   \frametitle{Wishful Thinking Theorem} \framesubtitle{Roos's Theorem}
   \begin{block}{Roos's theorem}
-  Given a matrix $\rho$, letting $\lambda_a=\sum_i\rho_i(a)$ be the vector of column sums, we have
-$$ |M^\rho-\mbox{poi}(\lambda)|\le 8.8\sum_a\frac{\sum_i\rho_i(a)^2}{\sum_i \rho_i(a)}.$$\end{block}
-So, the multivariate Poisson distribution is a good approximation for the fingerprints, if $\rho$ is small enough.
-\begin{block}{Bounding $\rho$ using the low-frequencies}
-Suppose that for some $0<\eps\le\frac{1}{2}$ it holds that $p_i\le \frac{\eps}{k}$. Then
-$\rho_i(a)=\mbox{poi}_{k_i}(a)=\frac{e^{-k_i}k_i^a}{a!}=\frac{e^{-k\cdot p_i}(k\cdot p_i)^a}{a!}\le (k\cdot p_i)
-^a\le \eps^a$. 
+    
+    Given a matrix $\rho$, letting $\lambda_a=\sum_i\rho_i(a)$ be the
+    vector of column sums, we have
+    \begin{equation*}
+      |M^\rho-\mbox{Poi}(\lambda)|\le
+      8.8\sum_a\frac{\sum_i\rho_i(a)^2}{\sum_i \rho_i(a)}.
+    \end{equation*}
+  \end{block}
+  So, the multivariate Poisson distribution is a good approximation
+  for the fingerprints, if $\rho$ is small enough.
+\end{frame}
+\begin{frame}
+  \frametitle{Wishful Thinking Theorem} \framesubtitle{Roos's Theorem}
 
-Thus: 
+  \begin{block}<1->{Bounding $\rho$ using the low-frequencies}
+    Suppose that for some $0<\eps\le\frac{1}{2}$ it holds that $p_i\le
+    \frac{\eps}{k}$. Then
+    $\rho_i(a)=\mbox{poi}_{k_i}(a)=\frac{e^{-k_i}k_i^a}{a!}=\frac{e^{-k\cdot
+        p_i}(k\cdot p_i)^a}{a!}\le (k\cdot p_i) ^a\le \eps^a$.
+  \end{block}
 
-$$\sum_a\frac{\sum_i\rho_i(a)^2}{\sum_i \rho_i(a)}\le \sum_a\max_i \rho_i(a)\le \sum_a \eps^a\le 2\eps. $$
+  \onslide<2->{Thus:}
+  \begin{block}<3->{}
+    \begin{equation*}
+      \sum_a\frac{\sum_i\rho_i(a)^2}{\sum_i \rho_i(a)}\le \sum_a\max_i \rho_i(a)\le \sum_a \eps^a\le 2\eps
+    \end{equation*}
+    and by Roos's theorem:
+    \begin{equation*}
+      |M^\rho-\mbox{Poi}(\lambda)|\le 2\cdot 8.8\eps.       
+    \end{equation*}
   \end{block}
 \end{frame}
 
@@ -548,9 +641,19 @@ $$\sum_a\frac{\sum_i\rho_i(a)^2}{\sum_i \rho_i(a)}\le \sum_a\max_i \rho_i(a)\le 
 \begin{frame}
   \frametitle{Wishful Thinking Theorem} \framesubtitle{Multivariate
     Poisson Statistical Distance}  
-    \begin{block}{Bounding the statistical distance between $\lambda^+$ and $\lambda^-$}
- The statistical distance between two multivariate Poisson distributions with parameters $\lambda^+, \lambda^-$ is bounded as
-$$|\mbox{Poi}(\lambda^+)-\mbox{Poi}(\lambda^-)|\le 2\sum_a\frac{|\lambda^+_a-\lambda^-_a|}{\sqrt{1+\max\{\lambda^+_a,\lambda_a^-\}}}.$$
+    \begin{block}<1->{Bounding the statistical distance between $\lambda^+$ and $\lambda^-$}
+      The statistical distance between two multivariate Poisson
+      distributions with parameters $\lambda^+, \lambda^-$ is bounded
+      by
+      \begin{equation*}
+        |\mbox{Poi}(\lambda^+)-\mbox{Poi}(\lambda^-)|\le 2\sum_a\frac{|\lambda^+_a-\lambda^-_a|}{\sqrt{1+\max\{\lambda^+_a,\lambda_a^-\}}}.
+      \end{equation*}
+    \end{block}
+    \onslide<2->{Hence, by the theorem's hypothesis:}
+    \begin{block}<3->{}
+      \begin{equation*}
+        |\mbox{Poi}(\lambda^+)-\mbox{Poi}(\lambda^-)|\le \frac{2}{25}.
+      \end{equation*}
     \end{block}
 \end{frame}
 
@@ -558,10 +661,10 @@ $$|\mbox{Poi}(\lambda^+)-\mbox{Poi}(\lambda^-)|\le 2\sum_a\frac{|\lambda^+_a-\la
   \frametitle{Wishful Thinking Theorem} \framesubtitle{(reminder)}
 
   \begin{block}{Wishful Thinking Theorem}
-    Given an integer $k>0$ and two distributions $p^+$ and $p^-$, all
-    of whose frequencies are at most $\frac{1}{500k}$. Let $\lambda^+$
-    and $\lambda^-$ be their Poisson moments for sample size $k$. If
-    it is the case that
+    Given an integer $k>0$, let $p^+$ and $p^-$ be two distributions,
+    all of whose frequencies are at most $\frac{1}{500k}$. Let
+    $\lambda^+$ and $\lambda^-$ be their Poisson moments for sample
+    size $k$. If it is the case that
     \begin{equation*}
       \sum_a\frac{|\lambda^+_a-\lambda^-_a|}{\sqrt{1+\max\{\lambda^+_a,\lambda^-_a\}}}<\frac{1}{25}
     \end{equation*}
@@ -578,18 +681,31 @@ $$|\mbox{Poi}(\lambda^+)-\mbox{Poi}(\lambda^-)|\le 2\sum_a\frac{|\lambda^+_a-\la
     
     \begin{proof}
     \begin{itemize}
-    \item The fingerprint $f_a$ is distributed like $M^\rho$.
-\item Combining Roos's theorem with the bound on $\rho$, and assuming that $p_i\le\frac{1}{500k}$, we get that $|M^\rho$ - $\mbox{Poi}(\lambda)|\le \frac{2\cdot 8.8}{500}<\frac{1}{25}$.
-\item We also bounded $|\mbox{poi}(\lambda^+)-\mbox{poi}(\lambda^-)|\le\frac{2}{25}$ using the thorem's assumption.
-\item Using the triangle inequality, we get that the fingerprints of $\mbox{Poi}(k)$ samples from $p^+$ versus $p^-$ is at most $\frac{4}{25}<\frac{1}{6}$.
-\item If a $k$-Poissonized tester existed, so would a $k$-tester.
-\item A $k$-tester must have a gap$>\frac{1}{6}$ (distinguish between $\frac{7}{12}$ and $\frac{5}{12}$), in contradiction to the statistical distance proved above.
-\end{itemize}
-$\Rightarrow $ it is impossible to test any symmetric property that is true for $p^+$ and false for $p^-$ in $k$ samples.
+    \item<1-> The fingerprint $f_a$ is distributed like $M^\rho$.
+    \item<2-> Combining Roos's theorem with the bound on $\rho$, and
+      assuming that $p_i\le\frac{1}{500k}$, we get that $|M^\rho$ -
+      $\mbox{Poi}(\lambda)|\le \frac{2\cdot 8.8}{500}<\frac{1}{25}$.
+    \item<3-> The theorem's hypothesis implies
+      $|\mbox{Poi}(\lambda^+)-\mbox{Poi}(\lambda^-)|\le\frac{2}{25}$.
+    \item<4-> Using the triangle inequality, we get that the
+      statistical distance between the distributions of fingerprints
+      of $\mbox{Poi}(k)$ samples from $p^+$ versus $p^-$ is at most
+      $\frac{4}{25}<\frac{1}{6}$.
+    \item<5-> A $k$-tester (poissonized) must have a gap$>\frac{1}{6}$
+      (succeed with probability $\frac{7}{12}$). This is impossible if
+      $|p^+-p^-|<1/6$.
+    \item<6-> If a $k$-Poissonized tester doesn't exist, then neither
+      does a $k$-tester.
+    \end{itemize}
+    \onslide<7->{ $\Rightarrow $ it is impossible to test any
+      symmetric property that is true for $p^+$ and false for $p^-$ in
+      $k$ samples.}
     \end{proof}
 \end{frame}
 
-
+\begin{frame}
+  Thanks!
+\end{frame}
 
 
 \end{document} 
