@@ -1,0 +1,540 @@
+\documentclass{beamer}
+
+\usepackage{beamerthemesplit}
+\setbeamertemplate{footline}[frame number]
+\mode<presentation>
+{
+  \usetheme{Warsaw}
+  \setbeamercovered{transparent}
+}
+
+\setlength{\unitlength}{\textwidth}
+\renewcommand{\figurename}{}
+
+\usepackage{ulem}
+
+\DeclareMathOperator{\Support}{Supp} \DeclareMathOperator{\Opt}{Opt}
+\DeclareMathOperator{\Ordo}{\mathcal{O}}
+\newcommand{\MaxkCSP}{\textsc{Max $k$-CSP}}
+\newcommand{\MaxkCSPq}{\textsc{Max $k$-CSP$_{q}$}}
+\newcommand{\MaxCSP}[1]{\textsc{Max CSP}(#1)} \renewcommand{\Pr}{{\bf
+    P}} \renewcommand{\P}{{\bf P}} \newcommand{\Px}{\mathop{\bf P\/}}
+\newcommand{\E}{\mbox{E}} \newcommand{\Cov}{\mbox{Cov}}
+\newcommand{\Var}{\mbox{Var}} \newcommand{\Varx}{\mathop{\bf Var\/}}
+
+\newcommand{\bits}{\{-1,1\}}
+
+\newcommand{\nsmaja}{\textstyle{\frac{2}{\pi}} \arcsin \rho}
+
+\newcommand{\Inf}{\mathrm{Inf}} \newcommand{\I}{\mathrm{I}}
+\newcommand{\J}{\mathrm{J}}
+
+\newcommand{\eps}{\epsilon} \newcommand{\lam}{\lambda}
+
+% \newcommand{\trunc}{\ell_{2,[-1,1]}}
+\newcommand{\trunc}{\zeta} \newcommand{\truncprod}{\chi}
+
+\newcommand{\N}{\mathbb N} \newcommand{\R}{\mathbb R}
+\newcommand{\Z}{\mathbb Z} \newcommand{\CalE}{{\mathcal{E}}}
+\newcommand{\CalC}{{\mathcal{C}}} \newcommand{\CalM}{{\mathcal{M}}}
+\newcommand{\CalR}{{\mathcal{R}}} \newcommand{\CalS}{{\mathcal{S}}}
+\newcommand{\CalV}{{\mathcal{V}}}
+\newcommand{\CalX}{{\boldsymbol{\mathcal{X}}}}
+\newcommand{\CalG}{{\boldsymbol{\mathcal{G}}}}
+\newcommand{\CalH}{{\boldsymbol{\mathcal{H}}}}
+\newcommand{\CalY}{{\boldsymbol{\mathcal{Y}}}}
+\newcommand{\CalZ}{{\boldsymbol{\mathcal{Z}}}}
+\newcommand{\CalW}{{\boldsymbol{\mathcal{W}}}}
+\newcommand{\CalF}{{\mathcal{Z}}}
+% \newcommand{\boldG}{{\boldsymbol G}}
+% \newcommand{\boldQ}{{\boldsymbol Q}}
+% \newcommand{\boldP}{{\boldsymbol P}}
+% \newcommand{\boldR}{{\boldsymbol R}}
+% \newcommand{\boldS}{{\boldsymbol S}}
+% \newcommand{\boldX}{{\boldsymbol X}}
+% \newcommand{\boldB}{{\boldsymbol B}}
+% \newcommand{\boldY}{{\boldsymbol Y}}
+% \newcommand{\boldZ}{{\boldsymbol Z}}
+% \newcommand{\boldV}{{\boldsymbol V}}
+\newcommand{\boldi}{{\boldsymbol i}} \newcommand{\boldj}{{\boldsymbol
+    j}} \newcommand{\boldk}{{\boldsymbol k}}
+\newcommand{\boldr}{{\boldsymbol r}}
+\newcommand{\boldsigma}{{\boldsymbol \sigma}}
+\newcommand{\boldupsilon}{{\boldsymbol \upsilon}}
+\newcommand{\hone}{{\boldsymbol{H1}}}
+\newcommand{\htwo}{\boldsymbol{H2}}
+\newcommand{\hthree}{\boldsymbol{H3}}
+\newcommand{\hfour}{\boldsymbol{H4}}
+
+
+\newcommand{\sgn}{\mathrm{sgn}} \newcommand{\Maj}{\mathrm{Maj}}
+\newcommand{\Acyc}{\mathrm{Acyc}}
+\newcommand{\UniqMax}{\mathrm{UniqMax}}
+\newcommand{\Thr}{\mathrm{Thr}} \newcommand{\littlesum}{{\textstyle
+    \sum}}
+
+\newcommand{\half}{{\textstyle \frac12}}
+\newcommand{\third}{{\textstyle \frac13}}
+\newcommand{\fourth}{{\textstyle \frac14}}
+\newcommand{\fifth}{{\textstyle \frac15}}
+
+\newcommand{\Stab}{\mathbb{S}}
+\newcommand{\StabThr}[2]{\Gamma_{#1}(#2)}
+\newcommand{\StabThrmin}[2]{{\underline{\Gamma}}_{#1}(#2)}
+\newcommand{\StabThrmax}[2]{{\overline{\Gamma}}_{#1}(#2)}
+\newcommand{\TestFcn}{\Psi}
+
+\title{Testing Symmetric Properties of Distributions} \subtitle{ Paul
+  Valiant, 2008}
+
+% Use the \inst command to identify several affiliations.
+\author{Omer Tamuz, Tamar Zondiner}
+\date{\today}
+
+\begin{document}
+%\newcounter{realtotalframenumber}{\value{totalframenumber}}
+\frame{\titlepage}
+\section{Introduction}
+
+\subsection{General Features}
+
+\begin{frame}
+  \frametitle{Definitions}
+  \framesubtitle{Properties}
+
+\begin{block}{A property $\pi$} A property of a distribution (on $[n]$ ) is a
+  function $\pi:D_n\rightarrow \mathbb{R}$, where $D_n$ is the set of
+  probability distributions on $[n]$.
+\end{block}
+
+\begin{block}{A binary property $\pi_a^b$}
+  Any property $\pi$ and pair of real numbers $a<b$ induce a binary
+  property $\pi_a^b$ defined as:
+  \begin{equation*}
+    \pi_a^b(p)=
+    \left\{\begin{matrix}
+       "yes" & \mbox{if }\pi(p)>b \\ 
+       "no" & \mbox{if }\pi(p)<a\\ 
+       \varnothing  & \mbox{otherwise} 
+      \end{matrix}\right.
+  \end{equation*}
+\end{block}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Definitions}
+  \framesubtitle{ A tester}
+  \begin{block}{A tester} Let $\pi_a^b$ be a binary property on
+    distributions. Let $k:\mathbb{Z}^+\rightarrow \mathbb{Z}^+$.
+
+    An algorithm $T$ is a {\bf ``$\pi_a^b-$tester with sample
+      complexity $k(\cdot)$''} if, given a sample of size $k(n)$ from
+    a distribution $p \in D_n$, algorithm $T$ will:
+    \begin{itemize}
+    \item accept with probability greater than $\frac{2}{3}$ if
+      $\pi_a^b(p)="yes"$, and
+    \item accept with probability less than $\frac{1}{3}$ if
+      $\pi_a^b(p)="no"$.
+    \end{itemize}
+\end{block}
+The behavior is unspecified when $\pi_a^b(p)=\phi$.
+
+ 
+\end{frame}
+ 
+\begin{frame}
+  \frametitle{Definitions}
+  \framesubtitle{ symmetry, ($\epsilon,\delta)-$weak continuity}
+
+  \begin{block}{A Symmetric Property}A property $\pi$ is symmetric if
+    for all distributions $p$ and all permutations $\sigma$ we have
+    $\pi(p)=\pi(p\circ\sigma)$.
+  \end{block}
+
+  \begin{block}{An ($\epsilon, \delta$)-weakly continuous property}
+    A property $\pi$ is $(\epsilon,\delta)$-weakly continuous if for
+    all distributions $p^+,p^-$ satisfying $|p^+-p^-|\le\delta$ we
+    have $|\pi(p^+)-\pi(p^-)|\le \epsilon$.
+  \end{block}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Example} \framesubtitle{Distance from the uniform
+    distribution}
+  \begin{theorem}
+    Distance from the uniform distribution is a symmetric and
+    $(\delta, \delta)$-weakly continuous property.
+  \end{theorem}
+  \begin{proof}
+    
+  \end{proof}
+  \begin{theorem}
+    The entropy is a symmetric and $\left(1,{1\over 2\log
+        n}\right)$-weakly continuous property.
+  \end{theorem}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Non-Examples} \framesubtitle{}
+  \begin{block}{}
+    Distance from a distribution that is not the uniform distribution
+    is not symmetric.
+  \end{block}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{The Canonical Tester} \framesubtitle{Canonical Tester
+    $T^\theta$ for $\pi_a^b$}
+  \begin{block}{The Canonical Tester($\theta$)}
+    \begin{enumerate}
+    \item For each $i$ such that $s(i)>\theta$ insert the constraint
+      $p(i)=\frac{s(i)}{k}$. Otherwise insert the constraint $p(i)\in
+      [0,\frac{\theta}{k}]$.
+    \item Insert the constraint $\sum_ip(i)=1$.
+    \item Let $P$ be the set of solutions to these constraints.
+    \item If the set $\pi_a^b(P)$ (the image of elements of $P$ under
+      $\pi_a^b$) contains only $"yes"$, return $"yes"$. If it contains
+      only $"no"$ return $"no"$. Otherwise answer arbitrarily.
+    \end{enumerate}
+  \end{block}  
+  It seems plausible that the canonical tester behaves correctly for
+  the high frequency elements.
+\end{frame}
+\begin{frame}
+  \frametitle{The Canonical Tester} \framesubtitle{Canonical Tester
+    $T^\theta$ for $\pi_a^b$}
+  \begin{block}{The Canonical Tester($\theta$)}
+    \begin{enumerate}
+    \item For each $i$ such that $s(i)>\theta$ insert the constraint
+      $p(i)=\frac{s(i)}{k}$. Otherwise insert the constraint $p(i)\in
+      [0,\frac{\theta}{k}]$.
+    \item Insert the constraint $\sum_ip(i)=1$.
+    \item Let $P$ be the set of solutions to these constraints.
+    \item If the set $\pi_a^b(P)$ (the image of elements of $P$ under
+      $\pi_a^b$) contains only $"yes"$, return $"yes"$. If it contains
+      only $"no"$ return $"no"$. Otherwise answer arbitrarily.
+    \end{enumerate}
+  \end{block}
+  Since the tester effectively discards all information regarding the
+  low frequency elements, if we can show that no tester can extract
+  information from these elements then it will follow that the
+  canonical tester is almost optimal.
+\end{frame}
+
+\begin{frame}
+  \frametitle{The Canonical Testing Theorem We Wish For}
+  \framesubtitle{}
+  \begin{block}{Not True Theorem}
+    Given a symmetric $(\epsilon,\delta)$-weakly continuous property
+    $\pi:D_n\rightarrow \mathbb{R}$ and two thresholds $a<b$, such
+    that the Canonical Tester $T^\theta$ for $\theta=600\log
+    n/\delta^2$ on $\pi_a^b$ fails to distinguish between $\pi>b$ and
+    $\pi<a$ in $k$ samples, then no tester can distinguish between
+    $\pi>b$ and $\pi<a$ in $k$ samples.
+  \end{block}
+  Sadly, this is not true.
+\end{frame}
+\begin{frame}
+  \frametitle{Canonical Testing Theorem}
+  \framesubtitle{}
+  \begin{theorem}
+    Given a symmetric $(\epsilon,\delta)$-weakly continuous property
+    $\pi:D_n\rightarrow \mathbb{R}$ and two thresholds $a<b$, such
+    that the Canonical Tester $T^\theta$ for $\theta=600\log
+    n/\delta^2$ on $\pi_a^b$ fails to distinguish between
+    $\pi>b+\epsilon$ and $\pi<a-\epsilon$ in $k$ samples, then no
+    tester can distinguish between $\pi>b-\epsilon$ and
+    $\pi<a-\epsilon$ in $k\cdot \frac{\delta^3}{n^{o(1)}}$ samples.
+  \end{theorem}
+  Essentially, the Canonical Tester is optimal up to small additive
+  constants, and a small $(n^{o(1)})$ factor in the number of samples
+  $k$.
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Low Frequency Blindness} \framesubtitle{}
+  The crux is to prove that the canonical tester does the ``right
+  thing'' (i.e., nothing!) for the low frequency elements.
+  
+  \begin{theorem}
+    Let $\pi$ be a symmetric property on distributions on $[n]$ that
+    is $(\epsilon,\delta)$-weakly continuous.
+
+    Let $p^+,p^-$ be two distributions that are identical for any
+    index occurring with probability at least $\frac{\theta}{k}$ in
+    either distribution, where $\theta=\frac{600\log n}{\delta^2}$.
+
+    If $\pi(p^+)>b$ and $\pi(p^-)<a$ , then no tester can distinguish
+    between $\pi>b-\epsilon$ and $\pi<a+\epsilon$ in $k\cdot
+    \frac{\delta^3}{n^{o(1)}}$ samples.
+  \end{theorem}
+
+
+\end{frame}
+
+
+
+\begin{frame}
+  \frametitle{Low Frequency Blindness $\Rightarrow$ Canonical Testing
+    Theorem} \framesubtitle{}
+  \begin{lemma}
+    Given a distribution $p$ and a parameter $\theta$, if we draw $k$
+    random samples from $p$ then with probability at least
+    $1-\frac{4}{n}$ the set $P$ constructed by the Canonical Tester
+    will include a distribution $\hat{p}$ such that $|p-\hat p
+    |\le 24\sqrt{\frac{\log n}{\theta}}$.
+  \end{lemma}
+  If $\theta = 600\log n / \delta^2$ then this reads $|p-\hat p
+    |\le \delta$
+  \begin{proof}
+    ``The proof is elementary: use Chernoff bounds on each index $i$
+    and then apply the union bound to combine the bounds.''
+  \end{proof}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Low Frequency Blindness $\Rightarrow$ Canonical Testing
+    Theorem} \framesubtitle{}
+
+  Reminder for the canonical testing theorem: if the canonical tester
+  fails with $k$ samples then any slightly weaker tester also fails.
+  
+  \begin{block}{Proof: Canonical Testing Theorem}
+    \begin{itemize}
+    \item Assume canonical tester says ``no'' with probability $1/3$
+      to some $p$ for which $\pi(p)>b+\epsilon$ (so it should have
+      said yes).
+    \item $\Rightarrow$ with probability $1/3$ there exists $p^-\ in
+      P$ such that $\pi(p^-)<a$.
+    \item By the lemma, $P$ contains some $p^+$ such that
+      $|p-p^+|<\delta$ with probability $1-4/n$. $\pi(p^+)$
+    \item $\Rightarrow$ there exists a single $P$ with both of these
+      properties.
+    \item $\Rightarrow$ there exist such $p^-$ and $p^+$ with the same
+      $\theta$-high-frequency elements.
+    \item $\Rightarrow$ the theorem follows by application of low
+      frequency blindness.
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Fingerprints} \framesubtitle{Definition}
+
+  \begin{block}{Histogram}
+    The histogram $h$ of a vector $v=(v_1,\ldots,v_k)$ is a vector such
+    that $h_i$ is the number of components of $v$ with value $i$.
+  \end{block}
+  \begin{block}{Fingerprint}
+    A fingerprint $f$ of a vector $v$ is the histogram of the
+    histogram of $v$.
+  \end{block}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Fingerprints} \framesubtitle{Example}
+
+  \begin{block}{Example}
+    Let $v=(3,1,2,2,5,1,2)$. Then:
+    \begin{itemize}
+    \item Its histogram is $h=(2,3,1,0,1)$.
+    \item Its fingerprint is $f=(2,1,1)$.
+    \item We omit the zero component of $f$.
+    \end{itemize}
+  \end{block}
+  \begin{block}{}
+    A tester for a symmetric distribution $\pi$ may consider only the
+    fingerprint of the sample and discard the rest of the information.
+  \end{block}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Low Frequency Blindness} \framesubtitle{}
+  \begin{theorem}
+    Let $\pi$ be a symmetric property on distributions on $[n]$ that
+    is $(\epsilon,\delta)$-weakly continuous.
+
+    Let $p^+,p^-$ be two distributions that are identical for any
+    index occurring with probability at least $\frac{\theta}{k}$ in
+    either distribution, where $\theta=\frac{600\log n}{\delta^2}$.
+
+    If $\pi(p^+)>b$ and $\pi(p^-)<a$ , then no tester can distinguish
+    between $\pi>b-\epsilon$ and $\pi<a+\epsilon$ in $k\cdot
+    \frac{\delta^3}{n^{o(1)}}$ samples.
+  \end{theorem}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Proof Sketch} \framesubtitle{}
+
+  Let's limit our analysis to distributions with low frequencies.
+  Suppose all elements have probability $<\frac{\theta}{k}$ where
+  $\theta=\frac{600\log n}{\delta^2}$.
+  \begin{itemize}
+  \item Let $p^+$ and $p^-$ be such that $\pi(p^+)>b$ and
+    $\pi(p^-)<a$.
+  \item We construct $\hat{p}^+$ and $\hat{p}^-$ such that
+    $\pi(\hat{p}^+)>b-\epsilon$ and $\pi(\hat{p}^-)<a+\epsilon$. Also,
+    $\hat{p}^+$ and $\hat{p}^-$ have similar {\bf Poisson moments} for
+    sample size $\hat{k}=k\frac{\delta^3}{n^{o(1)}}$.
+  \item For any sample size for which two distributions have similar
+    Poisson moments, they also have similar {\bf fingerprints}.
+  \item We have two distributions with similar fingerprints; one has
+    the property and the other doesn't. It is therefore impossible to
+    test for $\pi_a^b$ with $\hat{k}$ samples.
+  \end{itemize}
+
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Wishful Thinking Theorem} \framesubtitle{Poisson
+    Moments}
+
+  \begin{itemize}
+  \item Let $p$ be a distribution on $[n]$.
+  \item For sample size $k$, the expectation of the number of
+    appearances of $i$ in the sample is $k_i:=kp_i$.
+  \item Let $\mbox{poi}_x(y)$ be the probability for $y$ in the
+    Poisson distribution with parameter $x$.
+  \item  Then $\lambda_a:=\sum_i\mbox{poi}_{k_i}(a)$ are the
+    Poisson moments of $p$ for sample size $k$.
+  \end{itemize}
+  $\lambda_a$ is a good approximation to the expected value of $f_a$.
+\end{frame}
+
+
+
+\begin{frame}
+  \frametitle{Wishful Thinking Theorem} \framesubtitle{Intuition}
+
+  \begin{block}{}
+    \begin{itemize}
+    \item Each component of the fingerprint is a sum of many
+      indicators. For example, $f_3$ is the sum of the indicators of
+      the events $h_i=3$.
+    \item These indicators are only weakly dependent when the
+      frequencies are low, so let's ignore these dependencies
+      altogether.
+    \item Assume $f_a$ is distributed Poisson (independently) with mean
+      (and variance) $\lambda_a$.
+    \item If for $p^+$ and $p^-$ and each $a$ we have that
+      $|\lambda^-_a-\lambda^+_a|$ is much smaller than
+      $\sqrt{\lambda^+_a}$ then we expect the distributions'
+      fingerprints to be indistinguishable.
+    \item If $\pi(p^+)>b$ and $\pi(p^-)<a$ then no tester can test
+      $\pi_a^b$.
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Wishful Thinking Theorem} \framesubtitle{Statement}
+
+  \begin{block}{Wishful Thinking Theorem}
+    Given an integer $k>0$ and two distributions $p^+$ and $p^-$, all
+    of whose frequencies are at most $\frac{1}{500k}$. Let $\lambda^+$
+    and $\lambda^-$ be their Poisson moments for sample size $k$. If
+    it is the case that
+    \begin{equation}
+      \sum_a\frac{|\lambda^+_a-\lambda^-_a|}{\sqrt{1+\max\{\lambda^+_a,\lambda^-_a\}}}<\frac{1}{25}
+    \end{equation}
+    then it is impossible to test any symmetric property that is true
+    for $p^+$ and false for $p^-$ in $k$ samples.
+  \end{block}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Wishful Thinking Theorem} \framesubtitle{Overview}
+
+  \begin{itemize}
+  \item We would like to approximate the distribution of a fingerprint
+    $f_a$ by an independent Poisson distribution with parameter
+    $\lambda_a$. I.e., $f$ is distributed similarly to the
+    multivariate Poisson distribution $\mbox{Poi}(\lambda)$.
+  \item We can then use a convenient statistical lemma that bounds the
+    distance between multivariate Poisson distributions.
+  \item Finally, using the triangle inequality we can bound the
+    distance between fingerprints' distributions.
+  \end{itemize}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Wishful Thinking Theorem} \framesubtitle{Poissonization}
+
+  \begin{block}{Poissonization}
+    A $k$-Poissonized tester $T$ is a function that correctly
+    classifies a property on a distribution $p$ with probability
+    $7/12$ on input samples generated in the following way:
+    \begin{itemize}
+    \item Draw $k'\leftarrow \mbox{poi}_k$.
+    \item Return $k'$ samples from $p$.
+    \end{itemize}
+  \end{block}
+
+  \begin{block}{Lemma}
+    If there exists a $k$-sample tester $T$ for a property $\pi_a^b$
+    then there exists a $k$-Poissonized tester $T'$ for $\pi_a^b$.
+  \end{block}
+  
+\end{frame}
+
+\begin{frame}
+  \frametitle{Wishful Thinking Theorem} \framesubtitle{Poissonization}
+
+  
+  \begin{itemize}
+  \item After this Poissonization, the histogram component $h_i$ is
+    distributed $\mbox{poi}_{k_i}$, and the different $h_i$s are independent.
+  \item Hence, by additivity of expectations (and variances), the
+    expectation (and variance) of $f_a$ is $\sum_i\mbox{poi}_{k_i}(a)$
+    which equals $\lambda_a$.
+  \end{itemize}
+  
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Wishful Thinking Theorem} \framesubtitle{Generalized
+    Multinomial Distribution}
+  
+\end{frame}
+
+\begin{frame}
+  \frametitle{Wishful Thinking Theorem} \framesubtitle{Roos's Theorem}
+  
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Wishful Thinking Theorem} \framesubtitle{Bounding $\rho$}
+  
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Wishful Thinking Theorem} \framesubtitle{Multivariate
+    Poisson Statistical Distance}  
+\end{frame}
+
+\begin{frame}
+  \frametitle{Wishful Thinking Theorem} \framesubtitle{Proof of
+    Wishful Thinking Theorem}  
+\end{frame}
+
+
+
+
+\end{document} 
