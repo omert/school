@@ -168,14 +168,14 @@
     Distance from the uniform distribution is a symmetric and
     $(\delta, \delta)$-weakly continuous property.
   \end{theorem}
-  \begin{proof}
+  \begin{proof}<2->
     \begin{itemize}
-    \item<1-> Let $U_n$ be the uniform distribution on $[n]$.
-    \item<2-> Let $\pi(p)=|U_n-p|$ for $p\in D_n$.
-    \item<3-> Let $p^+,p^-\in D_n$ be such that $|p^+-p^-|<\delta$.
-    \item<4-> Assume WLOG that $\pi(p^+) \geq \pi(p^-)$.
+    \item Let $U_n$ be the uniform distribution on $[n]$.
+    \item Let $\pi(p)=|U_n-p|$ for $p\in D_n$.
+    \item Let $p^+,p^-\in D_n$ be such that $|p^+-p^-|<\delta$.
+    \item Assume WLOG that $\pi(p^+) \geq \pi(p^-)$.
     \end{itemize}
-    \onslide<5->{
+    \onslide{
       \begin{align*}
         |\pi(p^+)-\pi(p^-)|&=|U_n-p^+|-|U_n-p^-|
         \\ &\leq |U_n-p^-|+|p^+-p^-|-|U_n-p^-|
@@ -199,22 +199,13 @@
 
 
 \begin{frame}
-  \frametitle{Non-Examples} \framesubtitle{}
-  \begin{block}{}
-    Distance from a distribution that is not the uniform distribution
-    is not symmetric.
-  \end{block}
-\end{frame}
-
-
-\begin{frame}
   \frametitle{The Canonical Tester} \framesubtitle{Canonical Tester
     $T^\theta$ for $\pi_a^b$}
   \begin{block}{The Canonical Tester($\theta$)}
     \begin{enumerate}
-    \item<2-> Insert the constraint $\sum_ip(i)=1$.
-    \item<3-> For each $i$ such that $s(i)>\theta$ insert the constraint
-      $p(i)=\frac{s(i)}{k}$. Otherwise insert the constraint $p(i)\in
+    \item<2-> Insert the constraint $\sum_ip_i=1$.
+    \item<3-> For each $i$ such that $h_i>\theta$ insert the constraint
+      $p_i=\frac{h_i}{k}$. Otherwise insert the constraint $p_i\in
       [0,\frac{\theta}{k}]$.
     \item<4-> Let $P$ be the set of solutions to these constraints.
     \item<5-> If the set $\pi_a^b(P)$ (the image of elements of $P$
@@ -268,9 +259,6 @@
     tester can distinguish between $\pi>b-\epsilon$ and
     $\pi<a+\epsilon$ in $k\cdot \frac{\delta^3}{n^{o(1)}}$ samples.
   \end{theorem}
-  \onslide<2->{ Essentially, the Canonical Tester is optimal up to
-    small additive constants and a small $(n^{o(1)})$ factor in the
-    number of samples $k$.}
 \end{frame}
 
 
@@ -392,22 +380,20 @@
   \begin{block}{}
     
     \begin{itemize}
-    \item<1-> Let $p$ be a distribution on $[n]$.
-    \item<2-> For sample size $k$, the expectation of the number of
-      appearances of $i$ in the sample (=$h_i$) is $k_i:=k\cdot p_i$.
-    \item<3-> Let $\mbox{poi}_x(y)$ be the probability for $y$ drawn
-      from the Poisson distribution with parameter $x$.
+    \item<1-> Let $p$ be a distribution on $[n]$ with histogram $h$
+      and fingerprint $f$.
+    \item<2-> Let the sample size be $k$.
+    \item<3-> $k_i:=\E[h_i]=k\cdot p_i$.
     \item<4-> The distribution of $h_i$ is well approximated by
       $\mbox{poi}_{k_i}(\cdot)$.
+      \item<5-> $\E[f_a]=\sum_i\P[h_i=a]$. 
     \end{itemize}
   \end{block}
-  \begin{block}<5->{Definition} Let
+  \begin{block}<6->{Definition} Let
     $\lambda_a:=\sum_i\mbox{poi}_{k_i}(a)$. Then
     $\lambda=\{\lambda_a\}_{a=1}^\infty$ are the {\bf Poisson moments
       of $p$ for sample size $k$}.
   \end{block}
-  \onslide<6->{ $\lambda_a$ is a good approximation to the expected
-    value of $f_a$.}
 \end{frame}
 
 
@@ -486,8 +472,8 @@
     \item<2-> These indicators are only weakly dependent when the
       frequencies are low, so let's ignore these dependencies
       altogether.
-    \item<3-> Assume $f_a$ is distributed Poisson (independently) with mean
-      (and variance) $\lambda_a$.
+    \item<3-> {\bf Wishfully} assume $f_a$ is distributed Poisson
+      (independently) with mean (and variance) $\lambda_a$.
     \item<4-> If for $p^+$ and $p^-$ and each $a$ we have that
       $|\lambda^-_a-\lambda^+_a|$ is smaller than $\sqrt{\lambda^+_a}$
       then we expect the distributions' fingerprints to be
