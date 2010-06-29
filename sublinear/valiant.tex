@@ -1,5 +1,5 @@
 %&latex
-\documentclass[handout]{beamer}
+\documentclass{beamer}
 
 \usepackage{beamerthemesplit}
 \setbeamertemplate{footline}[frame number]
@@ -386,6 +386,31 @@
   \end{block}
 \end{frame}
 
+\begin{frame}
+  \frametitle{Poisson Moments}
+
+  \begin{block}{}
+    
+    \begin{itemize}
+    \item<1-> Let $p$ be a distribution on $[n]$.
+    \item<2-> For sample size $k$, the expectation of the number of
+      appearances of $i$ in the sample (=$h_i$) is $k_i:=k\cdot p_i$.
+    \item<3-> Let $\mbox{poi}_x(y)$ be the probability for $y$ drawn
+      from the Poisson distribution with parameter $x$.
+    \item<4-> The distribution of $h_i$ is well approximated by
+      $\mbox{poi}_{k_i}(\cdot)$.
+    \end{itemize}
+  \end{block}
+  \begin{block}<5->{Definition} Let
+    $\lambda_a:=\sum_i\mbox{poi}_{k_i}(a)$. Then
+    $\lambda=\{\lambda_a\}_{a=1}^\infty$ are the {\bf Poisson moments
+      of $p$ for sample size $k$}.
+  \end{block}
+  \onslide<6->{ $\lambda_a$ is a good approximation to the expected
+    value of $f_a$.}
+\end{frame}
+
+
 
 \begin{frame}
   \frametitle{Low Frequency Blindness} \framesubtitle{}
@@ -402,6 +427,7 @@
     \frac{\delta^3}{n^{o(1)}}$ samples.
   \end{theorem}
 \end{frame}
+
 
 
 \begin{frame}
@@ -448,30 +474,6 @@
 
 \end{frame}
 
-\begin{frame}
-  \frametitle{Wishful Thinking Theorem} \framesubtitle{Poisson
-    Moments}
-
-  \begin{block}{}
-    
-    \begin{itemize}
-    \item<1-> Let $p$ be a distribution on $[n]$.
-    \item<2-> For sample size $k$, the expectation of the number of
-      appearances of $i$ in the sample (=$h_i$) is $k_i:=k\cdot p_i$.
-    \item<3-> Let $\mbox{poi}_x(y)$ be the probability for $y$ drawn
-      from the Poisson distribution with parameter $x$.
-    \end{itemize}
-  \end{block}
-  \begin{block}<4->{Definition} Let
-    $\lambda_a:=\sum_i\mbox{poi}_{k_i}(a)$. Then
-    $\lambda=\{\lambda_a\}_{a=1}^\infty$ are the {\bf Poisson moments
-      of $p$ for sample size $k$}.
-  \end{block}
-  \onslide<5->{ $\lambda_a$ is a good approximation to the expected
-    value of $f_a$.}
-\end{frame}
-
-
 
 \begin{frame}
   \frametitle{Wishful Thinking Theorem} \framesubtitle{Intuition}
@@ -500,7 +502,7 @@
 \begin{frame}
   \frametitle{Wishful Thinking Theorem} \framesubtitle{Statement}
 
-  \begin{block}{Wishful Thinking Theorem}
+  \begin{block}<1->{Wishful Thinking Theorem}
     Given an integer $k>0$, let $p^+$ and $p^-$ be two distributions,
     all of whose frequencies are at most $\frac{1}{500k}$. Let
     $\lambda^+$ and $\lambda^-$ be their Poisson moments for sample
@@ -511,7 +513,8 @@
     then it is impossible to test any symmetric property that is true
     for $p^+$ and false for $p^-$ in $k$ samples.
   \end{block}
-
+  \onslide<2->{Reminder: whenever the canonical tester fails we are
+    guaranteed to have such $p^+$ and $p^-$.}
 \end{frame}
 
 \begin{frame}
@@ -562,10 +565,8 @@
   \begin{itemize}
   \item<1-> After Poissonization, the histogram component $h_i$ is
     distributed $\mbox{poi}_{k_i}$, and the different $h_i$s are independent.
-  \item<2-> Hence, by additivity of expectations (and variances), the
-    expectation (and variance) of $f_a$ is $\sum_i\mbox{poi}_{k_i}(a)$
-    which equals $\lambda_a$.
-
+  \item<2-> By additivity of expectations and variances
+    $\E[f_a]=\Var[f_a]=\sum_i\mbox{poi}_{k_i}(a)=\lambda_a$.
   \item<3-> However, the different $f_a$s aren't independent.
  \end{itemize}
   
