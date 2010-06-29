@@ -1,5 +1,5 @@
 %&latex
-\documentclass{beamer}
+\documentclass[handout]{beamer}
 
 \usepackage{beamerthemesplit}
 \setbeamertemplate{footline}[frame number]
@@ -96,9 +96,6 @@
 
 %\newcounter{realtotalframenumber}{\value{totalframenumber}}
 \frame{\titlepage}
-\section{Introduction}
-
-\subsection{General Features}
 
 \begin{frame}
   \frametitle{Definitions}
@@ -126,21 +123,21 @@
 
 \begin{frame}
   \frametitle{Definitions}
-  \framesubtitle{ A tester}
-  \begin{block}{A tester} Let $\pi_a^b$ be a binary property on
-    distributions. Let $k:\mathbb{Z}^+\rightarrow \mathbb{Z}^+$.
+  \framesubtitle{ A tester} Let $\pi_a^b$ be a binary property on
+  $D_n$.
+  \begin{block}<2->{A tester} 
 
     An algorithm $T$ is a {\bf ``$\pi_a^b-$tester with sample
       complexity $k(\cdot)$''} if, given a sample of size $k(n)$ from
     a distribution $p \in D_n$, algorithm $T$ will:
     \begin{itemize}
-    \item<1-> accept with probability greater than $\frac{2}{3}$ if
+    \item<3-> accept with probability greater than $\frac{2}{3}$ if
       $\pi_a^b(p)="yes"$, and
-    \item<2-> accept with probability less than $\frac{1}{3}$ if
-      $\pi_a^b(p)="no"$.
+    \item<4-> reject with probability greater than $\frac{2}{3}$ if
+      $\pi_a^b(p)="no"$, and
     \end{itemize}
   \end{block}
-  \begin{block}<3->{} The tester's behavior is unspecified when
+  \begin{block}<5->{} The tester's behavior is unspecified when
     $\pi_a^b(p)=\phi$, i.e. when $a\leq\pi(p)\leq b$.
   \end{block}
 
@@ -161,7 +158,7 @@
     all distributions $p^+,p^-$ satisfying $|p^+-p^-|\le\delta$ we
     have $|\pi(p^+)-\pi(p^-)|\le \epsilon$.
   \end{block}
-
+  \onslide<3->{$|x-y|$ denotes the $L_1$ distance.}
 \end{frame}
 
 \begin{frame}
@@ -196,7 +193,7 @@
         n}\right)$-weakly continuous property.
   \end{theorem}
   \begin{proof}<2->
-    Simple.
+    Easy.
   \end{proof}
 \end{frame}
 
@@ -215,38 +212,35 @@
     $T^\theta$ for $\pi_a^b$}
   \begin{block}{The Canonical Tester($\theta$)}
     \begin{enumerate}
-    \item<1-> For each $i$ such that $s(i)>\theta$ insert the constraint
+    \item<2-> Insert the constraint $\sum_ip(i)=1$.
+    \item<3-> For each $i$ such that $s(i)>\theta$ insert the constraint
       $p(i)=\frac{s(i)}{k}$. Otherwise insert the constraint $p(i)\in
       [0,\frac{\theta}{k}]$.
-    \item<2-> Insert the constraint $\sum_ip(i)=1$.
-    \item<3-> Let $P$ be the set of solutions to these constraints.
-    \item<4-> If the set $\pi_a^b(P)$ (the image of elements of $P$ under
-      $\pi_a^b$) contains only $"yes"$, return $"yes"$. If it contains
-      only $"no"$ return $"no"$. Otherwise answer arbitrarily.
+    \item<4-> Let $P$ be the set of solutions to these constraints.
+    \item<5-> If the set $\pi_a^b(P)$ (the image of elements of $P$
+      under $\pi_a^b$) contains only ``$yes$'' and $\varnothing$ return
+      ``$yes$''. If it contains only ``$no$'' and $\varnothing$ return
+      ``$no$''. Otherwise answer arbitrarily.
     \end{enumerate}
   \end{block}
-  \onslide<5->{ It seems plausible that the canonical tester behaves
-    correctly for the high frequency elements.  }
 \end{frame}
 \begin{frame}
   \frametitle{The Canonical Tester} \framesubtitle{Canonical Tester
     $T^\theta$ for $\pi_a^b$}
-  \begin{block}{The Canonical Tester($\theta$)}
-    \begin{enumerate}
-    \item For each $i$ such that $s(i)>\theta$ insert the constraint
-      $p(i)=\frac{s(i)}{k}$. Otherwise insert the constraint $p(i)\in
-      [0,\frac{\theta}{k}]$.
-    \item Insert the constraint $\sum_ip(i)=1$.
-    \item Let $P$ be the set of solutions to these constraints.
-    \item If the set $\pi_a^b(P)$ (the image of elements of $P$ under
-      $\pi_a^b$) contains only $"yes"$, return $"yes"$. If it contains
-      only $"no"$ return $"no"$. Otherwise answer arbitrarily.
-    \end{enumerate}
+  \begin{block}{}
+    \begin{itemize}
+    \item<1-> It seems plausible that the canonical tester behaves
+      correctly for the high frequency elements.
+    \item<2-> The tester effectively discards all information
+      regarding the low frequency elements.
+    \item<3-> If we can show that no tester can extract information from
+      these elements then it will follow that the canonical tester is
+      almost optimal.
+    \item<4-> In this talk we prove a weaker statement: no tester can
+      extract information from a sample where all the elements have
+      low frequency.
+    \end{itemize}
   \end{block}
-  Since the tester effectively discards all information regarding the
-  low frequency elements, if we can show that no tester can extract
-  information from these elements then it will follow that the
-  canonical tester is almost optimal.
 \end{frame}
 
 \begin{frame}
@@ -272,11 +266,11 @@
     n/\delta^2$ on $\pi_a^b$ fails to distinguish between
     $\pi>b+\epsilon$ and $\pi<a-\epsilon$ in $k$ samples, then no
     tester can distinguish between $\pi>b-\epsilon$ and
-    $\pi<a-\epsilon$ in $k\cdot \frac{\delta^3}{n^{o(1)}}$ samples.
+    $\pi<a+\epsilon$ in $k\cdot \frac{\delta^3}{n^{o(1)}}$ samples.
   \end{theorem}
-  Essentially, the Canonical Tester is optimal up to small additive
-  constants and a small $(n^{o(1)})$ factor in the number of samples
-  $k$.
+  \onslide<2->{ Essentially, the Canonical Tester is optimal up to
+    small additive constants and a small $(n^{o(1)})$ factor in the
+    number of samples $k$.}
 \end{frame}
 
 
@@ -361,6 +355,7 @@
     Coffee Break
   \end{block}
 \end{frame}
+
 \begin{frame}
   \frametitle{Fingerprints} \framesubtitle{Definition}
 
@@ -419,7 +414,7 @@
     is $(\epsilon,\delta)$-weakly continuous.
 
     Let $p^+,p^-$ be two distributions for which all indices occur
-    with probability at most $\frac{\theta}{k}$ in, where
+    with probability at most $\frac{\theta}{k}$, where
     $\theta=\frac{600\log n}{\delta^2}$.
 
     If $\pi(p^+)>b$ and $\pi(p^-)<a$ , then no tester can distinguish
@@ -453,7 +448,6 @@
 
 \end{frame}
 
-
 \begin{frame}
   \frametitle{Wishful Thinking Theorem} \framesubtitle{Poisson
     Moments}
@@ -463,14 +457,15 @@
     \begin{itemize}
     \item<1-> Let $p$ be a distribution on $[n]$.
     \item<2-> For sample size $k$, the expectation of the number of
-      appearances of $i$ in the sample (=$h_i$) is $k_i:=kp_i$.
+      appearances of $i$ in the sample (=$h_i$) is $k_i:=k\cdot p_i$.
     \item<3-> Let $\mbox{poi}_x(y)$ be the probability for $y$ drawn
       from the Poisson distribution with parameter $x$.
     \end{itemize}
   \end{block}
-  \begin{block}<4->{Definition}
-    $\lambda_a:=\sum_i\mbox{poi}_{k_i}(a)$ are the {\bf Poisson
-      moments of $p$ for sample size $k$}.
+  \begin{block}<4->{Definition} Let
+    $\lambda_a:=\sum_i\mbox{poi}_{k_i}(a)$. Then
+    $\lambda=\{\lambda_a\}_{a=1}^\infty$ are the {\bf Poisson moments
+      of $p$ for sample size $k$}.
   \end{block}
   \onslide<5->{ $\lambda_a$ is a good approximation to the expected
     value of $f_a$.}
@@ -541,7 +536,7 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Wishful Thinking Theorem} \framesubtitle{Poissonization}
+  \frametitle{Poissonization} \framesubtitle{}
 
   \begin{block}{Poissonization}
     A $k$-Poissonized tester $T$ is a function that correctly
@@ -561,7 +556,7 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Wishful Thinking Theorem} \framesubtitle{Poissonization}
+  \frametitle{Poissonization} \framesubtitle{}
 
   
   \begin{itemize}
@@ -578,8 +573,7 @@
 
 
 \begin{frame}
-  \frametitle{Wishful Thinking Theorem} \framesubtitle{Generalized
-    Multinomial Distribution}
+  \frametitle{Generalized Multinomial Distribution}
   \begin{block}{Definition: $M^\rho$, the generalized multinomial
       distribution($\rho$)}
   
@@ -594,7 +588,7 @@
   \end{block}
 
   \begin{block}<4->{Lemma} The distribution of fingerprints of
-    $\mbox{poi}(k)$ samples from $p$ (the distribution of $f_a$ after
+    $\mbox{poi}(k)$ samples from $p$ (the distribution of $f$ after
     Poissonization) is the generalized multinomial distribution,
     $M^\rho$, when using $\rho_i(a)=\mbox{poi}_{k_i}(a)$ to define the
     rows $\rho_i$.
@@ -602,7 +596,7 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Wishful Thinking Theorem} \framesubtitle{Roos's Theorem}
+  \frametitle{Roos's Theorem}
   \begin{block}{Roos's theorem}
     
     Given a matrix $\rho$, letting $\lambda_a=\sum_i\rho_i(a)$ be the
@@ -616,7 +610,7 @@
   for the fingerprints, if $\rho$ is small enough.
 \end{frame}
 \begin{frame}
-  \frametitle{Wishful Thinking Theorem} \framesubtitle{Roos's Theorem}
+  \frametitle{Roos's Theorem}
 
   \begin{block}<1->{Bounding $\rho$ using the low-frequencies}
     Suppose that for some $0<\eps\le\frac{1}{2}$ it holds that $p_i\le
@@ -639,8 +633,7 @@
 
 
 \begin{frame}
-  \frametitle{Wishful Thinking Theorem} \framesubtitle{Multivariate
-    Poisson Statistical Distance}  
+  \frametitle{Multivariate Poisson Statistical Distance}
     \begin{block}<1->{Bounding the statistical distance between $\lambda^+$ and $\lambda^-$}
       The statistical distance between two multivariate Poisson
       distributions with parameters $\lambda^+, \lambda^-$ is bounded
@@ -681,10 +674,10 @@
     
     \begin{proof}
     \begin{itemize}
-    \item<1-> The fingerprint $f_a$ is distributed like $M^\rho$.
+    \item<1-> $f^\pm\sim M^{\rho^\pm}$.
     \item<2-> Combining Roos's theorem with the bound on $\rho$, and
-      assuming that $p_i\le\frac{1}{500k}$, we get that $|M^\rho$ -
-      $\mbox{Poi}(\lambda)|\le \frac{2\cdot 8.8}{500}<\frac{1}{25}$.
+      assuming that $p_i^\pm\le\frac{1}{500k}$, we get that $|M^{\rho^\pm}$ -
+      $\mbox{Poi}(\lambda^\pm)|\le \frac{2\cdot 8.8}{500}<\frac{1}{25}$.
     \item<3-> The theorem's hypothesis implies
       $|\mbox{Poi}(\lambda^+)-\mbox{Poi}(\lambda^-)|\le\frac{2}{25}$.
     \item<4-> Using the triangle inequality, we get that the
@@ -701,6 +694,10 @@
       symmetric property that is true for $p^+$ and false for $p^-$ in
       $k$ samples.}
     \end{proof}
+\end{frame}
+
+\begin{frame}
+  Questions?
 \end{frame}
 
 \begin{frame}
