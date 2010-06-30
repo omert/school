@@ -89,7 +89,7 @@
   Valiant, 2008}
 
 % Use the \inst command to identify several affiliations.
-\author{Omer Tamuz, Tamar Zondiner}
+\author{Presented by Omer Tamuz and Tamar Zondiner}
 \date{\today}
 
 \begin{document}
@@ -201,14 +201,16 @@
 \begin{frame}
   \frametitle{The Canonical Tester} \framesubtitle{Canonical Tester
     $T^\theta$ for $\pi_a^b$}
-  \begin{block}{The Canonical Tester($\theta$)}
+  Consider a sample of size $k$ from distribution $p$ over $[n]$. Let
+  $h_i$ be the number of appearances of $i$ in the sample.
+  \begin{block}<2->{The Canonical Tester with parameter $\theta$}
     \begin{enumerate}
-    \item<2-> Insert the constraint $\sum_ip_i=1$.
-    \item<3-> For each $i$ such that $h_i>\theta$ insert the constraint
+    \item<3-> Insert the constraint $\sum_ip_i=1$.
+    \item<4-> For each $i$ such that $h_i>\theta$ insert the constraint
       $p_i=\frac{h_i}{k}$. Otherwise insert the constraint $p_i\in
       [0,\frac{\theta}{k}]$.
-    \item<4-> Let $P$ be the set of solutions to these constraints.
-    \item<5-> If the set $\pi_a^b(P)$ (the image of elements of $P$
+    \item<5-> Let $P$ be the set of solutions to these constraints.
+    \item<6-> If the set $\pi_a^b(P)$ (the image of elements of $P$
       under $\pi_a^b$) contains only ``$yes$'' and $\varnothing$ return
       ``$yes$''. If it contains only ``$no$'' and $\varnothing$ return
       ``$no$''. Otherwise answer arbitrarily.
@@ -227,9 +229,6 @@
     \item<3-> If we can show that no tester can extract information from
       these elements then it will follow that the canonical tester is
       almost optimal.
-    \item<4-> In this talk we prove a weaker statement: no tester can
-      extract information from a sample where all the elements have
-      low frequency.
     \end{itemize}
   \end{block}
 \end{frame}
@@ -285,7 +284,8 @@
   \onslide<3->{ If we could show that such $p^+$ and $p^-$ exist
     whenever the canonical tester fails than this would imply the
     canonical testing theorem.}
-  
+
+  \onslide<4->{ Example: Entropy}
 \end{frame}
 
 
@@ -336,13 +336,6 @@
   \end{block}
 \end{frame}
 
-\begin{frame}
-  \frametitle{Coffee Break}
-  \framesubtitle{Coffee Break}
-  \begin{block}{Coffee Break}
-    Coffee Break
-  \end{block}
-\end{frame}
 
 \begin{frame}
   \frametitle{Fingerprints} \framesubtitle{Definition}
@@ -375,28 +368,39 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Poisson Moments}
+  \frametitle{Poisson Moments Vector}
 
+  \begin{block}<1->{Definition}
+    \begin{itemize}
+    \item<2-> Let $p$ be a distribution on $[n]$.
+    \item<3-> Let the sample size be $k$.
+    \item<4-> $k_i:=\E[h_i]=k\cdot p_i$.
+    \end{itemize}
+    
+    \onslide<5->{Let $\lambda_a:=\sum_i\mbox{poi}_{k_i}(a)$.
+
+      Then $\lambda=\{\lambda_a\}_{a=1}^\infty$ is the {\bf Poisson
+        moments vector of $p$ for sample size $k$}.}
+  \end{block}
   \begin{block}{}
     
     \begin{itemize}
-    \item<1-> Let $p$ be a distribution on $[n]$ with histogram $h$
-      and fingerprint $f$.
-    \item<2-> Let the sample size be $k$.
-    \item<3-> $k_i:=\E[h_i]=k\cdot p_i$.
-    \item<4-> The distribution of $h_i$ is well approximated by
+    \item<6-> $p$ has histogram $h$ and fingerprint $f$.
+    \item<7-> The distribution of $h_i$ is well approximated by
       $\mbox{poi}_{k_i}(\cdot)$.
-      \item<5-> $\E[f_a]=\sum_i\P[h_i=a]$. 
+    \item<8-> $\E[f_a]=\sum_i\P[h_i=a]\approx \lambda_a$.
     \end{itemize}
-  \end{block}
-  \begin{block}<6->{Definition} Let
-    $\lambda_a:=\sum_i\mbox{poi}_{k_i}(a)$. Then
-    $\lambda=\{\lambda_a\}_{a=1}^\infty$ are the {\bf Poisson moments
-      of $p$ for sample size $k$}.
   \end{block}
 \end{frame}
 
 
+\begin{frame}
+  \frametitle{Coffee Break}
+  \framesubtitle{Coffee Break}
+  \begin{block}{Coffee Break}
+    Coffee Break
+  \end{block}
+\end{frame}
 
 \begin{frame}
   \frametitle{Low Frequency Blindness} \framesubtitle{}
@@ -421,7 +425,7 @@
   \onslide<1->{ We'll limit our analysis to distributions with low
     frequencies.  Suppose {\bf all} elements have probability
     $<\frac{\theta}{k}$ where $\theta=\frac{600\log n}{\delta^2}$.  }
-  \begin{theorem}<2->
+  \begin{lemma}<2->
     Let $\pi$ be a symmetric property on distributions on $[n]$ that
     is $(\epsilon,\delta)$-weakly continuous.
 
@@ -432,32 +436,32 @@
     If $\pi(p^+)>b$ and $\pi(p^-)<a$ , then no tester can distinguish
     between $\pi>b-\epsilon$ and $\pi<a+\epsilon$ in $k\cdot
     \frac{\delta^3}{n^{o(1)}}$ samples.
-  \end{theorem}
+  \end{lemma}
 \end{frame}
 
 
 \begin{frame}
   \frametitle{Proof Sketch} \framesubtitle{}
 
-  \begin{itemize}
-  \item<1-> Let $p^+$ and $p^-$ be {\bf low frequency distributions}
-    such that $\pi(p^+)>b$ and $\pi(p^-)<a$.
+  \onslide<1->{ Let $p^+$ and $p^-$ be {\bf low frequency
+      distributions} such that $\pi(p^+)>b$ and $\pi(p^-)<a$.}
+  \begin{enumerate}
   \item<2-> We construct $\hat{p}^+$ and $\hat{p}^-$ such that
     \begin{itemize}
     \item<3-> $|\hat{p}^\pm-p^\pm|<\delta$, and therefore
-      $\pi(\hat{p}^+)>b-\epsilon$ and
-      $\pi(\hat{p}^-)<a+\epsilon$.
+      $\pi(\hat{p}^+)>b-\epsilon$ and $\pi(\hat{p}^-)<a+\epsilon$.
     \item<4->$\hat{p}^+$ and $\hat{p}^-$ have similar {\bf Poisson
-        moments} for sample size $\hat{k}=k\frac{\delta^3}{n^{o(1)}}$.
+        moments vector} for sample size
+      $\hat{k}=k\frac{\delta^3}{n^{o(1)}}$.
     \end{itemize}
   \item<5-> For any sample size for which two distributions have similar
-    Poisson moments, they also have similar {\bf fingerprints}. This
-    is the {\bf ``Wishful Thinking Theorem''}.
+    Poisson moments vectors, they also have similar {\bf fingerprints}. 
   \item<6-> We now have two distributions with similar fingerprints;
     one has the property and the other doesn't. It is therefore
     impossible to test for $\pi_a^b$ with $\hat{k}$ samples.
-  \end{itemize}
-
+  \end{enumerate}
+  \onslide<7->{Steps two and three are the {\bf ``Wishful
+      Thinking Theorem''}.}
 \end{frame}
 
 
@@ -469,11 +473,11 @@
     \item<1-> Each component of the fingerprint is a sum of many
       indicators. For example, $f_3$ is the sum of the indicators of
       the events $h_i=3$.
-    \item<2-> These indicators are only weakly dependent when the
-      frequencies are low, so let's ignore these dependencies
-      altogether.
-    \item<3-> {\bf Wishfully} assume $f_a$ is distributed Poisson
-      (independently) with mean (and variance) $\lambda_a$.
+    \item<2-> {\bf Wishfully} assume that the $h_i$s are independent
+      and distributed Poisson with parameter $k_i=k\cdot p_i$. Then
+      $\E[f_a]=\Var[f_a]=\lambda_a$.
+    \item<3-> {\bf Wishfully} assume that the $f_a$s are independent
+      and distributed Poisson with parameter $\lambda_a$.
     \item<4-> If for $p^+$ and $p^-$ and each $a$ we have that
       $|\lambda^-_a-\lambda^+_a|$ is smaller than $\sqrt{\lambda^+_a}$
       then we expect the distributions' fingerprints to be
@@ -489,15 +493,15 @@
   \frametitle{Wishful Thinking Theorem} \framesubtitle{Statement}
 
   \begin{block}<1->{Wishful Thinking Theorem}
-    Given an integer $k>0$, let $p^+$ and $p^-$ be two distributions,
-    all of whose frequencies are at most $\frac{1}{500k}$. Let
-    $\lambda^+$ and $\lambda^-$ be their Poisson moments for sample
-    size $k$. If it is the case that
+    Given an integer $\hat{k}>0$, let $p^+$ and $p^-$ be two distributions,
+    all of whose frequencies are at most $\frac{1}{500\hat{k}}$. Let
+    $\lambda^+$ and $\lambda^-$ be their Poisson moments vectors for sample
+    size $\hat{k}$. If it is the case that
     \begin{equation*}
       \sum_a\frac{|\lambda^+_a-\lambda^-_a|}{\sqrt{1+\max\{\lambda^+_a,\lambda^-_a\}}}<\frac{1}{25}
     \end{equation*}
     then it is impossible to test any symmetric property that is true
-    for $p^+$ and false for $p^-$ in $k$ samples.
+    for $p^+$ and false for $p^-$ in $\hat{k}$ samples.
   \end{block}
   \onslide<2->{Reminder: whenever the canonical tester fails we are
     guaranteed to have such $p^+$ and $p^-$.}
@@ -506,21 +510,16 @@
 \begin{frame}
   \frametitle{Wishful Thinking Theorem} \framesubtitle{Overview}
 
-  \begin{itemize}
-  \item<1-> Given two distributions $p^+$ and $p^-$, we approximate
-    each of their fingerprint distributions $f_a$ by an independent
-    Poisson distribution with parameter $\lambda_a$. I.e., $f$ is
-    distributed similarly to the multivariate Poisson distribution
-    $\mbox{Poi}(\lambda)$.
-  \item<2-> We can then use a bound for the distance between multivariate
-    Poisson distributions to show that the approximate distributions
-    are close.
-  \item<3-> We deduce a bound on the distance between the
-    actual fingerprints' distributions.
-  \item<4-> Finally, we conclude that since the fingerprints are
+  \begin{enumerate}
+  \item<1-> Show $h_i\approx \mbox{poi}_{k_i}$ (and $h \approx \mbox{Poi}(kp)$).
+  \item<2-> Show $f_a \approx \mbox{poi}_{\lambda_a}$ (and $f \approx
+    \mbox{Poi}(\lambda)$).
+  \item<3-> Bound $|\mbox{Poi}(\lam^+)-\mbox{Poi}(\lam^-)|$.
+  \item<4-> Deduce a bound on $|f^+-f^-|$.
+  \item<5-> Finally, conclude that since the fingerprints are
     indistinguishable (even though the distributions might not be),
     then the property can't be tested.
-  \end{itemize}
+  \end{enumerate}
 
 \end{frame}
 
@@ -641,15 +640,15 @@
   \frametitle{Wishful Thinking Theorem} \framesubtitle{(reminder)}
 
   \begin{block}{Wishful Thinking Theorem}
-    Given an integer $k>0$, let $p^+$ and $p^-$ be two distributions,
-    all of whose frequencies are at most $\frac{1}{500k}$. Let
-    $\lambda^+$ and $\lambda^-$ be their Poisson moments for sample
-    size $k$. If it is the case that
+    Given an integer $\hat{k}>0$, let $p^+$ and $p^-$ be two distributions,
+    all of whose frequencies are at most $\frac{1}{500\hat{k}}$. Let
+    $\lambda^+$ and $\lambda^-$ be their Poisson moments vectors for sample
+    size $\hat{k}$. If it is the case that
     \begin{equation*}
       \sum_a\frac{|\lambda^+_a-\lambda^-_a|}{\sqrt{1+\max\{\lambda^+_a,\lambda^-_a\}}}<\frac{1}{25}
     \end{equation*}
     then it is impossible to test any symmetric property that is true
-    for $p^+$ and false for $p^-$ in $k$ samples.
+    for $p^+$ and false for $p^-$ in $\hat{k}$ samples.
   \end{block}
 
 \end{frame}
