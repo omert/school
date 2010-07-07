@@ -221,16 +221,29 @@
   cover on $G \setminus V_d$ plus the size of $V_d$. The sources of
   error here are the following:
   \begin{itemize}
-  \item The error of $M$ or $\mbox{HKON}_{\eps/2}(G \setminus V_d)$ is
+  \item The error of $\mbox{HKON}_{\eps/2}(G \setminus V_d)$ is
     $\eps/2$.
   \item The error of assuming all of $V_d$ is in the cover is
     $|V_d|/|V|=\eps/4$.
-  \item The error on the estimation of $N$ or $|V_d|$ is $\eps/4$.
+  \item The error on the estimation of $|V_d|$ is $\eps/4$.
   \end{itemize}
   Thus the total additive error is at most $\eps$.
 
   The running time of the algorithm is $T(\eps/2,24/\eps)$, plus
   $O(d/\eps^2)=O(1/\eps^3)$ for estimating the size of $V_d$.
+
+\item The algorithm we saw in class terminates, with high probability
+  (say $1/2$), after time $q2^{d^{O(k)}}$, where $q$ is the number of
+  queries, $d$ is the maximum degree and $k=k^*(\eps^2/800,\eps/20)$.
+
+  We would like to have a (sometimes failing w.p. $<\alpha$) algorithm with
+  bounded running time. All we must do is run the algorithm we saw in
+  class at most $-\log\alpha$ times for at most $q2^{d^{O(k)}}$ steps
+  each time, and return its answer the first time it doesn't
+  fail. Then the probability of failing in all attempts (and thus
+  returning ``fail'') is at most $\alpha$, assuming that each attempt
+  succeeds with probability at most half.
+  
 \end{enumerate}
 \end{document}
 
