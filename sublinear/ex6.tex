@@ -197,6 +197,40 @@
   Every planar graph has average degree at most six. Hence for any
   $\eps > 0$, at most $\eps$ of the vertices have degree larger than
   $6 \over \eps$.
+
+  Denote by $\mbox{HKON}_\eps$ the algorithm of
+  Hassidim-Kelner-Onak-Nguyen for which an additive error of $\eps n$
+  is guaranteed.  Let $T(\eps, d)$ be its running time.
+
+  Our algorithm is the following: given $0 < \eps < 1$, let
+  $d=24/\eps$. Then at most $6/d=\eps/4$ of the nodes have degree larger
+  than $d$. Denote the set of these nodes by $V_d$. Run
+  $\mbox{HKON}_{\eps/2}$ on $G \setminus V_d$ by ignoring any
+  encountered vertex with degree $>d$. Let $M$ be the answer returned
+  by $\mbox{HKON}_{\eps/2}(G \setminus V_d)$ (i.e. its estimate for
+  the size of the cover of $G \setminus V_d$).
+
+  To estimate the size of $V_d$, we sample $O(1/\eps)$ vertices of
+  $G$, and count the number of them which have degree higher than
+  $d$. By the Hoeffding bound, a sample of $O(1/\eps^2)$ is enough to
+  know $|V_d|/|V|$ to within $\eps/4$ additive error, with high
+  probability. Let $N$ be the result of this estimate of the size of
+  $V_d$.
+
+  we return $N+M$, estimating the size of the cover by the size of the
+  cover on $G \setminus V_d$ plus the size of $V_d$. The sources of
+  error here are the following:
+  \begin{itemize}
+  \item The error of $M$ or $\mbox{HKON}_{\eps/2}(G \setminus V_d)$ is
+    $\eps/2$.
+  \item The error of assuming all of $V_d$ is in the cover is
+    $|V_d|/|V|=\eps/4$.
+  \item The error on the estimation of $N$ or $|V_d|$ is $\eps/4$.
+  \end{itemize}
+  Thus the total additive error is at most $\eps$.
+
+  The running time of the algorithm is $T(\eps/2,24/\eps)$, plus
+  $O(d/\eps^2)=O(1/\eps^3)$ for estimating the size of $V_d$.
 \end{enumerate}
 \end{document}
 
