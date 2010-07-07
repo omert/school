@@ -1,0 +1,203 @@
+\documentclass[11pt]{article} \usepackage{amssymb}
+\usepackage{amsfonts} \usepackage{amsmath} \usepackage{bm}
+\usepackage{latexsym} \usepackage{epsfig}
+
+\setlength{\textwidth}{6.5 in} \setlength{\textheight}{8.25in}
+\setlength{\oddsidemargin}{0in} \setlength{\topmargin}{0in}
+\addtolength{\textheight}{.8in} \addtolength{\voffset}{-.5in}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{example}[theorem]{Example}
+\newenvironment{proof}{\noindent \textbf{Proof:}}{$\Box$}
+
+\newcommand{\ignore}[1]{}
+
+\newcommand{\enote}[1]{} \newcommand{\knote}[1]{}
+\newcommand{\rnote}[1]{}
+
+
+
+% \newcommand{\enote}[1]{{\bf [[Elchanan:} {\emph{#1}}{\bf ]]}}
+% \newcommand{\knote}[1]{{\bf [[Krzysztof:} {\emph{#1}}{\bf ]]}}
+% \newcommand{\rnote}[1]{{\bf [[Ryan:} {\emph{#1}}{\bf ]]}}
+
+
+
+\DeclareMathOperator{\Support}{Supp} \DeclareMathOperator{\Opt}{Opt}
+\DeclareMathOperator{\Ordo}{\mathcal{O}}
+\newcommand{\MaxkCSP}{\textsc{Max $k$-CSP}}
+\newcommand{\MaxkCSPq}{\textsc{Max $k$-CSP$_{q}$}}
+\newcommand{\MaxCSP}[1]{\textsc{Max CSP}(#1)} \renewcommand{\Pr}{{\bf
+    P}} \renewcommand{\P}{{\bf P}} \newcommand{\Px}{\mathop{\bf P\/}}
+\newcommand{\E}{{\bf E}} \newcommand{\Cov}{{\bf Cov}}
+\newcommand{\Var}{{\bf Var}} \newcommand{\Varx}{\mathop{\bf Var\/}}
+
+\newcommand{\bits}{\{-1,1\}}
+
+\newcommand{\nsmaja}{\textstyle{\frac{2}{\pi}} \arcsin \rho}
+
+\newcommand{\Inf}{\mathrm{Inf}} \newcommand{\I}{\mathrm{I}}
+\newcommand{\J}{\mathrm{J}}
+
+\newcommand{\eps}{\epsilon} \newcommand{\lam}{\lambda}
+
+% \newcommand{\trunc}{\ell_{2,[-1,1]}}
+\newcommand{\trunc}{\zeta} \newcommand{\truncprod}{\chi}
+
+\newcommand{\N}{\mathbb N} \newcommand{\R}{\mathbb R}
+\newcommand{\Z}{\mathbb Z} \newcommand{\CalE}{{\mathcal{E}}}
+\newcommand{\CalC}{{\mathcal{C}}} \newcommand{\CalM}{{\mathcal{M}}}
+\newcommand{\CalR}{{\mathcal{R}}} \newcommand{\CalS}{{\mathcal{S}}}
+\newcommand{\CalV}{{\mathcal{V}}}
+\newcommand{\CalX}{{\boldsymbol{\mathcal{X}}}}
+\newcommand{\CalG}{{\boldsymbol{\mathcal{G}}}}
+\newcommand{\CalH}{{\boldsymbol{\mathcal{H}}}}
+\newcommand{\CalY}{{\boldsymbol{\mathcal{Y}}}}
+\newcommand{\CalZ}{{\boldsymbol{\mathcal{Z}}}}
+\newcommand{\CalW}{{\boldsymbol{\mathcal{W}}}}
+\newcommand{\CalF}{{\mathcal{Z}}}
+% \newcommand{\boldG}{{\boldsymbol G}}
+% \newcommand{\boldQ}{{\boldsymbol Q}}
+% \newcommand{\boldP}{{\boldsymbol P}}
+% \newcommand{\boldR}{{\boldsymbol R}}
+% \newcommand{\boldS}{{\boldsymbol S}}
+% \newcommand{\boldX}{{\boldsymbol X}}
+% \newcommand{\boldB}{{\boldsymbol B}}
+% \newcommand{\boldY}{{\boldsymbol Y}}
+% \newcommand{\boldZ}{{\boldsymbol Z}}
+% \newcommand{\boldV}{{\boldsymbol V}}
+\newcommand{\boldi}{{\boldsymbol i}} \newcommand{\boldj}{{\boldsymbol
+    j}} \newcommand{\boldk}{{\boldsymbol k}}
+\newcommand{\boldr}{{\boldsymbol r}}
+\newcommand{\boldsigma}{{\boldsymbol \sigma}}
+\newcommand{\boldupsilon}{{\boldsymbol \upsilon}}
+\newcommand{\hone}{{\boldsymbol{H1}}}
+\newcommand{\htwo}{\boldsymbol{H2}}
+\newcommand{\hthree}{\boldsymbol{H3}}
+\newcommand{\hfour}{\boldsymbol{H4}}
+
+
+\newcommand{\sgn}{\mathrm{sgn}} \newcommand{\Maj}{\mathrm{Maj}}
+\newcommand{\Acyc}{\mathrm{Acyc}}
+\newcommand{\UniqMax}{\mathrm{UniqMax}}
+\newcommand{\Thr}{\mathrm{Thr}} \newcommand{\littlesum}{{\textstyle
+    \sum}}
+
+\newcommand{\half}{{\textstyle \frac12}}
+\newcommand{\third}{{\textstyle \frac13}}
+\newcommand{\fourth}{{\textstyle \frac14}}
+
+\newcommand{\Stab}{\mathbb{S}}
+\newcommand{\StabThr}[2]{\Gamma_{#1}(#2)}
+\newcommand{\StabThrmin}[2]{{\underline{\Gamma}}_{#1}(#2)}
+\newcommand{\StabThrmax}[2]{{\overline{\Gamma}}_{#1}(#2)}
+\newcommand{\TestFcn}{\Psi}
+
+\renewcommand{\phi}{\varphi}
+
+\begin{document}
+\title{Sublinear Algorithms - Exercise 6}
+
+ \author{Omer Tamuz, 035696574}
+\maketitle
+\begin{enumerate}
+\item
+
+  \begin{lemma}
+    \label{lemma:cut}
+    There exists a universal constant $c$ such that for every $n>0$
+    every planar graph with $n$ vertices and maximum degree $\leq d$
+    has a $(cd/\sqrt{n},n/2)$-partition.
+  \end{lemma}
+  \begin{proof}
+    By the planar separator theorem there exists a universal constant
+    $c$ such that every planar graph with $n$ vertices has a set $S$
+    of size at most $c\sqrt{n}$ such that each connected component of
+    $G\setminus S$ is of size at most $n/2$.
+
+    Consider the partition of $G$ into these connected components and
+    $S$. Any cross-edge has to be adjacent to a vertex in $S$, and so
+    there are at most $cd\sqrt{n}$ edges between the sets of the
+    partition.
+  \end{proof}
+
+  \begin{lemma}
+    Let $c$ be the universal constant from lemma~\ref{lemma:cut} and
+    $\gamma = {\sqrt{2}\over \sqrt{2}-1}$.
+    
+    Every planar graph of size $n$ with maximum degree $\leq d$ admits
+    an $(\eps, k^*(\eps, d, n))$-partition, for every $\eps > 0$, where
+    \begin{equation*}
+      k^*(\eps, d, n)=\left({\gamma cd \over \eps+\gamma {cd \over \sqrt{2n}}}\right)^2
+    \end{equation*}
+    when $n>c^2d^2/\eps^2$, and otherwise
+    \begin{equation*}
+      k^*(\eps, d, n)=c^2d^2/\eps^2.
+    \end{equation*}
+  \end{lemma}
+  Before proving the lemma we note that $k^*(\eps-cd/\sqrt{n}, d,
+  n/2)=k^*(\eps, d, n)$, and that $k^*$ increases monotonously with $n$.
+
+  
+  \begin{proof}
+    Let $G=(V,E)$ and $n=|V|$. If $n \leq c^2d^2/\eps^2$ the statement is
+    trivially true, since then $n \leq k^*(\eps, d, n)$. Otherwise,
+    assume the statement is true for all graphs with at most $n-1$
+    vertices. Partition $G$ using $S$, the guaranteed separator of
+    size at most $c\sqrt{n}$, and let $P_1,\ldots P_l$ be the sets of
+    this partition.
+
+    Let
+    \begin{equation*}
+      \eps'=\eps-{cd \over \sqrt{n}}.
+    \end{equation*}
+    Note that we are considering the case where $\sqrt{n} > cd/\eps$,
+    and therefore $\eps'>0$.
+    
+    By the inductive hypothesis, each $P_i$ has an $(\eps', k^*(\eps',
+    d, |P_i|))$-partition. If we indeed partition each $P_i$ using
+    this partition, then the number of cross-edges $|E_x|$ in the
+    resulting partition of $G$ satisfies:
+    \begin{align*}
+      |E_x| &\leq cd\sqrt{n} + \sum_{i=1}^l\eps'|P_i|
+      \\ &\leq cd\sqrt{n}+\eps\left(1-{cd \over \eps \sqrt{n}}\right)\sum_{i=1}^l|P_i|
+      \\ &\leq cd\sqrt{n}+\eps\left(1-{cd  \over \eps \sqrt{n}}\right)n
+      \\ &= \eps n
+    \end{align*}
+    Furthermore, we note that $k^*(\eps, d, n)$ is increasing with
+    $n$, and that therefore $k^*(\eps', d, |P_i|) \leq k^*(\eps', d,
+    n/2)$. Hence:
+    \begin{align*}
+      k^*(\eps', d, |P_i|) &\leq k^*(\eps', d, n/2)
+      \\ &= k^*\left(\eps-{cd \over \sqrt{n}}, d, n/2\right)
+      \\ &= k^*(\eps, d, n)
+    \end{align*}
+    where the last step follows directly from the definition of $k^*$.
+    We have therefore shown that each set of the partition is of size
+    at most $k^*(\eps, d, n)$.
+  \end{proof}
+  \begin{theorem}
+    Every planar graph with maximum degree at most $d$ admits an
+    $(\eps, (\gamma cd/\eps)^2)$-partition, for every $\eps>0$.
+  \end{theorem}
+  \begin{proof}
+    This follows from the previous theorem and the fact that
+    $k^*(\eps, d, n) \leq (\gamma cd/\eps)^2$ for every $\eps>0$ and $n$.
+  \end{proof}
+
+\item
+  Every planar graph has average degree at most six. Hence for any
+  $\eps > 0$, at most $\eps$ of the vertices have degree larger than
+  $6 \over \eps$.
+\end{enumerate}
+\end{document}
+
+
