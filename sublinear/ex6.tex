@@ -236,13 +236,35 @@
   (say $1/2$), after time $q2^{d^{O(k)}}$, where $q$ is the number of
   queries, $d$ is the maximum degree and $k=k^*(\eps^2/800,\eps/20)$.
 
-  We would like to have a (sometimes failing w.p. $<\alpha$) algorithm with
-  bounded running time. All we must do is run the algorithm we saw in
-  class at most $-\log\alpha$ times for at most $q2^{d^{O(k)}}$ steps
-  each time, and return its answer the first time it doesn't
-  fail. Then the probability of failing in all attempts (and thus
-  returning ``fail'') is at most $\alpha$, assuming that each attempt
-  succeeds with probability at most half.
+  We would like to have an algorithm with bounded running time and
+  which may fail with probability $<\alpha$. All we must do is run the
+  algorithm we saw in class at most $-\log\alpha$ times for at most
+  $q2^{d^{O(k)}}$ steps each time, and return its answer the first
+  time it doesn't fail. Then the probability of failing in all
+  attempts (and thus returning ``fail'') is at most $\alpha$, assuming
+  that each attempt succeeds with probability at most half.
+
+\item The algorithm is simple: sample the partition oracle
+  $O(d^6/{\eps^*}^6)$ times, check each returned subgraph for planarity
+  and return true iff all the subgraphs are planar.
+
+  If the graph is planar then clearly all the subgraphs will also be
+  planar, and so the algorithm will return the correct answer with
+  probability one in this case.
+
+  Assume the graph is $\eps^*$-far from being planar. Let
+  $\eps=\eps^*/2$ let the partition oracle calculate a $(\eps,
+  k^*(\eps, d))$ partition. Let $G'$ be $G$ with all the cross edges
+  removed. Then $G'$ is at least $\eps^*-\eps=\eps^*/2$-far from being
+  planar. Since each set in the partition of $G'$ has at most $kd$
+  edges, then at least ${\eps^*|V| \over 2kd}$ of the sets are not
+  planar (as these sets are not connected in $G'$).
+
+  As we saw above, $k^*=O(d^2/\eps^2)$ and so the proportion of sets
+  that are not planar will be $O({\eps^*}^3/d^3)$. Hence, if we sample
+  $O(d^6/{\eps^*}^6)$ such sets then, by a calculation identical to the
+  one we saw in class, with high probability we will find a non-planar
+  set and correctly return false.
   
 \end{enumerate}
 \end{document}
