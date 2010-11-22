@@ -1,0 +1,211 @@
+%&latex
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{url}
+\input{defs.tex}
+\begin{document}
+
+\lecture{4}{}{Moni Naor}{Tamar Zondiner \& Omer Tamuz}
+\section{pairwise independent}
+$\Pr[h_{c_0,..,c_{\log n}}(x_2)=v]=\Pr[v=v'+c_j]=\frac{1}{m}.\\
+H_{linear}$ there is a finite field of size $n$. $n$ has to be a prime number. Take $H_{a,b}=ax+b$ in the field of size $n$. This works since there exactly one solution to every $x$, we can see that $ax+b=v, ay+b=u$ there is a unique solution to this set of examples whenever $x\ne y$. \\\\
+We can also use Matrix Multiplication, which is not unlike $H_{subsetsum}$. We consider $H_{matrix}$ such that $h_A(x)=Ax$. Then $x=(x_1,..,x_l)$ with $x_i\in F, \ n=F^l$. $A$ is a random matrix over that field. Here we have to be careful that $x\ne \vec 0$. \\\\
+What about a permutation? In the previous construction ($H_linear)$ it was enough to ask $a\ne 0$. What if we want $k-$wise independence? Take a higher degree polynomial randomly. Beyond 3 there is no elegant formulation. There's an interesting open problem regarding this.
+
+Not strongly transitive group - ? \\\\
+When  $n$ is not a prime power? Take something just a bit larger than $n$, we won't, in this course, care much about this.\\\\
+Is this the best we can hope for? Meaning, the smallest family satisfying this property? For $k$-wise we can ?\\\\
+
+Two parties: Alice and Bob. Alice wants to send a message to Bob. Between Alice and Bob stands Eve. Eve might change the message from Alice. What can Alice and Bob agree on to allow Bob to recognize when the message has been tampered with. \\
+It can be shown that if they have no previous agreement, and no secrets, there's nothing they can do.\\
+If they do meet, they can agree on some secret. Alice and Bob know the secret, and Eve doesn't. 
+Suppose the secret is some hash function $h$. Then Alice sends $h(m)$ (m is the message). Alice sends $h(m), m$. Eve may change and send $m',s$ which succeeds only if $s=h(m').$ Without knowing the hash function, this has probability as small as we'd like. If $m$ is very large, we could have a very large hash function. That's why we would probably prefer a hash function that isn't fully pairwise independent. This describes a one-time authentication scheme. If we wanted to send many messages, we'd need Eve not to have too much computation power (otherwise she might learn the hash function). \\\\
+
+\section{Multiset equality}
+Alice and Bob each receive streams $\{z_i\}_{i=1}^l$ and
+$\{w_i\}_{i=1}^l$, respectively. They would like to determine whether
+$z$ and $w$ are equal as multisets. Formally, this holds if there
+exists a permutation $\sigma$ such that $z_i=w_{\sigma(i)}$ for all
+$i$. Na\"ively, they could send each other the entire stream, sort
+each stream and compare them. We would like to find a solution that
+has lower communication complexity.
+
+A possible approach would be for them to calculate $\sum_{i=1}^l z_i$
+and $\sum_{j=1}^l w_j$ and compare the result of this
+calculation. However, in an adversarial model this would give no
+non-trivial lower bound on the probability of declaring the streams
+equal when in fact they are not.
+
+A more fruitful approach is to consider the {\em product} of the
+elements, rather than their sum. We regard each $w_i$ and $z_i$ as an
+element of some finite field $F$. Then:
+\begin{claim}
+  Let $Z(x)=\prod_{i=1}^l(z_i-x)$ and $W(x)=\prod_{i=1}^l(w_i-x)$. Then, for a
+  uniformly random choice of $x \in F$, it holds that
+  \begin{align*}
+    \Pr[Z(x)=W(x)] \leq \frac{l-1}{|F|}
+  \end{align*}
+  whenever $Z \neq W$.
+\end{claim}
+\begin{proof}
+  The polynomial $P(x)=Z(x)-W(x)$ is of degree $l-1$, and therefore
+  has at most $l-1$ roots. Hence $W(x)$ is equal to $Z(x)$ in at most
+  $l-1$ values of $x$, out of the possible $|F|$ values.
+\end{proof}
+
+The proposed algorithm is therefore for Alice and Bob to calculate
+$W(x)$ and $Z(x)$ for some common, random $x$. Clearly, if the streams
+are equal then $W(x) = Z(x)$. By the claim above, when the streams are
+not equal then equality can be made arbitrarily rare, by an
+appropriate choice of $F$.
+
+
+\subsection{Application to memory checking}
+
+Consider a CPU which uses a large external memory store. The CPU
+doesn't trust the store, as it is possibly unreliable and may change a
+stored value adversarially. We would like to find a way for the CPU to
+verify that indeed every value read from memory is the same as the
+last value written there.
+
+One may take two approaches here: an on-line and an off-line
+approach. In the on-line approach the CPU verifies continuously that
+the memory is not corrupt. In the off-line approach verification takes
+place only after the termination of the program. We focus on the
+off-line case.
+
+To implement our algorithm, we add to each memory cell a timestamp
+cell. Also, the CPU maintains a counter $t$, which it advances with
+every memory access operation. We refer to $t$ as the CPU's ``current
+time''. We assume that the interaction between the CPU and memory is
+performed via two function calls: $(v,t) = \mathrm{read}(a)$ and
+$\mathrm{write}(a,v,t)$. Here $a$ is the location of a memory cell,
+$v$ is a value to be written, and $t$ is the timestamp to be written.
+
+To verify the memory integrity, the CPU adds the following actions to
+its executions:
+\begin{enumerate}
+\item Start with writing `0' in all locations. 
+\item After each `read' perform a `write' with the same value and the
+  current time stamp.
+\item Before `write' - read location (i.e., don't overwrite without
+  checking).
+\item At the end read all locations.
+\item Always check that the current time stamp is greater than the
+  timestamp read.
+\end{enumerate}
+Hence the timestamp at each cell records the last time a value was
+written to that cell. Therefore, if a value read at a cell has a
+timestamp larger than the current time then clearly the memory is
+corrupt. We assume henceforth that no such event is detected.
+
+Let $R$ equal the set of triplets $(a,v,t)$ read at the time of
+termination of the program, and likewise let $W$ equal the set of
+triplets $(a,v,t)$ written up to that time.
+
+Given the CPU's actions, the following claim is easy to verify:
+\begin{claim}
+  If no time-stamp read was higher than the current time-stamp, then
+  $W=R$ if and only if the memory has functioned correctly.
+\end{claim}
+
+Storing and comparing $W$ and $R$ is obviously not an option in this
+model. However, we can use our multiset equality algorithm to perform
+this with constant space requirements as high chances of success. Our
+sets $W$ and $R$ become the two streams $\{w_i\}$ and $\{z_i\}$, and
+the polynomials $W(x)$ and $Z(x)$ can be calculated on the fly, after
+$x$ is chosen at random at the beginning of the process. Then
+$W(z) = Z(x)$ if the memory is not corrupt, and $W(z) \neq Z(x)$ with
+high probability when it is.
+
+
+\section{Multivariate polynomials}
+Let $Q({x_1, \ldots, x_n})$ be an $n$-variate polynomial over some
+finite field $F$. We define the degree of a term of $Q$,
+$Cx_1^{e_1}x_2^{e_2} \cdots x_n^{e_n}$, to be $\sum_{e_i}$, and the
+degree of $Q$ to be the maximum degree of any of its terms.
+
+When given $Q$ implicitly, an interesting question is whether $Q$ is
+identically zero. If we have the possibility of efficiently evaluating
+it then a possible approach would be to evaluate it on a uniformly
+random argument $r = (r_1, \ldots, r_n)$. If $Q = 0$ then the result
+would definitely equal zero. We would like to calculate the
+probability that $Q(r) = 0$ when $Q \neq 0$.
+
+The following lemma was proven independently by
+Scwartz~\cite{Schwartz:1980} and Zippel~\cite{Zippel:1979}, and
+presented at the same conference, where Zippel spoke right after
+Schwartz, according to the program. A slightly weaker result was
+proved earlier by Demillo and
+Lipton~\cite{DemilloLipton:1978}. See~\cite{LiptonBlog} for an
+in-depth discussion of the mathematics, history and politics.
+
+\begin{lemma}[Schwartz-Zippel]
+  Let $r = (r_1, \ldots, r_n)$ be drawn from the uniform distribution
+  over $S^n$, for some $S \subseteq F$. Then
+  \begin{align*}
+    \Pr[Q(r) = 0] \leq \frac{d}{|S|}.
+  \end{align*}
+  for any polynomial $Q \neq 0$ with degree $d$.
+\end{lemma}
+\begin{proof}
+  We prove by induction on $n$. The base of the induction is the fact
+  that a single variable polynomial of degree $d$ can have no more
+  than $d$ roots.
+
+  Assume that the theorem holds up to $n-1$. Let $k$ be the highest
+  degree of $x_1$ in $Q$. Then there exist polynomials $Q_1$ and $Q_2$
+  such that
+  \begin{align*}
+    Q(x_1, \ldots, x_n) = x_1^kQ_1(x_2, \ldots, x_n) + Q_2(x_1, \ldots, x_n).
+  \end{align*}
+
+  Let $A$ be the event that $Q(r) = 0$, and let $B$ be the event that
+  $Q_1(r) = 0$. For any two events $A$ and $B$ it holds that $\Pr[A]
+  \leq \Pr[B] + \Pr[A| \neg B]$. By the inductive hypothesis we know
+  that $\Pr[B] \leq \frac{d-k}{|S|}$.
+
+  Now, for any fixed choice of $r_2, \ldots, r_n$, $Q_2$ is a
+  single variable polynomial in $r_1$, and as such has at most $d$ zeros.
+\end{proof}
+
+$A$=event that $Q(r_1,..,r_n)=0$\\
+$B$= event that $Q_1(r_1,..,r_n)=0$\\ \\
+$\Pr[A]\le\Pr[B]+\Pr[A|\neg B]$. \\
+$\Pr[B]\le \frac{d-k}{|S|}$ by induction. We have a polynomial of
+degree $k$, and $Q(r_1,..,r_n)$ is at most a polynomial of degree of
+at most $k$.  So $\Pr[A|\neg B]\le \frac{k}{|S|}$.  Thus the sum $\le
+\frac{d}{|S|}$.
+\\\\
+**A different proof:
+$Q(x+ty)$ was shown in class partitioning to  parallel lines. $x,y\in |F|^n,\ t\in F$.  Getting a polynomial in $t$, a single variate polynomial in degree at most $d$,a nd then we could apply the original algorithm. There are at most $d$ zeros for each line, altogether we have $\frac{d |F|^{n-1}}{|F|^n}$.\\\\
+This is a slightly weaker result, don't need inductions here.  **
+
+\section{Perfect Matchings}
+Suppose we have a bipartite graph $n$ vertices in each part. A perfect matching is a subset of $n$ edges such that each vertex touches a unique edge.
+We know we can find them with flow algorithms. It's in P, but not a trivial problem. We want to make it into a trivial problem. \\\\
+We can talk about the adjacency Matrix of a graph $G$. We put $V$ on rows, $U$ on columns, and write the adjacency matrix:  $M_{i,j}=\begin{cases}0 & (i,j)\in E \\
+1 & o.w. \\
+\end{cases}$
+
+The Tutte Matrix is a matrix with $\forall (i,j)\in E$ assign $x_{i,j}$.\\
+will have $det(T)\ne0$ iff $G$ has a perfect matching. 
+The determinant is the sum of all permutations:
+$\sum_{\pi}(-1)^{?}\prod_{i=1}^{n}T_{i,\pi(i)}$\\
+The algorithm is quite clear: choose a random assignment to $X_{i,j}$. 
+
+Instead of computing the determinant, we only compute it for the points we choose. That will be non-zero if and only if there's a perfect matching. We see whether we get a perfect matching or not. \\
+$\Pr[Error]\le\frac{n}{|F|}$, the probability of saying there isn't a perfect matching when there is.
+
+We don't know how to check whether a graph has a matching. The flow algorithms are sequential. This gives us a parallel algorithm for checking whether a given graph has a pm or not. This used to be a big problem, whether there is an explicit deterministic algorithm for finding a pm in graphs.\\\\
+
+Another application: primality testing can also be viewed as identity testing. There is a simple algorithm for primality testing for checking using identity testing whether a number is primal or not - define 
+$P_n(z)=(1+z)^{n}-1-z^n$. Then to test primality you get that 
+$P_n(z)=0 mod n \iff$ z is prime.\\
+
+So what we've seen was one of the most useful probabilistic techniques that we know. Has many applications. Perfect matching, primality testing, memory checking etc. 
+
+\bibliographystyle{abbrv} \bibliography{lectures}
+
+\end{document}
+
