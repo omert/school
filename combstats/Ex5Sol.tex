@@ -272,44 +272,14 @@
   and so the distance between two vertices is the sum of the weights
   on the edges along the shortest path between them. Thus this defines
   a graph metric, which in particular is a metric.
-\item Given an unbounded number of edges we can reconstruct
-  $\beta_{u,v}$ exactly, with probability one. We saw in class how to
-  reconstruct a tree $T$ given the distances between the nodes by some
-  tree metric: the tree is the Minimum Spanning Tree.
-\item The following algorithm reconstructs a tree with $n$ nodes:
-  \begin{enumerate}
-  \item Denote $\delta = \tanh(10^{-6})(1-\tanh(10^6))$. Draw
-    $k=-2{\log\eps\over \delta^2}$ samples from the distribution.
-  \item For each pair $u,v$, estimate $c_{u,v}=\E[\sigma_u\sigma_v]$
-    by its sample average $\hat{c}_{u,v}$: denote by $l_{u,v}$ the
-    number of samples for which $\sigma_u=\sigma_v$. Then
-    $\hat{c}_{u,v}=(2l_{uv}-k)/k$. Calculate $\hat{w}_{u,v}=-\log
-    \hat{c}_{u,v}$.
-  \item Return an MST on $\hat{w}_{u,v}$. 
-  \end{enumerate}
-  We show that this algorithm returns the wrong answer with error
-  probability at most $\eps$: Assume we run Kruskal's MST
-  algorithm\footnote{Reminder: Kruskal's algorithm orders the edges by
-    increasing distance, considers the edges according to this order
-    and adds a considered edge to the solution iff it doesn't create a
-    cycle}. Let $e'=(u',v')$ be the first edge added to the
-  algorithm's answer $T'$ which is not in $T$. Then the ``real''
-  shortest path between $u'$ and $v'$ is of length at least two, and
-  furthermore there must exist an edge $e \in T$ that is on the
-  shortest path between $u'$ and $v'$ and was not added yet.
-
-  Since $e$ was not added yet then
-  $\hat{c}_{e'}>\hat{c}_{e}$. However, since the length of the path is
-  at least two, then
-  $c_{e'}<c_{e}\tanh(10^6)<c_e-\tanh(10^{-6})(1-\tanh(10^6))=c_e-\delta$.  
-  The probability for such an error is:
-  \begin{align*}
-    \P[\hat{c}_{e'}-c_{e'}>\delta] &= \P\left[(2l_{u,v}-k)/k-c_{e'}>\delta\right]
-    \\ &= \P\left[l_{u,v}-\half(k+kc_{e'})>\half k\delta\right]
-    \\ &= \P\left[l_{u,v}-\E[l_{u,v}]>\half k\delta\right]
-    \\ &\leq exp(-\half k\delta^2)
-    \\ = \eps
-  \end{align*}
+\item Given an unbounded number of samples on the edges we can
+  reconstruct the distance between the edges exactly, with probability
+  one. We showed in class that from this we can reconstruct the entire
+  tree.
+\item Let $f=\tanh 10^{-6}$ and $g=\tanh 10^6$. Then we showed in
+  class that given $k$ samples from the leaves of the tree, the tree
+  can be reconstructed with high probability when $k=O(f^{2\log
+    n}/(1-g)^2)=\mbox{poly}(n)$.
 \end{itemize}
 
 \end{document}
