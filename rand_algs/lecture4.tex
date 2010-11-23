@@ -163,23 +163,35 @@ in-depth discussion of the mathematics, history and politics.
   Let $A$ be the event that $Q(r) = 0$, and let $B$ be the event that
   $Q_1(r) = 0$. For any two events $A$ and $B$ it holds that $\Pr[A]
   \leq \Pr[B] + \Pr[A| \neg B]$. By the inductive hypothesis we know
-  that $\Pr[B] \leq \frac{d-k}{|S|}$.
+  that $\Pr[B] \leq \frac{d-k}{|S|}$, so all we've left to do is bound
+  $\Pr[A | \neg B]$.
+  
+  Now, for any fixed choice of $r_2, \ldots, r_n$ for which $Q_1 \neq
+  0$, $Q_1$ is a constant and $Q_2$ is a single variable polynomial in
+  $r_1$, and as such has degree less than $k$. Thus $Q$ is (after
+  fixing $r_2, \ldots, r_n$) a single variable polynomial of degree
+  $k$, and as such has at most $k$ zeros, and so the probability of
+  $r$ being a zero is at most $k/|S|$. Since this is true conditioned on
+  $r_2, \ldots, r_n$ it must also hold on average, and so $\Pr[A |
+  \neg B] \leq \frac{k}{|S|}$.
 
-  Now, for any fixed choice of $r_2, \ldots, r_n$, $Q_2$ is a
-  single variable polynomial in $r_1$, and as such has at most $d$ zeros.
+  We have then that
+  \begin{align*}
+    \Pr[Q(r) = 0] &= \Pr[A]
+    \\ &\leq \Pr[B] + \Pr[A| \neg B]
+    \\ &\leq \frac{d-k}{|S|} + \frac{k}{|S|}
+    \\ &= \frac{d}{|S|}
+  \end{align*}
 \end{proof}
 
-$A$=event that $Q(r_1,..,r_n)=0$\\
-$B$= event that $Q_1(r_1,..,r_n)=0$\\ \\
-$\Pr[A]\le\Pr[B]+\Pr[A|\neg B]$. \\
-$\Pr[B]\le \frac{d-k}{|S|}$ by induction. We have a polynomial of
-degree $k$, and $Q(r_1,..,r_n)$ is at most a polynomial of degree of
-at most $k$.  So $\Pr[A|\neg B]\le \frac{k}{|S|}$.  Thus the sum $\le
-\frac{d}{|S|}$.
-\\\\
-**A different proof:
-$Q(x+ty)$ was shown in class partitioning to  parallel lines. $x,y\in |F|^n,\ t\in F$.  Getting a polynomial in $t$, a single variate polynomial in degree at most $d$,a nd then we could apply the original algorithm. There are at most $d$ zeros for each line, altogether we have $\frac{d |F|^{n-1}}{|F|^n}$.\\\\
-This is a slightly weaker result, don't need inductions here.  **
+Recently, Moshkovitz~\cite{Moshkovitz:2010} published a short
+alternative proof for this lemma, for the case of $S=F$. For fixed $y
+\in F^n$ and $x \in F^{n-1}$, $Q(x+ty)$ is a single variable
+polynomial in $t$ of degree $d$, and as such has at most $d$ zeros, or
+a probability of $d/|F|$ for a random $t$ to be a zero. The theorem
+follows from the fact that $F^n$ is partitioned by the choice of $x$
+and $y$.
+
 
 \section{Perfect Matchings}
 Suppose we have a bipartite graph $n$ vertices in each part. A perfect matching is a subset of $n$ edges such that each vertex touches a unique edge.
