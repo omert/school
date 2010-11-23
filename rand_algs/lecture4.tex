@@ -6,20 +6,40 @@
 \begin{document}
 
 \lecture{4}{}{Moni Naor}{Tamar Zondiner \& Omer Tamuz}
-\section{pairwise independent}
-$\Pr[h_{c_0,..,c_{\log n}}(x_2)=v]=\Pr[v=v'+c_j]=\frac{1}{m}.\\
-H_{linear}$ there is a finite field of size $n$. $n$ has to be a prime number. Take $H_{a,b}=ax+b$ in the field of size $n$. This works since there exactly one solution to every $x$, we can see that $ax+b=v, ay+b=u$ there is a unique solution to this set of examples whenever $x\ne y$. \\\\
-We can also use Matrix Multiplication, which is not unlike $H_{subsetsum}$. We consider $H_{matrix}$ such that $h_A(x)=Ax$. Then $x=(x_1,..,x_l)$ with $x_i\in F, \ n=F^l$. $A$ is a random matrix over that field. Here we have to be careful that $x\ne \vec 0$. \\\\
-What about a permutation? In the previous construction ($H_linear)$ it was enough to ask $a\ne 0$. What if we want $k-$wise independence? Take a higher degree polynomial randomly. Beyond 3 there is no elegant formulation. There's an interesting open problem regarding this.
+\section{Application of pairwise independent hash functions}
+In the previous lecture we encountered two families of pairwise
+independent hash function: $H_{\mathrm{subset}}$ and
+$H_{\mathrm{linear}}$. A similar family is $H_{\mathrm{matrix}}$: a
+function $h_A \in H_{\mathrm{matrix}}$ is defined by $h_A(x) = Ax$,
+where $x$ is a vector in $F^n$ (for some finite field $F$) and
+$A$ is an $n$-by-$n$ matrix over $F$. Note that we must restrict $x$
+to not equal zero.
 
-Not strongly transitive group - ? \\\\
-When  $n$ is not a prime power? Take something just a bit larger than $n$, we won't, in this course, care much about this.\\\\
-Is this the best we can hope for? Meaning, the smallest family satisfying this property? For $k$-wise we can ?\\\\
+Is it possible to construct a family of pairwise independent hash
+functions that are all permutations? This is in fact easy: a function
+$h_{a,b} \in H_{\mathrm{linear}}$ is a permutation iff $a \neq
+0$. However, requiring $k$-wise independence for $k>3$ makes this
+problem more difficult, and no elegant solution is currently known.
 
-Two parties: Alice and Bob. Alice wants to send a message to Bob. Between Alice and Bob stands Eve. Eve might change the message from Alice. What can Alice and Bob agree on to allow Bob to recognize when the message has been tampered with. \\
-It can be shown that if they have no previous agreement, and no secrets, there's nothing they can do.\\
-If they do meet, they can agree on some secret. Alice and Bob know the secret, and Eve doesn't. 
-Suppose the secret is some hash function $h$. Then Alice sends $h(m)$ (m is the message). Alice sends $h(m), m$. Eve may change and send $m',s$ which succeeds only if $s=h(m').$ Without knowing the hash function, this has probability as small as we'd like. If $m$ is very large, we could have a very large hash function. That's why we would probably prefer a hash function that isn't fully pairwise independent. This describes a one-time authentication scheme. If we wanted to send many messages, we'd need Eve not to have too much computation power (otherwise she might learn the hash function). \\\\
+We can use families of pairwise independent hash functions for message
+authentication. Consider two parties: Alice and Bob. Alice wants to
+send a message to Bob, but Eve stands between them, and Eve might
+tamper with the message. Alice and Bob would like to find an
+authentication mechanism that would help detect tampering.
+
+It can be shown that if Alice and Bob have no secrets from Eve, then
+there's nothing they can do. Let's assume then that they share a
+secret that is unknown to Eve. In particular, suppose this secret is a
+hash function $h$, picked uniformly at random from some family of
+pairwise independent hash functions.
+
+To send an authenticated message $m$, Alice appends $h(m)$ to $m$. Eve
+may change this message and send instead $m',s$, which would succeed
+only if $s=h(m')$. The probability of success can be made arbitrarily
+small, by choosing a large enough family of functions.
+
+Note that this scheme cannot be used repeatedly. For example, a linear
+hash function can be learned from two such authenticated messages.
 
 \section{Multiset equality}
 Alice and Bob each receive streams $\{z_i\}_{i=1}^l$ and
@@ -189,33 +209,55 @@ alternative proof for this lemma, for the case of $S=F$. For fixed $y
 \in F^n$ and $x \in F^{n-1}$, $Q(x+ty)$ is a single variable
 polynomial in $t$ of degree $d$, and as such has at most $d$ zeros, or
 a probability of $d/|F|$ for a random $t$ to be a zero. The theorem
-follows from the fact that $F^n$ is partitioned by the choice of $x$
-and $y$.
+follows from the fact that $F^n$ is partitioned into lines by the
+choice of $x$ and $y$.
 
 
-\section{Perfect Matchings}
-Suppose we have a bipartite graph $n$ vertices in each part. A perfect matching is a subset of $n$ edges such that each vertex touches a unique edge.
-We know we can find them with flow algorithms. It's in P, but not a trivial problem. We want to make it into a trivial problem. \\\\
-We can talk about the adjacency Matrix of a graph $G$. We put $V$ on rows, $U$ on columns, and write the adjacency matrix:  $M_{i,j}=\begin{cases}0 & (i,j)\in E \\
-1 & o.w. \\
-\end{cases}$
+\subsection{Application to perfect matchings and more}
+Let $G=(U,V,E)$ be a bipartite graph, with $|U|=|V|=n$. A perfect
+matching is a subset of $n$ edges such that each vertex touches a
+unique edge.
 
-The Tutte Matrix is a matrix with $\forall (i,j)\in E$ assign $x_{i,j}$.\\
-will have $det(T)\ne0$ iff $G$ has a perfect matching. 
-The determinant is the sum of all permutations:
-$\sum_{\pi}(-1)^{?}\prod_{i=1}^{n}T_{i,\pi(i)}$\\
-The algorithm is quite clear: choose a random assignment to $X_{i,j}$. 
+Perfect matchings can be found with flow algorithms, which are
+non-trivial. We will show a simple randomized solution, using
+multivariate polynomial identity testing.
 
-Instead of computing the determinant, we only compute it for the points we choose. That will be non-zero if and only if there's a perfect matching. We see whether we get a perfect matching or not. \\
-$\Pr[Error]\le\frac{n}{|F|}$, the probability of saying there isn't a perfect matching when there is.
+Let $M$ be the adjacency matrix of a $G$, so that for $i \in U$ and $j
+\in V$ it holds that
+\begin{align*}
+M_{i,j}=
+\begin{cases}
+  1 & (i,j)\in E \\
+  0 & \mathrm{otherwise} \\
+\end{cases}.  
+\end{align*}
+The Tutte Matrix $T$ is constructed by replacing each non-zero element
+$M_{ij}$ of $M$ with the formal variable $x_{ij}$:
+\begin{align*}
+T_{i,j}=
+\begin{cases}
+  x_{ij} & (i,j)\in E \\
+  0 & \mathrm{otherwise} \\
+\end{cases}.  
+\end{align*}
+It is easy to see that $\det(T)\neq 0$ iff $G$ has a perfect matching,
+since the determinant is the sum of all permutations:
+$\sum_{\pi}(-1)^{\mathrm{sgn} \pi}\prod_{i=1}^{n}T_{i,\pi(i)}$.  The algorithm
+is no trivial: choose random assignments to $\{x_{ij}\}$ and calculate
+$\det(T)$. Since $\det(T)$ is a polynomial of degree $n$, the
+probability that it will be zero for a random assignment is at most
+$n/|F|$, given that a perfect matching exists. We can control the
+probability of error by choosing a large $F$.
 
-We don't know how to check whether a graph has a matching. The flow algorithms are sequential. This gives us a parallel algorithm for checking whether a given graph has a pm or not. This used to be a big problem, whether there is an explicit deterministic algorithm for finding a pm in graphs.\\\\
+An advantage of this algorithm over flow algorithms is that it is easy
+to parallelize, whereas flow algorithms are inherently sequential. 
 
-Another application: primality testing can also be viewed as identity testing. There is a simple algorithm for primality testing for checking using identity testing whether a number is primal or not - define 
-$P_n(z)=(1+z)^{n}-1-z^n$. Then to test primality you get that 
-$P_n(z)=0 mod n \iff$ z is prime.\\
 
-So what we've seen was one of the most useful probabilistic techniques that we know. Has many applications. Perfect matching, primality testing, memory checking etc. 
+Primality testing can also be viewed as identity testing. Consider the
+following simple algorithm for primality testing: given a number $n$,
+define $P_n(z)=(1+z)^{n}-1-z^n$. Then $P_n(z)=0 \mod n \iff$ z is
+prime, and thus testing for the primality of $n$ is equivalent to
+testing whether $P_n(z)$ is identically zero.
 
 \bibliographystyle{abbrv} \bibliography{lectures}
 
