@@ -6,25 +6,45 @@
 \begin{document}
 
 \lecture{4}{}{Moni Naor}{Tamar Zondiner \& Omer Tamuz}
-\section{Application of pairwise independent hash functions}
+\section{Pairwise independent hash functions}
 In the previous lecture we encountered two families of pairwise
 independent hash function: $H_{\mathrm{subset}}$ and
-$H_{\mathrm{linear}}$. A similar family is $H_{\mathrm{matrix}}$: a
-function $h_A \in H_{\mathrm{matrix}}$ is defined by $h_A(x) = Ax$,
-where $x$ is a vector in $F^n$ (for some finite field $F$) and
-$A$ is an $n$-by-$n$ matrix over $F$. Note that we must restrict $x$
-to not equal zero.
+$H_{\mathrm{linear}}$. We recall their definitions:
+\begin{definition}
+  $H_{\mathrm{subset}}$ is a family of functions parameterized by
+  $(c_1, \ldots, c_{\log n}) \in [n]^{\log n}$ such that $h_{c_1,
+    \ldots, c_{\log n}}(x) = \sum_{i=1}^{\log n}c_jx_j \mod n$, for $x \in
+    \{0,1\}^n$.
+\end{definition}
+\begin{definition}
+  $H_{\mathrm{linear}}$ is a family of functions parameterized by
+  $a,b \in [n]$ such that $h_{a,b}(x) = ax+b \mod n$, for $x \in [n]$.
+\end{definition}
 
-Is it possible to construct a family of pairwise independent hash
-functions that are all permutations? This is in fact easy: a function
-$h_{a,b} \in H_{\mathrm{linear}}$ is a permutation iff $a \neq 0$.
-However, requiring $k$-wise independence for $k>3$ makes this problem
-more difficult. There are no known non-trivial (i.e., not containing
-all permutations) constructions of (exact) $k$-wise independent
-families of permutations.  There are constructions that are {\em
-  almost} $k$-wise independent, but we leave the discussion of
+A similar family to $H_{\mathrm{linear}}$ is $H_{\mathrm{matrix}}$: a
+function $h_A \in H_{\mathrm{matrix}}$ is defined by $h_A(x) = Ax$,
+where $x$ is a vector in $F^n$ (for some finite field $F$) and $A$ is
+an $n$-by-$n$ matrix over $F$. Note that we must restrict $x$ to not
+equal zero.
+
+$k-wise$ independent families of functions can be constructed by
+generalizing linear functions to $k-1$-degree polynomials. 
+
+Is it possible to construct a family of pairwise independent
+permutations? These are families for which the probability that
+$h(x)=h(y)$ for $x \neq y$ is $1/n(n-1)$ (rather than $1/n^2$, as in
+the case of general functions).
+
+This is in fact easy: a function $h_{a,b} \in H_{\mathrm{linear}}$ is
+a permutation iff $a \neq 0$.  However, requiring $k$-wise
+independence for $k>3$ makes this problem more difficult; this is an
+important open problem. There are no known non-trivial (i.e., not
+containing all permutations) constructions of (exact) $k$-wise
+independent families of permutations.  There are constructions that
+are {\em almost} $k$-wise independent, but we leave the discussion of
 approximation notions to later in the course.
 
+\subsection{Application to authenticated communication}
 We can use families of pairwise independent hash functions for message
 authentication. Consider two parties: Alice and Bob. Alice wants to
 send a message to Bob, but Eve stands between them, and Eve might
@@ -46,16 +66,17 @@ Note that this scheme cannot be used repeatedly. For example, a linear
 hash function can be learned from two such authenticated messages.
 
 \section{Multiset equality}
-Alice and Bob each receive streams $\{z_i\}_{i=1}^l$ and
-$\{w_i\}_{i=1}^l$, respectively. They would like to determine whether
+Alice and Bob each receive streams $\{z_i\}_{i=1}^\ell$ and
+$\{w_i\}_{i=1}^\ell$, respectively. They would like to determine whether
 $z$ and $w$ are equal as multisets. Formally, this holds if there
 exists a permutation $\sigma$ such that $z_i=w_{\sigma(i)}$ for all
 $i$. Na\"ively, they could send each other the entire stream, sort
 each stream and compare them. We would like to find a solution that
 has lower communication complexity.
 
-A possible approach would be for them to calculate $\sum_{i=1}^l z_i$
-and $\sum_{j=1}^l w_j$ and compare the result of this
+A possible approach would be for them to calculate some simple
+function that is sensitive to the inputs, such as $\sum_{i=1}^\ell z_i$
+and $\sum_{j=1}^\ell w_j$, and compare the result of this
 calculation. However, in an adversarial model this would give no
 non-trivial lower bound on the probability of declaring the streams
 equal when in fact they are not.
@@ -64,17 +85,18 @@ A more fruitful approach is to consider the {\em product} of the
 elements, rather than their sum. We regard each $w_i$ and $z_i$ as an
 element of some finite field $F$. Then:
 \begin{claim}
-  Let $Z(x)=\prod_{i=1}^l(z_i-x)$ and $W(x)=\prod_{i=1}^l(w_i-x)$. Then, for a
-  uniformly random choice of $x \in F$, it holds that
+  Let $Z(x)=\prod_{i=1}^\ell(z_i-x)$ and
+  $W(x)=\prod_{i=1}^\ell(w_i-x)$. Then, for a uniformly random choice
+  of $x \in F$, it holds that
   \begin{align*}
-    \Pr[Z(x)=W(x)] \leq \frac{l-1}{|F|}
+    \Pr[Z(x)=W(x)] \leq \frac{\ell-1}{|F|}
   \end{align*}
   whenever $Z \neq W$.
 \end{claim}
 \begin{proof}
-  The polynomial $P(x)=Z(x)-W(x)$ is of degree $l-1$, and therefore
-  has at most $l-1$ roots. Hence $W(x)$ is equal to $Z(x)$ in at most
-  $l-1$ values of $x$, out of the possible $|F|$ values.
+  The polynomial $P(x)=Z(x)-W(x)$ is of degree $\ell-1$, and therefore
+  has at most $\ell-1$ roots. Hence $W(x)$ is equal to $Z(x)$ in at most
+  $\ell-1$ values of $x$, out of the possible $|F|$ values.
 \end{proof}
 
 The proposed algorithm is therefore for Alice and Bob to calculate
@@ -87,10 +109,10 @@ appropriate choice of $F$.
 \subsection{Application to memory checking}
 
 Consider a CPU which uses a large external memory store. The CPU
-doesn't trust the store, as it is possibly unreliable and may change a
-stored value adversarially. We would like to find a way for the CPU to
-verify that indeed every value read from memory is the same as the
-last value written there.
+doesn't trust the external storage, as it is possibly unreliable and
+may change a stored value adversarially. We would like to find a way
+for the CPU to verify that indeed every value read from memory is the
+same as the last value written there.
 
 One may take two approaches here: an on-line and an off-line
 approach. In the on-line approach the CPU verifies continuously that
@@ -127,7 +149,8 @@ Let $R$ equal the set of triplets $(a,v,t)$ read at the time of
 termination of the program, and likewise let $W$ equal the set of
 triplets $(a,v,t)$ written up to that time.
 
-Given the CPU's actions, the following claim is easy to verify:
+Given the CPU's actions, the proof of the following claim is left as
+an exercise to the reader:
 \begin{claim}
   If no time-stamp read was higher than the current time-stamp, then
   $W=R$ if and only if the memory has functioned correctly.
@@ -145,9 +168,9 @@ high probability when it is.
 
 \section{Multivariate polynomials}
 Let $Q({x_1, \ldots, x_n})$ be an $n$-variate polynomial over some
-finite field $F$. We define the degree of a term of $Q$,
-$Cx_1^{e_1}x_2^{e_2} \cdots x_n^{e_n}$, to be $\sum_{e_i}$, and the
-degree of $Q$ to be the maximum degree of any of its terms.
+finite field $F$. We define the degree of a term $x_1^{e_1}x_2^{e_2}
+\cdots x_n^{e_n}$ of $Q$ to be $\sum_i{e_i}$, and the degree of $Q$ to
+be the maximum degree of any of its terms.
 
 When given $Q$ implicitly, an interesting question is whether $Q$ is
 identically zero. If we have the possibility of efficiently evaluating
@@ -157,10 +180,9 @@ would definitely equal zero. We would like to calculate the
 probability that $Q(r) = 0$ when $Q \neq 0$.
 
 The following lemma was proven independently by
-Scwartz~\cite{Schwartz:1980} and Zippel~\cite{Zippel:1979}, and
-presented at the same conference, where Zippel spoke right after
-Schwartz, according to the program. A slightly weaker result was
-proved earlier by Demillo and
+Schwartz~\cite{Schwartz:1980} and Zippel~\cite{Zippel:1979}, and
+presented at the same conference. A slightly weaker result was proved
+earlier by Demillo and
 Lipton~\cite{DemilloLipton:1978}. See~\cite{LiptonBlog} for an
 in-depth discussion of the mathematics, history and politics.
 
@@ -208,13 +230,13 @@ in-depth discussion of the mathematics, history and politics.
   \end{align*}
 \end{proof}
 
-Recently, Moshkovitz~\cite{Moshkovitz:2010} published a short
-alternative proof for this lemma, for the case of $S=F$. We shall not
-describe it in full detail, but mention that her proof is based on
-partitioning all the points of $F^n$ into $F^{n-1}$ (parallel) lines
-of the form $x+ty$, for some $y$. The argument is then that $Q(x+ty)$
-is a non-zero polynomial of degree $d$ in $t$ and hence has at most
-$d/|F|$ roots.
+Recently, Moshkovitz~\cite{Moshkovitz:2010} published an alternative
+proof for this lemma, for the case of $S=F$. We shall not describe it
+in full detail, but mention that her proof is based on partitioning
+all the points of $F^n$ into $F^{n-1}$ (parallel) lines of the form
+$x+ty$, for some $y$. The argument is then that $Q(x+ty)$ is a
+non-zero polynomial of degree $d$ in $t$ and hence has at most $d/|F|$
+roots.
 
 
 \subsection{Application to perfect matchings and more}
@@ -244,10 +266,23 @@ T_{i,j}=
   0 & \mathrm{otherwise} \\
 \end{cases}.  
 \end{align*}
-It is easy to see that $\det(T)\neq 0$ iff $G$ has a perfect matching,
-since the determinant is the sum of all permutations:
-$\sum_{\pi}(-1)^{\mathrm{sgn} \pi}\prod_{i=1}^{n}T_{i,\pi(i)}$. Given
-the Schwartz-Zippel machinery, the suggested algorithms is now
+$\det(T)$ is now a polynomial in the variables $x_{ij}$ with degree at
+most $n$.
+
+\begin{claim}
+$\det(T)\neq 0$ iff $G$ has a perfect matching.  
+\end{claim}
+\begin{proof}
+  The determinant is the sum of all permutations:
+  $\sum_{\pi}(-1)^{\mathrm{sgn}
+    \pi}\prod_{i=1}^{n}T_{i,\pi(i)}$. These permutations correspond to
+  perfect matchings. If there is no matching, then each such term is
+  zero. If there is a perfect matching then the assignment that sets
+  one to the edges of the matching and zero to the other variables is
+  equal to one.
+\end{proof}
+
+Given the Schwartz-Zippel machinery, the suggested algorithms is now
 following: choose random assignments to $\{x_{ij}\}$ and calculate
 $\det(T)$. Since $\det(T)$ is a polynomial of degree $n$, the
 probability that it will be zero for a random assignment is at most
@@ -266,7 +301,9 @@ algorithm for primality testing: given a number $n$, define
 $P_n(z)=(1+z)^{n}-1-z^n$. Then $P_n(z)=0 \mod n \iff$ z is prime, and
 thus testing for the primality of $n$ is equivalent to testing whether
 $P_n(z)$ is identically zero. Note that over the composites it is not
-clear that such a test exists.
+immediately clear that such a test exists, since the Schwartz-Zippel
+lemma can only be applied when $n$ is a prime power. This difficulty
+is overcome in~\cite{AgrawalBiswas:2003}.
 
 \bibliographystyle{abbrv} \bibliography{lectures}
 
