@@ -17,9 +17,13 @@ to not equal zero.
 
 Is it possible to construct a family of pairwise independent hash
 functions that are all permutations? This is in fact easy: a function
-$h_{a,b} \in H_{\mathrm{linear}}$ is a permutation iff $a \neq
-0$. However, requiring $k$-wise independence for $k>3$ makes this
-problem more difficult, and no elegant solution is currently known.
+$h_{a,b} \in H_{\mathrm{linear}}$ is a permutation iff $a \neq 0$.
+However, requiring $k$-wise independence for $k>3$ makes this problem
+more difficult. There are no known non-trivial (i.e., not containing
+all permutations) constructions of (exact) $k$-wise independent
+families of permutations.  There are constructions that are {\em
+  almost} $k$-wise independent, but we leave the discussion of
+approximation notions to later in the course.
 
 We can use families of pairwise independent hash functions for message
 authentication. Consider two parties: Alice and Bob. Alice wants to
@@ -205,12 +209,12 @@ in-depth discussion of the mathematics, history and politics.
 \end{proof}
 
 Recently, Moshkovitz~\cite{Moshkovitz:2010} published a short
-alternative proof for this lemma, for the case of $S=F$. For fixed $y
-\in F^n$ and $x \in F^{n-1}$, $Q(x+ty)$ is a single variable
-polynomial in $t$ of degree $d$, and as such has at most $d$ zeros, or
-a probability of $d/|F|$ for a random $t$ to be a zero. The theorem
-follows from the fact that $F^n$ is partitioned into lines by the
-choice of $x$ and $y$.
+alternative proof for this lemma, for the case of $S=F$. We shall not
+describe it in full detail, but mention that her proof is based on
+partitioning all the points of $F^n$ into $F^{n-1}$ (parallel) lines
+of the form $x+ty$, for some $y$. The argument is then that $Q(x+ty)$
+is a non-zero polynomial of degree $d$ in $t$ and hence has at most
+$d/|F|$ roots.
 
 
 \subsection{Application to perfect matchings and more}
@@ -242,22 +246,27 @@ T_{i,j}=
 \end{align*}
 It is easy to see that $\det(T)\neq 0$ iff $G$ has a perfect matching,
 since the determinant is the sum of all permutations:
-$\sum_{\pi}(-1)^{\mathrm{sgn} \pi}\prod_{i=1}^{n}T_{i,\pi(i)}$.  The algorithm
-is no trivial: choose random assignments to $\{x_{ij}\}$ and calculate
+$\sum_{\pi}(-1)^{\mathrm{sgn} \pi}\prod_{i=1}^{n}T_{i,\pi(i)}$. Given
+the Schwartz-Zippel machinery, the suggested algorithms is now
+following: choose random assignments to $\{x_{ij}\}$ and calculate
 $\det(T)$. Since $\det(T)$ is a polynomial of degree $n$, the
 probability that it will be zero for a random assignment is at most
 $n/|F|$, given that a perfect matching exists. We can control the
 probability of error by choosing a large $F$.
 
 An advantage of this algorithm over flow algorithms is that it is easy
-to parallelize, whereas flow algorithms are inherently sequential. 
+to parallelize (since there are parallel algorithms for evaluating the
+determinant of a matrix), whereas flow algorithms are inherently
+sequential.
 
 
-Primality testing can also be viewed as identity testing. Consider the
-following simple algorithm for primality testing: given a number $n$,
-define $P_n(z)=(1+z)^{n}-1-z^n$. Then $P_n(z)=0 \mod n \iff$ z is
-prime, and thus testing for the primality of $n$ is equivalent to
-testing whether $P_n(z)$ is identically zero.
+Primality testing can also be viewed as identity
+testing~\cite{AgrawalBiswas:2003}. Consider the following simple
+algorithm for primality testing: given a number $n$, define
+$P_n(z)=(1+z)^{n}-1-z^n$. Then $P_n(z)=0 \mod n \iff$ z is prime, and
+thus testing for the primality of $n$ is equivalent to testing whether
+$P_n(z)$ is identically zero. Note that over the composites it is not
+clear that such a test exists.
 
 \bibliographystyle{abbrv} \bibliography{lectures}
 

@@ -9,6 +9,6 @@ latex gldifftemp2
 dvips -t letter gldifftemp2 -o
 ps2pdf gldifftemp2.ps
 evince gldifftemp2.pdf  
-rm gldifftemp*
+
 
 
