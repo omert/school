@@ -1,0 +1,283 @@
+\documentclass[11pt]{article} \usepackage{amssymb}
+\usepackage{amsfonts} \usepackage{amsmath} \usepackage{amsthm} \usepackage{bm}
+\usepackage{latexsym} \usepackage{epsfig}
+
+\setlength{\textwidth}{6.5 in} \setlength{\textheight}{8.25in}
+\setlength{\oddsidemargin}{0in} \setlength{\topmargin}{0in}
+\addtolength{\textheight}{.8in} \addtolength{\voffset}{-.5in}
+
+\newtheorem*{theorem*}{Theorem}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem*{proposition*}{Proposition}
+\newtheorem*{claim*}{Claim}
+
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{example}[theorem]{Example}
+%\newenvironment{proof}{\noindent \textbf{Proof:}}{$\Box$}
+
+\newcommand{\ignore}[1]{}
+
+\newcommand{\enote}[1]{} \newcommand{\knote}[1]{}
+\newcommand{\rnote}[1]{}
+
+
+\DeclareMathOperator{\Support}{Supp} \DeclareMathOperator{\Opt}{Opt}
+\DeclareMathOperator{\Ordo}{\mathcal{O}}
+\newcommand{\MaxkCSP}{\textsc{Max $k$-CSP}}
+\newcommand{\MaxkCSPq}{\textsc{Max $k$-CSP$_{q}$}}
+\newcommand{\MaxCSP}[1]{\textsc{Max CSP}(#1)} \renewcommand{\Pr}{{\bf
+    P}} \renewcommand{\P}{{\bf P}} \newcommand{\Px}{\mathop{\bf P\/}}
+\newcommand{\E}{{\bf E}} \newcommand{\Cov}{{\bf Cov}}
+\newcommand{\Var}{{\bf Var}} \newcommand{\Varx}{\mathop{\bf Var\/}}
+
+\newcommand{\bits}{\{-1,1\}}
+
+\newcommand{\nsmaja}{\textstyle{\frac{2}{\pi}} \arcsin \rho}
+
+\newcommand{\Inf}{\mathrm{Inf}} \newcommand{\I}{\mathrm{I}}
+\newcommand{\J}{\mathrm{J}}
+
+\newcommand{\eps}{\epsilon} \newcommand{\lam}{\lambda}
+
+% \newcommand{\trunc}{\ell_{2,[-1,1]}}
+\newcommand{\trunc}{\zeta} \newcommand{\truncprod}{\chi}
+
+\newcommand{\N}{\mathbb N} \newcommand{\R}{\mathbb R}
+\newcommand{\Z}{\mathbb Z} \newcommand{\CalE}{{\mathcal{E}}}
+\newcommand{\CalC}{{\mathcal{C}}} \newcommand{\CalM}{{\mathcal{M}}}
+\newcommand{\CalR}{{\mathcal{R}}} \newcommand{\CalS}{{\mathcal{S}}}
+\newcommand{\CalV}{{\mathcal{V}}}
+\newcommand{\CalX}{{\boldsymbol{\mathcal{X}}}}
+\newcommand{\CalG}{{\boldsymbol{\mathcal{G}}}}
+\newcommand{\CalH}{{\boldsymbol{\mathcal{H}}}}
+\newcommand{\CalY}{{\boldsymbol{\mathcal{Y}}}}
+\newcommand{\CalZ}{{\boldsymbol{\mathcal{Z}}}}
+\newcommand{\CalW}{{\boldsymbol{\mathcal{W}}}}
+\newcommand{\CalF}{{\mathcal{Z}}}
+% \newcommand{\boldG}{{\boldsymbol G}}
+% \newcommand{\boldQ}{{\boldsymbol Q}}
+% \newcommand{\boldP}{{\boldsymbol P}}
+% \newcommand{\boldR}{{\boldsymbol R}}
+% \newcommand{\boldS}{{\boldsymbol S}}
+% \newcommand{\boldX}{{\boldsymbol X}}
+% \newcommand{\boldB}{{\boldsymbol B}}
+% \newcommand{\boldY}{{\boldsymbol Y}}
+% \newcommand{\boldZ}{{\boldsymbol Z}}
+% \newcommand{\boldV}{{\boldsymbol V}}
+\newcommand{\boldi}{{\boldsymbol i}} \newcommand{\boldj}{{\boldsymbol
+    j}} \newcommand{\boldk}{{\boldsymbol k}}
+\newcommand{\boldr}{{\boldsymbol r}}
+\newcommand{\boldsigma}{{\boldsymbol \sigma}}
+\newcommand{\boldupsilon}{{\boldsymbol \upsilon}}
+\newcommand{\hone}{{\boldsymbol{H1}}}
+\newcommand{\htwo}{\boldsymbol{H2}}
+\newcommand{\hthree}{\boldsymbol{H3}}
+\newcommand{\hfour}{\boldsymbol{H4}}
+
+
+\newcommand{\sgn}{\mathrm{sgn}} \newcommand{\Maj}{\mathrm{Maj}}
+\newcommand{\Acyc}{\mathrm{Acyc}}
+\newcommand{\UniqMax}{\mathrm{UniqMax}}
+\newcommand{\Thr}{\mathrm{Thr}} \newcommand{\littlesum}{{\textstyle
+    \sum}}
+
+\newcommand{\half}{{\textstyle \frac12}}
+\newcommand{\third}{{\textstyle \frac13}}
+\newcommand{\fourth}{{\textstyle \frac14}}
+\newcommand{\fifth}{{\textstyle \frac15}}
+
+\newcommand{\Stab}{\mathbb{S}}
+\newcommand{\StabThr}[2]{\Gamma_{#1}(#2)}
+\newcommand{\StabThrmin}[2]{{\underline{\Gamma}}_{#1}(#2)}
+\newcommand{\StabThrmax}[2]{{\overline{\Gamma}}_{#1}(#2)}
+\newcommand{\TestFcn}{\Psi}
+
+\renewcommand{\phi}{\varphi}
+
+\renewcommand{\theenumi}{\Alph{enumi}}
+\renewcommand{\labelenumi}{\theenumi.}
+\renewcommand{\theenumii}{\arabic{enumii}}
+\renewcommand{\labelenumii}{\theenumii.}
+\renewcommand{\theenumiii}{\alph{enumiii}}
+\renewcommand{\labelenumiii}{\theenumiii)}
+
+\begin{document}
+\title{Game Theory Exam Solution}
+\author{Omer Tamuz}
+\date{\today}
+\maketitle
+
+\begin{enumerate}
+\item
+  \begin{enumerate}
+  \item
+    \begin{enumerate}
+    \item Denote by $R$ the convex set defined in the question. Let
+      $\vec{n}={\sqrt{3}\over 3} (1,1,1)$. Let $L$ be the plane defined by
+      $L=\{\vec{x}\: : \: (\vec{x}-\vec{n}) \cdot \vec{n} = 0\}$.
+
+      Note that since $(\vec{0}-\vec{n}) \cdot \vec{n} = -|\vec{n}|^2 = -1 <
+      0$ then the origin is not in $L$.
+
+      Consider $\vec{x}=(x_1, x_2, x_3) \in R$. Then
+      \begin{align}
+        (\vec{x}-\vec{n}) \cdot \vec{n} &= \vec{x} \cdot \vec{n} - 1
+        \\ &= -1+{\sqrt{3}\over 3}\sum_{i=1}^3x_i
+        \\ &\geq -1 + \sqrt{3}\left(\prod_{i=1}^3x_i\right)^{1/3} \label{eq:geo}
+        \\ &\geq -1 + \sqrt{3} \label{eq:in-r}
+        \\ &> 0,
+      \end{align}
+      where \eqref{eq:geo} stems from the fact that for positive
+      numbers the geometric mean is at most as large at the arithmetic
+      mean, and \eqref{eq:in-r} is a consequence of the fact
+      that $x\in R$.
+
+      Thus we have that $(\vec{0}-\vec{n}) \cdot \vec{n} < 0$ and
+      $(\vec{x}-\vec{n}) \cdot \vec{n} > 0$ for all $x\in R$, and thus
+      $L$ is a separating plane, as required.
+
+    \item The statement is not true. Let $R=\{(x,0,0) : x \geq 0\}$ be
+      the closed convex subset of $\R^3$ that contains the
+      origin. Then clearly the origin is a boundary point of $R$, any
+      plane that passes through the origin and does not include the
+      $x$-axis is a supporting hyperplane, and there is more than one
+      such plane.
+    \end{enumerate}
+  \item
+    \begin{enumerate}
+    \item
+      \begin{theorem*}
+        Let $G$ be a zero sum two player game. Then there exists a $V
+        \in \R$, a mixed strategy $S_1$ for player 1 and a mixed
+        strategy $S_2$ for player 2 such that if player 2 plays $S_2$
+        then the highest possible payoff for player 1 is $V$ and if
+        player 1 plays $S_1$ then the highest possible payoff for
+        player 2 is $-V$.
+      \end{theorem*}
+      \begin{proof}        
+        Let $S_1$ be a mixed strategy for player 1 and $S_2$ be a
+        mixed strategy for player 2, such that $(S_1,S_2)$ is a Nash
+        equilibrium point of the game. The existence of such a pair is
+        guaranteed by the Nash equilibrium theorem.
+
+        Let $V$ be player 1's expected payoff at this Nash. Then,
+        since $G$ is a zero sum game then player 2's expected payoff
+        is $-V$. Since $(S_1,S_2)$ is a Nash equilibrium then the
+        expected payoff for player 1 when playing any other strategy
+        is at most $V$, and the same holds for player 2 and $-V$. Thus
+        $V$, $S_1$ and $S_2$ satisfy the requirements of the theorem.
+      \end{proof}
+    \item 
+      \begin{theorem*}
+        Let $G$ be a zero sum two player game with payoffs $a_{ij}$
+        for strategies $1 \leq i \leq n$ and $1 \leq j \leq m$. Then
+        \begin{align*}
+          \max_{1 \leq i \leq n}\left\{\min_{1 \leq j \leq m}
+              a_{ij}\right\}
+          \leq \min_{1 \leq j \leq m}\left\{\max_{1 \leq i \leq n} a_{ij}\right\}
+        \end{align*}
+      \end{theorem*}
+      \begin{proof}
+        Denote $x_i= \min_{1 \leq j \leq m} a_{ij}$ and $y_j = \max_{1
+          \leq i \leq n} a_{ij}$. For any $i$ and $j$ it holds that
+        $x_i \leq a_{ij} \leq y_i$, by definition. Hence $\forall i,j$
+        it holds that $x_i \leq y_j$, and in particular $\max_ix_i
+        \leq min_jy_j$, which is an equivalent statement to that of
+        the theorem.        
+      \end{proof}
+    \end{enumerate}
+  \end{enumerate}
+\item
+  \begin{enumerate}
+  \item
+   {\bf Two person general sum game.}
+
+      A two person general sum game includes two players. Each player
+      $i \in \{1,2\}$ must choose a strategy $s_i \in S_i$, for some
+      set of strategies $S_i$. When player 1 chooses $s_1$ and player
+      2 chooses $s_2$ the payoff to player 1 is $A_{s_1,s_2}$ and to
+      player 2 is $B_{s_1,s_2}$.  $A$ and $B$ have real entries but
+      are not otherwise constrained. A mixed strategy $\sigma_i$ is a
+      distribution over $S_i$. The payoff to player 1 for strategies
+      $\sigma_1$ and $\sigma_2$ is the expected payoff when $s_i$ is
+      picked from $\sigma_i$.
+
+      There are a number of solution concepts for such a game. $s_1$
+      is a {\em dominant strategy} for player 1 if for any strategy
+      played by player 2 the maximum payoff is achieved by playing
+      $s_1$:
+      \begin{align*}        
+        \forall t_1 \in S_1,s_2 \in S_2: A_{s_1,s_2} \geq A_{t_1,s_2}.
+      \end{align*}
+      If a player has a dominant strategy then it is hard to imagine
+      why she would not use it.
+
+      A pure Nash equilibrium is a pair of pure (i.e., not mixed)
+      strategies $(s_1,s_2)$ such that player 1 cannot get a better
+      payoff by deviating from $s_1$, assuming the player 2 plays
+      $s_2$, and vice versa.
+
+      A mixed Nash equilibrium is a pair of mixed strategies for which
+      the same holds. Such an equilibrium is guaranteed to exist in
+      games where the sets of strategies are finite.
+
+      A correlated equilibrium is a joint distribution $\mathcal{C}$
+      over $S_1 \times S_2$. Such that if $(s_1,s_2)$ are drawn from
+      $\mathcal{C}$ then...
+  \item
+    \begin{enumerate}
+    \item {\bf Prisoners' dilemma}
+
+      This game has one obvious pure Nash equilibrium. It occurs when
+      both players play the second strategy. Their payoff is then -5,
+      and they can only decrease it to -10 be deviating.
+
+      \vspace{0.1in}
+      {\bf Battle of the sexes}
+
+      This game has two pure equilibria and a mixed equilibrium. Two
+      two pure equilibria occur when both players choose the same
+      strategy: either both choose the first or both choose the
+      second. Their payoffs are then either 10 or 3, and can only
+      decrease to 0 by deviating.
+
+      In a mixed equilibrium the expected payoff to each player is the
+      same for playing all strategies in the support of her mixed
+      strategy. We'll use this to find the mixed equilibrium for this
+      game. Let the equilibrium strategies be such that the column
+      player plays strategy 1 with probability $p$, and the row
+      player plays strategy 1 with probability $q$. Then the expected
+      payoff to the column player is $3q$ for playing strategy 1 and
+      $10(1-q)$ for playing strategy 2. The solution of the equation
+      $3q=10(1-q)$ is $q=10/13$. Likewise the row player's expected
+      payoffs are $10p$ and $3(1-p)$, and so $p=3/13$.
+    \end{enumerate}
+  \end{enumerate}
+\end{enumerate}
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
