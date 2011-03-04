@@ -1,0 +1,205 @@
+\documentclass[11pt]{article} \usepackage{amssymb}
+\usepackage{amsfonts} \usepackage{amsmath} \usepackage{amsthm} \usepackage{bm}
+\usepackage{latexsym} \usepackage{epsfig}
+
+\setlength{\textwidth}{6.5 in} \setlength{\textheight}{8.25in}
+\setlength{\oddsidemargin}{0in} \setlength{\topmargin}{0in}
+\addtolength{\textheight}{.8in} \addtolength{\voffset}{-.5in}
+
+\newtheorem*{theorem*}{Theorem}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem*{proposition*}{Proposition}
+\newtheorem*{claim*}{Claim}
+\newtheorem*{definition*}{Definition}
+
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{example}[theorem]{Example}
+%\newenvironment{proof}{\noindent \textbf{Proof:}}{$\Box$}
+
+\newcommand{\ignore}[1]{}
+
+\newcommand{\enote}[1]{} \newcommand{\knote}[1]{}
+\newcommand{\rnote}[1]{}
+
+
+\DeclareMathOperator{\Support}{Supp} \DeclareMathOperator{\Opt}{Opt}
+\DeclareMathOperator{\Ordo}{\mathcal{O}}
+\newcommand{\MaxkCSP}{\textsc{Max $k$-CSP}}
+\newcommand{\MaxkCSPq}{\textsc{Max $k$-CSP$_{q}$}}
+\newcommand{\MaxCSP}[1]{\textsc{Max CSP}(#1)} \renewcommand{\Pr}{{\bf
+    P}} \renewcommand{\P}{{\bf P}} \newcommand{\Px}{\mathop{\bf P\/}}
+\newcommand{\E}{{\bf E}} \newcommand{\Cov}{{\bf Cov}}
+\newcommand{\Var}{{\bf Var}} \newcommand{\Varx}{\mathop{\bf Var\/}}
+
+\newcommand{\bits}{\{-1,1\}}
+
+\newcommand{\nsmaja}{\textstyle{\frac{2}{\pi}} \arcsin \rho}
+
+\newcommand{\Inf}{\mathrm{Inf}} \newcommand{\I}{\mathrm{I}}
+\newcommand{\J}{\mathrm{J}}
+
+\newcommand{\eps}{\epsilon} \newcommand{\lam}{\lambda}
+
+% \newcommand{\trunc}{\ell_{2,[-1,1]}}
+\newcommand{\trunc}{\zeta} \newcommand{\truncprod}{\chi}
+
+\newcommand{\N}{\mathbb N} \newcommand{\R}{\mathbb R}
+\newcommand{\Z}{\mathbb Z} \newcommand{\CalE}{{\mathcal{E}}}
+\newcommand{\CalC}{{\mathcal{C}}} \newcommand{\CalM}{{\mathcal{M}}}
+\newcommand{\CalR}{{\mathcal{R}}} \newcommand{\CalS}{{\mathcal{S}}}
+\newcommand{\CalV}{{\mathcal{V}}}
+\newcommand{\CalX}{{\boldsymbol{\mathcal{X}}}}
+\newcommand{\CalG}{{\boldsymbol{\mathcal{G}}}}
+\newcommand{\CalH}{{\boldsymbol{\mathcal{H}}}}
+\newcommand{\CalY}{{\boldsymbol{\mathcal{Y}}}}
+\newcommand{\CalZ}{{\boldsymbol{\mathcal{Z}}}}
+\newcommand{\CalW}{{\boldsymbol{\mathcal{W}}}}
+\newcommand{\CalF}{{\mathcal{Z}}}
+% \newcommand{\boldG}{{\boldsymbol G}}
+% \newcommand{\boldQ}{{\boldsymbol Q}}
+% \newcommand{\boldP}{{\boldsymbol P}}
+% \newcommand{\boldR}{{\boldsymbol R}}
+% \newcommand{\boldS}{{\boldsymbol S}}
+% \newcommand{\boldX}{{\boldsymbol X}}
+% \newcommand{\boldB}{{\boldsymbol B}}
+% \newcommand{\boldY}{{\boldsymbol Y}}
+% \newcommand{\boldZ}{{\boldsymbol Z}}
+% \newcommand{\boldV}{{\boldsymbol V}}
+\newcommand{\boldi}{{\boldsymbol i}} \newcommand{\boldj}{{\boldsymbol
+    j}} \newcommand{\boldk}{{\boldsymbol k}}
+\newcommand{\boldr}{{\boldsymbol r}}
+\newcommand{\boldsigma}{{\boldsymbol \sigma}}
+\newcommand{\boldupsilon}{{\boldsymbol \upsilon}}
+\newcommand{\hone}{{\boldsymbol{H1}}}
+\newcommand{\htwo}{\boldsymbol{H2}}
+\newcommand{\hthree}{\boldsymbol{H3}}
+\newcommand{\hfour}{\boldsymbol{H4}}
+
+
+\newcommand{\sgn}{\mathrm{sgn}} \newcommand{\Maj}{\mathrm{Maj}}
+\newcommand{\Acyc}{\mathrm{Acyc}}
+\newcommand{\UniqMax}{\mathrm{UniqMax}}
+\newcommand{\Thr}{\mathrm{Thr}} \newcommand{\littlesum}{{\textstyle
+    \sum}}
+
+\newcommand{\half}{{\textstyle \frac12}}
+\newcommand{\third}{{\textstyle \frac13}}
+\newcommand{\fourth}{{\textstyle \frac14}}
+\newcommand{\fifth}{{\textstyle \frac15}}
+
+\newcommand{\Stab}{\mathbb{S}}
+\newcommand{\StabThr}[2]{\Gamma_{#1}(#2)}
+\newcommand{\StabThrmin}[2]{{\underline{\Gamma}}_{#1}(#2)}
+\newcommand{\StabThrmax}[2]{{\overline{\Gamma}}_{#1}(#2)}
+\newcommand{\TestFcn}{\Psi}
+\newcommand{\interior}{\mbox{int}}
+
+\renewcommand{\phi}{\varphi}
+
+\renewcommand{\theenumi}{\Alph{enumi}}
+\renewcommand{\labelenumi}{\theenumi.}
+\renewcommand{\theenumii}{\arabic{enumii}}
+\renewcommand{\labelenumii}{\theenumii.}
+\renewcommand{\theenumiii}{\alph{enumiii}}
+\renewcommand{\labelenumiii}{\theenumiii)}
+
+\begin{document}
+
+\title{Summary of pp.372-378 of Y. Kannai's ``The Core and
+  Balancedness``}
+
+\author{Omer Tamuz}
+\date{\today}
+
+\maketitle
+
+Let $N=\{1,\ldots,n\}$ be the set of players. A coalition in a subset
+of $N$. We denote by $x=(x_1,\ldots,x_n) \in \R^n$ the payoff vector
+to the players.
+
+A non-transferable $n$ person non-transferable utility game is defined
+by a function $V:2^N \to 2^{\R^N}$ (from coalitions to sets in $\R^n$)
+that has the following properties:
+\begin{itemize}
+\item $V(\emptyset) = \emptyset$.
+\item $V(S)$ is non empty and closed for all $S$.
+\item Let $y_i \leq x_i$ for all $i$. Then $x \in V(S)$ implies $y \in
+  V(S)$, for any $S$.
+\end{itemize}
+The third condition implies that if a coalition $S$ can achieve a certain
+payoff vector $x$ then it can also achieve any payoff vector $y$ that
+is strictly smaller than it, for every member of $S$.
+
+Given a transferable utility game $v$ we can translate it into a
+transferable utility game $V$ by setting $V(S)=\{x \in \R^n \mbox{
+  s.t. } \sum_{i \in S}x_i \leq v(S)\}$. We shall in fact assume that
+$V$ is always constructed in a similar way, so that there exists a
+closed and compact set $F$ such that $V(S)=\{x \in \R^n \mbox{
+  s.t. } (\exists y \in F)(\forall i):\:x_i \leq y_i\}$. We shall
+further make the simplifying assumption that $V(\{i\}) = \{x \in \R^n
+:\: x_i \leq 0\}$.
+
+We call a payoff vector $x$ {\em individually rational} if for all $i$
+and $y \in V(\{i\})$ it holds that $x_i \geq y_i$; a player will not
+join a coalition which gives her a lower payoff than she a achieve by
+herself. Clearly individually rational vectors exist iff there exists
+an $x \in F$ such that $x_i \geq 0$ for all $i$. We will assume
+henceforth that this is indeed the case.
+
+If $x$ is in the interior of $V(S)$ then $S$ can improve upon it, in
+the sense that there exists an $y \in V(S)$ such that $x_i < y_i$ for
+all $i$. Hence $V(N) \setminus \cap{S \subseteq N} int V(S)$ is the
+set of feasible payoff vectors that cannot be improved upon by any
+coalition. This set is referred to as the {\em core} of the game.
+
+In analogy to the case of transferable utilities we call a
+non-transferable utility game $V$ {\em balanced} if $\cap_{i=1}^k(S_i)
+\subseteq V(N)$ for every balanced collection $(S_1,\ldots,S_k)$ of
+subsets of $N$. This definition is due to
+Scarf~\cite{scarf:1967}. Note that if $v$ is balanced then the
+corresponding $V$ (as defined above) is also balanced.
+
+We devote the rest of this summary to prove the following theorem,
+following Shapely~\cite{shapley:1973} and Kannai~\cite{kannai:1970}:
+
+\begin{theorem}
+  Every balanced game has a non-empty core.
+\end{theorem}
+
+To prove this theorem we introduce two lemmas, generalizing Sperner's
+lemma and the Knaster, Kuratowski and Mazurkiewicz theorem.
+
+Denote the unit vectors of $R^n$ by $\{e^i\}_{i=1}^n$. For $S
+\subseteq N$, $S \neq \emptyset$ let $A^S$ equal the complex hull of
+$\{e^i\}_{i \in S}$. Let $m_S = \frac{1}{|S|}\sum_{i \in S}e^i$ be the
+barycenter of $A^S$. 
+ 
+
+
+\bibliographystyle{abbrv} \bibliography{summary}
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
