@@ -11,6 +11,7 @@
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem*{proposition*}{Proposition}
 \newtheorem*{claim*}{Claim}
+\newtheorem*{definition*}{Definition}
 
 \newtheorem{proposition}[theorem]{Proposition}
 \newtheorem{claim}[theorem]{Claim}
@@ -217,28 +218,65 @@
         \forall t_1 \in S_1,s_2 \in S_2: A_{s_1,s_2} \geq A_{t_1,s_2}.
       \end{align*}
       If a player has a dominant strategy then it is hard to imagine
-      why she would not use it.
+      why she would not use it. The prisoner's dilemma game (see
+      below) has ``defect'' as a dominant strategy.
 
       A pure Nash equilibrium is a pair of pure (i.e., not mixed)
       strategies $(s_1,s_2)$ such that player 1 cannot get a better
       payoff by deviating from $s_1$, assuming the player 2 plays
-      $s_2$, and vice versa.
+      $s_2$, and vice versa.  The battle of the sexes game (also see
+      below) has two such equilibria.
 
       A mixed Nash equilibrium is a pair of mixed strategies for which
       the same holds. Such an equilibrium is guaranteed to exist in
-      games where the sets of strategies are finite.
+      games where the sets of strategies are finite. Every pure
+      equilibrium is also a mixed equilibrium. The battle of the sexes
+      game also has a mixed equilibrium that is not pure.
 
       A correlated equilibrium is a joint distribution $\mathcal{C}$
-      over $S_1 \times S_2$. Such that if $(s_1,s_2)$ are drawn from
-      $\mathcal{C}$ then...
+      over $S_1 \times S_2$. Such that if $\omega = (s_1,s_2)$ are
+      drawn from $\mathcal{C}$ then the expected payoff for player 1,
+      given that she is told to play $s_1$ is maximized by playing
+      $s_1$. The battle of the sexes game has an additional
+      interesting correlated equilibrium. See below.
+
+      \vspace{0.1in}
+      {\bf Bargaining problem.}
+
+      A two player bargaining problem has a set of solutions $S \in
+      \R^2$ such that if $(u,v)\in S$ is chosen then the payoff to
+      player 1 is $u$ and the payoff to player 2 is $v$. $S$ is
+      assumed to be convex, closed and comprehensive. The latter
+      condition means that $S \cap \{(u,v):\: u \geq u^*, v \geq
+      v^*\}$ is compact, where $u^*$ is player 1's ``reserve price''
+      or the price she get by playing an maximin strategy.
+
+      An example of such a set is the set of expected payoffs in the
+      correlated equilibria of a two player game.
+
+      The problem in a bargaining problem is to choose a point in the
+      set. Nash's solution is to choose the maximizer in $S$ of
+      $(u-u^*)\cdot(v-v^*)$. He showed that this is the unique
+      solution that is invariant to affine transformations of the
+      utilities, Pareto efficient, symmetric, and satisfies the
+      ``independence of irrelevant alternatives'' (IIA) criterion.
+
+      A different approach, which dispenses with the IIA criterion, is
+      the Kalia-Smorodinsky solution. This solution chooses a point 
+      $(u,v) \in S$ that maximizes player 1's (or player 2's) payoff while
+      keeping the ratio $u/v$ equal to $\max_S u / \max_S v$. 
+
   \item
     \begin{enumerate}
     \item {\bf Prisoners' dilemma}
 
-      This game has one obvious pure Nash equilibrium. It occurs when
-      both players play the second strategy. Their payoff is then -5,
-      and they can only decrease it to -10 be deviating.
+      Since the players in this game have a dominant strategy, this
+      game has one obvious pure Nash equilibrium. It occurs when both
+      players play the second strategy. Their payoff is then -5, and
+      they can only decrease it to -10 be deviating.
 
+      This game has no additional Nash or correlated equilibria.
+      
       \vspace{0.1in}
       {\bf Battle of the sexes}
 
@@ -257,8 +295,140 @@
       payoff to the column player is $3q$ for playing strategy 1 and
       $10(1-q)$ for playing strategy 2. The solution of the equation
       $3q=10(1-q)$ is $q=10/13$. Likewise the row player's expected
-      payoffs are $10p$ and $3(1-p)$, and so $p=3/13$.
+      payoffs are $10p$ and $3(1-p)$, and so $p=3/13$. The players'
+      payoffs are hence both equal to $30/13$.
+
+      This game has a particularly interesting (see below) correlated
+      equilibrium: simply toss a coin and have both players choose
+      strategy 1 or both choose strategy 2, with equal
+      probability. The payoffs are then $13/2$, for both players.
+
+    \item {\bf Prisoners' dilemma}
+
+      Since there is only one Nash in this game then the set of
+      correlated equilibria is a singleton, with payoff $-5$ for both
+      players.
+      
+      \vspace{0.1in}
+      {\bf Battle of the sexes}
+
+      By Papademitriou's theorem the set of correlated equilibria is
+      the convex hull of the Nash equilibria. Hence the set of
+      achievable utilities is the triangle in $R^2$ with vertices at
+      $(10,3)$, $(3,10)$ and $(30/13, 30/13)$.
+
+    \item {\bf Prisoners' dilemma}
+
+      The single trivial solution is $(-5,-5)$.
+      
+      \vspace{0.1in}
+      {\bf Battle of the sexes}
+
+      In this case each player can guarantee an expected payoff of
+      $30/13$ by playing the mixed Nash strategy. Hence
+      $u^*=v^*=30/13$. Since Nash bargaining is Pareto efficient the
+      solution must lie on the line segment connecting $(10,3)$ and
+      $(3,10)$. Since Nash Bargaining is symmetric, and since the
+      feasible set is symmetric, then the solution must lie in the
+      middle of the line segment, and in fact be achieved by the
+      correlated equilibrium we mentioned earlier, with payoffs
+      $(13/2,13/2)$.
+
     \end{enumerate}
+  \end{enumerate}
+\item
+  \begin{enumerate}
+  \item 
+    {\bf Definitions and statement of the Shapely-Bondareva Theorem.}
+    \begin{definition*}
+      Let $N$ be the set of players. A {\em balanced collection}
+      $\mathcal{S} = \{S_1,\ldots,S_k\}$ is balanced if $\forall i:
+      S_i \subseteq N$ and for there exist $\{\lambda_i\}_{i=1}^k$
+      such that for every $1 \leq j \leq n$ it holds that $\sum_{S_i:j
+        \in S_i}\lambda_i=1$.
+    \end{definition*}
+    \begin{definition*}
+      The {\em core} of a cooperative game $v$ for a set of players
+      $N$ is the set of payoff vectors $x \in R^{|N|}$ such that for
+      all $S \subseteq N$ it holds that $v(S) \leq \sum_{i \in S}x_i$.
+    \end{definition*}
+    Denote by $C(v)$ the core of the game $v$.
+    \begin{theorem*}[Shapely - Bondareva]
+      $C(v) \neq \emptyset$ iff for every balanced collection
+      $\{S_1,\ldots,S_k\}$ with balancing weights $\{\lambda_i\}$ it
+      holds that $\sum_{i=1}^k\lambda_iv(S_i) \leq v(N)$.
+    \end{theorem*}
+
+    {\bf Proof of the first direction of the Shapely-Bondareva theorem.}
+    \begin{theorem*}[Shapely - Bondareva]
+      If $C(v) \neq \emptyset$ then for every balanced collection
+      $\{S_1,\ldots,S_k\}$ with balancing weights $\{\lambda_i\}$ it
+      holds that $\sum_{i=1}^k\lambda_iv(S_i) \leq v(N)$.
+    \end{theorem*}
+    \begin{proof}
+      Let $x$ be in the core of $v$, and let $\{S_1,\ldots,S_k\}$ be a
+      balanced collection with balancing weights $\{\lambda_i\}$. Then
+      $\sum_{j \in S_i}x_j \geq v(S_i)$ and so $\lambda_i\sum_{j \in
+        S_i}x_j \geq \lambda_iv(S_i)$. We now sum over $i$:
+      \begin{align*}
+        \sum_{i=1}^k\lambda_iv(S_i) &\leq \sum_{i=1}^k\lambda_i\sum_{j
+          \in S_i}x_j
+        \\ &= \sum_{i=1}^k\sum_{j \in S_i}\lambda_ix_j
+        \\ &= \sum_{i=1}^k\sum_{j}{\bf 1}_{j\in S_i}\lambda_ix_j
+        \\ &= \sum_{j}x_j\sum_{i=1}^k{\bf 1}_{j\in S_i}\lambda_i
+        \\ &= \sum_{j}x_j\sum_{i: j \in S_i}^k\lambda_i
+        \\ &= \sum_{j}x_j
+        \\ &\leq v(N)
+      \end{align*}
+    \end{proof}
+  \item We denote by $R$, $G$ and $B$ the Red, Green and Blue
+      parties. 
+    \begin{enumerate}
+    \item 
+      The characteristic function is:
+      \begin{align*}
+        v(\{R\}) = v(\{G\}) = v(\{B\}) = v(\{B, G\}) = 0
+        \\ v(\{R, B\}) = v(\{R, G\}) = v(\{R, G, B\}) = 1
+      \end{align*}
+
+    \item
+      A payoff vector in the core has to satisfy the following
+      (in)equalities:
+      \begin{align}
+        x_R,x_G,x_B &\geq 0 \label{eq0}
+        \\ x_R+x_G+x_B &= 1 \label{eq1}
+        \\ x_R+x_G &\geq 1 \label{eq2}
+        \\ x_R+x_B &\geq 1. \label{eq3}
+      \end{align}
+      Clearly \eqref{eq1} and \eqref{eq0} imply that \eqref{eq2} and
+      \eqref{eq3} must also be equalities. Then, by subtracting
+      \eqref{eq2} and \eqref{eq3} from \eqref{eq1} we have that the
+      only solution is $x_R=1$, $x_G=x_B=0$.
+
+    \item
+      There are six possible permutations of the players. In each one
+      exactly one player, when added in, changes the coalition's
+      payoff from zero to one. Hence each party's Shapely value is
+      $1/6$ times the number of permutations in which it first creates
+      the $2/3$ majority. The following table lists the permutations
+      and the respective party that creates the majority:
+      \begin{table}
+        \centering
+        \begin{tabular}{l|l}
+          Permutation & Party\\
+          \hline
+          RGB & G \\
+          RBG & B \\
+          GRB & R \\
+          GBR & R \\
+          BRG & R \\
+          BGR & R
+        \end{tabular}
+      \end{table}
+      Hence the Red Party's Shapely value is $2/3$ and the Green's and
+      Blue's are both $1/6$.
+    \end{enumerate}
+    
   \end{enumerate}
 \end{enumerate}
 
