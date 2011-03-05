@@ -112,8 +112,8 @@
 
 \begin{document}
 
-\title{Summary of pp.372-378 of Y. Kannai's ``The Core and
-  Balancedness``}
+\title{Summary of Pages 372-378 of Y. Kannai's ``The Core and
+  Balancedness''}
 
 \author{Omer Tamuz}
 \date{\today}
@@ -155,7 +155,7 @@ henceforth that this is indeed the case.
 
 If $x$ is in the interior of $V(S)$ then $S$ can improve upon it, in
 the sense that there exists an $y \in V(S)$ such that $x_i < y_i$ for
-all $i$. Hence $V(N) \setminus \cap{S \subseteq N} int V(S)$ is the
+all $i$. Hence $V(N) \setminus \cap_{S \subseteq N} \mbox{int} V(S)$ is the
 set of feasible payoff vectors that cannot be improved upon by any
 coalition. This set is referred to as the {\em core} of the game.
 
@@ -170,6 +170,7 @@ We devote the rest of this summary to prove the following theorem,
 following Shapely~\cite{shapley:1973} and Kannai~\cite{kannai:1970}:
 
 \begin{theorem}
+  \label{thm:0}
   Every balanced game has a non-empty core.
 \end{theorem}
 
@@ -179,7 +180,109 @@ lemma and the Knaster, Kuratowski and Mazurkiewicz theorem.
 Denote the unit vectors of $R^n$ by $\{e^i\}_{i=1}^n$. For $S
 \subseteq N$, $S \neq \emptyset$ let $A^S$ equal the complex hull of
 $\{e^i\}_{i \in S}$. Let $m_S = \frac{1}{|S|}\sum_{i \in S}e^i$ be the
-barycenter of $A^S$. 
+barycenter of $A^S$. Let $V(\Sigma)$ denote the set of vertices of a
+simplicial subdivision $\Sigma$ of $A^N$. A {\em labelling} of
+$\Sigma$ is a function from $V(\Sigma)$ to the non-empty subsets of
+$N$.
+
+Our first lemma is the following:
+\begin{theorem}
+  \label{thm:sperner}
+  Let $\Sigma$ be a simplicial subdivision of $N$, and let $f$ be a
+  labelling of $V(\Sigma)$. If for every non-empty subset $S$ of $N$
+  and $q$ it holds that $f(q) \subseteq S$ whenever $q \in V(\Sigma)
+  \cap A^S$, then there exists a simplex $\sigma$ in $\Sigma$, of some
+  dimension, such that $\{f(q):\: q \in \sigma\}$ is {\em balanced}.
+\end{theorem}
+
+\begin{proof}
+  Let $\tilde{f}:A^N \to A^N$ be a linear extension of the function
+  that maps each $q \in V(\Sigma)$ to $\frac{1}{|f(q)|}\sum_{i \in
+    f(q)}e^i$.
+  
+  Let $B=\cup_{S \subset N}A^S$ be the relative boundary of $A^N$. Let
+  $g:B \to B$ be the antipodal map with $m_N=(1/n,\ldots,1/n)$ as the
+  center. It is easy to convince oneself that for any $x \in S$
+  (expect $S=N$) it holds that $g(x) \not \in A^S$.
+
+  Let $h : A^N \setminus \{m_n\} \to B$ be the usual radial
+  deformation of $A^N$ (expect its center) to its boundary $B$. Note
+  that $h$ is continuous and that for every $x \in B$ it holds that
+  $h(x) = x$.
+
+  Let $\phi : A^N \to B$ be defined by $\phi = g \circ h \circ
+  \tilde{f}$. We claim that $\phi$ does not have a fixed point. Assume
+  the contrary, so that there exists $x\in B$ such that
+  $\phi(x)=x$. Then, since $B=\cup_{S \subset N}A^S$ then there must
+  exist an $S \neq N$ such that $x \in A^S$. There must then also
+  exist a simplex $\sigma = \{q_1, \ldots, q_{|S|}\} \in \Sigma$ such
+  that all $q_i$'s are in $A^S$ and $x$ is in the convex hull of
+  $\sigma$. By the theorem hypothesis $f(q_i) \in S$ for all $i$, and
+  so $\tilde{f}(q_i) \in A^S$, and furthermore $\tilde{f}(x) \in A^S
+  \subset B$. Since $h(x) = x$ for $x \in B$ then $\phi(x) =
+  g(h(\tilde{f}(x)))= g(\tilde{f}(x))$. But by the definition of $g$,
+  and since $\tilde{f}(x) \in A^S$ we have that $g(\tilde{f}(x)) \not
+  \in A^S$, and so it cannot be that $\phi(x)=x$.
+
+  We have shown that $\phi$ has no fixed point. By the Brouwer fixed
+  point theorem this can only be if $\phi$ is not continuous or if
+  $\phi$ is not well defined. Since $\phi$ is a composition of
+  continuous functions it must then be the case that it is not well
+  defined. This can happen only if $m_N \in \tilde{f}(A^N)$, since
+  $h(m_N)$ is not defined. Hence we conclude that $m_N \in
+  \tilde{f}(A^N)$.
+
+  Let then $x$ be such that $\tilde{f}(x) = m_N$, or equivalently
+  $\tilde{f}(x)_i=1/n$. Then there must exist a simplex $\sigma =
+  \{q_1, \ldots, q_k\} \in \Sigma$ that contains $x$.  Let $(\alpha_1,
+  \ldots, \alpha_k)$ be the coefficient of $x$'s representation as a
+  convex combination of $\{q_1,\ldots,q_k\}$, so that
+  $x=\sum_{i=1}^k\alpha_iq_i$. We claim that $\lambda_j =
+  n\alpha_j/|f(q_j)|$ are balancing weights of the collection
+  $\{f(q_j)\}_{j=1}^k$:
+  \begin{align*}
+    \sum_{j :\: i \in S_j}\lambda_j &=
+    \sum_{j :\: i \in S_j}\frac{n\alpha_j}{|f(q_j)|}
+    \\ &= n\sum_{j=1}^k\alpha_j\frac{1}{|f(q_j)|}{\bf 1}_{i \in f(q_j)}
+    \\ &= n\sum_{j=1}^k\alpha_j\frac{1}{|f(q_j)|}\sum_{l \in f(q_j)}e^l_i
+    \\ &= n\sum_{j=1}^k\alpha_jf(q_j)_i
+    \\ &= n\tilde{f}(x)_i
+    \\ &= 1.
+  \end{align*}
+\end{proof}
+
+We now prove a second lemma:
+\begin{theorem}
+  For every non-empty $S \subseteq N$ let $C(S)$ be a closed subset of
+  $A^N$ such that $A^T \subseteq \cup_{S \subseteq T}C(S)$ for every $T$.
+  Then there exists a balanced collection $\{S_1, \ldots S_k\}$ such
+  that $\cap_{i=1}^kC(S_i) \neq \emptyset$.
+\end{theorem}
+\begin{proof}
+  Let $\{\Sigma^{(m)}\}{m=1}^\infty$ be a sequence of simplicial
+  partitions of $A^N$, such that the limit, as $m$ tends to infinity,
+  of the maximum diameter of a simplex in $\Sigma^{(m)}$ is
+  zero. Given $q \in T(\Sigma^{(m)})$ let $T(q)$ be the minimal
+  coalition such that $q \in A^{T(q)}$. By the theorem hypothesis $q
+  \in C(S)$ for some $S \subseteq T(q)$. Let $f^{(m)}:V(\Sigma^{(m)}
+  \to 2^N$ assign to each $q$ such a set $S$. Note that $f^{(m)}$ is
+  in fact a labelling that satisfies the conditions of
+  theorem~\ref{thm:sperner}, and so by that theorem for every $m \in
+  N$ and $q \in V(\Sigma^{(m)}$ there exists a simplex $\sigma^{(m)}$
+  such that the collection $\mathcal{S}^{(m)}$ of the sets
+  $f^{(m)}(q)$ for $q \in \sigma^{(m)}$ is balanced. Since both $A^N$
+  and the set of balanced collections are compact then there must
+  exist a subsequence $\{\Sigma^{(m_i)}\}$ that $\sigma^{(m_i)}$
+  converges to some $q_0 \in A^N$ and $S^{(m_i)}$ converges to some
+  balanced collection $\mathcal{S}_0=(S_1,\ldots,S_k)$. Since, for all
+  $j$, $f^{(m)}(q_j^{(m_i)}) \in C(S_j)$ then $q_0$, which is the
+  limit of $q_j^{(m_i)}$, is also in $C(S_j)$ for all $j$, since the
+  $C(S_j)$'s are closed. Hence $q_0 \in \cap_{i=j}^kC(S_j)$, and the
+  set is not empty.
+\end{proof}
+
+We are now ready to prove our main theorem~\ref{thm:0}:
+
  
 
 
