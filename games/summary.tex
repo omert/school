@@ -141,10 +141,17 @@ Given a transferable utility game $v$ we can translate it into a
 transferable utility game $V$ by setting $V(S)=\{x \in \R^n \mbox{
   s.t. } \sum_{i \in S}x_i \leq v(S)\}$. We shall in fact assume that
 $V$ is always constructed in a similar way, so that there exists a
-closed and compact set $F$ such that $V(S)=\{x \in \R^n \mbox{
-  s.t. } (\exists y \in F)(\forall i):\:x_i \leq y_i\}$. We shall
-further make the simplifying assumption that $V(\{i\}) = \{x \in \R^n
-:\: x_i \leq 0\}$.
+closed and compact set $F$ such that
+\begin{equation}
+  \label{eq:F}
+  V(N)=\{x \in \R^n \mbox{
+    s.t. } (\exists y \in F)(\forall i):\:x_i \leq y_i\}.  
+\end{equation}
+We shall further make the simplifying assumption that
+\begin{align}
+  \label{eq:zero}
+  V(\{i\}) = \{x \in \R^n :\: x_i \leq 0\}.
+\end{align}
 
 We call a payoff vector $x$ {\em individually rational} if for all $i$
 and $y \in V(\{i\})$ it holds that $x_i \geq y_i$; a player will not
@@ -253,6 +260,7 @@ Our first lemma is the following:
 
 We now prove a second lemma:
 \begin{theorem}
+  \label{thm:KKMS}
   For every non-empty $S \subseteq N$ let $C(S)$ be a closed subset of
   $A^N$ such that $A^T \subseteq \cup_{S \subseteq T}C(S)$ for every $T$.
   Then there exists a balanced collection $\{S_1, \ldots S_k\}$ such
@@ -283,7 +291,59 @@ We now prove a second lemma:
 
 We are now ready to prove our main theorem~\ref{thm:0}:
 
- 
+\begin{proof}
+  By our assumption~\eqref{eq:F} there exists a large constant $M$
+  such that for all $x \in V(N)$ it holds for all $i \in N$ that $x_i
+  \leq M$. Assume for now that this also holds for all other $S \neq
+  N$, i.e. that $x_i < M$ for all $i \in S$.
+
+  For $x \in \R^n$, let $t(x) = \max\{t: x+t(1,\ldots, 1) \in \cup_S
+  V(S)\}$. Since $V(S)$ is closed for all $S$ and by our assumption
+  bounded, then this maximum always exists, and $t(x)$ is in fact a
+  continuous function. Let $y(x) = x+t(x)(1, \ldots, 1)$. Clearly $y$
+  is also continuous.
+
+  Define $\tilde{e}^i = -nMe^i$, and let $\tilde{A}^S$ be the convex
+  hull of the corresponding $\tilde{e}^i$'s, in analogy to the
+  definition of $A^S$.  Let $C_S = \{x \in \tilde{A}^N:\: y(x) \in
+  V(S)\}$. By the continuity of $y$ and the fact that $V(S)$ is closed
+  we have that $C_S$ is also closed. We would like to show that the
+  $C_S$'s and $\tilde{A}^T$'s satisfy the conditions of
+  theorem~\ref{thm:KKMS}. We will do this by showing that if there
+  exists an $x \in C_S \cap \tilde{A}^T$ then $S \subseteq T$. For
+  $T=N$ the statement is trivial. Hence we assume henceforth that $T
+  \neq N$.
+
+  Since $x \in \tilde{A}^T$ then it is in the convex combination of
+  $-nMe^i$, and so for some coordinate $j \in T$ we have that $x_j <
+  -M$, and so $t(x) > M$, since $x+M(1,\ldots,1) \in V(\{j\})$. Then,
+  by our assumption we have that $x_i <0$ for all $i \in S$, and since
+  $x \in \tilde{A}^T$ then $x_i \neq 0$ implies $i \in T$. Hence it
+  must be the case that $S \subseteq T$.
+
+  Let $\{S_1, \ldots, S_k\}$ be a balanced collection, and let $x \in
+  \tilde{A}^N$ be a point in each of the $C_{S_i}$'s. The existence of
+  these is guaranteed by theorem~\ref{thm:KKMS}. Therefore $y(x)$ is
+  in each of the $V(S_i)$'s but not to any of the interior of any
+  $V(S)$.  Therefore, since the game is balanced, $y$ must be in
+  $V(N)$ and hence in the core. We have thus shown that the core is
+  not empty under our assumption that $x_i < M$ for every $x \in V(S)$
+  and $i \in S$.
+
+  To drop this assumption we recall that it does indeed hold for $S=V$
+  for some $M$. Define a ``cropped'' game $V_M$ by $V_M(S)=V(S) \cap
+  \{x :\: x_i \leq M \mbox{ for } i \in S\}$. For this game our
+  assumption holds, and so let $y^{(M)}$ be a member of $V_M$'s
+  core. Since $y$ is in $V_M(N)$ it is also in $V(N)$, and by our
+  assumption~\ref{eq:zero} we have that $y^{(M)}_i \geq 0$. Hence
+  there exists a sequence of $M$'s such that if we let $M$ tend to
+  infinity along this sequence then $y^{(M)}$ will tend to some
+  $\bar{y} \in V(N)$. $\bar{y}$ must be in the core of $V$, since
+  otherwise for large enough $M$ there will exist some point $z \in
+  V(S)$ that will dominate $\bar{y}$ for some coalition $S$. But $z$
+  must be in some $V_{M_0}(S)$, and it cannot dominate $y^{(M_0)}$.
+  
+\end{proof}
 
 
 \bibliographystyle{abbrv} \bibliography{summary}
