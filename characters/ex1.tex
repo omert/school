@@ -1,0 +1,231 @@
+\documentclass[11pt]{article} \usepackage{amssymb}
+\usepackage{amsfonts} \usepackage{amsmath} \usepackage{bm}
+\usepackage{latexsym} \usepackage{epsfig}
+
+\setlength{\textwidth}{6.5 in} \setlength{\textheight}{8.25in}
+\setlength{\oddsidemargin}{0in} \setlength{\topmargin}{0in}
+\addtolength{\textheight}{.8in} \addtolength{\voffset}{-.5in}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{example}[theorem]{Example}
+\newenvironment{proof}{\noindent \textbf{Proof:}}{$\Box$}
+
+\newcommand{\ignore}[1]{}
+
+\newcommand{\enote}[1]{} \newcommand{\knote}[1]{}
+\newcommand{\rnote}[1]{}
+
+
+
+% \newcommand{\enote}[1]{{\bf [[Elchanan:} {\emph{#1}}{\bf ]]}}
+% \newcommand{\knote}[1]{{\bf [[Krzysztof:} {\emph{#1}}{\bf ]]}}
+% \newcommand{\rnote}[1]{{\bf [[Ryan:} {\emph{#1}}{\bf ]]}}
+
+
+
+\DeclareMathOperator{\Support}{Supp} \DeclareMathOperator{\Opt}{Opt}
+\DeclareMathOperator{\Ordo}{\mathcal{O}}
+\newcommand{\MaxkCSP}{\textsc{Max $k$-CSP}}
+\newcommand{\MaxkCSPq}{\textsc{Max $k$-CSP$_{q}$}}
+\newcommand{\MaxCSP}[1]{\textsc{Max CSP}(#1)} \renewcommand{\Pr}{{\bf
+    P}} \renewcommand{\P}{{\bf P}} \newcommand{\Px}{\mathop{\bf P\/}}
+\newcommand{\E}{{\bf E}} \newcommand{\Cov}{{\bf Cov}}
+\newcommand{\Var}{{\bf Var}} \newcommand{\Varx}{\mathop{\bf Var\/}}
+
+\newcommand{\bits}{\{-1,1\}}
+
+\newcommand{\nsmaja}{\textstyle{\frac{2}{\pi}} \arcsin \rho}
+
+\newcommand{\Inf}{\mathrm{Inf}} \newcommand{\I}{\mathrm{I}}
+\newcommand{\J}{\mathrm{J}}
+
+\newcommand{\eps}{\epsilon} \newcommand{\lam}{\lambda}
+
+% \newcommand{\trunc}{\ell_{2,[-1,1]}}
+\newcommand{\trunc}{\zeta} \newcommand{\truncprod}{\chi}
+
+\newcommand{\N}{\mathbb N} \newcommand{\R}{\mathbb R}
+\newcommand{\Z}{\mathbb Z} \newcommand{\CalE}{{\mathcal{E}}}
+\newcommand{\CalC}{{\mathcal{C}}} \newcommand{\CalM}{{\mathcal{M}}}
+\newcommand{\CalR}{{\mathcal{R}}} \newcommand{\CalS}{{\mathcal{S}}}
+\newcommand{\CalV}{{\mathcal{V}}}
+\newcommand{\cF}{\mathcal{F}}
+\newcommand{\CalX}{{\boldsymbol{\mathcal{X}}}}
+\newcommand{\CalG}{{\boldsymbol{\mathcal{G}}}}
+\newcommand{\CalH}{{\boldsymbol{\mathcal{H}}}}
+\newcommand{\CalY}{{\boldsymbol{\mathcal{Y}}}}
+\newcommand{\CalZ}{{\boldsymbol{\mathcal{Z}}}}
+\newcommand{\CalW}{{\boldsymbol{\mathcal{W}}}}
+\newcommand{\CalF}{{\mathcal{Z}}}
+% \newcommand{\boldG}{{\boldsymbol G}}
+% \newcommand{\boldQ}{{\boldsymbol Q}}
+% \newcommand{\boldP}{{\boldsymbol P}}
+% \newcommand{\boldR}{{\boldsymbol R}}
+% \newcommand{\boldS}{{\boldsymbol S}}
+% \newcommand{\boldX}{{\boldsymbol X}}
+% \newcommand{\boldB}{{\boldsymbol B}}
+% \newcommand{\boldY}{{\boldsymbol Y}}
+% \newcommand{\boldZ}{{\boldsymbol Z}}
+% \newcommand{\boldV}{{\boldsymbol V}}
+\newcommand{\boldi}{{\boldsymbol i}} \newcommand{\boldj}{{\boldsymbol
+    j}} \newcommand{\boldk}{{\boldsymbol k}}
+\newcommand{\boldr}{{\boldsymbol r}}
+\newcommand{\boldsigma}{{\boldsymbol \sigma}}
+\newcommand{\boldupsilon}{{\boldsymbol \upsilon}}
+\newcommand{\hone}{{\boldsymbol{H1}}}
+\newcommand{\htwo}{\boldsymbol{H2}}
+\newcommand{\hthree}{\boldsymbol{H3}}
+\newcommand{\hfour}{\boldsymbol{H4}}
+
+
+\newcommand{\sgn}{\mathrm{sgn}} \newcommand{\Maj}{\mathrm{Maj}}
+\newcommand{\Acyc}{\mathrm{Acyc}}
+\newcommand{\UniqMax}{\mathrm{UniqMax}}
+\newcommand{\Thr}{\mathrm{Thr}} \newcommand{\littlesum}{{\textstyle
+    \sum}}
+
+\newcommand{\half}{{\textstyle \frac12}}
+\newcommand{\third}{{\textstyle \frac13}}
+\newcommand{\fourth}{{\textstyle \frac14}}
+
+\newcommand{\Stab}{\mathbb{S}}
+\newcommand{\StabThr}[2]{\Gamma_{#1}(#2)}
+\newcommand{\StabThrmin}[2]{{\underline{\Gamma}}_{#1}(#2)}
+\newcommand{\StabThrmax}[2]{{\overline{\Gamma}}_{#1}(#2)}
+\newcommand{\TestFcn}{\Psi}
+
+
+\renewcommand{\phi}{\varphi}
+
+\begin{document}
+\title{Character Theory - Exercise 1}
+
+ \author{Omer Tamuz, 035696574}
+\maketitle
+
+
+\begin{enumerate}
+\item Let $x = \sum_{0 \leq k < n}x_k\omega^k$ be an element of $FG$
+  where $G$ is the cyclic group of order $n$, $\omega$ is a
+  generator of $G$, and $x_k$ is in $F$ for all $k$.
+
+  Let $\cF:FG \to FG$ be the transformation defined by $\cF(x)_\ell =
+  \sum_{0 \leq k < n}\omega^{-\ell k}x_k$. It is easy to see that
+  $\cF$ is linear transformation, i.e., it preserves $FG$-addition.
+
+  \begin{claim}
+    $\cF(xy)_\ell = \cF(x)_\ell\cF(y)_\ell$.
+  \end{claim}
+  \begin{proof}
+    \begin{align*}
+      \cF(xy)_\ell &= \sum_{0 \leq k < n}\omega^{-\ell k}(xy)_k \\
+      &= \sum_{0 \leq k < n}\omega^{-\ell k}\sum_{0 \leq m < n}x_my_{k-m \mod n} \\
+      &= \sum_{0 \leq k < n}\omega^{-\ell (k+m)}\sum_{0 \leq m < n}x_my_{k} \\
+      &= \sum_{0 \leq m < n}\omega^{-\ell m}x_m\sum_{0 \leq k < n}\omega^{-\ell k}y_{k} \\
+      &= \cF(x)_\ell\cF(y)_\ell.
+    \end{align*}
+  \end{proof}
+  
+  \begin{lemma}
+    If $x$ is the $FG$-multiplicative identity then $\cF(x)_\ell=1$
+    for all $\ell$.
+  \end{lemma}
+  \begin{proof}
+    Let $x$ be the $FG$-multiplicative identity so that $x_0 = 1$ and
+    $x_k=0$ for $k \neq 0$. Then
+    \begin{align*}
+      \cF(x)_\ell &= \sum_{0 \leq k < n}x_k\omega^k \\
+      &= \omega^0 \\
+      &= 1.
+    \end{align*}
+  \end{proof}
+  
+  \begin{theorem}
+    $x$ is invertible iff $\cF(x)_\ell$ is an invertible element of
+    $F$ for all $\ell$.
+  \end{theorem}
+  \begin{proof}
+    Let $x$ be invertible so that $xy=1$. Then $\cF(xy)_\ell=1$ for
+    all $\ell$. Hence $\cF(x)_\ell\cF(x)_\ell = \cF(xy)_\ell = 1$, and
+    so $\cF(x)_\ell = \cF(y)_\ell^{-1}$.
+
+    Let $x$ be such that $\cF(x)_\ell$ be invertible for all
+    $\ell$. Let $y \in FG$ be such that $y_k = \sum_{0 \leq \ell <
+      n}\omega^{\ell k}\cF(x)_\ell^{-1}$.  Then
+    \begin{align*}
+      \cF(y)_\ell &= \sum_{0 \leq k < n}\omega^{-\ell k}y_k \\
+      &= \sum_{0 \leq k < n}\omega^{-\ell k}\sum_{0 \leq m <
+        n}\omega^{m k}\cF(x)_m^{-1} \\
+      &= \sum_{0 \leq m < n}\cF(x)_m^{-1}\sum_{0 \leq k < n}\omega^{-\ell k}\omega^{m k} \\
+      &= \sum_{0 \leq m < n}\cF(x)_m^{-1}\sum_{0 \leq k <
+        n}\left(\omega^{m-\ell}\right)^k \\
+      &= n\cF(x)_\ell^{-1}
+    \end{align*}
+    Assuming $n \neq 0$ in $F$ then the theorem is proved. In the case
+    $n=0$ (i.e., the case that the characteristic of $F$ divides $|G|$) then 
+    I'm not sure what to do...
+  \end{proof}
+
+\item Let $x=1+(12)$ and assume by way of contradiction that there
+  exists a $y \in QS_3$ such that $xy=1$. Then
+  \begin{align*}
+    1 &= xy \\
+    &= [1 + (12)] \cdot
+    [y_11+y_{(12)}(12)+y_{(13)}(13)+y_{(23)}(23)+y_{123}(123)+y_{132}(132)]
+    \\
+    &=
+    [y_11+y_{(12)}(12)+y_{(13)}(13)+y_{(23)}(23)+y_{123}(231)+y_{132}(213)]+
+    [y_1(12)+y_{(12)}1+y_{(13)}(132)+y_{(23)}(132)+y_{123}(23)+y_{132}(13)]
+  \end{align*}
+  but this is impossible since it implies both $y_1+y_{(12)}=1$ (the
+  coefficient of 1) and $y_1+y_{(12)}=0$ (the coefficient of
+  $(12)$). The exact same contradiction is to be had if we define $y$
+  to satisfy $yx=1$.
+
+\item
+  \begin{enumerate}
+  \item 
+    \begin{align*}
+      \left(\sum_{g \in G}g\right)^2 &= \sum_{g \in G}g\sum_{h \in G}h
+      \\
+      &= \sum_{g \in G}\sum_{h \in G}gh \\
+      &= \sum_{g \in G}\sum_{k \in G}k \\
+      &= |G|\sum_{k \in G}k \\
+      &= 0.
+    \end{align*}
+
+  \item Let $x=\sum_{g \in G}g$. Let $Z$ be the set of elements $z \in
+    FG^\circ$ such that $xz=0$. Then by the above $Z$ includes
+    $x$. Furthermore it is easy to see that $Z$ is a submodule of
+    $FG^\circ$, and that $Z$ is neither trivial (it includes $x$) nor
+    equal to $FG^\circ$ (it does not include the $FG$ multiplicative
+    identity).
+
+    Assume by way of contradiction that $FG$ is semi-simple. Then
+    there exists a submodule $Y$ such that $FG^\circ = Y \oplus Z$, so
+    that for every $a \in FG^\circ$ there exist unique $y \in Y$ and
+    $z \in Z$ such that $a=y+z$. If we set $a=1$ then we arrive at
+    \begin{align*}
+      1 &= y + z \\
+      x &= xy \\
+      y &= 1
+    \end{align*}
+    and so the $FG$ multiplicative identity is in $Y$. However, $Y$
+    must be closed to multiplication by $FG$, and so this means that
+    $Y=FG^\circ$, and so the sum of $Z$ and $Y$ is no longer direct -
+    contradiction.
+  \end{enumerate}
+\item
+  
+\end{enumerate}
+\end{document}
+
+
