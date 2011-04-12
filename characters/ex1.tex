@@ -157,23 +157,28 @@
     all $\ell$. Hence $\cF(x)_\ell\cF(x)_\ell = \cF(xy)_\ell = 1$, and
     so $\cF(x)_\ell = \cF(y)_\ell^{-1}$.
 
+    Consider the case that $n \neq 0$ in $F$. (In the case $n=0$
+    (i.e., the case that the characteristic of $F$ divides $|G|$) then
+    I'm not sure what to do...)
+
     Let $x$ be such that $\cF(x)_\ell$ be invertible for all
-    $\ell$. Let $y \in FG$ be such that $y_k = \sum_{0 \leq \ell <
+    $\ell$. Let $y \in FG$ be such that $y_k = n^{-1}\sum_{0 \leq \ell <
       n}\omega^{\ell k}\cF(x)_\ell^{-1}$.  Then
     \begin{align*}
-      \cF(y)_\ell &= \sum_{0 \leq k < n}\omega^{-\ell k}y_k \\
-      &= \sum_{0 \leq k < n}\omega^{-\ell k}\sum_{0 \leq m <
+      \cF(y)_\ell &= n^{-1}\sum_{0 \leq k < n}\omega^{-\ell k}y_k \\
+      &= n^{-1}\sum_{0 \leq k < n}\omega^{-\ell k}\sum_{0 \leq m <
         n}\omega^{m k}\cF(x)_m^{-1} \\
-      &= \sum_{0 \leq m < n}\cF(x)_m^{-1}\sum_{0 \leq k < n}\omega^{-\ell k}\omega^{m k} \\
-      &= \sum_{0 \leq m < n}\cF(x)_m^{-1}\sum_{0 \leq k <
+      &= n^{-1}\sum_{0 \leq m < n}\cF(x)_m^{-1}\sum_{0 \leq k < n}\omega^{-\ell k}\omega^{m k} \\
+      &= n^{-1}\sum_{0 \leq m < n}\cF(x)_m^{-1}\sum_{0 \leq k <
         n}\left(\omega^{m-\ell}\right)^k \\
-      &= n\cF(x)_\ell^{-1}
+      &= \cF(x)_\ell^{-1}
     \end{align*}
-    Assuming $n \neq 0$ in $F$ then the theorem is proved. In the case
-    $n=0$ (i.e., the case that the characteristic of $F$ divides $|G|$) then 
-    I'm not sure what to do...
   \end{proof}
 
+  {\bf Note: We saw the (simpler) full solution in class - the
+    invertible elements are those which, as polynomials, have roots
+    other than the primitive roots of unity.}
+  
 \item Let $x=1+(12)$ and assume by way of contradiction that there
   exists a $y \in QS_3$ such that $xy=1$. Then
   \begin{align*}
@@ -224,6 +229,40 @@
     contradiction.
   \end{enumerate}
 \item
+  
+  Denote $A=QS_3$, and regard $A$ as the set of functions from $S_3$
+  to $Q$. Then if $a \in A$ commutes with $b \in A$ then for all $s
+  \in S_3$ it holds that
+  \begin{align*}
+    [ab](s) &= [ba](s)  \\
+    \sum_{t \in S_3}a(t)b(t^{-1}s) &= \sum_{t \in S_3}b(t)a(t^{-1}s) \\
+    \sum_{t \in S_3}a(t)b(t^{-1}s) &= \sum_{t \in S_3}a(t)b(st^{-1})) \\
+  \end{align*}
+
+  Let $a$ be in $Z(A)$. Then the above holds for all $b \in A$, and in
+  particular for $b$ equal to an element $\sigma \in S_3$. In this case we
+  have that, for all $s$, 
+  \begin{align*}
+    a(s\sigma^{-1}) &= a(\sigma^{-1}s). 
+  \end{align*}
+  Since $s$ and $\sigma$ are both arbitrary we have that $a$ is
+  necessarily a function from the conjugacy classes of $S_3$ to $Q$. 
+
+  Let $a$ be a class function. Then for $\sigma \in S_3$
+  \begin{align*}
+    [a\sigma](s) &= a(s\sigma^{-1}) \\
+    &= a(\sigma^{-1}s) \\
+    &= [\sigma a](s)
+  \end{align*}
+
+  Then by the above we have that $a$
+  commutes with the elements of $S_3$. Hence, for arbitrary $b =
+  \sum_{s \in S_3}b_ss$ we have that
+  \begin{align*}
+    ab &= a\left(\sum_{s \in S_3}b_ss\right) \\
+    &= \sum_{s \in S_3}b_ssa \\
+    &= ba
+  \end{align*}
   
 \end{enumerate}
 \end{document}
