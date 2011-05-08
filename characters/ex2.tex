@@ -1,0 +1,329 @@
+\documentclass[11pt]{article} \usepackage{amssymb}
+\usepackage{amsfonts} \usepackage{amsmath} \usepackage{bm}
+\usepackage{latexsym} \usepackage{epsfig}
+
+\setlength{\textwidth}{6.5 in} \setlength{\textheight}{8.25in}
+\setlength{\oddsidemargin}{0in} \setlength{\topmargin}{0in}
+\addtolength{\textheight}{.8in} \addtolength{\voffset}{-.5in}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{example}[theorem]{Example}
+\newenvironment{proof}{\noindent \textbf{Proof:}}{$\Box$}
+
+\newcommand{\ignore}[1]{}
+
+\newcommand{\enote}[1]{} \newcommand{\knote}[1]{}
+\newcommand{\rnote}[1]{}
+
+
+
+% \newcommand{\enote}[1]{{\bf [[Elchanan:} {\emph{#1}}{\bf ]]}}
+% \newcommand{\knote}[1]{{\bf [[Krzysztof:} {\emph{#1}}{\bf ]]}}
+% \newcommand{\rnote}[1]{{\bf [[Ryan:} {\emph{#1}}{\bf ]]}}
+
+
+
+\DeclareMathOperator{\Support}{Supp} \DeclareMathOperator{\Opt}{Opt}
+\DeclareMathOperator{\Ordo}{\mathcal{O}}
+\newcommand{\MaxkCSP}{\textsc{Max $k$-CSP}}
+\newcommand{\MaxkCSPq}{\textsc{Max $k$-CSP$_{q}$}}
+\newcommand{\MaxCSP}[1]{\textsc{Max CSP}(#1)} \renewcommand{\Pr}{{\bf
+    P}} \renewcommand{\P}{{\bf P}} \newcommand{\Px}{\mathop{\bf P\/}}
+\newcommand{\E}{{\bf E}} \newcommand{\Cov}{{\bf Cov}}
+\newcommand{\Var}{{\bf Var}} \newcommand{\Varx}{\mathop{\bf Var\/}}
+
+\newcommand{\bits}{\{-1,1\}}
+
+\newcommand{\nsmaja}{\textstyle{\frac{2}{\pi}} \arcsin \rho}
+
+\newcommand{\Inf}{\mathrm{Inf}} \newcommand{\I}{\mathrm{I}}
+\newcommand{\J}{\mathrm{J}}
+
+\newcommand{\eps}{\epsilon} \newcommand{\lam}{\lambda}
+
+% \newcommand{\trunc}{\ell_{2,[-1,1]}}
+\newcommand{\trunc}{\zeta} \newcommand{\truncprod}{\chi}
+
+\newcommand{\N}{\mathbb N} \newcommand{\R}{\mathbb R}
+\newcommand{\Z}{\mathbb Z} \newcommand{\CalE}{{\mathcal{E}}}
+\newcommand{\CalC}{{\mathcal{C}}} \newcommand{\CalM}{{\mathcal{M}}}
+\newcommand{\CalR}{{\mathcal{R}}} \newcommand{\CalS}{{\mathcal{S}}}
+\newcommand{\CalV}{{\mathcal{V}}}
+\newcommand{\cF}{\mathcal{F}}
+\newcommand{\CalX}{{\boldsymbol{\mathcal{X}}}}
+\newcommand{\CalG}{{\boldsymbol{\mathcal{G}}}}
+\newcommand{\CalH}{{\boldsymbol{\mathcal{H}}}}
+\newcommand{\CalY}{{\boldsymbol{\mathcal{Y}}}}
+\newcommand{\CalZ}{{\boldsymbol{\mathcal{Z}}}}
+\newcommand{\CalW}{{\boldsymbol{\mathcal{W}}}}
+\newcommand{\CalF}{{\mathcal{Z}}}
+% \newcommand{\boldG}{{\boldsymbol G}}
+% \newcommand{\boldQ}{{\boldsymbol Q}}
+% \newcommand{\boldP}{{\boldsymbol P}}
+% \newcommand{\boldR}{{\boldsymbol R}}
+% \newcommand{\boldS}{{\boldsymbol S}}
+% \newcommand{\boldX}{{\boldsymbol X}}
+% \newcommand{\boldB}{{\boldsymbol B}}
+% \newcommand{\boldY}{{\boldsymbol Y}}
+% \newcommand{\boldZ}{{\boldsymbol Z}}
+% \newcommand{\boldV}{{\boldsymbol V}}
+\newcommand{\boldi}{{\boldsymbol i}} \newcommand{\boldj}{{\boldsymbol
+    j}} \newcommand{\boldk}{{\boldsymbol k}}
+\newcommand{\boldr}{{\boldsymbol r}}
+\newcommand{\boldsigma}{{\boldsymbol \sigma}}
+\newcommand{\boldupsilon}{{\boldsymbol \upsilon}}
+\newcommand{\hone}{{\boldsymbol{H1}}}
+\newcommand{\htwo}{\boldsymbol{H2}}
+\newcommand{\hthree}{\boldsymbol{H3}}
+\newcommand{\hfour}{\boldsymbol{H4}}
+
+
+\newcommand{\sgn}{\mathrm{sgn}} \newcommand{\Maj}{\mathrm{Maj}}
+\newcommand{\Acyc}{\mathrm{Acyc}}
+\newcommand{\UniqMax}{\mathrm{UniqMax}}
+\newcommand{\Thr}{\mathrm{Thr}} \newcommand{\littlesum}{{\textstyle
+    \sum}}
+
+\newcommand{\half}{{\textstyle \frac12}}
+\newcommand{\third}{{\textstyle \frac13}}
+\newcommand{\fourth}{{\textstyle \frac14}}
+
+\newcommand{\Stab}{\mathbb{S}}
+\newcommand{\StabThr}[2]{\Gamma_{#1}(#2)}
+\newcommand{\StabThrmin}[2]{{\underline{\Gamma}}_{#1}(#2)}
+\newcommand{\StabThrmax}[2]{{\overline{\Gamma}}_{#1}(#2)}
+\newcommand{\TestFcn}{\Psi}
+
+
+\renewcommand{\phi}{\varphi}
+
+\begin{document}
+\title{Character Theory - Exercise 2}
+
+ \author{Omer Tamuz, 035696574}
+\maketitle
+
+It is easy to verify that the conjugacy classes of $S_4$ are $(1)$,
+$(12)$, $(123)$, $(12)(34)$ and $(1234)$, with sizes 1, 6, 8, 3 and
+6. Thus the top of the character table is
+\begin{table}[h]
+\begin{center}
+{\small
+\begin{tabular}{ l | c | c | c | c | c }
+  & $(1)$ & $(12)$ & $(123)$ & $(12)(34)$ & $(1234)$ \\
+\hline
+$|C|$ & 1 & 6 & 8 & 3 & 6\\
+\end{tabular}
+}
+\end{center}
+\end{table}
+
+The constant character $\chi_1$ appears in any group. The signum
+character $\chi_2$ is afforded by the representation that equals -1 for
+odd permutations and 1 for even ones.
+\begin{table}[h]
+\begin{center}
+{\small
+\begin{tabular}{ l | c | c | c | c | c }
+  & $(1)$ & $(12)$ & $(123)$ & $(12)(34)$ & $(1234)$ \\
+\hline
+$|C|$ & 1 & 6 & 8 & 3 & 6\\
+\hline
+$\chi_1$ & 1 & 1 & 1 & 1 & 1\\
+$\chi_2$ & 1 & -1 & 1 & 1 & -1\\
+\end{tabular}
+}
+\end{center}
+\end{table}
+
+A natural representation of $S_4$ is with $4 \times 4$ permutation
+matrices. The character $\xi$ afforded by this representation is then
+simply the number of fixed points of the permutation, so that
+$\xi(1)=4$, $\xi(12) = 2$, $\xi(123) = 2$ and
+$\xi((12)(34))=\xi(1234)=0$. Since this character's inner product with
+$\chi_1$ is not zero ($(\xi,\chi_1) = 1$) then it is not
+irreducible. However, if we calculate its projection on the space
+orthogonal to $\chi_1$ then we get $\xi' = \xi - (\xi,\chi_1)\chi_1$
+with $(\xi',\xi')=1$. Since only irreducible characters have this
+property then $\xi'$ is irreducible and we can set $\chi_3=\xi'$.
+\begin{table}[h]
+\begin{center}
+{\small
+\begin{tabular}{ l | c | c | c | c | c }
+  & $(1)$ & $(12)$ & $(123)$ & $(12)(34)$ & $(1234)$ \\
+\hline
+$|C|$ & 1 & 6 & 8 & 3 & 6\\
+\hline
+$\chi_1$ & 1 & 1 & 1 & 1 & 1\\
+$\chi_2$ & 1 & -1 & 1 & 1 & -1\\
+$\chi_3$ & 3 & 1 & 0 & -1 & -1\\
+\end{tabular}
+}
+\end{center}
+\end{table}
+
+\pagebreak
+Since $\sum_i\chi_i(1)^2=24$ then $\chi_4(1)^2+\chi_5(1)^2 =
+13$. Since $\chi_i(1)$ is the order of the representation and hence an
+integer for all $i$ then the only possibility is
+$\{\chi_4(1),\chi_5(1)\}=\{2,3\}$. Hence we can choose as follows.
+\begin{table}[h]
+\begin{center}
+{\small
+\begin{tabular}{ l | c | c | c | c | c }
+  & $(1)$ & $(12)$ & $(123)$ & $(12)(34)$ & $(1234)$ \\
+\hline
+$|C|$ & 1 & 6 & 8 & 3 & 6\\
+\hline
+$\chi_1$ & 1 & 1 & 1 & 1 & 1\\
+$\chi_2$ & 1 & -1 & 1 & 1 & -1\\
+$\chi_3$ & 3 & 1 & 0 & -1 & -1\\
+$\chi_4$ & 2 & & & &\\
+$\chi_5$ & 3 & & & &\\
+\end{tabular}
+}
+\end{center}
+\end{table}
+
+
+We can fill in the rest of the gaps using the orthogonality
+relations. First we will give names to the missing boxes:
+\begin{table}[h]
+\begin{center}
+{\small
+\begin{tabular}{ l | c | c | c | c | c }
+  & $(1)$ & $(12)$ & $(123)$ & $(12)(34)$ & $(1234)$ \\
+\hline
+$|C|$ & 1 & 6 & 8 & 3 & 6\\
+\hline
+$\chi_1$ & 1 & 1 & 1 & 1 & 1\\
+$\chi_2$ & 1 & -1 & 1 & 1 & -1\\
+$\chi_3$ & 3 & 1 & 0 & -1 & -1\\
+$\chi_4$ & 2 & a & b & c & d\\
+$\chi_5$ & 3 & x & y & z & w\\
+\end{tabular}
+}
+\end{center}
+\end{table}
+
+Taking the inner product of $\chi_4$ with each of the known characters
+ we get that
+
+\begin{align*}
+  \begin{pmatrix}
+    6 & 8 & 3 & 6 \\
+    -6 & 8 & 3 & -6\\
+    6 & 0 & -3 & -6\\
+  \end{pmatrix}
+  \begin{pmatrix}
+    a\\
+    b\\
+    c\\
+    d\\
+  \end{pmatrix}
+  =
+  \begin{pmatrix}
+    -2\\
+    -2\\
+    -6\\
+  \end{pmatrix}
+\end{align*}
+
+Using Gauss elimination we get that
+\begin{align*}
+  \begin{pmatrix}
+    1 & 0 & 0 & 1 \\
+    0 & 2 & 0 & -3\\
+    0 & 0 & 1 & 4\\
+  \end{pmatrix}
+  \begin{pmatrix}
+    a\\
+    b\\
+    c\\
+    d\\
+  \end{pmatrix}
+  =
+  \begin{pmatrix}
+    0\\
+    -2\\
+    2\\
+  \end{pmatrix}
+\end{align*}
+so we can now rewrite our table as 
+
+\begin{table}[h]
+\begin{center}
+{\small
+\begin{tabular}{ l | c | c | c | c | c }
+  & $(1)$ & $(12)$ & $(123)$ & $(12)(34)$ & $(1234)$ \\
+\hline
+$|C|$ & 1 & 6 & 8 & 3 & 6\\
+\hline
+$\chi_1$ & 1 & 1 & 1 & 1 & 1\\
+$\chi_2$ & 1 & -1 & 1 & 1 & -1\\
+$\chi_3$ & 3 & 1 & 0 & -1 & -1\\
+$\chi_4$ & 2 & a & $-\frac{3}{2}a-1$ & $4a+2$ & -a\\
+$\chi_5$ & 3 & x & y & z & w\\
+\end{tabular}
+}
+\end{center}
+\end{table}
+
+\pagebreak
+Applying the first orthogonality relation $(\chi_4,\chi_4)=1$ we get
+that $a=0$ so that the table now looks like this:
+
+\begin{table}[h]
+\begin{center}
+{\small
+\begin{tabular}{ l | c | c | c | c | c }
+  & $(1)$ & $(12)$ & $(123)$ & $(12)(34)$ & $(1234)$ \\
+\hline
+$|C|$ & 1 & 6 & 8 & 3 & 6\\
+\hline
+$\chi_1$ & 1 & 1 & 1 & 1 & 1\\
+$\chi_2$ & 1 & -1 & 1 & 1 & -1\\
+$\chi_3$ & 3 & 1 & 0 & -1 & -1\\
+$\chi_4$ & 2 & 0 & $-1$ & $2$ & 0\\
+$\chi_5$ & 3 & x & y & z & w\\
+\end{tabular}
+}
+\end{center}
+\end{table}
+
+To finish filling in the gaps we can use the second orthogonality
+relation, taking the inner product of each column with the first
+column. We then get $3x+3=0$, $3y=0$, $3z=3$ and $3w=-3$. Hence the
+full character table is:
+
+
+\begin{table}[h]
+\begin{center}
+{\small
+\begin{tabular}{ l | c | c | c | c | c }
+  & $(1)$ & $(12)$ & $(123)$ & $(12)(34)$ & $(1234)$ \\
+\hline
+$|C|$ & 1 & 6 & 8 & 3 & 6\\
+\hline
+$\chi_1$ & 1 & 1 & 1 & 1 & 1\\
+$\chi_2$ & 1 & -1 & 1 & 1 & -1\\
+$\chi_3$ & 3 & 1 & 0 & -1 & -1\\
+$\chi_4$ & 2 & 0 & $-1$ & $2$ & 0\\
+$\chi_5$ & 3 & 1 & 0 & 1 & -1\\
+\end{tabular}
+}
+\end{center}
+\end{table}
+
+
+\end{document}
+
+
