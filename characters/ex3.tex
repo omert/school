@@ -174,12 +174,66 @@
     orthogonal to them. Finally, $(\chi,\chi)=1$, and so it must be
     the last degree two irreducible character.
 
-  \item Let $X$ be a representation of $D_8$ 
-    affording $\chi$. Since $-1$ is in the center of $D_8$
-    then $X(-1)=-I_2$.
+  \item Let $X$ be a representation of $D_8$ affording $\chi$. Since
+    $-1$ is in the center of $D_8$ then $X(-1)=-I_2$. Let $g \in D_8$
+    be an element of order 2 different than $-1$, which exists in
+    $D_8$.  Then $g^2=1$ and $X(g)^2=I_2$. Hence the eigenvalues of
+    $X(g)$ are in $\{1,-1\}$. Since $\chi(g)=0$ then their sum is 0
+    and they must be the pair $(1,-1)$. Hence $(\de\chi)(g) = -1$ and
+    $\de\chi \neq \mathbf{1}_{D_8}$.
+  \item Let $X$ be a representation of $Q_8$ affording $\chi$. Since
+    $-1$ is in the center of $Q_8$ then $X(-1)=-I_2$. Let $g \in Q_8$
+    be an arbitrary element different than $1$ and $-1$. Then $g^2=-1$
+    and $X(g)^2=-I_2$. Hence the eigenvalues of $X(g)$ are in
+    $\{i,-i\}$. Since $\chi(g)=0$ then their sum is 0 and they must be
+    the pair $(i,-i)$. Hence
+    $(\de\chi)(1)=(\de\chi)(-1)=(\de\chi)(g)=1$ and $\de\chi =
+    \mathbf{1}_{Q_8}$.
  \end{enumerate}
+\item
+  \begin{enumerate}
+  \item $D_8$ can be viewed as the group of symmetries of the square,
+    including four rotations (including the identity), and four
+    reflections: about the two axes and about the two
+    diagonals. Hence a real representation is the set of matrices
+    corresponding to these transformation.
+
+    For $k \in \{0,1,2,3\}$, a rotation by $\theta = k\pi/2$ radians is
+    represented by
+    \begin{align*}
+      \begin{pmatrix}
+        \cos\theta&-\sin\theta\\
+        \sin\theta&\cos\theta
+      \end{pmatrix}.
+    \end{align*}
+    For $\ell \in \{0,1,2,3\}$, the reflection about the line having
+    angle $\theta=k\pi/2$ with the abscissa is represented by
+    \begin{align*}
+      \begin{pmatrix}
+        \cos2\theta&\sin2\theta\\
+        \sin2\theta&-\cos2\theta
+      \end{pmatrix}.
+    \end{align*}
+    It is easy to verify that this representation affords $\chi$.
+  \item Let $g \in Q_8$ be an arbitrary element different than $1$ and
+    $-1$. Let $X$ be a representation of $G$ affording $\chi$.  Since
+    $\chi(g)=0$ then $\mathrm{tr}(X)=0$ and we can write
+    \begin{align*}
+      X(g) =
+      \begin{pmatrix}
+        a&b\\
+        c&-a
+      \end{pmatrix}.
+    \end{align*}
+    We furthermore know that the eigenvalues of this matrix are $i$
+    and $-i$, so
+    \begin{align*}
+      \de(X(g)-\lambda I) = (a-\lambda)(-a-\lambda)+bc =
+      (\lambda-i)(\lambda+i)
+    \end{align*}
+  \end{enumerate}
+  Hence $a=i$ and the representation can't be real.
 \end{enumerate}
 
 \end{document}
-
 
