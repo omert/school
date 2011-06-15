@@ -1,0 +1,295 @@
+\documentclass[11pt]{article} \usepackage{amssymb}
+\usepackage{amsfonts} \usepackage{amsmath} \usepackage{amsthm} \usepackage{bm}
+\usepackage{latexsym} \usepackage{epsfig}
+
+\setlength{\textwidth}{6.5 in} \setlength{\textheight}{8.25in}
+\setlength{\oddsidemargin}{0in} \setlength{\topmargin}{0in}
+\addtolength{\textheight}{.8in} \addtolength{\voffset}{-.5in}
+
+\newtheorem*{theorem*}{Theorem}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem*{proposition*}{Proposition}
+\newtheorem{maintheorem}{Theorem}
+
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{mechanism}[theorem]{Mechanism}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{example}[theorem]{Example}
+%\newenvironment{proof}{\noindent \textbf{Proof:}}{$\Box$}
+
+\newcommand{\ignore}[1]{}
+
+\newcommand{\enote}[1]{} \newcommand{\knote}[1]{}
+\newcommand{\rnote}[1]{}
+
+\newcommand{\argmax}{\operatornamewithlimits{argmax}}
+\newcommand{\argmin}{\operatornamewithlimits{argmin}}
+
+
+
+
+\newcommand{\cF}{{\mathcal{F}}}
+\newcommand{\cS}{{\mathcal{S}}}
+\newcommand{\cG}{{\mathcal{G}}}
+\newcommand{\cV}{{\mathcal{V}}}
+\DeclareMathOperator{\Support}{Supp} \DeclareMathOperator{\Opt}{Opt}
+\DeclareMathOperator{\Ordo}{\mathcal{O}}
+\newcommand{\MaxkCSP}{\textsc{Max $k$-CSP}}
+\newcommand{\MaxkCSPq}{\textsc{Max $k$-CSP$_{q}$}}
+\newcommand{\MaxCSP}[1]{\textsc{Max CSP}(#1)}
+\renewcommand{\P}[1]{{\mathbb{P}}\left[{#1}\right]}
+\newcommand{\CondP}[2]{{\mathbb{P}}\left[{#1}\middle\vert{#2}\right]}
+\newcommand{\E}[1]{{\mathbb{E}}\left[{#1}\right]}
+\newcommand{\ind}[1]{{\bf 1}\left({#1}\right)}
+\newcommand{\ESub}[2]{{\mathbb{E}}_{#2}\left[{#1}\right]}
+\newcommand{\CondE}[2]{{\mathbb{E}}\left[{#1}\middle\vert{#2}\right]}
+\newcommand{\CondESub}[3]{{\mathbb{E}}_{#3}\left[{#1}\middle\vert{#2}\right]}
+\newcommand{\Var}[1]{{\mbox{Var}}\left[{#1}\right]}
+\newcommand{\Cov}[2]{{\mbox{Cov}}\left[{#1},{#2}\right]}
+
+\newcommand{\bits}{\{-1,1\}}
+
+\newcommand{\nsmaja}{\textstyle{\frac{2}{\pi}} \arcsin \rho}
+
+\newcommand{\Inf}{\mathrm{Inf}} \newcommand{\I}{\mathrm{I}}
+\newcommand{\J}{\mathrm{J}}
+
+\newcommand{\eps}{\epsilon} \newcommand{\lam}{\lambda}
+
+% \newcommand{\trunc}{\ell_{2,[-1,1]}}
+\newcommand{\trunc}{\zeta} \newcommand{\truncprod}{\chi}
+
+\newcommand{\N}{\mathbb N} \newcommand{\R}{\mathbb R}
+\newcommand{\Z}{\mathbb Z} \newcommand{\CalE}{{\mathcal{E}}}
+\newcommand{\CalC}{{\mathcal{C}}} \newcommand{\CalM}{{\mathcal{M}}}
+\newcommand{\CalR}{{\mathcal{R}}} \newcommand{\CalS}{{\mathcal{S}}}
+\newcommand{\CalV}{{\mathcal{V}}}
+\newcommand{\CalX}{{\boldsymbol{\mathcal{X}}}}
+\newcommand{\CalG}{{\boldsymbol{\mathcal{G}}}}
+\newcommand{\CalH}{{\boldsymbol{\mathcal{H}}}}
+\newcommand{\CalY}{{\boldsymbol{\mathcal{Y}}}}
+\newcommand{\CalZ}{{\boldsymbol{\mathcal{Z}}}}
+\newcommand{\CalW}{{\boldsymbol{\mathcal{W}}}}
+\newcommand{\CalF}{{\mathcal{Z}}}
+% \newcommand{\boldG}{{\boldsymbol G}}
+% \newcommand{\boldQ}{{\boldsymbol Q}}
+% \newcommand{\boldP}{{\boldsymbol P}}
+% \newcommand{\boldR}{{\boldsymbol R}}
+% \newcommand{\boldS}{{\boldsymbol S}}
+% \newcommand{\boldX}{{\boldsymbol X}}
+% \newcommand{\boldB}{{\boldsymbol B}}
+% \newcommand{\boldY}{{\boldsymbol Y}}
+% \newcommand{\boldZ}{{\boldsymbol Z}}
+% \newcommand{\boldV}{{\boldsymbol V}}
+\newcommand{\boldi}{{\boldsymbol i}} \newcommand{\boldj}{{\boldsymbol
+    j}} \newcommand{\boldk}{{\boldsymbol k}}
+\newcommand{\boldr}{{\boldsymbol r}}
+\newcommand{\boldsigma}{{\boldsymbol \sigma}}
+\newcommand{\boldupsilon}{{\boldsymbol \upsilon}}
+\newcommand{\hone}{{\boldsymbol{H1}}}
+\newcommand{\htwo}{\boldsymbol{H2}}
+\newcommand{\hthree}{\boldsymbol{H3}}
+\newcommand{\hfour}{\boldsymbol{H4}}
+
+\newcommand{\sgn}{\mathrm{sgn}} \newcommand{\Maj}{\mathrm{Maj}}
+\newcommand{\Acyc}{\mathrm{Acyc}}
+\newcommand{\UniqMax}{\mathrm{UniqMax}}
+\newcommand{\Thr}{\mathrm{Thr}} \newcommand{\littlesum}{{\textstyle
+    \sum}}
+
+\newcommand{\half}{{\textstyle \frac12}}
+\newcommand{\third}{{\textstyle \frac13}}
+\newcommand{\fourth}{{\textstyle \frac14}}
+\newcommand{\fifth}{{\textstyle \frac15}}
+
+\newcommand{\Stab}{\mathbb{S}}
+\newcommand{\StabThr}[2]{\phi^-_{#1}(#2)}
+\newcommand{\StabThrmin}[2]{{\underline{\phi^-}}_{#1}(#2)}
+\newcommand{\StabThrmax}[2]{{\overline{\phi^-}}_{#1}(#2)}
+\newcommand{\TestFcn}{\Psi}
+\newcommand{\nolimit}{\half}
+\newcommand{\bigO}{O}
+\newcommand{\tree}{\mathbb{T}}
+\newcommand{\act}{\lambda}
+\newcommand{\saw}{\mathrm{saw}}
+
+\renewcommand{\phi}{\varphi}
+
+\begin{document}
+\section{The Hardcore Model}
+\begin{itemize}
+\item Undirected graph $G=(V,E)$. Bounded degree $b+1$, so if you root
+  it each node has $b$ children. Can be infinite or finite.
+\item $\act>0$ activity parameter. Sort of like inverse
+  temperature.
+\item Independent set $I \subseteq V$: if $v,u \in I$ then $(u,v) \not
+  \in E$.
+\item Hardcore model: distribution over $\{0,1\}^V$. Probability of
+  $I$ is
+  \begin{align*}
+    \P{I} = \act^{|I|}
+  \end{align*}
+  if $I$ is an independent set and 0 otherwise.
+\item Law $\mu_{G,\act}$.
+\item Partition function $Z=Z_G^\act$.
+\item $\sigma \in \{0,1\}^V$. $\sigma_\Lambda$ restricted to $\Lambda
+  \subseteq V$. Conditional distribution
+  $\mu_{G,\act}^{\sigma_\Lambda}$.
+\item $p_v^{\sigma_\Lambda}$ - probability $v$ occupied conditioned
+  on $\sigma_\Lambda$. $\sigma_\Lambda$ legal.
+\end{itemize}
+
+
+\section{Easy claims}
+\begin{itemize}
+\item Claim: $\mu_{G,\act}^{\sigma_\Lambda}=\mu_{G',\act}$ where the
+  graph $G'$ is $G$ after we remove $\Lambda$ as well as any vertex adjacent to
+  $v \in \Lambda$ such that $\sigma(v)=1$.
+\item Proof: Independence of sets preserved. Let $k$ be number of
+  occupied vertices in $\sigma_\Lambda$.
+  \begin{align*}
+    \mu_{G',\act}(I) \propto \lambda^{|I|}.
+  \end{align*}
+  and
+  \begin{align*}
+    \mu{G,\act}^{\sigma_\Lambda}(I) =
+    \mu_{G,\act}(I,\sigma_\Lambda)/\mu_{G,\act}(\sigma_\Lambda)
+    \propto \act^{|I|+k} \propto \act^{|I|}.
+  \end{align*}
+\item Claim: Let $\Lambda$ be a cut so that $V=(S_1,\Lambda,S_2)$. Let
+  $I_i \subseteq S_i$ be sets.
+  \begin{align*}
+   \mu_G^{\sigma_\Lambda}(I_1 \cup I_2)=\mu_{S_1\cup \Lambda}^{\sigma_\Lambda}(I_1)\mu_{S_2
+   \cup \Lambda}^{\sigma_\Lambda}(I_2). 
+  \end{align*}
+\item Proof:
+  \begin{align*}
+   \mu_G^{\sigma_\Lambda}(I_1 \cup I_2) &\propto \act^{|I_1|+|I_2|}\\
+   &= \act^{|I_1|}\act^{|I_2|}\\
+   &\propto \mu_{S_1\cup \Lambda}^{\sigma_\Lambda}(I_1)\mu_{S_2
+   \cup \Lambda}^{\sigma_\Lambda}(I_2)
+ \end{align*}
+\item Vertex $v$ occupied / unoccupied. Marginal
+  \begin{align*}
+    p_v=p_{G,v}^\act = Z^{-1}\sum_{I \ni v}\act^{|I|}
+  \end{align*}
+\end{itemize}
+
+\section{Previous and main results}
+
+\begin{itemize}
+\item Definition: Weak spatial mixing.
+\item Theorem: Weak mixing on infinite graph with rate going to zero
+  is equivalent to uniqueness of the Gibbs measure.
+\item Definition: Strong spatial mixing.
+\item Usually definition is with $\delta$ exponential.
+\item Definition: $b+1$-regular tree $\tree_b$.
+\item Theorem 2.5 (Spitzer 1975): weak mixing on $\tree_b$ with
+  \begin{align*}
+    \act_c(b) = \frac{b^b}{(b-1)^{b+1}}.
+  \end{align*}
+\item Theorem 2.4: weak mixing implies strong mixing with correction.
+\item Theorem 2.3: strong mixing on tree implies strong mixing on any
+  graph with same degree.
+\item Computational problems: approximate $Z$, sample from $\mu$. Both
+  can be reduced to calculating $p_v$.
+\item $Z$ by calculating marginal.
+  \begin{align*}
+    \mu_G(\emptyset) = Z_G^{-1}.
+  \end{align*}
+  But also set $\Lambda = \{v\}$, $\sigma(v)=0$.
+  \begin{align*}
+    \mu_G(\emptyset) =
+    (1-p_v)\mu_G^{\sigma_\Lambda}(\emptyset)=(1-p_v)\mu_{G\setminus\{v\}}(\emptyset).
+  \end{align*}
+  
+\item Sampling by calculating marginal: pick $v$, choose by marginal. Fix $v$ and
+  proceed on the rest.
+\item Theorem 2.8: Approximation algorithm for $Z$ when $\act <
+  \act_c(b)$. Reference to Allan's paper for $\act > \act_c(b)$.
+\end{itemize}
+
+\section{SAW}
+\begin{itemize}
+\item Self avoiding walk - no repetition of vertices. We also add one
+  last vertex closing a cycle.
+\item $T_\saw(G,v)$ - tree of self avoiding walks from $v$ in $G$. Example.
+\item Order the directed edges (neighbors) $(u,v_i)$.
+\item Fix leafs: if closing edge is larger then occupied, unoccupied otherwise.
+\item Conditioning on $G$ changes $T_\saw(G,v)$ to
+  $T_\saw(G,v,\sigma_\Lambda)$. If $v \in \Lambda$ then we stop the walk at $v$
+  and fix it on the tree to the same thing.
+\item Definition: $q_{G,v}^{\sigma_\Lambda}$ is the probability that
+  the vertex of $T_\saw(G,v,\sigma_\Lambda)$ is occupied given the
+  fixing $\sigma_\Lambda$ on $G$.
+\item Theorem: $q_{G,v}^{\sigma_\Lambda}=p_{G,v}^{\sigma_\Lambda}$.
+\item Proof of theorem 2.3 given this:
+  \begin{itemize}
+  \item Strong mixing on $T_\saw$ implies strong mixing on $G$: $p=q$
+    and Distance from root to any subset $\Delta$ is preserved. 
+  \item Strong mixing on $\tree_b$ implies strong mixing on $T_\saw$:
+    $T_\saw$ is $\tree_b$ with additional fixed vertices (what happens
+    downstream is independent). Distance to $\Delta$ is preserved (not
+    to $\Lambda$, hence the same doesn't hold for weak mixing!).
+  \end{itemize}
+\end{itemize}
+
+\section{Proof of main theorem}
+\begin{itemize}
+
+\item $R_v=p_v/(1-p_v)$.
+
+\item Calculate $p_v$ on any tree. Fixing the root means subtrees are
+  independent.
+
+\item Claim:
+  \begin{align*}
+    R_{T,v}^{\sigma_\Lambda}=\act\prod_{i=1}^{d(v)}\frac{1}{1+R_{T_i,u_i}^{\sigma_{\Lambda_i}}}.
+  \end{align*}
+\item Proof. let $A$ be the event that all $u_i$ are unoccupied. Then
+  \begin{align*}
+    \frac{\mu(v|A)}{\mu(\bar{v}|A)} = \act.
+  \end{align*}
+  But also
+  \begin{align*}
+    \frac{\mu(v|A)}{\mu(\bar{v}|A)} &=
+    \frac{\mu(A|v)\mu(v)}{\mu(A|\bar{v})\mu(\bar{v})} \\
+    &= \frac{\mu(v)}{\prod_i(1-p_{u_i})\mu(\bar{v})}
+  \end{align*}
+  Hence
+  \begin{align*}
+    R_v = \act\prod_i(1-p_{u_i})=\act\prod_i\frac{1}{1+R_{u_i}}.
+  \end{align*}
+  
+\item Extend model to have $\vec{\act}$, so that $\mu(I) =
+  Z^{-1}\prod_{I \ni v}\vec{\act}(v)$.
+
+\item $d$ is degree of $v$. Divide $v$ into $v_i$, each with activity
+  $\act^{1/d}$.
+\item Consider the distribution conditioned on all occupied or all
+  unoccupied.
+\item $R$ is the ratio between all occupied and all unoccupied.
+\item Define $\tau_i$.
+\item $R = \prod_iR_i^{\tau_i}$.
+\item $v_i$ is connected only to $u_i$, so 
+  \begin{align*}
+    R_{G',v_i}^{\tau_i}=\act^{1/d}\frac{1}{1+R_{G'\setminus\{v_i\},u_i}^{\tau_i}}.
+  \end{align*}
+  and so 
+  \begin{align*}
+    R_{G,v}^{}=\act\prod_{i=1}^{d(v)}\frac{1}{1+R_{G'\setminus\{v_i\},u_i}^{\tau_i}}.
+  \end{align*}
+
+\item $T_\saw(G,v)_i = T_\saw(G' \setminus \{v_i\}, u_i)$.
+\end{itemize}
+
+
+\end{document}
+
+
